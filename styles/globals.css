@@ -2,7 +2,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
-  /* font-display: optional; */
+  font-display: optional;
   src: url(/fonts/Inter.var.woff2) format('woff2');
 }
 
@@ -138,7 +138,35 @@ a {
   display: table;
 }
 
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
 ::selection {
   background-color: #47a3f3;
   color: #fefefe;
+}
+
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
 }
