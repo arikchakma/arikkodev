@@ -1,9 +1,9 @@
 @font-face {
-  font-family: 'Inter';
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 100 900;
-  font-display: optional;
-  src: url(/fonts/Inter.var.woff2) format('woff2');
+  /* font-display: optional; */
+  src: url(/fonts/ibm-plex-sans-var.woff2) format('woff2');
 }
 
 /*
@@ -39,8 +39,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
 
   /* Optional but important */
   -webkit-font-smoothing: antialiased;
