@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import HeroSection from '../components/sections/HeroSection';
+import Header from '../layouts/Header';
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
           content="A frontend chef, who is building his world."
         />
       </Head>
-
+      <Header />
       <main>
         <HeroSection />
       </main>
