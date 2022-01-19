@@ -1,5 +1,8 @@
 import Head from 'next/head';
+import Divider from '../components/Divider';
+import ConnectSection from '../components/sections/ConnectSection';
 import HeroSection from '../components/sections/HeroSection';
+import Footer from '../layouts/Footer';
 import Header from '../layouts/Header';
 
 export default function Home() {
@@ -15,6 +18,9 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <ConnectSection />
+        <Divider />
+        <Footer />
       </main>
     </div>
   );

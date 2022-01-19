@@ -41,9 +41,6 @@ export default function HeroSection() {
 const Wrapper = styled.section``;
 
 const ContentWrapper = styled.div`
-  max-width: 750px;
-  margin: 0 auto;
-  padding: 0 25px;
 `;
 
 // Name Wrapper

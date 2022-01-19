@@ -54,9 +54,6 @@ const ContentWrapper = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  max-width: 750px;
-  margin: 0 auto;
-  padding: 0 25px;
   margin-top: 45px;
 `;
 
