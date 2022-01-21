@@ -1,36 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+
+function Dot() {
+  return <div className="w-1 h-1 rounded-sm bg-gray-300" />;
+}
 
 export default function Divider() {
   return (
-    <Wrapper>
-      <ContentWrapper>
+    <div className="grid justify-center content-center py-28">
+      <div className="flex gap-1">
         <Dot />
         <Dot />
         <Dot />
-      </ContentWrapper>
-    </Wrapper>
+      </div>
+    </div>
   );
 }
-
-// Wrapper
-const Wrapper = styled.div`
-  display: grid;
-  justify-content: center;
-  align-content: center;
-
-  padding: 100px 0;
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  gap: 5px;
-`;
-
-// Dot
-const Dot = styled.div`
-  width: 3px;
-  height: 3px;
-  border-radius: 1.5px;
-  background-color: #cccccc;
-`;

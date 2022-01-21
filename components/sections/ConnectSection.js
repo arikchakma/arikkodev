@@ -1,114 +1,62 @@
-import React from 'react';
-import styled from 'styled-components';
-import theme from '../../data/theme';
+import React from "react";
 
 const socialData = [
   {
-    name: 'Twitter',
-    username: '@imarikchakma',
-    href: 'https://twitter.com/imarikchakma'
+    name: "Twitter",
+    username: "@imarikchakma",
+    href: "https://twitter.com/imarikchakma"
   },
   {
-    name: 'Email',
-    username: 'hello@arikko.dev',
-    href: 'mailto:hello@arikko.dev'
+    name: "Email",
+    username: "hello@arikko.dev",
+    href: "mailto:hello@arikko.dev"
   },
   {
-    name: 'GitHub',
-    username: 'arikchakma',
-    href: 'https://github.com/arikchakma'
+    name: "GitHub",
+    username: "arikchakma",
+    href: "https://github.com/arikchakma"
   },
   {
-    name: 'Instagram',
-    username: '@imarikchakma',
-    href: 'https://instagram.com/imarikchakma'
+    name: "Instagram",
+    username: "@imarikchakma",
+    href: "https://instagram.com/imarikchakma"
   }
 ];
 
 function Social({ name, username, href }) {
   return (
-    <SocialContainer>
-      <SocialName>{name}</SocialName>
-      <SocialLink href={href} target="_blank">
+    <div className="flex justify-start items-center text-lg font-medium">
+      <p className="w-24">{name}</p>
+      <a
+        className="ml-24 text-gray-500 no-underline hover:underline"
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+      >
         {username}
-      </SocialLink>
-    </SocialContainer>
+      </a>
+    </div>
   );
 }
 
 export default function ConnectSection() {
   return (
-    <Wrapper>
-      <ContentWrapper>
-        <TextWrapper>
-          <Heading>Connect</Heading>
-          <SubHeading>
-            The best day to connect Arik was one year ago. The second best is
+    <section>
+      <div className="mt-32">
+        <div>
+          <h3 className="font-bold text-3xl">Connect</h3>
+          <p className="mt-3 text-xl max-w-xl">
+            The best day to connect me was one year ago. The second best is
             today! Just buzz me anywhere.
-          </SubHeading>
-        </TextWrapper>
+          </p>
+        </div>
 
-        <SocialWrapper>
+        <div className="mt-12 grid gap-4">
           {socialData.map(el => (
             <Social {...el} key={el.name} />
           ))}
-        </SocialWrapper>
-      </ContentWrapper>
-    </Wrapper>
+        </div>
+      </div>
+    </section>
   );
 }
-
-// Wrapper
-const Wrapper = styled.section``;
-
-const ContentWrapper = styled.div`
-  margin-top: 120px;
-`;
-
-// Text Wrapper
-const TextWrapper = styled.div``;
-
-const Heading = styled.h3`
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 40px;
-`;
-
-const SubHeading = styled.p`
-  margin-top: 10px;
-
-  font-size: 20px;
-  line-height: 30px;
-`;
-
-const SocialWrapper = styled.div`
-  margin-top: 50px;
-
-  display: grid;
-  gap: 15px;
-`;
-
-const SocialContainer = styled.div`
-  display: grid;
-  justify-content: left;
-  align-items: center;
-
-  grid-template-columns: 100px 1fr;
-
-  font-size: 18px;
-  line-height: 30px;
-  font-weight: 500;
-`;
-
-const SocialName = styled.p``;
-
-const SocialLink = styled.a`
-  margin-left: 100px;
-
-  color: ${theme.dark.grey};
-  text-decoration: none;
-
-  :hover {
-    text-decoration: underline;
-  }
-`;
