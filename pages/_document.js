@@ -51,15 +51,22 @@ export default function Document(props) {
           content="6GngfjvZoTOZDrw-UgX-gcL2NNsLhFOGPSGaqVyOBTo"
           name="google-site-verification"
         />
-        <NextScript
+        <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-T68C8WTRWH"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
         />
-        <script>
-          window.dataLayer = window.dataLayer || []; function gtag()
-          {dataLayer.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'G-T68C8WTRWH');
-        </script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+          `
+          }}
+        />
       </Head>
       <body>
         <Main />
