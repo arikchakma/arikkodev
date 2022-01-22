@@ -1,13 +1,19 @@
 import NextLink from 'next/link';
 
-export default function BlogCard({ title, readingTime, summary, publishedAt, slug }) {
+export default function BlogCard({
+  title,
+  readingTime,
+  summary,
+  publishedAt,
+  slug
+}) {
   return (
     <NextLink href={`/blog/${slug}`}>
       <a>
         <div>
           <div className="flex justify-between items-start gap-4">
             <h2 className="text-xl font-semibold max-w-lg">{title}</h2>
-            <p className="text-sm font-normal text-gray-400">
+            <p className="sm:hidden text-sm font-normal text-gray-400">
               {readingTime?.text || publishedAt}
             </p>
           </div>

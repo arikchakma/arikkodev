@@ -41,7 +41,7 @@ export default function Header() {
           </Link>
         </div>
 
-        <ul className="flex list-none">
+        <ul className="list-none sm:hidden flex">
           {navigationData.map(el => (
             <li key={el.name}>
               <Navigation {...el} />

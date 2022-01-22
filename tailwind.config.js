@@ -4,6 +4,31 @@ module.exports = {
   content: ['./pages/**/*.js', './components/**/*.js', './layouts/**/*.js'],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        16: 'repeat(16, minmax(0, 1fr))',
+
+        // Complex site-specific column configuration
+        'social': '100px minmax(20px, 100px) 1fr'
+      },
+      screens: {
+        '2xl': { max: '1535px' },
+        // => @media (max-width: 1535px) { ... }
+
+        xl: { max: '1279px' },
+        // => @media (max-width: 1279px) { ... }
+
+        lg: { max: '1023px' },
+        // => @media (max-width: 1023px) { ... }
+
+        md: { max: '767px' },
+        // => @media (max-width: 767px) { ... }
+
+        sm: { max: '639px' },
+        // => @media (max-width: 639px) { ... }
+
+        '2sm': { max: '480px' }
+      },
       colors: {
         'blue-opaque': 'rgb(13 42 148 / 18%)',
         gray: {

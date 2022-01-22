@@ -1,8 +1,8 @@
 function NameWrapper() {
   return (
     <div className="mt-28">
-      <h1 className="font-semibold text-xl">Arik Chakma</h1>
-      <p className="mt-4 max-w-xl text-xl">
+      <h1 className="font-normal text-xl">Arik Chakma</h1>
+      <p className="max-w-xl text-xl mt-6">
         Frontend developer interested in filmmaking, content creation, vlogging,
         and backend.
       </p>

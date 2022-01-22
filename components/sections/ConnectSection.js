@@ -23,10 +23,10 @@ const socialData = [
 
 function Social({ name, username, href }) {
   return (
-    <div className="flex justify-start items-center text-lg font-medium">
-      <p className="w-24">{name}</p>
+    <div className=" grid justify-start items-center text-lg font-medium grid-cols-3 sm:grid-cols-2">
+      <p>{name}</p>
       <a
-        className="ml-24 text-gray-500 no-underline hover:underline"
+        className="text-gray-500 no-underline hover:underline"
         href={href}
         target="_blank"
         rel="noreferrer"
