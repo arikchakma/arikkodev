@@ -13,15 +13,16 @@
 html,
 body {
   height: 100%;
-
-  max-width: 750px;
-  margin: 0 auto;
-  padding: 0 25px;
 }
 
 body {
   background-color: #151718;
   color: #ffffff;
+
+  max-width: 750px;
+  margin: 0 auto;
+
+  @apply px-12 sm:px-8;
 }
 
 #__next {
