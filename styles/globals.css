@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
   font-display: optional;
-  src: url(/fonts/Inter.var.woff2) format("woff2");
+  src: url(/fonts/Inter.var.woff2) format('woff2');
 }
 
 html,
@@ -36,8 +36,7 @@ body {
 }
 
 .prose .anchor {
-  position: absolute;
-  visibility: hidden;
+  @apply absolute invisible;
 
   margin-left: -1em;
   padding-right: 0.5em;
@@ -47,59 +46,37 @@ body {
 }
 
 .anchor:hover {
-  visibility: visible;
-  text-decoration: none;
+  @apply visible no-underline;
 }
 
 .prose a {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  @apply transition-all;
+}
+
+.prose .anchor:after {
+  @apply text-gray-700;
+  content: '#';
 }
 
 .prose *:hover > .anchor {
-  visibility: visible;
-  text-decoration: none;
-}
-
-.anchor::after {
-  content: "#";
-  color: rgba(153, 153, 153, 1);
-}
-
-/* Codes */
-
-.prose h2,
-h3,
-h4,
-h5,
-h6 {
-  scroll-margin-top: 100px;
+  @apply visible no-underline;
 }
 
 .prose pre {
-  border-width: 1px;
-  border-color: rgba(51, 51, 51, 1);
-  background-color: rgba(17, 17, 17, 1);
+  @apply border border-gray-700 bg-gray-900;
 }
 
 .prose code {
-  color: rgba(234, 234, 234, 1);
-  padding-top: 0.125rem /* 2px */;
-  padding-bottom: 0.125rem /* 2px */;
-  border-width: 1px;
-  border-color: rgba(34, 34, 34, 1);
-  border-radius: 0.5rem; /* 8px */
-  background-color: rgba(17, 17, 17, 1);
+  @apply text-gray-200 px-1 py-0.5 border-0 border-gray-800 rounded-lg bg-gray-900;
 }
 
 .prose pre code {
-  color: rgba(234, 234, 234, 1);
+  @apply text-gray-200;
 }
 
 .prose img {
   /* Don't apply styles to next/image */
-  margin: 0px;
+  @apply m-0;
 }
 
 .prose > :first-child {
@@ -112,11 +89,11 @@ h6 {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: rgba(153, 153, 153, 1);
+  @apply text-gray-300;
 }
 
 .token.punctuation {
-  color: rgba(153, 153, 153, 1);
+  @apply text-gray-300;
 }
 
 .token.property,
@@ -126,7 +103,7 @@ h6 {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: rgba(16, 185, 129, 1);
+  @apply text-green-500;
 }
 
 .token.selector,
@@ -135,7 +112,7 @@ h6 {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: rgba(139, 92, 246, 1);
+  @apply text-purple-500;
 }
 
 .token.operator,
@@ -143,29 +120,29 @@ h6 {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: rgba(245, 158, 11, 1);
+  @apply text-yellow-500;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: rgba(59, 130, 246, 1);
+  @apply text-blue-500;
 }
 
 .token.function,
 .token.class-name {
-  color: rgba(236, 72, 153, 1);
+  @apply text-pink-500;
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: rgba(245, 158, 11, 1);
+  @apply text-yellow-500;
 }
 
-code[class*="language-"],
-pre[class*="language-"] {
-  color: rgba(249, 250, 251, 1);
+code[class*='language-'],
+pre[class*='language-'] {
+  @apply text-gray-50;
 }
 
 pre::-webkit-scrollbar {
@@ -178,52 +155,20 @@ pre {
 }
 
 .rehype-code-title {
-  padding-left: 1.25rem /* 20px */;
-  padding-right: 1.25rem /* 20px */;
-  padding-top: 0.75rem /* 12px */;
-  padding-bottom: 0.75rem /* 12px */;
-
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-
-  font-size: 0.875rem /* 14px */;
-  line-height: 1.25rem /* 20px */;
-
-  font-weight: 700;
-
-  color: rgba(234, 234, 234, 1);
-  border-color: rgba(51, 51, 51, 1);
-  background-color: rgba(34, 34, 34, 1);
-
-  border-width: 1px;
-  border-bottom-width: 0px;
-
-  border-top-left-radius: 0.5rem /* 8px */;
-  border-top-right-radius: 0.5rem /* 8px */;
+  @apply px-5 py-3 font-mono text-sm font-bold  border border-b-0  rounded-t-lg text-gray-200 border-gray-700 bg-gray-800;
 }
 
 .rehype-code-title + pre {
-  margin-top: 0px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  @apply mt-0 rounded-t-none;
 }
 
 .highlight-line {
-  display: block;
-  padding-left: 1rem /* 16px */;
-  padding-right: 1rem /* 16px */;
-  margin-left: -1rem /* -16px */;
-  margin-right: -1rem /* -16px */;
-
-  background-color: rgba(34, 34, 34, 1);
-
-  border-left-width: 4px;
-  border-color: rgba(59, 130, 246, 1);
+  @apply block px-4 -mx-4  border-l-4 border-blue-500 bg-gray-800;
 }
 
 /* Remove Safari input shadow on mobile */
-input[type="text"],
-input[type="email"] {
+input[type='text'],
+input[type='email'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

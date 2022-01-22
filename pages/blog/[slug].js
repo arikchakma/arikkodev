@@ -1,5 +1,5 @@
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import BlogLayout from '../../layouts/Blog';
+import BlogLayout from '@/layouts/Blog';
 import { allBlogs } from '.contentlayer/data';
 
 export default function Post({ post }) {

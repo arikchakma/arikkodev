@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Logo({
   width = '54',
   height = '16',

@@ -1,16 +1,15 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import cn from "classnames";
+import cn from 'classnames';
 
-import Logo from "./icons/Logo";
+import Logo from './icons/Logo';
 
 const navigationData = [
-  { name: "Home", url: "/" },
-  { name: "Dashboard", url: "/dashboard" },
-  { name: "Blog", url: "/blog" },
-  { name: "Snippets", url: "/snippets" }
+  { name: 'Home', url: '/' },
+  { name: 'Dashboard', url: '/dashboard' },
+  { name: 'Blog', url: '/blog' }
+  // { name: "Snippets", url: "/snippets" }
 ];
 
 function Navigation({ name, url }) {
@@ -20,8 +19,8 @@ function Navigation({ name, url }) {
     <Link href={url} passHref={true}>
       <a
         className={cn(
-          isActive ? "font-semibold" : "font-normal",
-          "py-2 px-3 no-underline text-base transition-all rounded-md hover:bg-gray-800"
+          isActive ? 'font-semibold' : 'font-normal',
+          'py-2 px-3 no-underline text-base transition-all rounded-md hover:bg-gray-800'
         )}
       >
         {name}

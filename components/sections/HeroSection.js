@@ -1,8 +1,6 @@
-import React from "react";
-
 function NameWrapper() {
   return (
-    <div className="mt-24">
+    <div className="mt-28">
       <h1 className="font-semibold text-xl">Arik Chakma</h1>
       <p className="mt-4 max-w-xl text-xl">
         Frontend developer interested in filmmaking, content creation, vlogging,

@@ -1,25 +1,23 @@
-import React from "react";
-
 const socialData = [
   {
-    name: "Twitter",
-    username: "@imarikchakma",
-    href: "https://twitter.com/imarikchakma"
+    name: 'Twitter',
+    username: '@imarikchakma',
+    href: 'https://twitter.com/imarikchakma'
   },
   {
-    name: "Email",
-    username: "hello@arikko.dev",
-    href: "mailto:hello@arikko.dev"
+    name: 'Email',
+    username: 'hello@arikko.dev',
+    href: 'mailto:hello@arikko.dev'
   },
   {
-    name: "GitHub",
-    username: "arikchakma",
-    href: "https://github.com/arikchakma"
+    name: 'GitHub',
+    username: 'arikchakma',
+    href: 'https://github.com/arikchakma'
   },
   {
-    name: "Instagram",
-    username: "@imarikchakma",
-    href: "https://instagram.com/imarikchakma"
+    name: 'Instagram',
+    username: '@imarikchakma',
+    href: 'https://instagram.com/imarikchakma'
   }
 ];
 
@@ -44,7 +42,7 @@ export default function ConnectSection() {
     <section>
       <div className="mt-32">
         <div>
-          <h3 className="font-bold text-3xl">Connect</h3>
+          <h2 className="font-bold text-3xl">Connect</h2>
           <p className="mt-3 text-xl max-w-xl">
             The best day to connect me was one year ago. The second best is
             today! Just buzz me anywhere.

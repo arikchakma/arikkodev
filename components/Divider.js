@@ -1,5 +1,3 @@
-import React from "react";
-
 function Dot() {
   return <div className="w-1 h-1 rounded-sm bg-gray-300" />;
 }
