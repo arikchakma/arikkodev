@@ -11,9 +11,7 @@ export default function index({ posts }) {
       title="Blog - Arik Chakma"
       description="Thoughts on tech, software, programming, tech, editing and cinematography."
     >
-      <h1 className="mt-28 text-4xl font-bold tracking-tight text-white">
-        Blog
-      </h1>
+      <h1 className="mt-28 text-4xl font-bold tracking-tight">Blog</h1>
       <p className="mt-2 text-gray-400">
         Thoughts on tech, software, programming, tech, editing and
         cinematography.

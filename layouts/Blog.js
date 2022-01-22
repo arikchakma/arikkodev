@@ -13,18 +13,15 @@ export default function BlogLayout({ children, post }) {
       type="article"
     >
       <article className="mt-28">
-        <h1 className="text-4xl font-bold tracking-tight text-white">
-          {post.title}
-        </h1>
+        <h1 className="text-4xl font-bold tracking-tight">{post.title}</h1>
         <div className="flex justify-between items-center mt-2">
           <p className="text-sm text-gray-400">
             {format(parseISO(post.publishedAt), 'dd MMMM, yyyy')}
           </p>
           <p className="text-sm text-gray-400">{post.readingTime.text}</p>
         </div>
-        <div className="prose mt-8">{children}</div>
+        <div className="prose dark:prose-dark mt-8">{children}</div>
       </article>
-
       <Divider />
     </Container>
   );

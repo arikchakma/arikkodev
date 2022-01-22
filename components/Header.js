@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import cn from 'classnames';
 
 import Logo from './icons/Logo';
+import SwitchV2 from './Switch';
 
 const navigationData = [
   { name: 'Home', url: '/' },
@@ -20,7 +21,7 @@ function Navigation({ name, url }) {
       <a
         className={cn(
           isActive ? 'font-semibold' : 'font-normal',
-          'py-2 px-3 no-underline text-base transition-all rounded-md hover:bg-gray-800'
+          'py-2 px-3 no-underline text-base transition-all rounded-md hover:bg-gray-200 dark:hover:bg-gray-800'
         )}
       >
         {name}
@@ -33,7 +34,7 @@ export default function Header() {
   return (
     <header className="my-11">
       <nav className="flex justify-between items-center">
-        <div>
+        <div className="sm:hidden">
           <Link href="/" passHref={true}>
             <a>
               <Logo />
@@ -41,13 +42,16 @@ export default function Header() {
           </Link>
         </div>
 
-        <ul className="list-none sm:hidden flex">
-          {navigationData.map(el => (
-            <li key={el.name}>
-              <Navigation {...el} />
-            </li>
-          ))}
-        </ul>
+        <div className="flex gap-6 items-center sm:justify-between sm:w-full">
+          <ul className="list-none flex">
+            {navigationData.map(el => (
+              <li key={el.name}>
+                <Navigation {...el} />
+              </li>
+            ))}
+          </ul>
+          <SwitchV2 />
+        </div>
       </nav>
     </header>
   );

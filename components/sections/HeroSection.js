@@ -15,7 +15,7 @@ function NowContainer() {
     <div className="mt-16">
       <p className="max-w-xl mt-4 text-xl">
         Currently working as a frontend developer at a creative agency
-        called—Eetpixel.
+        called—eetpixel.
       </p>
       <p className="mt-4 text-xl">Other stuff I am building right now.</p>
     </div>
