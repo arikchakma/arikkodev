@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document(props) {
   return (
@@ -47,10 +47,19 @@ export default function Document(props) {
           name="msapplication-config"
         />
         {/* <meta content="14d2e73487fa6c71" name="yandex-verification" /> */}
-        {/* <meta
-          content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw"
+        <meta
+          content="6GngfjvZoTOZDrw-UgX-gcL2NNsLhFOGPSGaqVyOBTo"
           name="google-site-verification"
-        /> */}
+        />
+        <NextScript
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-T68C8WTRWH"
+        />
+        <NextScript>
+          window.dataLayer = window.dataLayer || []; function gtag()
+          {dataLayer.push(arguments)}
+          gtag('js', new Date()); gtag('config', 'G-T68C8WTRWH');
+        </NextScript>
       </Head>
       <body>
         <Main />
