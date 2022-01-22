@@ -55,11 +55,11 @@ export default function Document(props) {
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-T68C8WTRWH"
         />
-        <NextScript>
+        <script>
           window.dataLayer = window.dataLayer || []; function gtag()
           {dataLayer.push(arguments)}
           gtag('js', new Date()); gtag('config', 'G-T68C8WTRWH');
-        </NextScript>
+        </script>
       </Head>
       <body>
         <Main />
