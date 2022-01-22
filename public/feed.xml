@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Arik Chakma]]></title>
+        <description><![CDATA[Arik Chakma]]></description>
+        <link>https://arikko.dev</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Sat, 22 Jan 2022 12:10:18 GMT</lastBuildDate>
+        <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[How I developed my site with NextJs and Tailwindcss?]]></title>
+            <description><![CDATA[A deep-dive on everything I have used in the building my modern stack based blog-polio using NextJs, tailwindcss and contentlayer.]]></description>
+            <link>https://arikko.dev/blog/how-i-developed-my-site-with-nextjs-and-tailwind</link>
+            <guid isPermaLink="true">https://arikko.dev/blog/how-i-developed-my-site-with-nextjs-and-tailwind</guid>
+            <pubDate>Sat, 22 Jan 2022 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>
