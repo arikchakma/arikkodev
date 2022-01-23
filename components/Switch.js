@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import cn from 'classnames';
 import useSound from 'use-sound';
-import toggle from '../public/static/audio/toggle.mp3';
 
 export default function Switch() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const [play] = useSound(toggle);
+  const [play] = useSound('/static/audio/toggle.mp3');
 
   useEffect(() => setMounted(true), []);
 
