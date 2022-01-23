@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
 import cn from 'classnames';
 
 import Logo from './icons/Logo';
-import SwitchV from './Switch';
+// import SwitchV from './Switch';
+
+const Switch = dynamic(import('./Switch'));
 
 const navigationData = [
   { name: 'Home', url: '/' },
@@ -50,7 +53,7 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <SwitchV />
+          <Switch />
         </div>
       </nav>
     </header>
