@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import cn from 'classnames';
 
 import Logo from './icons/Logo';
-import SwitchV2 from './Switch';
+import SwitchV from './Switch';
 
 const navigationData = [
   { name: 'Home', url: '/' },
@@ -50,7 +50,7 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <SwitchV2 />
+          <SwitchV />
         </div>
       </nav>
     </header>
