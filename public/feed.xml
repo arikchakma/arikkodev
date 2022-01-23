@@ -4,8 +4,15 @@
         <description><![CDATA[Arik Chakma]]></description>
         <link>https://arikko.dev</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 22 Jan 2022 22:40:59 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 23 Jan 2022 17:02:38 GMT</lastBuildDate>
         <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[Create a theme toggle with tailwindcss and next-themes]]></title>
+            <description><![CDATA[Techniques I used to build a modern theme toggle with smooth animation using tailwindcss.]]></description>
+            <link>https://arikko.dev/blog/dark-theme-toggle-with-tailwindcss-and-next-themes</link>
+            <guid isPermaLink="true">https://arikko.dev/blog/dark-theme-toggle-with-tailwindcss-and-next-themes</guid>
+            <pubDate>Sat, 22 Jan 2022 00:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[How I developed my site with NextJs and Tailwindcss?]]></title>
             <description><![CDATA[A deep-dive on everything I have used in the building my modern stack based blog-polio using NextJs, tailwindcss and contentlayer.]]></description>
