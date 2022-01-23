@@ -5,15 +5,12 @@ import dynamic from 'next/dynamic';
 import cn from 'classnames';
 
 import Logo from './icons/Logo';
-// import SwitchV from './Switch';
-
-const Switch = dynamic(import('./Switch'));
+import Switch from './Switch';
 
 const navigationData = [
   { name: 'Home', url: '/' },
   { name: 'Dashboard', url: '/dashboard' },
   { name: 'Blog', url: '/blog' }
-  // { name: "Snippets", url: "/snippets" }
 ];
 
 function Navigation({ name, url }) {
