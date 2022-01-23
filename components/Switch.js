@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 
 export default function Switch() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [play] = useSound('/static/audio/toggle.mp3');
 
   useEffect(() => setMounted(true), []);
@@ -14,7 +14,7 @@ export default function Switch() {
     <button
       type="button"
       onClick={() => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
+        setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
         play();
       }}
       aria-label="Dark Mode Toggle"
