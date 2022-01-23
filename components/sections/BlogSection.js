@@ -11,6 +11,12 @@ export default function BlogSection() {
 
         <div className="mt-5 grid gap-8">
           <BlogCard
+            title="Create a theme toggle with tailwindcss and next-themes"
+            publishedAt="24 Jan 2022"
+            summary="Techniques I used to build a modern theme toggle with smooth animation using tailwindcss."
+            slug="dark-theme-toggle-with-tailwindcss-and-next-themes"
+          />
+          <BlogCard
             title="How I developed my site with NextJs and Tailwindcss"
             publishedAt="22 Jan 2022"
             summary="A deep-dive on everything I have used in the building my modern stack based blog-polio using NextJs, tailwindcss and contentlayer."

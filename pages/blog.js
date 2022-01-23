@@ -16,7 +16,7 @@ export default function index({ posts }) {
         Thoughts on tech, software, programming, tech, editing and
         cinematography.
       </p>
-      <div className="mt-12">
+      <div className="mt-12 grid gap-6">
         {posts.map(post => (
           <BlogCard {...post} key={post.slug} />
         ))}
