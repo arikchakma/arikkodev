@@ -3,6 +3,7 @@ import BlogLayout from '@/layouts/Blog';
 import { allBlogs } from '.contentlayer/data';
 
 import components from '@/components/MDXComponents';
+import Switch from '@/components/Switch';
 
 export default function Post({ post }) {
   const Component = useMDXComponent(post.body.code);
@@ -11,7 +12,8 @@ export default function Post({ post }) {
     <BlogLayout post={post}>
       <Component
         components={{
-          ...components
+          ...components,
+          Switch
         }}
       />
     </BlogLayout>

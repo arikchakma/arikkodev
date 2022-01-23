@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import ComponentsShowMDX from './ComponentsShowMDX';
+
 const CustomLink = props => {
   const { href } = props;
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
@@ -22,7 +24,8 @@ function RoundedImage(props) {
 
 const MDXComponents = {
   Image: RoundedImage,
-  a: CustomLink
+  a: CustomLink,
+  ShowComponent: ComponentsShowMDX
 };
 
 export default MDXComponents;
