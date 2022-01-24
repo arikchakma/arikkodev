@@ -21,7 +21,7 @@ function Navigation({ name, url }) {
       <a
         className={cn(
           isActive ? 'font-semibold' : 'font-normal',
-          'py-2 px-3 no-underline text-base transition-all rounded-md hover:bg-gray-200 dark:hover:bg-gray-800'
+          'rounded-md py-2 px-3 text-base no-underline transition-all hover:bg-gray-200 dark:hover:bg-gray-800'
         )}
       >
         {name}
@@ -33,7 +33,7 @@ function Navigation({ name, url }) {
 export default function Header() {
   return (
     <header className="my-11">
-      <nav className="flex justify-between items-center">
+      <nav className="flex items-center justify-between">
         <div className="sm:hidden">
           <Link href="/" passHref={true}>
             <a>
@@ -42,8 +42,8 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="flex gap-6 items-center sm:justify-between sm:w-full">
-          <ul className="list-none flex">
+        <div className="flex items-center gap-6 sm:w-full sm:justify-between">
+          <ul className="flex list-none">
             {navigationData.map(el => (
               <li key={el.name}>
                 <Navigation {...el} />

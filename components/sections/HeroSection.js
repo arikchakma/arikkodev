@@ -1,8 +1,8 @@
 function NameWrapper() {
   return (
     <div className="mt-28">
-      <h1 className="font-normal text-xl">Arik Chakma</h1>
-      <p className="max-w-xl text-xl mt-6">
+      <h1 className="text-xl font-normal">Arik Chakma</h1>
+      <p className="mt-6 max-w-xl text-xl">
         Frontend developer interested in filmmaking, content creation, vlogging,
         and backend.
       </p>
@@ -13,7 +13,7 @@ function NameWrapper() {
 function NowContainer() {
   return (
     <div className="mt-16">
-      <p className="max-w-xl mt-4 text-xl">
+      <p className="mt-4 max-w-xl text-xl">
         Currently working as a frontend developer at a creative agency
         called—eetpixel.
       </p>

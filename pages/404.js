@@ -5,8 +5,8 @@ import Container from '@/components/Container';
 export default function NotFound() {
   return (
     <Container title="404 - Arik Chakma">
-      <div className="grid justify-center items-center text-center my-52">
-        <h1 className="font-bold text-3xl tracking-tight">
+      <div className="my-52 grid items-center justify-center text-center">
+        <h1 className="text-3xl font-bold tracking-tight">
           451 - Are You Lost Baby?
         </h1>
         <p className="mt-4 max-w-md text-gray-400">
@@ -15,7 +15,7 @@ export default function NotFound() {
         </p>
 
         <NextLink href="/">
-          <a className="p-1 mt-8 justify-self-center font-semibold bg-gray-800 w-36 rounded-md text-center border-2 border-gray-700 text-gray-400 hover:text-gray-0 transition-all">
+          <a className="mt-8 w-36 justify-self-center rounded-md border-2 border-gray-700 bg-gray-800 p-1 text-center font-semibold text-gray-400 transition-all hover:text-gray-0">
             Return Home
           </a>
         </NextLink>

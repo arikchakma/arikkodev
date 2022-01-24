@@ -1,6 +1,6 @@
 export default function ComponentsShowMDX({ children }) {
   return (
-    <div className="w-full p-8 flex justify-center items-center">
+    <div className="flex w-full items-center justify-center p-8">
       {children}
     </div>
   );

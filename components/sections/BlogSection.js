@@ -7,7 +7,7 @@ export default function BlogSection() {
   return (
     <section>
       <div className="mt-28">
-        <h2 className="font-bold text-3xl">Writings</h2>
+        <h2 className="text-3xl font-bold">Writings</h2>
 
         <div className="mt-5 grid gap-8">
           <BlogCard
@@ -25,7 +25,7 @@ export default function BlogSection() {
         </div>
 
         <NextLink href="/blog">
-          <a className="mt-8 flex gap-1 items-center text-lg hover:underline">
+          <a className="mt-8 flex items-center gap-1 text-lg hover:underline">
             Read all posts <Arrow />
           </a>
         </NextLink>

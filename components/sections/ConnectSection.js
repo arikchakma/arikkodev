@@ -23,7 +23,7 @@ const socialData = [
 
 function Social({ name, username, href }) {
   return (
-    <div className=" grid justify-start items-center text-lg font-medium grid-cols-3 sm:grid-cols-2">
+    <div className=" grid grid-cols-3 items-center justify-start text-lg font-medium sm:grid-cols-2">
       <p>{name}</p>
       <a
         className="text-gray-500 no-underline hover:underline"
@@ -42,8 +42,8 @@ export default function ConnectSection() {
     <section>
       <div className="mt-32">
         <div>
-          <h2 className="font-bold text-3xl">Connect</h2>
-          <p className="mt-3 text-xl max-w-xl">
+          <h2 className="text-3xl font-bold">Connect</h2>
+          <p className="mt-3 max-w-xl text-xl">
             The best day to connect me was one year ago. The second best is
             today! Just buzz me anywhere.
           </p>
