@@ -9,7 +9,7 @@ import Switch from './Switch';
 
 const navigationData = [
   { name: 'Home', url: '/' },
-  { name: 'Dashboard', url: '/dashboard' },
+  // { name: 'Dashboard', url: '/dashboard' },
   { name: 'Blog', url: '/blog' }
 ];
 
