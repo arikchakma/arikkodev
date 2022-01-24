@@ -23,8 +23,6 @@ export default async function handler(req, res) {
       .insert([{ nonce: nonce, walletAddress: walletAddress }]);
   }
 
-  console.log(data, error);
-
   if (error) {
     res.status(400).json({ error: error.message });
   } else {

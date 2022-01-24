@@ -1,9 +1,15 @@
 import { useState } from 'react';
-import Container from '@/components/Container';
 import { ethers } from 'ethers';
+
+import { supabase } from '@/lib/supabase';
 
 export default function Dashboard() {
   const [loginState, setLoginState] = useState();
+
+  async function checkUser() {
+    const { data } = await supabase.from('users').select('*');
+    console.log(data);
+  }
 
   async function login() {
     setLoginState('Connecting...');
@@ -19,9 +25,8 @@ export default function Dashboard() {
 
     const signer = provider.getSigner();
     const walletAddress = await signer.getAddress();
-    // const signature = await signer.signMessage('Hello World');
 
-    const response = await fetch('/api/auth/nonce', {
+    let response = await fetch('/api/auth/nonce', {
       method: 'POST',
       body: JSON.stringify({
         walletAddress
@@ -31,14 +36,32 @@ export default function Dashboard() {
       }
     });
 
-    const data = await response.json();
-    console.log(walletAddress, data);
+    const { nonce } = await response.json();
+    const signature = await signer.signMessage(nonce);
+
+    response = await fetch('/api/auth/wallet', {
+      method: 'POST',
+      body: JSON.stringify({
+        walletAddress,
+        nonce,
+        signature
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const { user, token } = await response.json();
+    console.log(user);
+    console.log(token);
+
+    await supabase.auth.setAuth(token);
   }
 
   return (
     <div>
       <h1>{loginState}</h1>
       <button onClick={login}>Connect</button>
+      <button onClick={checkUser}>Check User</button>
     </div>
   );
 }
