@@ -43,7 +43,7 @@ export default function Newsletter() {
             placeholder="hello@apple.com"
             autoComplete="email"
             required
-            className="w-full rounded border-0 bg-[#E3E3E3] px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 focus:border-0 focus:outline-[0.5px] focus:outline-[#cecece] dark:bg-[#3C3C3C] dark:focus:outline-gray-500"
+            className="w-full rounded border-0 bg-[#E3E3E3] px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 focus:border-0 focus:outline-[0.5px] focus:outline-[#cecece] disabled:cursor-not-allowed dark:bg-[#3C3C3C] dark:focus:outline-gray-500"
             ref={inputEl}
             disabled
           />
