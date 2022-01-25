@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
 
-export default function Subscribe() {
+export default function Newsletter() {
   const [formState, setFormState] = useState({});
   const inputEl = useRef();
 
   const subscribe = async e => {
     e.preventDefault();
+    console.log(inputEl.current.value);
 
     const res = await fetch('/api/subscribe', {
       body: JSON.stringify({
@@ -27,29 +28,31 @@ export default function Subscribe() {
 
   return (
     <div className="my-24">
-      <div className="w-full px-7 py-9 bg-[#1B1D1D] border-2 border-gray-600 rounded-lg">
+      <div className="w-full rounded-lg border-2 border-gray-300 bg-[#F4F4F4] px-7 py-9 dark:border-gray-600 dark:bg-[#1B1D1D]">
         <div>
-          <h2 className="font-bold text-3xl">Subscribe to the newsletter</h2>
-          <p className="font-normal text-xl text-gray-500 mt-3">
+          <h2 className="text-3xl font-bold">Subscribe to the newsletter</h2>
+          <p className="mt-3 text-xl font-normal text-gray-500">
             Do not miss out and join my monthly newsletter to know about new
             arrivals.
           </p>
         </div>
 
-        <form className="mt-7 flex" onSubmit={subscribe}>
+        <form className="mt-7 flex gap-3 sm:flex-col" onSubmit={subscribe}>
           <input
             type="email"
             placeholder="hello@apple.com"
             autoComplete="email"
             required
-            className="bg-[#3C3C3C] px-6 py-3 rounded font-semibold text-xl w-full placeholder:text-gray-400 outline-0 border-0 focus:outline-[0.5px] focus:border-0 focus:outline-gray-500"
+            className="w-full rounded border-0 bg-[#E3E3E3] px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 focus:border-0 focus:outline-[0.5px] focus:outline-[#cecece] dark:bg-[#3C3C3C] dark:focus:outline-gray-500"
             ref={inputEl}
+            disabled
           />
           <button
             type="submit"
-            className="bg-[#3C3C3C] px-9 py-3 rounded ml-4 w-[180px] hover:bg-[#454545] transition-all"
+            className="w-[180px] rounded bg-[#E3E3E3] px-9 py-3 transition-all hover:bg-[#dedede] disabled:cursor-not-allowed dark:bg-[#3C3C3C] dark:hover:bg-[#454545] sm:w-full"
+            disabled
           >
-            <span className="font-bold text-xl">Subscribe</span>
+            <span className="text-xl font-bold">Subscribe</span>
           </button>
         </form>
       </div>
