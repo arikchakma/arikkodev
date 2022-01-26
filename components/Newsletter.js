@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
+import cn from 'classnames';
 
-export default function Newsletter() {
+export default function Newsletter({ blog }) {
   const [formState, setFormState] = useState({});
   const inputEl = useRef();
 
@@ -27,13 +28,18 @@ export default function Newsletter() {
   };
 
   return (
-    <div className="my-24">
-      <div className="w-full rounded-lg border-2 border-gray-300 bg-[#F4F4F4] px-7 py-9 dark:border-gray-600 dark:bg-[#1B1D1D]">
+    <div className={cn(blog ? 'mb-0' : '', 'my-24')}>
+      <div className="relative w-full rounded-lg border-2 border-gray-300 bg-[#F4F4F4] px-7 py-9 dark:border-gray-600 dark:bg-[#1B1D1D]">
+        <div className="absolute top-0 left-[-30px] rotate-[-30deg]">
+          <span className="rounded bg-yellow-400 p-2 font-semibold text-gray-700">
+            Not Available
+          </span>
+        </div>
         <div>
-          <h2 className="text-3xl font-bold">Subscribe to the newsletter</h2>
+          <h2 className="text-3xl font-bold">Get tech recipes from the chef</h2>
           <p className="mt-3 text-xl font-normal text-gray-500">
-            Do not miss out and join my monthly newsletter to know about new
-            arrivals.
+            Subscribe to the techletter to get exclusive updates &#38;
+            inspiration in your inbox.
           </p>
         </div>
 
