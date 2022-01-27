@@ -51,12 +51,12 @@ export default function Newsletter({ blog }) {
             required
             className="w-full rounded border-0 bg-[#E3E3E3] px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 focus:border-0 focus:outline-[0.5px] focus:outline-[#cecece] disabled:cursor-not-allowed dark:bg-[#3C3C3C] dark:focus:outline-gray-500"
             ref={inputEl}
-            disabled
+            // disabled
           />
           <button
             type="submit"
             className="w-[180px] rounded bg-[#E3E3E3] px-9 py-3 transition-all hover:bg-[#dedede] disabled:cursor-not-allowed dark:bg-[#3C3C3C] dark:hover:bg-[#454545] sm:w-full"
-            disabled
+            // disabled
           >
             <span className="text-xl font-bold">Subscribe</span>
           </button>
