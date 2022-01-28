@@ -37,7 +37,7 @@ export default function Newsletter({ blog }) {
         </div>
         <div>
           <h2 className="text-3xl font-bold">Get tech recipes from the chef</h2>
-          <p className="mt-3 text-xl font-normal text-gray-500">
+          <p className="mt-3 text-xl font-normal text-gray-400">
             Subscribe to the techletter to get exclusive updates &#38;
             inspiration in your inbox.
           </p>

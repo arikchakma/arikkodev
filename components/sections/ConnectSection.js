@@ -26,7 +26,7 @@ function Social({ name, username, href }) {
     <div className=" grid grid-cols-3 items-center justify-start text-lg font-medium sm:grid-cols-2">
       <p>{name}</p>
       <a
-        className="text-gray-500 no-underline hover:underline"
+        className="text-gray-400 no-underline hover:underline"
         href={href}
         target="_blank"
         rel="noreferrer"

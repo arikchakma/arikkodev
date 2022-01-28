@@ -36,7 +36,7 @@ export default function Header() {
       <nav className="flex items-center justify-between">
         <div className="sm:hidden">
           <Link href="/" passHref={true}>
-            <a>
+            <a aria-label="Arik Chakma's logo">
               <Logo />
             </a>
           </Link>
