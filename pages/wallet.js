@@ -1,4 +1,18 @@
-import { useAccount, useConnect } from 'wagmi';
+import { useAccount, useConnect, useBalance } from 'wagmi';
+
+const Balance = ({ address }) => {
+  const [{ data, error, loading }, getBalance] = useBalance({
+    addressOrName: address
+  });
+
+  if (loading) return <div>Fetching balance…</div>;
+  if (error) return <div>Error fetching balance</div>;
+  return (
+    <div>
+      {data?.formatted} {data?.symbol}
+    </div>
+  );
+};
 
 export default function Wallet() {
   const [{ data, error }, connect] = useConnect();
@@ -16,6 +30,7 @@ export default function Wallet() {
             : accountData.address}
         </div>
         <div>Connected to {accountData.connector.name}</div>
+        <Balance address={accountData.address} />
         <button onClick={disconnect}>Disconnect</button>
       </div>
     );
