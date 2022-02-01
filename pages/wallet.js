@@ -9,7 +9,7 @@ export default function Wallet() {
   if (accountData) {
     return (
       <div>
-        <img src={accountData.ens?.avatar} alt="ENS Avatar" />
+        {/* <img src={accountData.ens?.avatar} alt="ENS Avatar" /> */}
         <div>
           {accountData.ens?.name
             ? `${accountData.ens?.name} (${accountData.address})`
@@ -24,7 +24,7 @@ export default function Wallet() {
   return (
     <div className="flex flex-col gap-5">
       {data.connectors.map(x => (
-        <button key={x.id} onClick={() => connect(x)}>
+        <button disabled={!x.ready} key={x.id} onClick={() => connect(x)}>
           {x.name}
           {!x.ready && ' (unsupported)'}
         </button>
