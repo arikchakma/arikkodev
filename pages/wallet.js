@@ -24,7 +24,11 @@ export default function Wallet() {
   return (
     <div className="flex flex-col gap-5">
       {data.connectors.map(x => (
-        <button disabled={!x.ready} key={x.id} onClick={() => connect(x)}>
+        <button
+          // disabled={!x.ready}
+          key={x.id}
+          onClick={() => connect(x)}
+        >
           {x.name}
           {!x.ready && ' (unsupported)'}
         </button>
