@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import cn from 'classnames';
 import SuccessMessage from './SuccessMessage';
 import ErrorMessage from './ErrorMessage';
+import Realistic from './RealisticFireWorks';
 
 export default function Newsletter({ blog }) {
   const [formState, setFormState] = useState({
@@ -94,6 +95,7 @@ export default function Newsletter({ blog }) {
           ) : null}
         </div>
       </div>
+      <Realistic fireOn={formState?.success} />
     </div>
   );
 }
