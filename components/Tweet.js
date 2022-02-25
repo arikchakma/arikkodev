@@ -25,12 +25,12 @@ export const Tweet = ({
   return (
     <div
       className={cx(
-        'w-full rounded-xl border border-gray-700 bg-gray-200 dark:bg-gray-900',
+        'w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-900',
         FOCUS_VISIBLE_OUTLINE
       )}
     >
       {/* Author meta */}
-      <div className="flex flex-wrap items-center border-b p-6 text-lg dark:border-gray-700">
+      <div className="flex flex-wrap items-center border-b p-6 text-lg dark:border-gray-700 border-gray-300">
         <a
           href={author.authorUrl}
           target="_blank"
@@ -48,7 +48,7 @@ export const Tweet = ({
           </span>
 
           <span
-            className="font-medium text-gray-0 group-hover:text-gray-0/80 group-hover:underline group-hover:decoration-gray-700 group-hover:underline-offset-2"
+            className="font-medium text-gray-700  group-hover:text-gray-700/80 dark:text-gray-0 dark:group-hover:text-gray-0/80 group-hover:underline group-hover:decoration-gray-700 group-hover:underline-offset-2"
             title={author.name}
           >
             {author.name}
@@ -59,16 +59,16 @@ export const Tweet = ({
           ) : null}
 
           <span
-            className="ml-1.5 text-gray-0/70 "
+            className="ml-1.5 text-gray-400 dark:text-gray-0/70 sm:hidden"
             title={`@${author.username}`}
           >
             @{author.username}
           </span>
         </a>
 
-        <span className="ml-1.5 text-gray-0/70">&middot;</span>
+        <span className="ml-1.5 text-gray-700/70 dark:text-gray-0/70 sm:hidden">&middot;</span>
         <a
-          className="ml-1.5 text-gray-0/70 hover:underline hover:decoration-gray-700  hover:underline-offset-2"
+          className="ml-1.5 text-gray-700/70 dark:text-gray-0/70 hover:underline hover:decoration-gray-700  hover:underline-offset-2 sm:hidden"
           href={tweetUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -84,7 +84,7 @@ export const Tweet = ({
       </div>
 
       {/* Text */}
-      <div className="mx-6 mt-2 whitespace-pre-wrap text-lg text-white">
+      <div className="mx-6 mt-2 whitespace-pre-wrap text-lg text-black dark:text-white">
         {text}
       </div>
 

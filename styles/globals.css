@@ -180,4 +180,7 @@ table {
   .switch-transition {
     transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
+  .shadow-inside {
+    box-shadow: inset 0px 4px 4px rgb(255 255 255 / 15%);
+  }
 }
