@@ -1,7 +1,8 @@
 {
-	"extends": "next",
-	"rules": {
-		"react/prop-types": 0,
-		"react/no-unescaped-entities": 0
-	}
+  "extends": "next",
+  "rules": {
+    "react/prop-types": 0,
+    "react/no-unescaped-entities": 0,
+    "import/no-anonymous-default-export": 0
+  }
 }

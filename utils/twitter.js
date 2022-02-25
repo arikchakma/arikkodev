@@ -1,11 +1,10 @@
 import { format } from 'date-fns';
-import { encode } from 'qss';
 
-const getAuthor = (users, author_id) => {
+export const getAuthor = (users, author_id) => {
   return users.find(user => user.id === author_id);
 };
 
-const getMedia = (media, media_keys) => {
+export const getMedia = (media, media_keys) => {
   if (!media || !media_keys) {
     return undefined;
   }
@@ -23,7 +22,7 @@ const getMedia = (media, media_keys) => {
   return medias;
 };
 
-const getReferencedTweets = (includes, tweet) => {
+export const getReferencedTweets = (includes, tweet) => {
   if (!tweet.referenced_tweets) {
     return undefined;
   }
@@ -46,15 +45,15 @@ const getReferencedTweets = (includes, tweet) => {
   return referencedTweets;
 };
 
-const replaceBetween = (origin, startIndex, endIndex, insertion) =>
+export const replaceBetween = (origin, startIndex, endIndex, insertion) =>
   origin.substring(0, startIndex) + insertion + origin.substring(endIndex);
 
-const getStartEnd = (str, sub) => [
+export const getStartEnd = (str, sub) => [
   str.indexOf(sub),
   str.indexOf(sub) + sub.length
 ];
 
-const formatTweet = (includes, tweet) => {
+export const formatTweet = (includes, tweet) => {
   let textFormatted = tweet.text;
 
   if (tweet.entities?.urls) {
@@ -118,73 +117,4 @@ const formatTweet = (includes, tweet) => {
   };
 
   return formattedTweet;
-};
-
-export const getTweets = async ids => {
-  if (ids.length === 0) return [];
-
-  const queryParams = encode({
-    ids: ids.join(','),
-    expansions: [
-      'author_id',
-      'attachments.media_keys',
-      'referenced_tweets.id',
-      'referenced_tweets.id.author_id'
-    ].join(','),
-    'tweet.fields': [
-      'id',
-      'author_id',
-      'created_at',
-      'text',
-      'attachments',
-      'in_reply_to_user_id',
-      'public_metrics',
-      'referenced_tweets',
-      'entities'
-    ].join(','),
-    'user.fields': [
-      'id',
-      'name',
-      'profile_image_url',
-      'protected',
-      'username',
-      'verified'
-    ].join(','),
-    'media.fields': [
-      'media_key',
-      'type',
-      'height',
-      'width',
-      'url',
-      'preview_image_url',
-      'alt_text'
-    ].join(',')
-  });
-
-  const api = await fetch(`https://api.twitter.com/2/tweets?${queryParams}`, {
-    headers: {
-      Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`
-    }
-  }).then(x => x.json());
-
-  let tweets = [];
-
-  for (const tweet of api.data) {
-    const formattedTweet = formatTweet(api.includes, tweet);
-    const referencedTweets = getReferencedTweets(api.includes, tweet);
-    const quoteTweet = referencedTweets?.find(t => t.type === 'quoted');
-    const linkPreview = tweet.entities?.urls?.find(
-      x => x.status === 200 && tweet.text.endsWith(x.url)
-    );
-
-    tweets.push({
-      ...formattedTweet,
-      ...(linkPreview ? { linkPreview } : {}),
-      ...(quoteTweet
-        ? { quoteTweet: formatTweet(api.includes, quoteTweet) }
-        : {})
-    });
-  }
-
-  return tweets;
 };

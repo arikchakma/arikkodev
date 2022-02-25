@@ -3,6 +3,12 @@ const { withContentlayer } = require('next-contentlayer');
 module.exports = withContentlayer()({
   swcMinify: true,
   reactStrictMode: true,
+  images: {
+    domains: [
+      'api.microlink.io', // Link previews
+      'pbs.twimg.com' // Twitter Profile Picture
+    ]
+  },
   webpack(config, options) {
     const { isServer } = options;
     config.module.rules.push({

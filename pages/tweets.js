@@ -1,11 +1,43 @@
+import { Octokit } from '@octokit/core';
+
+import getTweets from '@/lib/getTweets';
+
 import Container from '@/components/Container';
 import Divider from '@/components/Divider';
+import { Tweet } from '@/components/Tweet';
 
-export default function Tweets() {
+export default function Tweets({ tweets }) {
+  console.log(tweets);
   return (
     <Container>
       <div>Hello, Twitter Gang!</div>
+      <div className="mt-14 grid gap-10">
+        {tweets.map(tweet => (
+          <Tweet key={tweet.id} {...tweet} />
+        ))}
+      </div>
       <Divider />
     </Container>
   );
 }
+
+export const getStaticProps = async () => {
+  // Get tweet ids from a Github project using Github's REST API
+  const octokit = new Octokit({
+    auth: `${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`
+  });
+
+  const response = await octokit.request(
+    'GET /projects/columns/{column_id}/cards',
+    {
+      column_id: 17854225
+    }
+  );
+  const tweetIds = response.data.map(card => card.note);
+
+  // Get the actual tweets from Twitter using the Twitter API
+  const tweets =
+    tweetIds && tweetIds.length > 0 ? await getTweets(tweetIds) : [];
+
+  return { props: { tweets } };
+};
