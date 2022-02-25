@@ -16,7 +16,7 @@ body {
 }
 
 body {
-  @apply max-w-[750px] px-12 sm:px-8 mx-auto my-0 bg-bgWhite dark:bg-bgDark text-black dark:text-white;
+  @apply mx-auto my-0 max-w-[750px] bg-bgWhite px-12 text-black dark:bg-bgDark dark:text-white sm:px-8;
 }
 
 #__next {
@@ -31,7 +31,7 @@ body {
 }
 
 .prose .anchor {
-  @apply absolute invisible;
+  @apply invisible absolute;
 
   margin-left: -1em;
   padding-right: 0.5em;
@@ -58,11 +58,11 @@ body {
 }
 
 .prose pre {
-  @apply border border-gray-200 bg-bgWhite dark:bg-bgDark dark:border-gray-700;
+  @apply border border-gray-200 bg-bgWhite dark:border-gray-700 dark:bg-bgDark;
 }
 
 .prose code {
-  @apply text-gray-800 dark:text-gray-200 px-1 py-0.5 border-0 border-gray-100 dark:border-gray-800 rounded-lg bg-bgWhite dark:bg-bgDark;
+  @apply rounded-lg border-0 border-gray-100 bg-bgWhite px-1 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-bgDark dark:text-gray-200;
 }
 
 .prose pre code {
@@ -150,7 +150,7 @@ pre {
 }
 
 .rehype-code-title {
-  @apply px-5 py-3 font-mono text-sm font-bold text-gray-800 bg-gray-200 border border-b-0 border-gray-200 rounded-t-lg dark:text-gray-200 dark:border-gray-700 dark:bg-gray-800;
+  @apply rounded-t-lg border border-b-0 border-gray-200 bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200;
 }
 
 .rehype-code-title + pre {
@@ -158,7 +158,7 @@ pre {
 }
 
 .highlight-line {
-  @apply block px-4 -mx-4 bg-gray-100 border-l-4 border-blue-500 dark:bg-gray-800;
+  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-4 dark:bg-gray-800;
 }
 
 /* Remove Safari input shadow on mobile */
