@@ -47,6 +47,7 @@ export default function Document(props) {
           name="msapplication-config"
         />
         {/* <meta content="14d2e73487fa6c71" name="yandex-verification" /> */}
+        <meta name="p:domain_verify" content="3c3b1f0cf2ba26785076afe9eee7466f"/>
         <meta
           content="6GngfjvZoTOZDrw-UgX-gcL2NNsLhFOGPSGaqVyOBTo"
           name="google-site-verification"
