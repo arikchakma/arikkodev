@@ -10,8 +10,13 @@ export default function Tweets({ tweets }) {
   console.log(tweets);
   return (
     <Container>
-      <div>Hello, Twitter Gang!</div>
-      <div className="mt-14 grid gap-10">
+      <div className="mt-28">
+        <h1 className="text-4xl font-bold tracking-tight">Appreciated Tweets</h1>
+        <p className="mt-4 text-xl text-gray-400">
+          Tweets that capture a sentiment I'd love to remember #BlessedTweets
+        </p>
+      </div>
+      <div className="mt-20 grid gap-10">
         {tweets.map(tweet => (
           <Tweet key={tweet.id} {...tweet} />
         ))}

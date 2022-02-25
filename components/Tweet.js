@@ -131,7 +131,7 @@ export const Tweet = ({
         <div className="m-6 mt-4 flex text-white">
           {/* Replies */}
           <a
-            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:underline-offset-2 dark:text-white"
+            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
             href={replyUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -151,7 +151,7 @@ export const Tweet = ({
           </a>
           {/* Retweet */}
           <a
-            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:underline-offset-2 dark:text-white"
+            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
             href={retweetUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -171,7 +171,7 @@ export const Tweet = ({
           </a>
           {/* Like */}
           <a
-            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:underline-offset-2 dark:text-white"
+            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
             href={likeUrl}
             target="_blank"
             rel="noopener noreferrer"
