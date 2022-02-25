@@ -1,6 +1,8 @@
 import { useState, useRef, useCallback } from 'react';
+import NextLink from 'next/link';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import cn from 'classnames';
+
 import SuccessMessage from './SuccessMessage';
 import ErrorMessage from './ErrorMessage';
 
@@ -20,6 +22,7 @@ export default function Newsletter({ blog }) {
     success: false,
     state: false
   });
+  const [email, setEmail] = useState('');
   const inputEl = useRef();
 
   const refAnimationInstance = useRef(null);
@@ -105,48 +108,74 @@ export default function Newsletter({ blog }) {
 
   return (
     <div className={cn(blog ? 'mb-0' : '', 'my-24')}>
-      <div className="relative w-full rounded-lg border-2 border-gray-300 bg-[#F4F4F4] px-7 py-9 dark:border-gray-600 dark:bg-[#1B1D1D]">
+      <div
+        className="relative w-full rounded-lg border border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-900
+      "
+      >
+        {/* py-9 */}
         {/* <div className="absolute top-0 left-[-30px] rotate-[-30deg]">
           <span className="rounded bg-yellow-400 p-2 font-semibold text-gray-700">
             Not Available
           </span>
         </div> */}
-        <div>
-          <h2 className="text-3xl font-bold">Get tech recipes from the chef</h2>
-          <p className="mt-3 text-xl font-normal text-gray-400">
-            Subscribe to the techletter to get exclusive updates &#38;
-            inspiration in your inbox.
-          </p>
+        <div className="border-b border-gray-300 px-7 py-4 dark:border-gray-700">
+          <h2 className="text-base font-semibold">Newsletter</h2>
         </div>
+        <div className="px-7">
+          <div className="py-4">
+            <p className="max-w-xl text-base font-normal text-gray-500 dark:text-gray-400">
+              Subscribe to get exclusive updates and tech recipes inspiration in
+              your inbox from the chef. I also publish semi-regular newsletters
+              containing links to interesting articles about design, technology,
+              and startups.
+            </p>
+          </div>
 
-        <form className="mt-7 flex gap-3 sm:flex-col" onSubmit={subscribe}>
-          <input
-            type="email"
-            placeholder="hello@apple.com"
-            autoComplete="email"
-            required
-            className="w-full rounded border-0 bg-[#E3E3E3] px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 focus:border-0 focus:outline-[0.5px] focus:outline-[#cecece] disabled:cursor-not-allowed dark:bg-[#3C3C3C] dark:focus:outline-gray-500"
-            ref={inputEl}
-          />
-          <button
-            type="submit"
-            className="w-[200px] rounded bg-[#E3E3E3] py-3 transition-all hover:bg-[#dedede] disabled:cursor-not-allowed dark:bg-[#3C3C3C] dark:hover:bg-[#454545] sm:w-full"
-          >
-            {formState.loading ? (
-              <span className="animate-ping text-xl font-bold">Loading</span>
-            ) : (
-              <span className="text-xl font-bold">Subscribe</span>
-            )}
-          </button>
-        </form>
-        <div className="mt-5">
-          {formState.state ? (
-            formState?.success ? (
-              <SuccessMessage>{formState?.message}</SuccessMessage>
-            ) : (
-              <ErrorMessage>{formState?.message}</ErrorMessage>
-            )
-          ) : null}
+          <form className="flex gap-3 sm:flex-col" onSubmit={subscribe}>
+            <input
+              type="email"
+              placeholder="hello@apple.com"
+              autoComplete="email"
+              required
+              className="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 disabled:cursor-not-allowed dark:border-gray-700 dark:bg-gray-800 dark:focus:outline-gray-500"
+              ref={inputEl}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="shadow-inside w-[200px] rounded bg-blue-500 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50 sm:w-full"
+              disabled={email?.length > 0 ? false : true}
+            >
+              {formState.loading ? (
+                <span className="animate-ping text-xl font-bold">Loading</span>
+              ) : (
+                <span className="text-xl font-bold">Subscribe</span>
+              )}
+            </button>
+          </form>
+          <div className="my-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            <p>
+              Unsubscribe at any time. Powered by{' '}
+              <NextLink
+                href="https://www.getrevue.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <a className="dark:text-gray-200 text-gray-700">Revue</a>
+              </NextLink>
+              .
+            </p>
+          </div>
+
+          {formState.state && (
+            <div className={cn("my-4 p-3", formState?.success ? "bg-green-200/5": "bg-red-200/5")}>
+              {formState?.success ? (
+                <SuccessMessage>{formState?.message}</SuccessMessage>
+              ) : (
+                <ErrorMessage>{formState?.message}</ErrorMessage>
+              )}
+            </div>
+          )}
         </div>
       </div>
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />

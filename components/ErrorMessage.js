@@ -25,7 +25,7 @@ export default function ErrorMessage({ children }) {
   return (
     <div className="flex items-center">
       <ErrorIcon />
-      <p className="ml-2 text-base font-medium text-red-500">{children}</p>
+      <p className="ml-2 text-base font-normal text-red-500">{children}</p>
     </div>
   );
 }

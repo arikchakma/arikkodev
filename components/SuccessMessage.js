@@ -19,7 +19,7 @@ export default function SuccessMessage({ children }) {
   return (
     <div className="flex items-center">
       <SuccessIcon />
-      <p className="ml-2 text-base font-medium text-green-500">{children}</p>
+      <p className="ml-2 text-base font-normal text-green-500">{children}</p>
     </div>
   );
 }
