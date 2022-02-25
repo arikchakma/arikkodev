@@ -7,7 +7,6 @@ import Divider from '@/components/Divider';
 import { Tweet } from '@/components/Tweet';
 
 export default function Tweets({ tweets }) {
-  console.log(tweets);
   return (
     <Container>
       <div className="mt-28">

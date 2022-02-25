@@ -1,7 +1,7 @@
 import { FOCUS_VISIBLE_OUTLINE } from '@/lib/constants';
 import TwitterIcon from './icons/TwitterIcon';
 import BadgeCheckIcon from './icons/BadgeCheckIcon';
-import cx from 'clsx';
+import cx from 'classnames';
 import Image from 'next/image';
 /**
  * Supports plain text, quote tweets.
