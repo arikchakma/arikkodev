@@ -25,7 +25,7 @@ export const Tweet = ({
   return (
     <div
       className={cx(
-        'rounded-xl border border-gray-700 bg-gray-200 dark:bg-gray-900',
+        'w-full rounded-xl border border-gray-700 bg-gray-200 dark:bg-gray-900',
         FOCUS_VISIBLE_OUTLINE
       )}
     >
@@ -128,10 +128,10 @@ export const Tweet = ({
 
       {/* Actions */}
       {!type ? (
-        <div className="m-6 mt-4 flex text-white">
+        <div className="m-6 mt-4 flex justify-between text-white max-w-xs">
           {/* Replies */}
           <a
-            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
+            className="group flex items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
             href={replyUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -151,7 +151,7 @@ export const Tweet = ({
           </a>
           {/* Retweet */}
           <a
-            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
+            className="group flex items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
             href={retweetUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -171,7 +171,7 @@ export const Tweet = ({
           </a>
           {/* Like */}
           <a
-            className="group flex w-28 items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
+            className="group flex items-center text-black hover:text-blue-500 hover:underline hover:decoration-blue-400 hover:underline-offset-2 dark:text-white"
             href={likeUrl}
             target="_blank"
             rel="noopener noreferrer"
