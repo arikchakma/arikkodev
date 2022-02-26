@@ -108,16 +108,8 @@ export default function Newsletter({ blog }) {
 
   return (
     <div className={cn(blog ? 'mb-0' : '', 'my-24')}>
-      <div
-        className="relative w-full rounded-lg border border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-900
-      "
-      >
-        {/* py-9 */}
-        {/* <div className="absolute top-0 left-[-30px] rotate-[-30deg]">
-          <span className="rounded bg-yellow-400 p-2 font-semibold text-gray-700">
-            Not Available
-          </span>
-        </div> */}
+      <div className="relative w-full rounded-lg border border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-900">
+        {/* Heading */}
         <div className="border-b border-gray-300 px-7 py-4 dark:border-gray-700">
           <h2 className="text-base font-semibold">Newsletter</h2>
         </div>
@@ -131,6 +123,7 @@ export default function Newsletter({ blog }) {
             </p>
           </div>
 
+          {/* Form of email */}
           <form className="grid grid-cols-3 gap-3" onSubmit={subscribe}>
             <input
               type="email"
@@ -144,7 +137,9 @@ export default function Newsletter({ blog }) {
             <button
               type="submit"
               className="shadow-inside rounded bg-blue-500 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50 sm:col-span-3"
-              disabled={email?.length > 0 ? false : true}
+              disabled={
+                (email?.length > 0 ? false : true) || formState?.loading
+              }
             >
               {formState.loading ? (
                 <span className="animate-ping text-xl font-bold">Loading</span>
@@ -167,6 +162,7 @@ export default function Newsletter({ blog }) {
             </p>
           </div>
 
+          {/* Success or Error message */}
           {formState.state && (
             <div
               className={cn(
