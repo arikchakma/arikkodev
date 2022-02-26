@@ -131,19 +131,19 @@ export default function Newsletter({ blog }) {
             </p>
           </div>
 
-          <form className="flex gap-3 sm:flex-col" onSubmit={subscribe}>
+          <form className="grid grid-cols-3 gap-3" onSubmit={subscribe}>
             <input
               type="email"
               placeholder="hello@apple.com"
               autoComplete="email"
               required
-              className="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 disabled:cursor-not-allowed dark:border-gray-700 dark:bg-gray-800 dark:focus:outline-gray-500"
+              className="col-span-2 rounded border border-gray-300 bg-gray-100 px-6 py-3 text-xl font-semibold outline-0 placeholder:text-gray-400 disabled:cursor-not-allowed dark:border-gray-700 dark:bg-gray-800 dark:focus:outline-gray-500 sm:col-span-3"
               ref={inputEl}
               onChange={e => setEmail(e.target.value)}
             />
             <button
               type="submit"
-              className="shadow-inside w-[200px] rounded bg-blue-500 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50 sm:w-full"
+              className="shadow-inside rounded bg-blue-500 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50 sm:col-span-3"
               disabled={email?.length > 0 ? false : true}
             >
               {formState.loading ? (
@@ -161,14 +161,19 @@ export default function Newsletter({ blog }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <a className="dark:text-gray-200 text-gray-700">Revue</a>
+                <a className="text-gray-700 dark:text-gray-200">Revue</a>
               </NextLink>
               .
             </p>
           </div>
 
           {formState.state && (
-            <div className={cn("my-4 p-3", formState?.success ? "bg-green-200/5": "bg-red-200/5")}>
+            <div
+              className={cn(
+                'my-4 p-3',
+                formState?.success ? 'bg-green-200/5' : 'bg-red-200/5'
+              )}
+            >
               {formState?.success ? (
                 <SuccessMessage>{formState?.message}</SuccessMessage>
               ) : (
