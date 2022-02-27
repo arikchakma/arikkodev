@@ -9,7 +9,7 @@ export default function BlogCard({
 }) {
   return (
     <NextLink href={`/blog/${slug}`}>
-      <a className="hover:opacity-70">
+      <a className="hover:opacity-70 transition-opacity">
         <div>
           <div className="flex items-start justify-between gap-4">
             <h2 className="max-w-lg text-xl font-semibold">{title}</h2>
