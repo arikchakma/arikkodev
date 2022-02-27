@@ -8,9 +8,14 @@ import { Tweet } from '@/components/Tweet';
 
 export default function Tweets({ tweets }) {
   return (
-    <Container>
+    <Container
+      title="Tweets - Arik Chakma"
+      description="Tweets that capture a sentiment I'd love to remember."
+    >
       <div className="mt-28">
-        <h1 className="text-4xl font-bold tracking-tight">Appreciated Tweets</h1>
+        <h1 className="text-4xl font-bold tracking-tight">
+          Appreciated Tweets
+        </h1>
         <p className="mt-4 text-xl text-gray-400">
           Tweets that capture a sentiment I'd love to remember #BlessedTweets
         </p>

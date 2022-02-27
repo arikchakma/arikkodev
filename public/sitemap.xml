@@ -13,6 +13,10 @@
   </url>
 
   <url>
+    <loc>https://arikko.dev/tweets</loc>
+  </url>
+
+  <url>
     <loc
       >https://arikko.dev/blog/dark-theme-toggle-with-tailwindcss-and-next-themes</loc
     >

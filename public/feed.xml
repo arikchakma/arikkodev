@@ -4,11 +4,11 @@
         <description><![CDATA[Arik Chakma]]></description>
         <link>https://arikko.dev</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 23 Jan 2022 23:56:02 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 27 Feb 2022 10:51:32 GMT</lastBuildDate>
         <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
-            <title><![CDATA[Create a theme toggle with tailwindcss and next-themes]]></title>
-            <description><![CDATA[Techniques I used to build a modern theme toggle with smooth animation using tailwindcss.]]></description>
+            <title><![CDATA[Create a theme toggle with Tailwind Css and next-themes]]></title>
+            <description><![CDATA[Techniques I used to build a modern theme toggle with smooth animation using Tailwind Css.]]></description>
             <link>https://arikko.dev/blog/dark-theme-toggle-with-tailwindcss-and-next-themes</link>
             <guid isPermaLink="true">https://arikko.dev/blog/dark-theme-toggle-with-tailwindcss-and-next-themes</guid>
             <pubDate>Sat, 22 Jan 2022 00:00:00 GMT</pubDate>
