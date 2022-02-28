@@ -12,8 +12,8 @@ export default function Home() {
       <HeroSection />
       <BlogSection />
       <ActivitesSection />
-      <Newsletter />
       <ConnectSection />
+      <Newsletter />
       <Divider />
     </Container>
   );

@@ -107,7 +107,7 @@ export default function Newsletter({ blog }) {
   };
 
   return (
-    <div className={cn(blog ? 'mb-0' : '', 'my-24')}>
+    <div className={cn(blog ? 'mb-0' : '', 'mt-16')}>
       <div className="relative w-full rounded-lg border border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-900">
         {/* Heading */}
         <div className="border-b border-gray-300 px-7 py-4 dark:border-gray-700">
