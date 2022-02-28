@@ -16,7 +16,7 @@ body {
 }
 
 body {
-  @apply mx-auto my-0 max-w-[750px] bg-bgWhite px-12 text-black dark:bg-bgDark dark:text-white sm:px-8;
+  @apply mx-auto my-0 max-w-[750px] bg-bgWhite px-12 text-black dark:bg-bgDark dark:text-white sm:px-5;
 }
 
 #__next {

@@ -1,4 +1,4 @@
-import MovieCard from '../images/MovieCard';
+import MovieCard from '../cards/MovieCard';
 import ReadingState from '../ReadingState';
 
 function BookDetails({ name, writer }) {
