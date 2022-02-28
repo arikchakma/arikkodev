@@ -4,12 +4,14 @@ import HeroSection from '@/components/sections/HeroSection';
 import Container from '@/components/Container';
 import BlogSection from '@/components/sections/BlogSection';
 import Newsletter from '@/components/Newsletter';
+import ActivitesSection from '@/components/sections/ActivitesSection';
 
 export default function Home() {
   return (
     <Container>
       <HeroSection />
       <BlogSection />
+      <ActivitesSection />
       <Newsletter />
       <ConnectSection />
       <Divider />
