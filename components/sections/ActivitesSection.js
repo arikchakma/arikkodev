@@ -5,7 +5,9 @@ function BookDetails({ name, writer }) {
   return (
     <div>
       <h2 className="text-lg font-semibold">{name}</h2>
-      <span className="text-base text-gray-600 dark:text-gray-300">{writer}</span>
+      <span className="text-base text-gray-600 dark:text-gray-300">
+        {writer}
+      </span>
     </div>
   );
 }
@@ -50,11 +52,11 @@ export default function ActivitesSection() {
 
         {/* Divide */}
         <div>
-          <div className="border border-gray-200 dark:border-gray-800 h-full" />
+          <div className="h-full border border-gray-200 dark:border-gray-800" />
         </div>
 
         {/* Right Side */}
-        <div className="basis-2/4 basis">
+        <div className="basis basis-2/4">
           <p className="text-base">
             Struggling for a film to watch? Here's the latest few from me.
           </p>
@@ -62,10 +64,12 @@ export default function ActivitesSection() {
             <MovieCard
               url="https://www.imdb.com/title/tt6468322/"
               image="money-heist"
+              alt="Money Heist"
             />
             <MovieCard
               url="https://imdb.com/title/tt0903747/"
               image="breaking-bad"
+              alt="Breaking Bad"
             />
           </div>
         </div>

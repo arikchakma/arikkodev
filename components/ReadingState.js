@@ -10,7 +10,7 @@ export default function ReadingState({ readingState, label, classNames }) {
       <div
         className={cn(
           'flex items-center justify-center gap-1 rounded p-1 px-2',
-          readingStateFresh === 'done' ? 'bg-green-700/10' : 'bg-yellow-700/10'
+          readingStateFresh === 'done' ? 'bg-green-600/10 dark:bg-green-700/10' : 'dark:bg-yellow-700/10 bg-yellow-600/10'
         )}
       >
         {readingStateFresh === 'done' ? (
@@ -21,7 +21,7 @@ export default function ReadingState({ readingState, label, classNames }) {
         <span
           className={cn(
             'text-sm font-medium',
-            readingStateFresh === 'done' ? 'text-green-700' : 'text-yellow-700 dark:text-yellow-600'
+            readingStateFresh === 'done' ? 'text-green-500' : 'text-yellow-700 dark:text-yellow-600'
           )}
         >
           {label}
