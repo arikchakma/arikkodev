@@ -22,7 +22,7 @@ function NowContainer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <a className="text-blue-500 hover:underline transition-all">eetpixel</a>
+          <a className="dark:text-blue-500 text-blue-700 hover:underline transition-all">eetpixel</a>
         </NextLink>
         .
       </p>
