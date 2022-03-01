@@ -5,7 +5,7 @@ import cn from 'classnames';
 import SuccessMessage from './SuccessMessage';
 import ErrorMessage from './ErrorMessage';
 
-const canvasStyles: CSSProperties = {
+const canvasStyles = {
   position: 'fixed',
   pointerEvents: 'none',
   width: '100%',
@@ -14,7 +14,7 @@ const canvasStyles: CSSProperties = {
   left: 0
 };
 
-export default function Newsletter({ blog }: { blog: boolean }) {
+export default function Newsletter({ blog }) {
   const [formState, setFormState] = useState({
     loading: false,
     message: '',
@@ -22,7 +22,7 @@ export default function Newsletter({ blog }: { blog: boolean }) {
     state: false
   });
   const [email, setEmail] = useState('');
-  const inputEl = useRef<HTMLInputElement>();
+  const inputEl = useRef();
 
   const refAnimationInstance = useRef(null);
 
