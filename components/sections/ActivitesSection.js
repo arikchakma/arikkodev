@@ -4,7 +4,7 @@ import ReadingState from '../ReadingState';
 function BookDetails({ name, writer }) {
   return (
     <div>
-      <h2 className="text-lg font-semibold">{name}</h2>
+      <h3 className="text-lg font-semibold">{name}</h3>
       <span className="text-base text-gray-600 dark:text-gray-300">
         {writer}
       </span>

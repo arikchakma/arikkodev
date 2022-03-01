@@ -9,7 +9,7 @@ export default function Container(props) {
   const router = useRouter();
   const meta = {
     title: 'Arik Chakma - Developer, creator.',
-    description: `A frontend chef, who is building his world.`,
+    description: `Front-end developer, content creator, and an explorer.`,
     image: 'https://arikko.dev/static/images/banner.png',
     keywords:
       'Arik Chakma, Arikko, Arik, Chakma, Developer, Frontend Master, Frontend Developer',
