@@ -4,7 +4,7 @@
         <description><![CDATA[Arik Chakma]]></description>
         <link>https://arikko.dev</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 27 Feb 2022 10:51:32 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 01 Mar 2022 23:02:48 GMT</lastBuildDate>
         <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
             <title><![CDATA[Create a theme toggle with Tailwind Css and next-themes]]></title>
