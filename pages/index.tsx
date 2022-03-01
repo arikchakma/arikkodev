@@ -13,7 +13,7 @@ export default function Home() {
       <BlogSection />
       <ActivitesSection />
       <ConnectSection />
-      <Newsletter />
+      <Newsletter blog={false} />
       <Divider />
     </Container>
   );

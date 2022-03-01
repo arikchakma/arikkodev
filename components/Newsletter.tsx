@@ -1,12 +1,11 @@
-import { useState, useRef, useCallback } from 'react';
-import NextLink from 'next/link';
+import { useState, useRef, useCallback, CSSProperties } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import cn from 'classnames';
 
 import SuccessMessage from './SuccessMessage';
 import ErrorMessage from './ErrorMessage';
 
-const canvasStyles = {
+const canvasStyles: CSSProperties = {
   position: 'fixed',
   pointerEvents: 'none',
   width: '100%',
@@ -15,7 +14,7 @@ const canvasStyles = {
   left: 0
 };
 
-export default function Newsletter({ blog }) {
+export default function Newsletter({ blog }: { blog: boolean }) {
   const [formState, setFormState] = useState({
     loading: false,
     message: '',
@@ -23,7 +22,7 @@ export default function Newsletter({ blog }) {
     state: false
   });
   const [email, setEmail] = useState('');
-  const inputEl = useRef();
+  const inputEl = useRef<HTMLInputElement>();
 
   const refAnimationInstance = useRef(null);
 
@@ -151,13 +150,14 @@ export default function Newsletter({ blog }) {
           <div className="my-4 text-base font-normal text-gray-500 dark:text-gray-400">
             <p>
               Unsubscribe at any time. Powered by{' '}
-              <NextLink
+              <a
                 href="https://www.getrevue.co/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-gray-700 dark:text-gray-200"
               >
-                <a className="text-gray-700 dark:text-gray-200">Revue</a>
-              </NextLink>
+                Revue
+              </a>
               .
             </p>
           </div>
