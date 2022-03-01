@@ -11,6 +11,8 @@ export default function Container(props) {
     title: 'Arik Chakma - Developer, creator.',
     description: `A frontend chef, who is building his world.`,
     image: 'https://arikko.dev/static/images/banner.png',
+    keywords:
+      'Arik Chakma, Arikko, Arik, Chakma, Developer, Frontend Master, Frontend Developer',
     type: 'website',
     ...customMeta
   };
@@ -21,6 +23,7 @@ export default function Container(props) {
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
         <meta content={meta.description} name="description" />
+        <meta name="keywords" content={meta.keywords} />
         <meta
           property="og:url"
           content={`https://arikko.dev${router.asPath}`}
