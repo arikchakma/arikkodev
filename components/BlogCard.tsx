@@ -6,13 +6,23 @@ export default function BlogCard({
   summary,
   publishedAt,
   slug
+}: {
+  title: String;
+  readingTime?: {
+    text?: String;
+  };
+  summary: String;
+  publishedAt?: String;
+  slug: String;
 }) {
   return (
     <NextLink href={`/blog/${slug}`}>
       <a className="group">
         <div>
           <div className="flex items-start justify-between gap-4">
-            <h2 className="max-w-lg text-xl font-semibold group-hover:underline">{title}</h2>
+            <h2 className="max-w-lg text-xl font-semibold group-hover:underline">
+              {title}
+            </h2>
             <p className="text-sm font-normal text-gray-400 sm:hidden">
               {readingTime?.text || publishedAt}
             </p>

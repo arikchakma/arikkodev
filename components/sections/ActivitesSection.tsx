@@ -1,7 +1,7 @@
 import MovieCard from '../cards/MovieCard';
 import ReadingState from '../ReadingState';
 
-function BookDetails({ name, writer }) {
+function BookDetails({ name, writer }: { name: string; writer: string }) {
   return (
     <div>
       <h3 className="text-lg font-semibold">{name}</h3>

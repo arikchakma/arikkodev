@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 
 import cn from 'classnames';
 
@@ -9,7 +8,6 @@ import Switch from './Switch';
 
 const navigationData = [
   { name: 'Home', url: '/' },
-  // { name: 'Dashboard', url: '/dashboard' },
   { name: 'Blog', url: '/blog' },
   { name: 'Tweets', url: '/tweets' }
 ];

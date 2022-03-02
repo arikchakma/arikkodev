@@ -1,4 +1,8 @@
-import { defineDocumentType, makeSource } from 'contentlayer/source-files';
+import {
+  defineDocumentType,
+  makeSource,
+  ComputedFields
+} from 'contentlayer/source-files';
 
 import readingTime from 'reading-time';
 import remarkGfm from 'remark-gfm';
@@ -7,7 +11,7 @@ import rehypeCodeTitles from 'rehype-code-titles'; // Code Title
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax highlighting
 
-const computedFields = {
+const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: doc => readingTime(doc.body.raw) },
   wordCount: {
     type: 'number',

@@ -1,5 +1,3 @@
-import NextLink from 'next/link';
-
 function NameWrapper() {
   return (
     <div className="mt-28">
@@ -17,13 +15,14 @@ function NowContainer() {
     <div className="mt-16">
       <p className="mt-4 max-w-xl text-xl">
         Currently working as a frontend developer at a creative agency called{' '}
-        <NextLink
+        <a
+          className="text-blue-700 transition-all hover:underline dark:text-blue-500"
           href="http://eetpixel.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <a className="dark:text-blue-500 text-blue-700 hover:underline transition-all">eetpixel</a>
-        </NextLink>
+          eetpixel
+        </a>
         .
       </p>
       <p className="mt-4 text-xl">Other stuff I am building right now.</p>
@@ -34,10 +33,8 @@ function NowContainer() {
 export default function HeroSection() {
   return (
     <section>
-      <div>
-        <NameWrapper />
-        <NowContainer />
-      </div>
+      <NameWrapper />
+      <NowContainer />
     </section>
   );
 }
