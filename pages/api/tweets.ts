@@ -1,6 +1,10 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { Octokit } from '@octokit/core';
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const octokit = new Octokit({
     auth: `${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`
   });

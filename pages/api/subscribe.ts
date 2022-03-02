@@ -1,4 +1,9 @@
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   // 1. Get the email from the payload and
   // validate if it is empty.
   const { email } = req.body;
@@ -36,6 +41,6 @@ export default async function handler(req, res) {
   } catch (err) {
     // 4. If the control goes inside the catch block
     // let us consider it as a server error(500)
-    return res.status(500).json({ error: err.message || error.toString() });
+    return res.status(500).json({ error: err.message || err.toString() });
   }
 }

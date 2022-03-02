@@ -1,8 +1,13 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
 // API route that revalidates the `/tweets` static page
 
 // Github is configured to send a webhook to this API route when an update to
 // a project is made: https://github.com/delbaoliveira/website/projects/1
-export default async function handler(req, res) {
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   // Ensure this webhook is from Github
   // Basic: In the webhook settings on Github, we've added a query string with
   // a secret to the payload URL e.g. delba.dev/api/tweets/revalidate?secret=abc
