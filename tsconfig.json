@@ -22,6 +22,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Newsletter.js", "components/RealisticFireWorks.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Newsletter.tsx", "components/RealisticFireWorks.tsx"],
   "exclude": ["node_modules"]
 }

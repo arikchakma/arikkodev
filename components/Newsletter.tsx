@@ -5,7 +5,7 @@ import cn from 'classnames';
 import SuccessMessage from './SuccessMessage';
 import ErrorMessage from './ErrorMessage';
 
-const canvasStyles = {
+const canvasStyles: CSSProperties = {
   position: 'fixed',
   pointerEvents: 'none',
   width: '100%',
@@ -14,17 +14,29 @@ const canvasStyles = {
   left: 0
 };
 
-export default function Newsletter({ blog }) {
-  const [formState, setFormState] = useState({
+type NewsletterProps = {
+  blog: boolean;
+};
+
+type NewsletterState = {
+  loading: boolean;
+  message: string;
+  success: boolean;
+  state: boolean;
+};
+
+export default function Newsletter({ blog }: NewsletterProps) {
+  const [formState, setFormState] = useState<NewsletterState>({
     loading: false,
     message: '',
     success: false,
     state: false
   });
-  const [email, setEmail] = useState('');
-  const inputEl = useRef();
 
-  const refAnimationInstance = useRef(null);
+  const [email, setEmail] = useState<string>('');
+  const inputEl = useRef<HTMLInputElement>(null!);
+
+  const refAnimationInstance: React.MutableRefObject<any> = useRef(null);
 
   const getInstance = useCallback(instance => {
     refAnimationInstance.current = instance;
@@ -68,7 +80,7 @@ export default function Newsletter({ blog }) {
     });
   }, [makeShot]);
 
-  const subscribe = async e => {
+  const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setFormState(e => {
