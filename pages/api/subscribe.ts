@@ -18,7 +18,7 @@ export default async function handler(
     const API_KEY = process.env.REVUE_API_KEY;
     const response = await fetch(`https://www.getrevue.co/api/v2/subscribers`, {
       method: 'POST',
-      body: JSON.stringify({ email: email, double_opt_in: false }),
+      body: JSON.stringify({ email: email, double_opt_in: true }),
       headers: {
         Authorization: `Token ${API_KEY}`,
         'Content-Type': 'application/json'
