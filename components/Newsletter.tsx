@@ -178,7 +178,7 @@ export default function Newsletter({ blog }: NewsletterProps) {
           {formState.state && (
             <div
               className={cn(
-                'my-4 p-3',
+                'my-4 p-3 rounded',
                 formState?.success ? 'bg-green-200/5' : 'bg-red-200/5'
               )}
             >
