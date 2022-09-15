@@ -11,7 +11,7 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "workbench.colorTheme": "Community Material Theme Ocean",
+  "workbench.colorTheme": "poimandres",
   "css.validate": false,
   "tailwindCSS.emmetCompletions": true
 }
