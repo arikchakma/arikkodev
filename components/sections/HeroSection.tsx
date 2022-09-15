@@ -3,8 +3,7 @@ function NameWrapper() {
     <div className="mt-28">
       <h1 className="text-xl font-normal">Arik Chakma</h1>
       <p className="mt-6 max-w-xl text-xl">
-        Frontend developer interested in filmmaking, content creation, vlogging,
-        and backend.
+        Web3 Frontend developer interested in filmmaking, content creation, vlogging, and backend.
       </p>
     </div>
   );
