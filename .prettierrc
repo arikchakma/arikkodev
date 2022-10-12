@@ -1,6 +1,17 @@
 {
-  "arrowParens": "avoid",
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "none"
+	"arrowParens": "avoid",
+	"bracketSpacing": true,
+	"bracketSameLine": false,
+	"quoteProps": "consistent",
+	"singleQuote": true,
+	"trailingComma": "es5",
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"overrides": [
+		{
+			"files": "./**/*.mdx",
+			"options": {
+				"printWidth": 72
+			}
+		}
+	]
 }
