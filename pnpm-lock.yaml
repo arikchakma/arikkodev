@@ -7,6 +7,7 @@ specifiers:
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.5
   autoprefixer: ^10.4.7
+  clsx: ^1.2.1
   eslint: 8.25.0
   eslint-config-next: 12.3.1
   husky: ^8.0.1
@@ -31,6 +32,7 @@ devDependencies:
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.5
   autoprefixer: 10.4.12_postcss@8.4.18
+  clsx: 1.2.1
   eslint: 8.25.0
   eslint-config-next: 12.3.1_t54va6jeo5lf3vtqih5uiyrm5e
   husky: 8.0.1
@@ -932,6 +934,11 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
     dev: true
 
   /color-convert/1.9.3:

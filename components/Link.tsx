@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import NextLink from 'next/link';
+import cn from 'clsx';
 
 export default function Link({
   children,
@@ -14,7 +15,15 @@ export default function Link({
 }) {
   if (href && !to) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={className}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className={cn(
+          'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70',
+          className
+        )}
+      >
         {children}
       </a>
     );
@@ -23,10 +32,28 @@ export default function Link({
   if (to && !href) {
     return (
       <NextLink href={to}>
-        <a className={className}>{children}</a>
+        <a
+          className={cn(
+            'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70',
+            className
+          )}
+        >
+          {children}
+        </a>
       </NextLink>
     );
   }
 
-  return null;
+  return (
+    <NextLink href="#">
+      <a
+        className={cn(
+          'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70',
+          className
+        )}
+      >
+        {children}
+      </a>
+    </NextLink>
+  );
 }
