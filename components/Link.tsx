@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import NextLink from 'next/link';
 import cn from 'clsx';
+import { useRouter } from 'next/router';
 
 export default function Link({
   children,
@@ -13,6 +14,9 @@ export default function Link({
   to?: string;
   className?: string;
 }) {
+  const router = useRouter();
+  const isActive = router.pathname === href || router.pathname === to;
+
   if (href && !to) {
     return (
       <a
@@ -20,7 +24,10 @@ export default function Link({
         target="_blank"
         rel="noreferrer"
         className={cn(
-          'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70',
+          'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out',
+          isActive
+            ? 'no-underline opacity-70'
+            : 'opacity-100 hover:no-underline hover:opacity-70',
           className
         )}
       >
@@ -34,7 +41,10 @@ export default function Link({
       <NextLink href={to}>
         <a
           className={cn(
-            'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70',
+            'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:opacity-70',
+            isActive
+              ? 'no-underline opacity-70'
+              : 'opacity-100 hover:no-underline hover:opacity-70',
             className
           )}
         >
@@ -48,7 +58,10 @@ export default function Link({
     <NextLink href="#">
       <a
         className={cn(
-          'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70',
+          'text-[#5d676a] underline underline-offset-2 transition-colors duration-100 ease-in-out hover:opacity-70',
+          isActive
+            ? 'no-underline opacity-70'
+            : 'opacity-100 hover:no-underline hover:opacity-70',
           className
         )}
       >
