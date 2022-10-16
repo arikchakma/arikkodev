@@ -1,12 +1,26 @@
-import type { NextPage } from 'next';
+import type {
+  GetServerSideProps,
+  NextPage,
+  InferGetServerSidePropsType,
+} from 'next';
 import Link from '../components/Link';
 import Container from '@/layouts/Container';
+import Image from 'next/image';
 
-const Home: NextPage = props => {
-  console.log(props);
+function getFlagEmoji(countryCode: string) {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    .map((char: any) => 127397 + char.charCodeAt());
+  return String.fromCodePoint(...codePoints);
+}
 
+const Home: NextPage = (
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) => {
   return (
     <Container>
+      <div>{getFlagEmoji(props.country)}</div>
       <article>
         <div className="mt-10 text-base leading-[26`px] text-[#313233]">
           <p>
@@ -54,6 +68,6 @@ const Home: NextPage = props => {
 
 export default Home;
 
-export const getServerSideProps = ({ query }: { query: any }) => ({
+export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
   props: query,
 });
