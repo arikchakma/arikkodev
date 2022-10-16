@@ -2,7 +2,9 @@ import type { NextPage } from 'next';
 import Link from '../components/Link';
 import Container from '@/layouts/Container';
 
-const Home: NextPage = () => {
+const Home: NextPage = props => {
+  console.log(props);
+
   return (
     <Container>
       <article>
@@ -51,3 +53,7 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = ({ query }: { query: any }) => ({
+  props: query,
+});
