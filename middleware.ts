@@ -7,8 +7,8 @@ export const config = {
 
 export async function middleware(req: NextRequest) {
   const { nextUrl: url, geo } = req;
-  const country = geo?.country || 'US';
-  const city = geo?.city || 'San Francisco';
+  const country = geo?.country || 'BD';
+  const city = geo?.city || 'Dhaka';
 
   url.searchParams.set('country', country);
   url.searchParams.set('city', city);
