@@ -15,7 +15,7 @@ export default function Header() {
               Writing
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/art" className="text-[#4b5563]">
               Art
             </Link>
@@ -24,7 +24,7 @@ export default function Header() {
             <Link to="/inspiration" className="text-[#4b5563]">
               Inspiration
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>
