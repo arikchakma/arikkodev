@@ -5,44 +5,21 @@ import type {
 } from 'next';
 import Link from '../components/Link';
 import Container from '@/layouts/Container';
-import Image from 'next/image';
-
-function getFlagEmoji(countryCode: string) {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split('')
-    .map((char: any) => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
-}
-
-let regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+import { useAtom } from 'jotai';
+import geoAtom from 'atoms/geo';
+import { useEffect } from 'react';
 
 const Home: NextPage = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
+  const [_, update] = useAtom(geoAtom);
+
+  useEffect(() => {
+    update({ country: props.country, city: props.city });
+  }, [update, props.country, props.city]);
+
   return (
     <Container>
-      <div className="mt-10 flex items-center gap-2">
-        {/* <span aria-hidden className="select-none">
-          ·
-        </span> */}
-        <div className="whitespace-nowrap text-xs grayscale transition-[filter] duration-150 ease-in-out hover:grayscale-0">
-          {getFlagEmoji('BD')} Dhaka, Bangladesh
-        </div>
-        <span aria-hidden className="select-none">
-          ·
-        </span>
-
-        <div>
-          <p className="group flex items-center gap-1 whitespace-nowrap text-xs">
-            Visiting from
-            <span className="grayscale transition-[filter] duration-150 ease-in-out group-hover:grayscale-0">
-              {getFlagEmoji(props.country)} {props.city},{' '}
-              {regionNames.of(props.country)}
-            </span>
-          </p>
-        </div>
-      </div>
       <article>
         <div className="mt-10 text-base leading-[26`px] text-[#313233]">
           <p>

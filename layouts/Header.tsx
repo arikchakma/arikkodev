@@ -3,7 +3,7 @@ import Link from '@/components/Link';
 export default function Header() {
   return (
     <header className="mt-24">
-      <nav>
+      <nav className="">
         <ul className="flex items-center gap-3">
           <li>
             <Link to="/" className="text-[#4b5563]">

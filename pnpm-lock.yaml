@@ -13,6 +13,7 @@ specifiers:
   eslint: 8.25.0
   eslint-config-next: 12.3.1
   husky: ^8.0.1
+  jotai: ^1.8.5
   lint-staged: ^13.0.3
   next: latest
   next-contentlayer: ^0.2.8
@@ -26,6 +27,7 @@ specifiers:
 dependencies:
   contentlayer: 0.2.8_esbuild@0.14.54
   date-fns: 2.29.3
+  jotai: 1.8.5_react@18.1.0
   next: 12.3.1_ef5jwxihqo6n7gxfmzogljlgcm
   next-contentlayer: 0.2.8_pnz7qwfms43ubgnrwq3q36uhhe
   react: 18.1.0
@@ -3117,6 +3119,43 @@ packages:
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
+
+  /jotai/1.8.5_react@18.1.0:
+    resolution: {integrity: sha512-c6MGQ3S0X8VctRUEmRLEL3FMib3F7Ppsx3x86c5XL+Gm6JjH6qIt0lb0F4yE2V5/9Tg+KhGiagfsdA5lg0D7cQ==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      '@babel/template': '*'
+      '@tanstack/query-core': '*'
+      '@urql/core': '*'
+      immer: '*'
+      optics-ts: '*'
+      react: '>=16.8'
+      valtio: '*'
+      wonka: '*'
+      xstate: '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      '@tanstack/query-core':
+        optional: true
+      '@urql/core':
+        optional: true
+      immer:
+        optional: true
+      optics-ts:
+        optional: true
+      valtio:
+        optional: true
+      wonka:
+        optional: true
+      xstate:
+        optional: true
+    dependencies:
+      react: 18.1.0
+    dev: false
 
   /js-sdsl/4.1.5:
     resolution: {integrity: sha512-08bOAKweV2NUC1wqTtf3qZlnpOX/R2DU9ikpjOHs0H+ibQv3zpncVQg6um4uYtRtrwIX8M4Nh3ytK4HGlYAq7Q==}

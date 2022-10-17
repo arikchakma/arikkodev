@@ -11,6 +11,7 @@
   "dependencies": {
     "contentlayer": "^0.2.8",
     "date-fns": "^2.29.3",
+    "jotai": "^1.8.5",
     "next": "latest",
     "next-contentlayer": "^0.2.8",
     "react": "18.1.0",

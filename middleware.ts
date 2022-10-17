@@ -7,6 +7,7 @@ export const config = {
 
 export async function middleware(req: NextRequest) {
   const { nextUrl: url, geo } = req;
+
   const country = geo?.country || 'BD';
   const city = geo?.city || 'Dhaka';
 

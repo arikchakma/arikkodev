@@ -1,4 +1,5 @@
 import Link from '@/components/Link';
+import Location from '@/components/Location';
 
 export default function Footer() {
   return (
@@ -29,6 +30,10 @@ export default function Footer() {
             <Link href="mailto:hello@arikko.dev">hello@arikko.dev</Link>
           </li>
         </ul>
+      </div>
+
+      <div className="mt-28">
+        <Location />
       </div>
     </footer>
   );
