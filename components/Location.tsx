@@ -31,7 +31,8 @@ export default function Location() {
         <p className="group flex cursor-pointer items-center gap-1 whitespace-nowrap text-xs">
           Visiting from
           <span className="grayscale transition-[filter_colors] duration-150 ease-in-out group-hover:text-[#313233] group-hover:grayscale-0">
-            {getFlagEmoji(data.country)} {data.city},{' '}
+            {getFlagEmoji(data.country)}
+            {data.city ? `${data.city}, ` : null}
             {regionNames.of(data.country)}
           </span>
         </p>
