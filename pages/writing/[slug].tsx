@@ -1,10 +1,13 @@
+import WritingLayout from '@/layouts/WritingLayout';
 import { allWritings, Writing } from 'contentlayer/generated';
 
 export default function Post({ data }: { data: Writing }) {
   return (
-    <div>
-      <h1>{data.title}</h1>
-    </div>
+    <WritingLayout>
+      <article className="prose mt-10">
+        <h1>{data.title}</h1>
+      </article>
+    </WritingLayout>
   );
 }
 
