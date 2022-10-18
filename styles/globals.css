@@ -58,12 +58,16 @@ body {
   @apply overflow-x-auto rounded-lg border border-gray-200 bg-bgWhite px-4 py-3;
 }
 
+.prose strong {
+  @apply font-semibold;
+}
+
 .prose code {
   @apply rounded-lg border-0 bg-[#EFEFEF] px-1 py-0.5 font-medium tracking-normal text-[#313233] [font-variation-settings:"wght"_500];
 }
 
 .prose pre code {
-  @apply tracking-normal text-[#313233] bg-bgWhite;
+  @apply bg-bgWhite tracking-normal text-[#313233];
 }
 
 .prose img {
@@ -81,7 +85,7 @@ body {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply text-[#313233];
+  @apply text-[#313233]/70;
 }
 
 .token.punctuation {

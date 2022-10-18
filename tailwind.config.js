@@ -47,6 +47,12 @@ module.exports = {
               'code': { color: theme('colors.blue.400') },
             },
             'h2,h3,h4': {
+              'font-weight': '700',
+              'margin-top': '2em',
+              'margin-bottom': '1em',
+              'line-height': '1.3333',
+              'letter-spacing': '-.015em',
+              'font-variation-settings': "'wght' 600",
               'scroll-margin-top': spacing[32],
             },
             'thead': {
