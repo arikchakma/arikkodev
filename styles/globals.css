@@ -60,6 +60,7 @@ body {
 
 .prose strong {
   @apply font-semibold;
+  font-variation-settings: 'wght' 600 !important;
 }
 
 .prose code {
