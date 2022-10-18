@@ -18,3 +18,164 @@ body {
   letter-spacing: 0.005em;
   background-color: #fcfcfc;
 }
+
+.font-main {
+  font-feature-settings: 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02', 'cv03' 1,
+    'cv04' 1, 'liga', 'clig', 'calt';
+  font-variation-settings: 'wght' 450;
+  font-variant: common-ligatures contextual;
+  letter-spacing: 0.005em;
+}
+
+.prose .anchor {
+  @apply invisible absolute;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible no-underline;
+}
+
+.prose a {
+  @apply transition-all;
+}
+
+.prose .anchor:after {
+  @apply text-[#313233];
+  content: '#';
+}
+
+.prose *:hover > .anchor {
+  @apply visible no-underline;
+}
+
+.prose pre {
+  @apply overflow-x-auto rounded-lg border border-gray-200 bg-bgWhite px-4 py-3;
+}
+
+.prose code {
+  @apply rounded-lg border-0 bg-[#EFEFEF] px-1 py-0.5 font-medium tracking-normal text-[#313233] [font-variation-settings:"wght"_500];
+}
+
+.prose pre code {
+  @apply tracking-normal text-[#313233] bg-bgWhite;
+}
+
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply m-0;
+}
+
+.prose > :first-child {
+  /* Override removing top margin, causing layout shift */
+  margin-top: 1.25em !important;
+  margin-bottom: 1.25em !important;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-[#313233];
+}
+
+.token.punctuation {
+  @apply text-[#313233];
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-green-500;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-purple-500;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-500;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-blue-500;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-pink-500;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-yellow-500;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+  @apply text-gray-800 dark:text-gray-50;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rehype-code-title {
+  @apply rounded-t-lg border border-b-0 border-gray-200 bg-[#f7f7f7] px-5 py-3 font-mono text-sm font-bold text-gray-800;
+}
+
+.rehype-code-title + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+.highlight-line {
+  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-4;
+}
+
+/* Remove Safari input shadow on mobile */
+input[type='text'],
+input[type='email'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+article.prose {
+  color: #313233;
+  font-variation-settings: 'wght' 450;
+  line-height: 1.6;
+  word-spacing: -0.04em;
+}

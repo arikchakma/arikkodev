@@ -1,4 +1,4 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily, spacing } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,11 +9,100 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // COLORS
+      colors: {
+        'bgWhite': '#FCFCFC',
+        'bgDark': '#FCFCFC',
+        'link-color': '#5d676a',
+        'link-hover': 'rgb(93 103 106 / 0.7)',
+        'gray': {
+          0: '#fff',
+          100: '#fafafa',
+          200: '#eaeaea',
+          300: '#999999',
+          400: '#888888',
+          500: '#666666',
+          600: '#444444',
+          700: '#333333',
+          800: '#222222',
+          900: '#111111',
+        },
+      },
       // TYPOGRAPHY
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
       },
+
+      typography: theme => ({
+        DEFAULT: {
+          css: {
+            'color': theme('colors.gray.700'),
+            'a': {
+              'color': theme('colors.link-color'),
+              'text-decoration-color': 'rgb(93 103 106 / 0.6)',
+              ' text-underline-offset': '2px',
+              '&:hover': {
+                opacity: 0.7,
+              },
+              'code': { color: theme('colors.blue.400') },
+            },
+            'h2,h3,h4': {
+              'scroll-margin-top': spacing[32],
+            },
+            'thead': {
+              borderBottomColor: theme('colors.gray.200'),
+            },
+            'code': { color: theme('colors.pink.500') },
+            'blockquote p:first-of-type::before': false,
+            'blockquote p:last-of-type::after': false,
+          },
+        },
+        dark: {
+          css: {
+            'color': theme('colors.gray.200'),
+            'a': {
+              'color': theme('colors.blue.400'),
+              '&:hover': {
+                color: theme('colors.blue.600'),
+              },
+              'code': { color: theme('colors.blue.400') },
+            },
+            'blockquote': {
+              borderLeftColor: theme('colors.gray.700'),
+              color: theme('colors.gray.300'),
+            },
+            'h2,h3,h4': {
+              'color': theme('colors.gray.100'),
+              'scroll-margin-top': spacing[32],
+            },
+            'hr': { borderColor: theme('colors.gray.700') },
+            'ol': {
+              li: {
+                '&:before': { color: theme('colors.gray.500') },
+              },
+            },
+            'ul': {
+              li: {
+                '&:before': { backgroundColor: theme('colors.gray.500') },
+              },
+            },
+            'strong': { color: theme('colors.gray.100') },
+            'thead': {
+              color: theme('colors.gray.100'),
+              borderBottomColor: theme('colors.gray.600'),
+            },
+            'tbody': {
+              tr: {
+                borderBottomColor: theme('colors.gray.700'),
+              },
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  variants: {
+    typography: ['dark'],
+  },
+  plugins: [require('@tailwindcss/typography')],
 };

@@ -12,7 +12,7 @@ export default function Document(props: DocumentProps) {
           crossOrigin="anonymous"
         />
       </Head>
-      <body className="w-screen overflow-x-hidden px-5 font-sans antialiased selection:bg-[#95a5ac40]">
+      <body className="w-screen overflow-x-hidden px-5 font-sans text-[#313233] antialiased selection:bg-[#95a5ac40]">
         <Main />
         <NextScript />
       </body>
