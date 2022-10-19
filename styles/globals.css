@@ -28,30 +28,11 @@ body {
 }
 
 .prose .anchor {
-  @apply invisible absolute;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
-}
-
-.anchor:hover {
-  @apply visible no-underline;
+  @apply cursor-pointer text-[#313233] no-underline after:invisible after:pl-2 after:text-[#5d676a] after:content-['#'] hover:opacity-80 hover:after:visible hover:after:opacity-100;
 }
 
 .prose a {
   @apply transition-all;
-}
-
-.prose .anchor:after {
-  @apply text-[#313233];
-  content: '#';
-}
-
-.prose *:hover > .anchor {
-  @apply visible no-underline;
 }
 
 .prose pre {

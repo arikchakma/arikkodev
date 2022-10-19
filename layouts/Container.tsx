@@ -20,7 +20,7 @@ export default function Container(props: {
   } = {
     title: 'Arik Chakma - Developer, creator.',
     description: `Web3 Front-end developer, content creator, and an explorer.`,
-    image: 'https://arikko.dev/static/images/banner.png',
+    image: 'https://beta.arikko.dev/static/images/banner.png',
     keywords:
       'Arik Chakma, Arikko, Arik, Chakma, Developer, Frontend Master, Frontend Developer, Web3, Crypto Dev, Blockchain Developer, Web3 Frontend Developer',
     type: 'website',
@@ -35,9 +35,12 @@ export default function Container(props: {
         <meta name="keywords" content={meta.keywords} />
         <meta
           property="og:url"
-          content={`https://arikko.dev${router.asPath}`}
+          content={`https://beta.arikko.dev${router.asPath}`}
         />
-        <link rel="canonical" href={`https://arikko.dev${router.asPath}`} />
+        <link
+          rel="canonical"
+          href={`https://beta.arikko.dev${router.asPath}`}
+        />
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="Arik Chakma" />
         <meta property="og:description" content={meta.description} />

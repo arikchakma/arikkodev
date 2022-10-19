@@ -32,11 +32,34 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
       },
+      // Breakpoints
+      screens: {
+        '-2xl': { max: '1440px' },
+        // => @media (max-width: 1440px) { ... }
+
+        '-xl': { max: '1279px' },
+        // => @media (max-width: 1279px) { ... }
+
+        '-lg': { max: '1024px' },
+        // => @media (max-width: 1023px) { ... }
+
+        '-2md': { max: '834px' },
+        // => @media (max-width: 834px) { ... }
+
+        '-md': { max: '767px' },
+        // => @media (max-width: 767px) { ... }
+
+        '-sm': { max: '639px' },
+        // => @media (max-width: 639px) { ... }
+
+        '-xs': { max: '428px' },
+        // => @media (max-width: 639px) { ... }
+      },
 
       typography: theme => ({
         DEFAULT: {
           css: {
-            'color': theme('colors.gray.700'),
+            'color': '#313233',
             'a': {
               'color': theme('colors.link-color'),
               'text-decoration-color': 'rgb(93 103 106 / 0.6)',
@@ -68,45 +91,45 @@ module.exports = {
           },
         },
         dark: {
-          css: {
-            'color': theme('colors.gray.200'),
-            'a': {
-              'color': theme('colors.blue.400'),
-              '&:hover': {
-                color: theme('colors.blue.600'),
-              },
-              'code': { color: theme('colors.blue.400') },
-            },
-            'blockquote': {
-              borderLeftColor: theme('colors.gray.700'),
-              color: theme('colors.gray.300'),
-            },
-            'h2,h3,h4': {
-              'color': theme('colors.gray.100'),
-              'scroll-margin-top': spacing[32],
-            },
-            'hr': { borderColor: theme('colors.gray.700') },
-            'ol': {
-              li: {
-                '&:before': { color: theme('colors.gray.500') },
-              },
-            },
-            'ul': {
-              li: {
-                '&:before': { backgroundColor: theme('colors.gray.500') },
-              },
-            },
-            'strong': { color: theme('colors.gray.100') },
-            'thead': {
-              color: theme('colors.gray.100'),
-              borderBottomColor: theme('colors.gray.600'),
-            },
-            'tbody': {
-              tr: {
-                borderBottomColor: theme('colors.gray.700'),
-              },
-            },
-          },
+          // css: {
+          //   'color': theme('colors.gray.200'),
+          //   'a': {
+          //     'color': theme('colors.blue.400'),
+          //     '&:hover': {
+          //       color: theme('colors.blue.600'),
+          //     },
+          //     'code': { color: theme('colors.blue.400') },
+          //   },
+          //   'blockquote': {
+          //     borderLeftColor: theme('colors.gray.700'),
+          //     color: theme('colors.gray.300'),
+          //   },
+          //   'h2,h3,h4': {
+          //     'color': theme('colors.gray.100'),
+          //     'scroll-margin-top': spacing[32],
+          //   },
+          //   'hr': { borderColor: theme('colors.gray.700') },
+          //   'ol': {
+          //     li: {
+          //       '&:before': { color: theme('colors.gray.500') },
+          //     },
+          //   },
+          //   'ul': {
+          //     li: {
+          //       '&:before': { backgroundColor: theme('colors.gray.500') },
+          //     },
+          //   },
+          //   'strong': { color: theme('colors.gray.100') },
+          //   'thead': {
+          //     color: theme('colors.gray.100'),
+          //     borderBottomColor: theme('colors.gray.600'),
+          //   },
+          //   'tbody': {
+          //     tr: {
+          //       borderBottomColor: theme('colors.gray.700'),
+          //     },
+          //   },
+          // },
         },
       }),
     },

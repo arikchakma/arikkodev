@@ -71,7 +71,7 @@ export default makeSource({
       [
         rehypeAutolinkHeadings,
         {
-          // behavior: 'wrap',
+          behavior: 'wrap',
           properties: {
             className: ['anchor'],
           },
