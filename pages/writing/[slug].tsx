@@ -1,11 +1,17 @@
-import WritingLayout from '@/layouts/WritingLayout';
+import Container from '@/layouts/Container';
 import { allWritings, Writing } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
+import { format, parseISO, compareDesc } from 'date-fns';
 
 export default function Post({ data }: { data: Writing }) {
   const MDXComponent = useMDXComponent(data.body.code);
   return (
-    <WritingLayout>
+    <Container
+      title={`${data.title} | Arik Chakma`}
+      description={data.summary}
+      keywords={data.keywords}
+      date={format(parseISO(data.date), 'dd/MM/yyyy')}
+    >
       <article className="font-main prose mt-10 text-[#313233]">
         <h1 className="tracking-[-0.02em] [font-variation-settings:'wght'_700]">
           {data.title}
@@ -16,7 +22,7 @@ export default function Post({ data }: { data: Writing }) {
           }}
         />
       </article>
-    </WritingLayout>
+    </Container>
   );
 }
 

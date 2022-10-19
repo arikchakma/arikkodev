@@ -9,8 +9,8 @@ import rehypeSlug from 'rehype-slug'; // Post Slug
 import rehypeCodeTitles from 'rehype-code-titles'; // Code Title
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax highlighting
-import rehypePrettyCode from 'rehype-pretty-code';
-import { type Options } from 'rehype-pretty-code';
+// import rehypePrettyCode from 'rehype-pretty-code';
+// import { type Options } from 'rehype-pretty-code';
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: doc => readingTime(doc.body.raw) },
@@ -43,6 +43,16 @@ export const Post = defineDocumentType(() => ({
       type: 'date',
       description: 'The date of the post',
       required: true,
+    },
+    summary: {
+      type: 'string',
+      description: 'A short summary of the post',
+      required: false,
+    },
+    keywords: {
+      type: 'string',
+      description: 'Keywords for SEO',
+      required: false,
     },
   },
   computedFields,
