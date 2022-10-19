@@ -3,12 +3,18 @@ import { allWritings, Writing } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
 export default function Post({ data }: { data: Writing }) {
-  const Component = useMDXComponent(data.body.code);
+  const MDXComponent = useMDXComponent(data.body.code);
   return (
     <WritingLayout>
       <article className="font-main prose mt-10 text-[#313233]">
-        {/* <h1>{data.title}</h1> */}
-        <Component />
+        <h1 className="tracking-[-0.02em] [font-variation-settings:'wght'_700]">
+          {data.title}
+        </h1>
+        <MDXComponent
+          components={{
+            li: (props: any) => <li className="[&>p]:m-0">{props.children}</li>,
+          }}
+        />
       </article>
     </WritingLayout>
   );

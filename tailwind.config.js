@@ -51,9 +51,13 @@ module.exports = {
               'margin-top': '2em',
               'margin-bottom': '1em',
               'line-height': '1.3333',
-              'letter-spacing': '-.015em',
-              'font-variation-settings': "'wght' 600",
+              'letter-spacing': '-.02em',
+              'font-variation-settings': "'wght' 700",
               'scroll-margin-top': spacing[32],
+            },
+            'li': {
+              'margin-top': '0.5em',
+              'margin-bottom': '0.5em',
             },
             'thead': {
               borderBottomColor: theme('colors.gray.200'),
