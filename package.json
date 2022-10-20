@@ -4,47 +4,53 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "post:build": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "@octokit/core": "^3.5.1",
-    "@tailwindcss/typography": "^0.5.2",
-    "classnames": "^2.3.1",
-    "contentlayer": "^0.0.34",
-    "globby": "^13.1.1",
-    "next": "12.1.0",
-    "next-contentlayer": "^0.0.34",
-    "next-themes": "^0.1.1",
-    "react": "17.0.2",
-    "react-canvas-confetti": "^1.3.0",
-    "react-dom": "17.0.2",
-    "reading-time": "^1.5.0",
-    "rehype": "^12.0.1",
-    "rehype-autolink-headings": "^6.1.1",
-    "rehype-code-titles": "^1.0.3",
-    "rehype-prism-plus": "^1.3.1",
-    "rehype-slug": "^5.0.1",
-    "remark-gfm": "^3.0.1",
-    "rss": "^1.2.2",
-    "sharp": "^0.30.1",
-    "tailwindcss": "^3.0.23",
-    "use-sound": "^4.0.1"
+    "@tailwindcss/typography": "^0.5.7",
+    "contentlayer": "^0.2.8",
+    "date-fns": "^2.29.3",
+    "github-slugger": "^1.4.0",
+    "jotai": "^1.8.5",
+    "next": "latest",
+    "next-contentlayer": "^0.2.8",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "shiki": "^0.11.1"
   },
   "devDependencies": {
-    "@types/node": "^17.0.21",
-    "@types/react": "^17.0.39",
-    "autoprefixer": "^10.4.2",
-    "date-fns": "^2.28.0",
-    "eslint": "8.9.0",
-    "eslint-config-next": "12.1.0",
-    "file-loader": "^6.2.0",
-    "postcss": "^8.4.6",
-    "prettier": "^2.5.1",
-    "prettier-plugin-tailwindcss": "^0.1.7",
-    "qss": "^2.0.3",
-    "typescript": "^4.6.2",
-    "url-loader": "^4.1.1"
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@types/github-slugger": "^1.3.0",
+    "@types/node": "17.0.35",
+    "@types/react": "18.0.9",
+    "@types/react-dom": "18.0.5",
+    "autoprefixer": "^10.4.7",
+    "clsx": "^1.2.1",
+    "eslint": "8.25.0",
+    "eslint-config-next": "12.3.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "postcss": "^8.4.14",
+    "prettier-plugin-tailwindcss": "^0.1.13",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-code-titles": "^1.1.0",
+    "rehype-prism-plus": "^1.5.0",
+    "rehype-slug": "^5.0.1",
+    "remark-gfm": "^3.0.1",
+    "tailwindcss": "^3.1.2",
+    "typescript": "4.7.2"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   }
 }

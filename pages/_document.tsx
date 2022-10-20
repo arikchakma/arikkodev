@@ -1,6 +1,6 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript, DocumentProps } from 'next/document';
 
-export default function Document(props) {
+export default function Document(props: DocumentProps) {
   return (
     <Html lang="en">
       <Head>
@@ -11,49 +11,38 @@ export default function Document(props) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
-        <link href="/static/favicons/site.webmanifest" rel="manifest" />
-        {/* <link
-          rel="preconnect"
-          href="https://cdn.usefathom.com"
-          crossOrigin=""
-        /> */}
         <link
-          href="/static/favicons/apple-touch-icon.png"
           rel="apple-touch-icon"
           sizes="180x180"
+          href="/static/favicons/apple-touch-icon.png"
         />
         <link
-          href="/static/favicons/favicon-32x32.png"
           rel="icon"
+          type="image/png"
           sizes="32x32"
-          type="image/png"
+          href="/static/favicons/favicon-32x32.png"
         />
         <link
-          href="/static/favicons/favicon-16x16.png"
           rel="icon"
-          sizes="16x16"
           type="image/png"
+          sizes="16x16"
+          href="/static/favicons/favicon-16x16.png"
         />
+        <link rel="manifest" href="/static/favicons/site.webmanifest" />
         <link
-          color="#4a9885"
-          href="/static/favicons/safari-pinned-tab.svg"
           rel="mask-icon"
+          href="/static/favicons/safari-pinned-tab.svg"
+          color="#fcfcfc"
         />
-        <meta content="#ffffff" name="theme-color" />
-        <meta content="#ffffff" name="msapplication-TileColor" />
+        <link rel="shortcut icon" href="/static/favicons/favicon.ico" />
+        <meta name="msapplication-TileColor" content="#fcfcfc" />
         <meta
-          content="/static/favicons/browserconfig.xml"
           name="msapplication-config"
+          content="/static/favicons/browserconfig.xml"
         />
-        {/* <meta content="14d2e73487fa6c71" name="yandex-verification" /> */}
-        <meta name="p:domain_verify" content="3c3b1f0cf2ba26785076afe9eee7466f"/>
-        <meta
-          content="6GngfjvZoTOZDrw-UgX-gcL2NNsLhFOGPSGaqVyOBTo"
-          name="google-site-verification"
-        />
+        <meta name="theme-color" content="#ffffff" />
       </Head>
-      <body>
+      <body className="px-5 font-sans text-[#313233] antialiased selection:bg-[#95a5ac40]">
         <Main />
         <NextScript />
       </body>

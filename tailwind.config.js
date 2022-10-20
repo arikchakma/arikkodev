@@ -1,21 +1,21 @@
-const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily, spacing } = require('tailwindcss/defaultTheme');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    './layouts/**/*.{js,ts,jsx,tsx}'
+    './layouts/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       // COLORS
       colors: {
-        // bgDark: '#151718',
-        bgDark: '#111111',
-        bgWhite: '#FBFCFD',
-        gray: {
+        'bgWhite': '#FCFCFC',
+        'bgDark': '#FCFCFC',
+        'link-color': '#5d676a',
+        'link-hover': 'rgb(93 103 106 / 0.7)',
+        'gray': {
           0: '#fff',
           100: '#fafafa',
           200: '#eaeaea',
@@ -25,112 +25,131 @@ module.exports = {
           600: '#444444',
           700: '#333333',
           800: '#222222',
-          900: '#111111'
-        }
+          900: '#111111',
+        },
       },
-
-      // GRID
-      gridTemplateColumns: {
-        // Simple 16 column grid
-        16: 'repeat(16, minmax(0, 1fr))',
-
-        // Complex site-specific column configuration
-        social: '100px minmax(20px, 100px) 1fr'
-      },
-
-      // BREAKPOINT SCREEN
-      screens: {
-        '2xl': { max: '1535px' },
-        // => @media (max-width: 1535px) { ... }
-
-        xl: { max: '1279px' },
-        // => @media (max-width: 1279px) { ... }
-
-        lg: { max: '1023px' },
-        // => @media (max-width: 1023px) { ... }
-
-        md: { max: '767px' },
-        // => @media (max-width: 767px) { ... }
-
-        sm: { max: '639px' },
-        // => @media (max-width: 639px) { ... }
-
-        '2sm': { max: '480px' }
-      },
-
       // TYPOGRAPHY
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans]
+        sans: ['Inter', ...fontFamily.sans],
+      },
+      // Breakpoints
+      screens: {
+        '-2xl': { max: '1440px' },
+        // => @media (max-width: 1440px) { ... }
+
+        '-xl': { max: '1279px' },
+        // => @media (max-width: 1279px) { ... }
+
+        '-lg': { max: '1024px' },
+        // => @media (max-width: 1023px) { ... }
+
+        '-2md': { max: '834px' },
+        // => @media (max-width: 834px) { ... }
+
+        '-md': { max: '767px' },
+        // => @media (max-width: 767px) { ... }
+
+        '-sm': { max: '639px' },
+        // => @media (max-width: 639px) { ... }
+
+        '-xs': { max: '428px' },
+        // => @media (max-width: 639px) { ... }
+      },
+
+      animation: {
+        'ticker-loop': '20s infinite linear ticker-loop',
+      },
+      keyframes: {
+        'ticker-loop': {
+          '0%': {
+            transform: 'translatex(0)',
+          },
+          '100%': {
+            transform: 'translatex(-100%)',
+          },
+        },
       },
 
       typography: theme => ({
         DEFAULT: {
           css: {
-            color: theme('colors.gray.700'),
-            a: {
-              color: theme('colors.blue.500'),
+            'color': '#313233',
+            'a': {
+              'color': theme('colors.link-color'),
+              'text-decoration-color': 'rgb(93 103 106 / 0.6)',
+              ' text-underline-offset': '2px',
               '&:hover': {
-                color: theme('colors.blue.700')
+                opacity: 0.7,
               },
-              code: { color: theme('colors.blue.400') }
+              'code': { color: theme('colors.blue.400') },
             },
             'h2,h3,h4': {
-              'scroll-margin-top': spacing[32]
+              'font-weight': '700',
+              'margin-top': '2em',
+              'margin-bottom': '1em',
+              'line-height': '1.3333',
+              'letter-spacing': '-.02em',
+              'font-variation-settings': "'wght' 700",
+              'scroll-margin-top': spacing[32],
             },
-            thead: {
-              borderBottomColor: theme('colors.gray.200')
+            'li': {
+              'margin-top': '0.5em',
+              'margin-bottom': '0.5em',
             },
-            code: { color: theme('colors.pink.500') },
+            'thead': {
+              borderBottomColor: theme('colors.gray.200'),
+            },
+            'code': { color: theme('colors.pink.500') },
             'blockquote p:first-of-type::before': false,
-            'blockquote p:last-of-type::after': false
-          }
+            'blockquote p:last-of-type::after': false,
+          },
         },
         dark: {
-          css: {
-            color: theme('colors.gray.200'),
-            a: {
-              color: theme('colors.blue.400'),
-              '&:hover': {
-                color: theme('colors.blue.600')
-              },
-              code: { color: theme('colors.blue.400') }
-            },
-            blockquote: {
-              borderLeftColor: theme('colors.gray.700'),
-              color: theme('colors.gray.300')
-            },
-            'h2,h3,h4': {
-              color: theme('colors.gray.100'),
-              'scroll-margin-top': spacing[32]
-            },
-            hr: { borderColor: theme('colors.gray.700') },
-            ol: {
-              li: {
-                '&:before': { color: theme('colors.gray.500') }
-              }
-            },
-            ul: {
-              li: {
-                '&:before': { backgroundColor: theme('colors.gray.500') }
-              }
-            },
-            strong: { color: theme('colors.gray.100') },
-            thead: {
-              color: theme('colors.gray.100'),
-              borderBottomColor: theme('colors.gray.600')
-            },
-            tbody: {
-              tr: {
-                borderBottomColor: theme('colors.gray.700')
-              }
-            }
-          }
-        }
-      })
-    }
+          // css: {
+          //   'color': theme('colors.gray.200'),
+          //   'a': {
+          //     'color': theme('colors.blue.400'),
+          //     '&:hover': {
+          //       color: theme('colors.blue.600'),
+          //     },
+          //     'code': { color: theme('colors.blue.400') },
+          //   },
+          //   'blockquote': {
+          //     borderLeftColor: theme('colors.gray.700'),
+          //     color: theme('colors.gray.300'),
+          //   },
+          //   'h2,h3,h4': {
+          //     'color': theme('colors.gray.100'),
+          //     'scroll-margin-top': spacing[32],
+          //   },
+          //   'hr': { borderColor: theme('colors.gray.700') },
+          //   'ol': {
+          //     li: {
+          //       '&:before': { color: theme('colors.gray.500') },
+          //     },
+          //   },
+          //   'ul': {
+          //     li: {
+          //       '&:before': { backgroundColor: theme('colors.gray.500') },
+          //     },
+          //   },
+          //   'strong': { color: theme('colors.gray.100') },
+          //   'thead': {
+          //     color: theme('colors.gray.100'),
+          //     borderBottomColor: theme('colors.gray.600'),
+          //   },
+          //   'tbody': {
+          //     tr: {
+          //       borderBottomColor: theme('colors.gray.700'),
+          //     },
+          //   },
+          // },
+        },
+      }),
+    },
   },
   variants: {
-    typography: ['dark']
+    typography: ['dark'],
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [require('@tailwindcss/typography')],
 };

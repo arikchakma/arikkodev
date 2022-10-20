@@ -1,2 +1,6 @@
+coverage
 .next
-.vercel
+dist
+CHANGELOG.md
+.contentlayer
+build

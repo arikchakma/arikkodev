@@ -10,63 +10,46 @@
   src: url(/fonts/Inter.var.woff2) format('woff2');
 }
 
-html,
 body {
-  height: 100%;
+  font-feature-settings: 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02', 'cv03' 1,
+    'cv04' 1, 'liga', 'clig', 'calt';
+  font-variation-settings: 'wght' 450;
+  font-variant: common-ligatures contextual;
+  letter-spacing: 0.005em;
+  background-color: #fcfcfc;
 }
 
-body {
-  @apply mx-auto my-0 max-w-[750px] bg-bgWhite px-12 text-black dark:bg-bgDark dark:text-white sm:px-5;
-}
-
-#__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-::selection {
-  background-color: #df3347;
-  color: #fefefe;
+.font-main {
+  font-feature-settings: 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02', 'cv03' 1,
+    'cv04' 1, 'liga', 'clig', 'calt';
+  font-variation-settings: 'wght' 450;
+  font-variant: common-ligatures contextual;
+  letter-spacing: 0.005em;
 }
 
 .prose .anchor {
-  @apply invisible absolute;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
-}
-
-.anchor:hover {
-  @apply visible no-underline;
+  @apply cursor-pointer text-[#313233] no-underline after:invisible after:pl-2 after:text-[#5d676a] after:content-['#'] hover:opacity-80 hover:after:visible hover:after:opacity-100;
 }
 
 .prose a {
   @apply transition-all;
 }
 
-.prose .anchor:after {
-  @apply text-gray-300 dark:text-gray-700;
-  content: '#';
-}
-
-.prose *:hover > .anchor {
-  @apply visible no-underline;
-}
-
 .prose pre {
-  @apply border border-gray-200 bg-bgWhite dark:border-gray-700 dark:bg-bgDark;
+  @apply overflow-x-auto rounded-lg border border-gray-200 bg-bgWhite px-4 py-3;
+}
+
+.prose strong {
+  @apply font-semibold;
+  font-variation-settings: 'wght' 600 !important;
 }
 
 .prose code {
-  @apply rounded-lg border-0 border-gray-100 bg-bgWhite px-1 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-bgDark dark:text-gray-200;
+  @apply rounded-lg border-0 bg-[#EFEFEF] px-1 py-0.5 font-medium tracking-normal text-[#313233] [font-variation-settings:"wght"_500];
 }
 
 .prose pre code {
-  @apply text-gray-800 dark:text-gray-200;
+  @apply bg-bgWhite tracking-normal text-[#313233];
 }
 
 .prose img {
@@ -84,11 +67,11 @@ body {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply text-gray-700 dark:text-gray-300;
+  @apply text-[#313233]/70;
 }
 
 .token.punctuation {
-  @apply text-gray-700 dark:text-gray-300;
+  @apply text-[#313233];
 }
 
 .token.property,
@@ -150,7 +133,7 @@ pre {
 }
 
 .rehype-code-title {
-  @apply rounded-t-lg border border-b-0 border-gray-200 bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200;
+  @apply rounded-t-lg border border-b-0 border-gray-200 bg-[#f7f7f7] px-5 py-3 font-mono text-sm font-bold text-gray-800;
 }
 
 .rehype-code-title + pre {
@@ -158,7 +141,7 @@ pre {
 }
 
 .highlight-line {
-  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-4 dark:bg-gray-800;
+  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-4;
 }
 
 /* Remove Safari input shadow on mobile */
@@ -176,11 +159,31 @@ table {
   white-space: nowrap;
 }
 
-@layer utilities {
-  .switch-transition {
-    transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
-  .shadow-inside {
-    box-shadow: inset 0px 4px 4px rgb(255 255 255 / 15%);
-  }
+article.prose {
+  color: #313233;
+  font-variation-settings: 'wght' 450;
+  line-height: 1.6;
+  word-spacing: -0.04em;
+}
+
+.gradient-clip::before {
+  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 40px;
+  z-index: 2;
+  left: 0;
+  top: 0;
+}
+.gradient-clip::after {
+  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 40px;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
 }
