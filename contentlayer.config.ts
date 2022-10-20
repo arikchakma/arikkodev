@@ -11,6 +11,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to h
 import rehypePrism from 'rehype-prism-plus'; // Syntax highlighting
 // import rehypePrettyCode from 'rehype-pretty-code';
 // import { type Options } from 'rehype-pretty-code';
+import GithubSlugger from 'github-slugger';
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: doc => readingTime(doc.body.raw) },
@@ -21,6 +22,32 @@ const computedFields: ComputedFields = {
   slug: {
     type: 'string',
     resolve: doc => doc._raw.sourceFileName.replace(/\.mdx$/, ''),
+  },
+  headings: {
+    type: 'json',
+    resolve: async doc => {
+      // use same package as rehypeSlug so toc and sluggified headings match
+      // https://github.com/rehypejs/rehype-slug/blob/main/package.json#L36
+      const slugger = new GithubSlugger();
+
+      // https://stackoverflow.com/a/70802303
+      const regXHeader = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+
+      const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+        value => {
+          const groups = (value as any).groups as any;
+          const flag = groups?.flag;
+          const content = groups?.content;
+          return {
+            heading: flag?.length,
+            text: content,
+            slug: content ? slugger.slug(content) : undefined,
+          };
+        }
+      );
+
+      return headings;
+    },
   },
 };
 
@@ -39,6 +66,12 @@ export const Post = defineDocumentType(() => ({
       description: 'The title of the post',
       required: true,
     },
+    status: {
+      type: 'enum',
+      options: ['draft', 'published'],
+      description: 'The status of the post',
+      required: true,
+    },
     date: {
       type: 'date',
       description: 'The date of the post',
@@ -52,6 +85,11 @@ export const Post = defineDocumentType(() => ({
     keywords: {
       type: 'string',
       description: 'Keywords for SEO',
+      required: false,
+    },
+    author: {
+      type: 'string',
+      description: 'Author of the post',
       required: false,
     },
   },
