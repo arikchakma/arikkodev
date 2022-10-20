@@ -1,16 +1,18 @@
 import Container from '@/layouts/Container';
 import { allWritings, Writing } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import { format, parseISO, compareDesc } from 'date-fns';
+import { formatDate } from '@/lib/formatDate';
 
 export default function Post({ data }: { data: Writing }) {
   const MDXComponent = useMDXComponent(data.body.code);
+  // console.log(data.headings);
+
   return (
     <Container
       title={`${data.title} | Arik Chakma`}
       description={data.summary}
       keywords={data.keywords}
-      date={format(parseISO(data.date), 'dd/MM/yyyy')}
+      date={formatDate(data.date)}
     >
       <article className="font-main prose mt-10 text-[#313233]">
         <h1 className="tracking-[-0.02em] [font-variation-settings:'wght'_700]">

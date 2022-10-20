@@ -1,8 +1,9 @@
 import { allWritings, Writing } from 'contentlayer/generated';
 import { GetStaticProps } from 'next';
-import { format, parseISO, compareDesc } from 'date-fns';
 import Container from '@/layouts/Container';
 import NextLink from 'next/link';
+import { formatDate } from '@/lib/formatDate';
+import { compareDesc } from 'date-fns';
 
 export default function AllWritings({ writings }: { writings: Writing[] }) {
   return (
@@ -19,7 +20,7 @@ export default function AllWritings({ writings }: { writings: Writing[] }) {
                   dateTime={writing.date}
                   className="date text-sm text-[#9ca3af]"
                 >
-                  {format(parseISO(writing.date), 'dd/MM/yyyy')}
+                  {formatDate(writing.date)}
                 </time>
               </a>
             </NextLink>
