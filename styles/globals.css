@@ -165,3 +165,25 @@ article.prose {
   line-height: 1.6;
   word-spacing: -0.04em;
 }
+
+.gradient-clip::before {
+  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 40px;
+  z-index: 2;
+  left: 0;
+  top: 0;
+}
+.gradient-clip::after {
+  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 40px;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}

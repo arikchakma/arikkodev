@@ -1,5 +1,6 @@
 import Link from '@/components/Link';
 import Location from '@/components/Location';
+import MarqueeLocation from '@/components/MarqueeLocation';
 
 export default function Footer() {
   return (
@@ -33,7 +34,10 @@ export default function Footer() {
       </div>
 
       <div className="mt-28">
-        <Location />
+        <div className="-sm:hidden">
+          <Location />
+        </div>
+        <MarqueeLocation />
       </div>
     </footer>
   );
