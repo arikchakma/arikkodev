@@ -35,7 +35,9 @@ const computedFields: ComputedFields = {
 
       const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
         value => {
-          const groups = (value as any).groups as any;
+          const groups = (
+            value as { groups: { flag: string; content: string } }
+          ).groups;
           const flag = groups?.flag;
           const content = groups?.content;
           return {
