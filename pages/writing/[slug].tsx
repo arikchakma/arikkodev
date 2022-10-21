@@ -5,7 +5,6 @@ import { formatDate, formatDateFull } from '@/lib/formatDate';
 
 export default function Post({ data }: { data: Writing }) {
   const MDXComponent = useMDXComponent(data.body.code);
-  // console.log(data.headings);
 
   return (
     <Container
