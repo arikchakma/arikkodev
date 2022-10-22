@@ -27,7 +27,6 @@ body {
   letter-spacing: 0.005em;
 }
 
-
 .prose .anchor {
   @apply cursor-pointer text-[#313233] no-underline after:invisible after:pl-2 after:text-[#5d676a] after:content-['#'] hover:opacity-80 hover:after:visible hover:after:opacity-100;
 }
@@ -189,3 +188,9 @@ article.prose {
   transform: rotateZ(180deg);
 }
 
+@layer utilities {
+  .top-blur {
+    -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent);
+    mask-image: linear-gradient(to bottom, #000 25%, transparent);
+  }
+}
