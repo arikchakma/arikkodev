@@ -51,6 +51,29 @@ const computedFields: ComputedFields = {
       return headings;
     },
   },
+  externalLinks: {
+    type: 'json',
+    resolve: async doc => {
+      // https://morioh.com/p/2f455138edf8
+      const regXExternalLink =
+        /\[(.+)\]\((https?:\/\/[^\s]+)(?: "(.+)")?\)|(https?:\/\/[^\s]+)/gi;
+
+      const externalLinks = Array.from(
+        doc.body.raw.matchAll(regXExternalLink)
+      ).map((value: any) => {
+        const text = value[1];
+        const url = value[2];
+        const name = (url as string).replace(/\//g, '@').replace(/#/g, '@');
+        return {
+          text,
+          url,
+          name,
+        };
+      });
+
+      return externalLinks;
+    },
+  },
 };
 
 // const rehypePrettyCodeOptions: Partial<Options> = {
