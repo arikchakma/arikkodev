@@ -1,11 +1,14 @@
 import { allWritings, Writing } from 'contentlayer/generated';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Container from '@/layouts/Container';
 import NextLink from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 import { compareDesc } from 'date-fns';
+import { getFormattedWriting } from '@/lib/getFormattedWriting';
 
-export default function AllWritings({ writings }: { writings: Writing[] }) {
+export default function AllWritings({
+  writings,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Container>
       <ul className="mt-10">
@@ -31,14 +34,18 @@ export default function AllWritings({ writings }: { writings: Writing[] }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ctx => {
-  const writings = allWritings.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date));
-  });
+export const getStaticProps: GetStaticProps<{
+  writings: ReturnType<typeof getFormattedWriting>[];
+}> = async ctx => {
+  const data = allWritings
+    .sort((a, b) => {
+      return compareDesc(new Date(a.date), new Date(b.date));
+    })
+    .filter(writing => writing.status === 'published');
 
   return {
     props: {
-      writings,
+      writings: data.map(getFormattedWriting),
     },
   };
 };

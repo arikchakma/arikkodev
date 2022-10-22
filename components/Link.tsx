@@ -25,7 +25,7 @@ export default function Link({
         rel="noopener noreferrer"
         className={cn(
           'text-[#5d676a] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 transition-colors duration-100 ease-in-out',
-          isActive ? 'no-underline opacity-70' : 'opacity-100 hover:opacity-70',
+          isActive ? 'no-underline opacity-90' : 'opacity-100 hover:opacity-70',
           className
         )}
       >
@@ -41,7 +41,7 @@ export default function Link({
           className={cn(
             'text-[#5d676a] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 transition-colors duration-100 ease-in-out hover:opacity-70',
             isActive
-              ? 'no-underline opacity-70'
+              ? 'no-underline opacity-90'
               : 'opacity-100 hover:opacity-70',
             className
           )}
@@ -57,7 +57,7 @@ export default function Link({
       <a
         className={cn(
           'text-[#5d676a] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 transition-colors duration-100 ease-in-out hover:opacity-70',
-          isActive ? 'no-underline opacity-70' : 'opacity-100 hover:opacity-70',
+          isActive ? 'no-underline opacity-90' : 'opacity-100 hover:opacity-70',
           className
         )}
       >
