@@ -42,7 +42,7 @@ export default function Document(props: DocumentProps) {
         />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <body className="font-sans text-[#313233] antialiased selection:bg-[#95a5ac40]">
+      <body className="p-5 font-sans text-[#313233] antialiased selection:bg-[#95a5ac40]">
         <Main />
         <NextScript />
       </body>

@@ -28,8 +28,8 @@ export default function Container(props: {
   };
   return (
     <>
-      <div className="top-blur pointer-events-none sticky top-0 left-0 z-10 h-20 w-screen cursor-none select-none opacity-95 backdrop-blur-[5px] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom,rgba(252,252,252,1),rgba(252,252,252,0))]" />
-      <main className="mx-auto max-w-[640px] p-5 pb-20 pt-0">
+      <div className="top-blur pointer-events-none sticky top-0 left-0 z-10 h-20 w-full cursor-none select-none opacity-95 backdrop-blur-[5px] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom,rgba(252,252,252,1),rgba(252,252,252,0))]" />
+      <main className="mx-auto max-w-[640px] pb-20">
         <Head>
           <title>{meta.title}</title>
           <meta name="robots" content="follow, index" />
