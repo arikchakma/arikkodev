@@ -2,6 +2,7 @@ import Container from '@/layouts/Container';
 import { allWritings, Writing } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import { formatDate, formatDateFull } from '@/lib/formatDate';
+import LinkPreview from '@/components/LinkPreview';
 
 export default function Post({ data }: { data: Writing }) {
   const MDXComponent = useMDXComponent(data.body.code);
@@ -48,6 +49,24 @@ export default function Post({ data }: { data: Writing }) {
         <MDXComponent
           components={{
             li: (props: any) => <li className="[&>p]:m-0">{props.children}</li>,
+            a: (props: any) => {
+              return (
+                <>
+                  {props.className ? (
+                    <a
+                      className={`${props.className} font-bold`}
+                      href={props.href}
+                    >
+                      {props.children}
+                    </a>
+                  ) : (
+                    <LinkPreview href={props.href}>
+                      {props.children}
+                    </LinkPreview>
+                  )}
+                </>
+              );
+            },
           }}
         />
       </article>

@@ -8,6 +8,7 @@ import Container from '@/layouts/Container';
 import { useAtom } from 'jotai';
 import geoAtom from 'atoms/geo';
 import { useEffect } from 'react';
+import LinkPreview from '@/components/LinkPreview';
 
 const Home: NextPage = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -33,10 +34,12 @@ const Home: NextPage = (
             seriously after joining college, worked as a freelance developer,
             and am pursuing a BSc degree in Computer Science. Building projects
             and experimenting in a{' '}
-            <Link href="https://1x3.studio">little lab</Link>
+            <LinkPreview href="https://1x3.studio">little lab</LinkPreview>
             —and now I&apos;m applying my knowledge to help build the future of
             money with{' '}
-            <Link href="https://precog.finance/">Precog Finance.</Link>
+            <LinkPreview href="https://precog.finance/">
+              Precog Finance.
+            </LinkPreview>
           </p>
 
           <p className="mt-5">
@@ -48,12 +51,15 @@ const Home: NextPage = (
           <div className="mt-5">
             <ul className="list-disc space-y-1 pl-6 marker:text-[#5d676a]">
               <li className="pl-1.5">
-                Building <Link href="https://precog.finance/">Tokens.Army</Link>
+                Building{' '}
+                <LinkPreview href="https://tokens-army.vercel.app/">
+                  Tokens.Army
+                </LinkPreview>
                 , which helps you explore your fantastic nfts on Ethreum and
                 manage your ens domains.
               </li>
               <li className="pl-1.5">
-                Created <Link href="https://precog.finance/">OG</Link>, which
+                Created <Link href="https://og.arikko.dev/">OG</Link>, which
                 gerates open graph data from a url and helps you create dynamic
                 og images for Tokens.Army.
               </li>
