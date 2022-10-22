@@ -20,6 +20,7 @@ specifiers:
   lint-staged: ^13.0.3
   next: latest
   next-contentlayer: ^0.2.8
+  playwright-core: ^1.27.1
   postcss: ^8.4.14
   prettier-plugin-tailwindcss: ^0.1.13
   react: 18.1.0
@@ -42,6 +43,7 @@ dependencies:
   jotai: 1.8.5_react@18.1.0
   next: 12.3.1_ef5jwxihqo6n7gxfmzogljlgcm
   next-contentlayer: 0.2.8_pnz7qwfms43ubgnrwq3q36uhhe
+  playwright-core: 1.27.1
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   shiki: 0.11.1
@@ -4418,6 +4420,12 @@ packages:
   /pify/2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
+
+  /playwright-core/1.27.1:
+    resolution: {integrity: sha512-9EmeXDncC2Pmp/z+teoVYlvmPWUC6ejSSYZUln7YaP89Z6lpAaiaAnqroUt/BoLo8tn7WYShcfaCh+xofZa44Q==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: false
 
   /postcss-import/14.1.0_postcss@8.4.18:
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}

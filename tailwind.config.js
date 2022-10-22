@@ -81,7 +81,7 @@ module.exports = {
               '&:hover': {
                 opacity: 0.7,
               },
-              'code': { color: theme('colors.blue.400') },
+              'code': { color: theme('colors.link-color') },
             },
             'h2,h3,h4': {
               'font-weight': '700',
