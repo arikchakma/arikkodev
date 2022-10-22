@@ -6,6 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "post:build": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs",
+    "post:preview": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/preview-images.mjs",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -13,12 +15,14 @@
     "contentlayer": "^0.2.8",
     "date-fns": "^2.29.3",
     "github-slugger": "^1.4.0",
+    "globby": "^13.1.2",
     "jotai": "^1.8.5",
     "next": "latest",
     "next-contentlayer": "^0.2.8",
     "playwright-core": "^1.27.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "rss": "^1.2.2",
     "shiki": "^0.11.1"
   },
   "devDependencies": {

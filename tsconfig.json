@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".contentlayer/generated",
-    "contentlayer.config.ts"
+    "contentlayer.config.ts",
+    "scripts/preview-images.mjs"
   ],
   "exclude": ["node_modules"]
 }
