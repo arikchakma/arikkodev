@@ -63,7 +63,10 @@ const computedFields: ComputedFields = {
       ).map((value: any) => {
         const text = value[1];
         const url = value[2];
-        const name = (url as string).replace(/\//g, '@').replace(/#/g, '@');
+        if (!url) return { text, url: '', name: text };
+        // Replacing all the / with @ to avoid folder structure
+        const name = (url as string).replace(/[\/#]/g, '@');
+
         return {
           text,
           url,

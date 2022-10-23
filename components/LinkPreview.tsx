@@ -12,7 +12,7 @@ export default function LinkPreview({
 }) {
   const router = useRouter();
   const isActive = router.pathname === href;
-  const name = href.replace(/\//g, '@').replace(/#/g, '@');
+  const name = href.replace(/[\/#]/g, '@');
   return (
     <HoverCard.Root openDelay={50} closeDelay={100}>
       <HoverCard.Trigger asChild>

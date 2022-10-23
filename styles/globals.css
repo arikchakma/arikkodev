@@ -141,7 +141,7 @@ pre {
 }
 
 .highlight-line {
-  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-4;
+  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-200/40 px-4;
 }
 
 /* Remove Safari input shadow on mobile */
