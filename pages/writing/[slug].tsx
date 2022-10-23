@@ -21,7 +21,7 @@ export default function Post({
     >
       <article className="font-main prose mt-10 text-[#313233]">
         <div>
-          <h1 className="mb-0 tracking-[-0.02em] [font-variation-settings:'wght'_700]">
+          <h1 className="mb-0 tracking-[-0.02em] [font-variation-settings:'wght'_700] -sm:text-3xl -sm:leading-[1.1111]">
             {writing.title}
           </h1>
           <div className="mt-3 mb-10 flex items-center gap-1.5 text-sm opacity-70">
