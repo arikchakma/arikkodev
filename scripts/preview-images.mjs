@@ -16,6 +16,7 @@ const altLinks = [
 function previewImages() {
   JSON.parse(allWritings).map(writing => {
     writing.externalLinks.map(async externalLink => {
+      if (!externalLink) return;
       let browser = await chromium.launch();
 
       let page = await browser.newPage();

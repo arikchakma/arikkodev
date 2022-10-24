@@ -10,7 +10,6 @@ export default function Post({
   writing,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const MDXComponent = useMDXComponent(writing.body.code);
-  // console.log(writing.externalLinks);
 
   return (
     <Container
@@ -54,13 +53,30 @@ export default function Post({
             a: (props: any) => {
               return (
                 <>
-                  {props.className ? (
-                    <a
-                      className={`${props.className} font-bold`}
-                      href={props.href}
-                    >
-                      {props.children}
-                    </a>
+                  {props.className || props.href.includes('twitter.com') ? (
+                    <>
+                      {props.href.includes('twitter.com') ? (
+                        <>
+                          <a
+                            className={`${props.className} font-bold`}
+                            href={props.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {props.children}
+                          </a>
+                        </>
+                      ) : (
+                        <>
+                          <a
+                            className={`${props.className} font-bold`}
+                            href={props.href}
+                          >
+                            {props.children}
+                          </a>
+                        </>
+                      )}
+                    </>
                   ) : (
                     <LinkPreview href={props.href}>
                       {props.children}
