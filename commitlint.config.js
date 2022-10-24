@@ -18,6 +18,8 @@ module.exports = {
 
         'refactor', // A code change that neither fixes a bug nor adds a feature
 
+        'writing', // A blog post that is not ready to be merged
+
         'revert', // Revert to the previous commit
 
         'example', // Adding example code or updating example code
