@@ -5,11 +5,5 @@ export const config = {
 };
 
 export default function handler(req: NextRequest) {
-  const country = req.geo?.country || 'BD';
-  const city = req.geo?.city || 'Dhaka';
-
-  return NextResponse.json({
-    country,
-    city,
-  });
+  return NextResponse.json(req.geo);
 }
