@@ -14,18 +14,19 @@ export default function AllWritings({
       <ul className="mt-10">
         {writings.map(writing => (
           <li key={writing.slug} className="">
-            <NextLink href={`/writing/${writing.slug}`}>
-              <a className="flex items-baseline text-[#111827] no-underline transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70">
-                <h3 className="flex-1 py-1 pr-4 text-[1.1rem] font-medium tracking-tight [font-variation-settings:'wght'_500]">
-                  {writing.title}
-                </h3>
-                <time
-                  dateTime={writing.date}
-                  className="date text-sm text-[#9ca3af]"
-                >
-                  {formatDate(writing.date)}
-                </time>
-              </a>
+            <NextLink
+              href={`/writing/${writing.slug}`}
+              className="flex items-baseline text-[#111827] no-underline transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70"
+            >
+              <h3 className="flex-1 py-1 pr-4 text-[1.1rem] font-medium tracking-tight [font-variation-settings:'wght'_500]">
+                {writing.title}
+              </h3>
+              <time
+                dateTime={writing.date}
+                className="date text-sm text-[#9ca3af]"
+              >
+                {formatDate(writing.date)}
+              </time>
             </NextLink>
           </li>
         ))}

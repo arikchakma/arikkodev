@@ -1,24 +1,9 @@
-import type {
-  GetServerSideProps,
-  NextPage,
-  InferGetServerSidePropsType,
-} from 'next';
+import type { NextPage } from 'next';
 import Link from '../components/Link';
 import Container from '@/layouts/Container';
-import { useAtom } from 'jotai';
-import geoAtom from 'atoms/geo';
-import { useEffect } from 'react';
 import LinkPreview from '@/components/LinkPreview';
 
-const Home: NextPage = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
-  const [_, update] = useAtom(geoAtom);
-
-  useEffect(() => {
-    update({ country: props.country, city: props.city });
-  }, [update, props.country, props.city]);
-
+const Home: NextPage = () => {
   return (
     <Container>
       <article>
@@ -72,7 +57,3 @@ const Home: NextPage = (
 };
 
 export default Home;
-
-export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
-  props: query,
-});

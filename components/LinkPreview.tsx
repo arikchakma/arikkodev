@@ -35,7 +35,6 @@ export default function LinkPreview({
             <Image
               src={`/previews/${name}.png`}
               className="absolute h-full w-full object-top"
-              layout="fill"
               alt={name}
             />
           </figure>

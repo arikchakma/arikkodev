@@ -1,5 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import { NextRequest, NextResponse } from 'next/server';
 
 export const config = {
@@ -7,9 +5,11 @@ export const config = {
 };
 
 export default function handler(req: NextRequest) {
-  console.log(req.geo);
+  const country = req.geo?.country || 'BD';
+  const city = req.geo?.city || 'Dhaka';
 
   return NextResponse.json({
-    geo: req.geo,
+    country,
+    city,
   });
 }

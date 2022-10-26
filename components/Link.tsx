@@ -36,25 +36,8 @@ function Link({
 
   if (to && !href) {
     return (
-      <NextLink href={to}>
-        <a
-          className={cn(
-            'whitespace-nowrap text-[#5d676a] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 transition-colors duration-100 ease-in-out hover:opacity-70',
-            isActive
-              ? 'no-underline opacity-90'
-              : 'opacity-100 hover:opacity-70',
-            className
-          )}
-        >
-          {children}
-        </a>
-      </NextLink>
-    );
-  }
-
-  return (
-    <NextLink href="#">
-      <a
+      <NextLink
+        href={to}
         className={cn(
           'whitespace-nowrap text-[#5d676a] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 transition-colors duration-100 ease-in-out hover:opacity-70',
           isActive ? 'no-underline opacity-90' : 'opacity-100 hover:opacity-70',
@@ -62,7 +45,20 @@ function Link({
         )}
       >
         {children}
-      </a>
+      </NextLink>
+    );
+  }
+
+  return (
+    <NextLink
+      href="#"
+      className={cn(
+        'whitespace-nowrap text-[#5d676a] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 transition-colors duration-100 ease-in-out hover:opacity-70',
+        isActive ? 'no-underline opacity-90' : 'opacity-100 hover:opacity-70',
+        className
+      )}
+    >
+      {children}
     </NextLink>
   );
 }
