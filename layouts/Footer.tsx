@@ -1,8 +1,10 @@
 import Link from '@/components/Link';
 import Location from '@/components/Location';
 import MarqueeLocation from '@/components/MarqueeLocation';
+import useWindowSize from '@/lib/useWindowSize';
 
 export default function Footer() {
+  const { width } = useWindowSize();
   return (
     <footer>
       <hr className="mt-12 text-[#5d676a]" />
@@ -24,10 +26,7 @@ export default function Footer() {
       </div>
 
       <div className="mt-28">
-        <div className="-sm:hidden">
-          <Location />
-        </div>
-        <MarqueeLocation />
+        {width > 639 ? <Location /> : <MarqueeLocation />}
       </div>
     </footer>
   );

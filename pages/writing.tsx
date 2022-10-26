@@ -15,7 +15,10 @@ export default function AllWritings({
         {writings.map(writing => (
           <li key={writing.slug} className="">
             <NextLink
-              href={`/writing/${writing.slug}`}
+              href={{
+                pathname: `/writing/[slug]`,
+                query: { slug: writing.slug },
+              }}
               className="flex items-baseline text-[#111827] no-underline transition-colors duration-100 ease-in-out hover:no-underline hover:opacity-70"
             >
               <h3 className="flex-1 py-1 pr-4 text-[1.1rem] font-medium tracking-tight [font-variation-settings:'wght'_500]">

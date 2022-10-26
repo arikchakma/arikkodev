@@ -26,7 +26,7 @@ export default function Location() {
         {getFlagEmoji('BD')} Dhaka, Bangladesh
       </div>
 
-      {data ? (
+      {data?.country ? (
         <>
           <span aria-hidden className="select-none">
             ·
@@ -35,9 +35,9 @@ export default function Location() {
             <p className="group flex cursor-pointer items-center gap-1 whitespace-nowrap text-xs">
               Visiting from
               <span className="grayscale transition-[filter_colors] duration-150 ease-in-out group-hover:text-[#313233] group-hover:grayscale-0">
-                {getFlagEmoji(data.country)}
+                {data.country ? `${getFlagEmoji(data.country)}` : null}
                 {data.city ? ` ${data.city}, ` : null}
-                {regionNames.of(data.country)}
+                {data.country ? `${regionNames.of(data.country)}` : null}
               </span>
             </p>
           </div>
