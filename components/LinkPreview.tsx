@@ -35,7 +35,9 @@ export default function LinkPreview({
             <Image
               src={`/previews/${name}.png`}
               className="absolute h-full w-full object-top"
+              fill={true}
               alt={name}
+              sizes="100%"
             />
           </figure>
         </HoverCard.Content>
