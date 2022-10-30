@@ -10,7 +10,6 @@ type FeedbackData = {
 };
 
 export default function FeedbackComp() {
-  // const [value, setValue] = useState('');
   const {
     register,
     handleSubmit,
@@ -18,7 +17,6 @@ export default function FeedbackComp() {
     formState: { errors },
     setError,
     reset,
-    getValues,
   } = useForm<FeedbackData>();
 
   const { mutate, status } = useMutation(
@@ -43,9 +41,7 @@ export default function FeedbackComp() {
   );
 
   const onSubmit = handleSubmit(data => {
-    // mutate(data);
-    console.log(data);
-
+    mutate(data);
     reset();
   });
 
