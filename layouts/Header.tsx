@@ -1,3 +1,4 @@
+import FeedbackComp from '@/components/Feedback/FeedbackComp';
 import Link from '@/components/Link';
 
 export default function Header() {
@@ -26,6 +27,8 @@ export default function Header() {
             </Link>
           </li> */}
         </ul>
+
+        <FeedbackComp />
       </nav>
     </header>
   );
