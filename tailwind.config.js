@@ -14,6 +14,7 @@ module.exports = {
       colors: {
         'bgWhite': '#FCFCFC',
         'bgDark': '#FCFCFC',
+        'text-dark': '#313233',
         'link-color': '#5d676a',
         'link-hover': 'rgb(93 103 106 / 0.7)',
         'gray': {
