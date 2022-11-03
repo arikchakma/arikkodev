@@ -9,8 +9,6 @@ import rehypeSlug from 'rehype-slug'; // Post Slug
 import rehypeCodeTitles from 'rehype-code-titles'; // Code Title
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax highlighting
-// import rehypePrettyCode from 'rehype-pretty-code';
-// import { type Options } from 'rehype-pretty-code';
 import GithubSlugger from 'github-slugger';
 
 const computedFields: ComputedFields = {
@@ -47,6 +45,7 @@ const computedFields: ComputedFields = {
           };
         }
       );
+      console.log(headings);
 
       return headings;
     },
@@ -78,11 +77,6 @@ const computedFields: ComputedFields = {
     },
   },
 };
-
-// const rehypePrettyCodeOptions: Partial<Options> = {
-//   // use a prepackaged theme
-//   theme: 'poimandres',
-// };
 
 export const Post = defineDocumentType(() => ({
   name: 'Writing',
@@ -124,16 +118,45 @@ export const Post = defineDocumentType(() => ({
   computedFields,
 }));
 
+export const Snippets = defineDocumentType(() => ({
+  name: 'Snippets',
+  filePathPattern: `snippets/*.mdx`,
+  contentType: 'mdx',
+  fields: {
+    title: {
+      type: 'string',
+      description: 'The title of the post',
+      required: true,
+    },
+    status: {
+      type: 'enum',
+      options: ['draft', 'published'],
+      description: 'The status of the post',
+      required: true,
+    },
+    date: {
+      type: 'date',
+      description: 'The date of the post',
+      required: true,
+    },
+    author: {
+      type: 'string',
+      description: 'Author of the post',
+      required: false,
+    },
+  },
+  computedFields,
+}));
+
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Post],
+  documentTypes: [Post, Snippets],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
       rehypeCodeTitles,
       rehypePrism,
-      // [rehypePrettyCode, rehypePrettyCodeOptions],
       [
         rehypeAutolinkHeadings,
         {
