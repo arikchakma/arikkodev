@@ -45,7 +45,6 @@ const computedFields: ComputedFields = {
           };
         }
       );
-      console.log(headings);
 
       return headings;
     },
@@ -118,39 +117,9 @@ export const Post = defineDocumentType(() => ({
   computedFields,
 }));
 
-export const Snippets = defineDocumentType(() => ({
-  name: 'Snippets',
-  filePathPattern: `snippets/*.mdx`,
-  contentType: 'mdx',
-  fields: {
-    title: {
-      type: 'string',
-      description: 'The title of the post',
-      required: true,
-    },
-    status: {
-      type: 'enum',
-      options: ['draft', 'published'],
-      description: 'The status of the post',
-      required: true,
-    },
-    date: {
-      type: 'date',
-      description: 'The date of the post',
-      required: true,
-    },
-    author: {
-      type: 'string',
-      description: 'Author of the post',
-      required: false,
-    },
-  },
-  computedFields,
-}));
-
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Post, Snippets],
+  documentTypes: [Post],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
