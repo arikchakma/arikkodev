@@ -1,9 +1,7 @@
 import FeedbackPopover from '@/components/Feedback/FeedbackPopover';
 import Link from '@/components/Link';
-import useWindowSize from '@/lib/useWindowSize';
 
 export default function Header() {
-  const { width } = useWindowSize();
   return (
     <header className="mt-5">
       <nav className="flex items-center justify-between">
@@ -29,7 +27,6 @@ export default function Header() {
             </Link>
           </li> */}
         </ul>
-        {width > 428 ? <FeedbackPopover /> : null}
       </nav>
     </header>
   );
