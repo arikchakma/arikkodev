@@ -51,7 +51,7 @@ export default function FeedbackComp() {
 
   return (
     <form
-      className="mt-10 w-[min(400px,100%)] rounded-lg bg-link-color/[0.02] ring-1 ring-link-color/10"
+      className="w-[min(300px,100%)] rounded-lg bg-link-color/[0.02] bg-bgWhite ring-1 ring-link-color/10"
       onSubmit={onSubmit}
     >
       <div className="px-5 pb-4 pt-5">
