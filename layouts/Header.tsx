@@ -27,6 +27,8 @@ export default function Header() {
             </Link>
           </li> */}
         </ul>
+
+        <FeedbackPopover />
       </nav>
     </header>
   );

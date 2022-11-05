@@ -26,7 +26,7 @@ export default async function handler(
       return res.status(400).json({ message: validation.error.message });
     }
 
-    await postmark.sendEmail({
+    const info = await postmark.sendEmail({
       From: 'hello@arikko.dev',
       To: 'feedback@arikko.dev',
       Subject: 'Feedback from arikko.dev',

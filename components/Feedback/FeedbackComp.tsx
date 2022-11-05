@@ -2,14 +2,27 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import Textarea from '../shared/Textarea';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 type FeedbackData = {
   feedback: string;
   emoji: string;
 };
 
-export default function FeedbackComp() {
+export default function FeedbackComp({
+  isSuccessOpen,
+  setIsSuccessOpen,
+  isErrorOpen,
+  setIsErrorOpen,
+  isOpen,
+  setIsOpen,
+}: {
+  isSuccessOpen: boolean;
+  setIsSuccessOpen: (open: boolean) => void;
+  isErrorOpen: boolean;
+  setIsErrorOpen: (open: boolean) => void;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}) {
   const {
     register,
     handleSubmit,
@@ -32,9 +45,25 @@ export default function FeedbackComp() {
     },
     {
       onSuccess: () => {
-        console.log('Done');
+        if (isSuccessOpen) {
+          setIsSuccessOpen(false);
+          setTimeout(() => {
+            setIsSuccessOpen(true);
+          }, 400);
+        } else {
+          setIsSuccessOpen(true);
+        }
+        setIsOpen(false);
       },
       onError: error => {
+        if (isErrorOpen) {
+          setIsErrorOpen(false);
+          setTimeout(() => {
+            setIsErrorOpen(true);
+          }, 400);
+        } else {
+          setIsErrorOpen(true);
+        }
         setError('feedback', { message: (error as any).message });
       },
     }
@@ -42,11 +71,6 @@ export default function FeedbackComp() {
 
   const onSubmit = handleSubmit(data => {
     mutate(data);
-    reset();
-  });
-
-  useEffect(() => {
-    console.log('Rendering');
   });
 
   return (
@@ -73,6 +97,7 @@ export default function FeedbackComp() {
       {/* Reactions */}
       <div className="flex items-center justify-between border-t border-gray-200 px-5 py-4">
         <RadioGroupPrimitive.Root
+          {...register('emoji')}
           aria-label="Reactions"
           onValueChange={value => setValue('emoji', value)}
         >

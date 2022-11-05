@@ -61,6 +61,7 @@ module.exports = {
       animation: {
         'ticker-loop': '20s infinite linear ticker-loop',
         'preview-popup': '150ms cubic-bezier(0,.79,.19,.99) preview-popup',
+        'toast-slide-in': '150ms cubic-bezier(0,.79,.19,.99) toast-slide-in',
       },
       keyframes: {
         'ticker-loop': {
@@ -78,6 +79,16 @@ module.exports = {
           },
           '100%': {
             transform: 'scale(1) translateY(0)',
+            opacity: 1,
+          },
+        },
+        'toast-slide-in': {
+          '0%': {
+            transform: 'scale(0.3) translateX(calc(100%+1rem))',
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'scale(1) translateX(0)',
             opacity: 1,
           },
         },
