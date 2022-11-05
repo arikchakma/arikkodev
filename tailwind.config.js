@@ -84,7 +84,7 @@ module.exports = {
         },
         'toast-slide-in': {
           '0%': {
-            transform: 'scale(0.3) translateX(calc(100%+1rem))',
+            transform: 'scale(0.3) translateX(calc(100% + 1rem))',
             opacity: 0,
           },
           '100%': {
