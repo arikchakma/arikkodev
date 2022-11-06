@@ -30,7 +30,7 @@ export default function Post({
             <span aria-hidden className="whitespace-nowrap">
               ·
             </span>
-            <time>{formatDateFull(writing.date)}</time>
+            {/* <time>{formatDateFull(writing.date)}</time> */}
           </div>
         </div>
 
