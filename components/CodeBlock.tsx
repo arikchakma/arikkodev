@@ -2,12 +2,15 @@ import { useState, useRef, useEffect, ReactNode, Fragment } from 'react';
 import copy from 'copy-to-clipboard';
 import ClipboardIcon from './icons/ClipboardIcon';
 import CheckIcon from './icons/CheckIcon';
+import cn from 'clsx';
 
 export default function CodeBlock({
   children,
+  className,
   ...props
 }: {
   children: ReactNode;
+  className: string;
 }) {
   const codeRef = useRef<HTMLModElement>(null);
 
@@ -21,10 +24,8 @@ export default function CodeBlock({
   }, []);
 
   return (
-    <>
-      <code ref={codeRef} {...props}>
-        {children}
-      </code>
+    <pre {...props} className={cn('relative', className)}>
+      <code ref={codeRef}>{children}</code>
       <button
         aria-label="Copy code to clipboard"
         onClick={() => {
@@ -36,6 +37,6 @@ export default function CodeBlock({
       >
         {hasCopied ? <CheckIcon /> : <ClipboardIcon className="" />}
       </button>
-    </>
+    </pre>
   );
 }

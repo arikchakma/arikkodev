@@ -86,6 +86,7 @@ export default function Post({
                 </>
               );
             },
+            pre: (props: any) => <>{props.children}</>,
             code: (props: any) => {
               const isInlineCode = !props.className;
               return (
