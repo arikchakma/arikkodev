@@ -5,6 +5,7 @@ import { formatDate, formatDateFull } from '@/lib/formatDate';
 import LinkPreview from '@/components/LinkPreview';
 import { getFormattedWriting } from '@/lib/getFormattedWriting';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import CodeBlock from '@/components/CodeBlock';
 
 export default function Post({
   writing,
@@ -81,6 +82,20 @@ export default function Post({
                     <LinkPreview href={props.href}>
                       {props.children}
                     </LinkPreview>
+                  )}
+                </>
+              );
+            },
+            code: (props: any) => {
+              const isInlineCode = !props.className;
+              return (
+                <>
+                  {isInlineCode ? (
+                    <code className="[white-space:break-spaces]">
+                      {props.children}
+                    </code>
+                  ) : (
+                    <CodeBlock {...props}>{props.children}</CodeBlock>
                   )}
                 </>
               );
