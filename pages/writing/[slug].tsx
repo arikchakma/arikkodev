@@ -6,6 +6,7 @@ import LinkPreview from '@/components/LinkPreview';
 import { getFormattedWriting } from '@/lib/getFormattedWriting';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '@/components/CodeBlock';
+import LinkPreviewDemo from '@/components/demos/LinkPreviewDemo';
 
 export default function Post({
   writing,
@@ -101,6 +102,7 @@ export default function Post({
                 </>
               );
             },
+            LinkPreviewDemo: LinkPreviewDemo,
           }}
         />
       </article>
