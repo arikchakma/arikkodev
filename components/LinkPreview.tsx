@@ -29,7 +29,7 @@ export default function LinkPreview({
       <HoverCard.Portal>
         <HoverCard.Content
           side="top"
-          className="m-2 w-64 origin-bottom animate-preview-popup rounded-lg bg-white p-2 shadow-xl data-[side=bottom]:origin-top"
+          className="relative z-50 m-2 w-64 origin-bottom animate-preview-popup rounded-lg bg-white p-2 shadow-xl data-[side=bottom]:origin-top"
         >
           <figure className="relative aspect-[1.3333] w-full overflow-hidden rounded-md">
             <Image

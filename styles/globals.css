@@ -210,17 +210,12 @@ article.prose {
   z-index: 2;
   opacity: 0;
   transition: opacity 500ms;
-}
-
-.demo-card::before {
   background: radial-gradient(
     800px circle at var(--mouse-x) var(--mouse-y),
-    rgba(252, 252, 252, 1),
+    rgba(255, 167, 16, 0.08),
     transparent 40%
   );
-  z-index: 3;
 }
-
 .demo-card:hover::before {
   opacity: 1;
 }
