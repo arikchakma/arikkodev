@@ -25,7 +25,10 @@ export default function CodeBlock({
 
   return (
     <div className="group">
-      <pre {...props} className={cn('relative', className)}>
+      <pre
+        {...props}
+        className={cn('relative mt-0 !rounded-t-none', className)}
+      >
         <code ref={codeRef}>{children}</code>
         <button
           aria-label="Copy code to clipboard"
