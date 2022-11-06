@@ -11,7 +11,7 @@ export default async function handler(
     if (req.method !== 'POST') {
       return res.status(405).json({ message: 'Method not allowed' });
     }
-    const { feedback, emoji } = req.body;
+    const { feedback, emoji, route } = req.body;
     const schema = z.object({
       feedback: z
         .string()
@@ -19,9 +19,10 @@ export default async function handler(
         .min(0, 'Must be at least 1 character')
         .max(500),
       emoji: z.string().min(0).max(500),
+      route: z.string().min(0).max(500),
     });
 
-    const validation = schema.safeParse({ feedback, emoji });
+    const validation = schema.safeParse({ feedback, emoji, route });
     if (!validation.success) {
       return res.status(400).json({ message: validation.error.message });
     }
@@ -30,7 +31,7 @@ export default async function handler(
       From: 'hello@arikko.dev',
       To: 'feedback@arikko.dev',
       Subject: 'Feedback from arikko.dev',
-      HtmlBody: `<strong>${emoji}</strong> - <span>${feedback}</span>`,
+      HtmlBody: `<strong>${emoji}</strong> - <span>${feedback}</span> - <span>${route}</span>`,
       // TextBody: 'Hello from Postmark!',
       MessageStream: 'outbound',
     });

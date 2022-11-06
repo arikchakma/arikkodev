@@ -2,6 +2,7 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import Textarea from '../shared/Textarea';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 
 type FeedbackData = {
   feedback: string;
@@ -31,6 +32,7 @@ export default function FeedbackComp({
     setError,
     reset,
   } = useForm<FeedbackData>();
+  const router = useRouter();
 
   const { mutate, status } = useMutation(
     async (data: FeedbackData) => {
@@ -39,7 +41,7 @@ export default function FeedbackComp({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, route: router.asPath }),
       });
       return res.json();
     },
