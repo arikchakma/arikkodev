@@ -11,6 +11,7 @@ export default function AllWritings({
   writings,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const isMounted = useIsMounted()();
+
   return (
     <Container>
       <ul className="mt-10">

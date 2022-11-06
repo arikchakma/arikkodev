@@ -29,10 +29,15 @@ export default function Post({
           </h1>
           <div className="mt-3 mb-10 flex items-center gap-1.5 text-sm opacity-70">
             {writing.author}
-            <span aria-hidden className="whitespace-nowrap">
-              ·
-            </span>
-            {isMounted && <time>{formatDateFull(writing.date)}</time>}
+
+            {isMounted && (
+              <>
+                <span aria-hidden className="whitespace-nowrap">
+                  ·
+                </span>
+                <time>{formatDateFull(writing.date)}</time>
+              </>
+            )}
           </div>
         </div>
 
