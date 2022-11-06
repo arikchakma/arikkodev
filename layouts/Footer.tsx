@@ -25,9 +25,9 @@ export default function Footer() {
         <Link href="mailto:hello@arikko.dev">hello@arikko.dev</Link>
       </div>
 
-      {/* <div className="mt-28">
+      <div className="mt-28">
         {width > 639 ? <Location /> : <MarqueeLocation />}
-      </div> */}
+      </div>
     </footer>
   );
 }

@@ -7,10 +7,12 @@ import { getFormattedWriting } from '@/lib/getFormattedWriting';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '@/components/CodeBlock';
 import LinkPreviewDemo from '@/components/demos/LinkPreviewDemo';
+import useIsMounted from '@/lib/useIsMounted';
 
 export default function Post({
   writing,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const isMounted = useIsMounted()();
   const MDXComponent = useMDXComponent(writing.body.code);
 
   return (
@@ -30,7 +32,7 @@ export default function Post({
             <span aria-hidden className="whitespace-nowrap">
               ·
             </span>
-            {/* <time>{formatDateFull(writing.date)}</time> */}
+            {isMounted && <time>{formatDateFull(writing.date)}</time>}
           </div>
         </div>
 

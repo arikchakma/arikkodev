@@ -5,10 +5,12 @@ import NextLink from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 import { compareDesc } from 'date-fns';
 import { getFormattedWriting } from '@/lib/getFormattedWriting';
+import useIsMounted from '@/lib/useIsMounted';
 
 export default function AllWritings({
   writings,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const isMounted = useIsMounted()();
   return (
     <Container>
       <ul className="mt-10">
@@ -24,12 +26,14 @@ export default function AllWritings({
               <h3 className="flex-1 py-1 pr-4 text-[1.1rem] font-medium tracking-tight [font-variation-settings:'wght'_500]">
                 {writing.title}
               </h3>
-              <time
-                dateTime={writing.date}
-                className="date text-sm text-[#9ca3af]"
-              >
-                {formatDate(writing.date)}
-              </time>
+              {isMounted && (
+                <time
+                  dateTime={writing.date}
+                  className="date text-sm text-[#9ca3af]"
+                >
+                  {formatDate(writing.date)}
+                </time>
+              )}
             </NextLink>
           </li>
         ))}
