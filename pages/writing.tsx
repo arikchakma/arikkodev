@@ -2,7 +2,6 @@ import { allWritings, Writing } from 'contentlayer/generated';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Container from '@/layouts/Container';
 import NextLink from 'next/link';
-import { formatDate } from '@/lib/formatDate';
 import { compareDesc } from 'date-fns';
 import { getFormattedWriting } from '@/lib/getFormattedWriting';
 import useIsMounted from '@/lib/useIsMounted';
@@ -27,14 +26,12 @@ export default function AllWritings({
               <h3 className="flex-1 py-1 pr-4 text-[1.1rem] font-medium tracking-tight [font-variation-settings:'wght'_500]">
                 {writing.title}
               </h3>
-              {isMounted && (
-                <time
-                  dateTime={writing.date}
-                  className="date text-sm text-[#9ca3af]"
-                >
-                  {formatDate(writing.date)}
-                </time>
-              )}
+              <time
+                dateTime={writing.formatedDate}
+                className="date text-sm text-[#9ca3af]"
+              >
+                {writing.formatedDate}
+              </time>
             </NextLink>
           </li>
         ))}

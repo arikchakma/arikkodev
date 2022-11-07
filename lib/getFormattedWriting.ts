@@ -1,4 +1,5 @@
 import { Writing } from 'contentlayer/generated';
+import { formatDate } from './formatDate';
 
 // don't send fields we don't use to the client
 // the biggest culprit is post.body.raw (the raw MDX source)
@@ -24,6 +25,7 @@ export const getFormattedWriting = ({
     keywords,
     status,
     readingTime,
+    formatedDate: formatDate(date),
     summary: summary ?? null,
     body: {
       code: body.code,
