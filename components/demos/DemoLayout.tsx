@@ -27,7 +27,7 @@ export default function DemoLayout({
     <div className="group">
       <div
         ref={cardRef}
-        className="demo-card relative mt-12 flex items-center justify-center rounded-lg bg-gray-200 p-24 group-hover:after:opacity-100"
+        className="demo-card relative mt-12 flex items-center justify-center rounded-lg bg-gray-200 p-24 after:opacity-100"
       >
         <div
           className={cn(
