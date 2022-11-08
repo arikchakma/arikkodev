@@ -1,3 +1,4 @@
+import FeedbackPopover from '@/components/Feedback/FeedbackPopover';
 import Link from '@/components/Link';
 
 export default function Header() {
@@ -26,6 +27,8 @@ export default function Header() {
             </Link>
           </li> */}
         </ul>
+
+        <FeedbackPopover />
       </nav>
     </header>
   );
