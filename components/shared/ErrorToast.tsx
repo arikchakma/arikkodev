@@ -13,7 +13,7 @@ const ErrorToast = (props: Props) => {
       <ToastPrimitive.Root
         open={open}
         onOpenChange={setOpen}
-        className="fixed right-4 bottom-4 z-50 w-[280px] animate-toast-slide-in rounded-lg bg-red-200/50 text-red-800 ring-1 ring-red-400/40"
+        className="fixed right-4 bottom-4 z-50 w-[280px] animate-toast-slide-in rounded-lg bg-[#FEE4E4] text-red-800 ring-1 ring-red-400/40"
       >
         <ToastPrimitive.Title className="border-b border-red-400/40 p-2 font-semibold">
           Feedback error!
