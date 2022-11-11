@@ -8,9 +8,12 @@
     "lint": "next lint",
     "post:build": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs && pnpm post:preview",
     "post:preview": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/preview-images.mjs",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.5",
+    "@prisma/client": "^4.6.1",
     "@radix-ui/react-hover-card": "^1.0.2",
     "@radix-ui/react-popover": "^1.0.2",
     "@radix-ui/react-radio-group": "^1.1.0",
@@ -25,6 +28,7 @@
     "github-slugger": "^2.0.0",
     "globby": "^13.1.2",
     "next": "latest",
+    "next-auth": "^4.16.4",
     "next-contentlayer": "^0.2.8",
     "playwright-core": "^1.27.1",
     "postmark": "^3.0.14",
@@ -51,6 +55,7 @@
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.18",
     "prettier-plugin-tailwindcss": "^0.1.13",
+    "prisma": "^4.6.1",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-code-titles": "^1.1.0",

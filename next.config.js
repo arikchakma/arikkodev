@@ -4,6 +4,6 @@ const { withContentlayer } = require('next-contentlayer');
 module.exports = withContentlayer({
   reactStrictMode: true,
   images: {
-    domains: [],
+    domains: ['pbs.twimg.com', 'avatars.githubusercontent.com'],
   },
 });
