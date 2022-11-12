@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/lib/prisma';
 import { getSession } from 'next-auth/react';
+import { format } from 'date-fns';
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,7 +43,10 @@ export default async function handler(
           id: message.id.toString(),
           created_by: message.created_by,
           body: message.body,
-          created_at: message.updated_at,
+          created_at: format(
+            new Date(message.updated_at),
+            "d MMM yyyy 'at' h:mm bb"
+          ),
         };
       })
     );
