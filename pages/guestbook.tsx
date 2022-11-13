@@ -85,7 +85,7 @@ export default function GuestbookPage({
             >
               Github
             </button>
-            <button
+            {/* <button
               className="grid place-content-center rounded-md bg-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-100"
               onClick={e => {
                 e.preventDefault();
@@ -93,7 +93,7 @@ export default function GuestbookPage({
               }}
             >
               Twitter
-            </button>
+            </button> */}
           </>
         )}
       </form>
