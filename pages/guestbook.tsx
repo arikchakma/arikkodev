@@ -4,13 +4,22 @@ import cn from 'clsx';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import LoadingSpinIcon from '@/components/icons/LoadingSpinIcon';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { Guestbook } from '@prisma/client';
+import prisma from '@/lib/prisma';
+import GuestbookComp from '@/components/GuestbookComp';
+import { format } from 'date-fns';
+import { useQueryClient } from '@tanstack/react-query';
 
-export default function GuestbookPage() {
+export default function GuestbookPage({
+  fallbackData,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const queryClient = useQueryClient();
   const { data: session } = useSession();
   const { register, handleSubmit, reset } = useForm();
 
   const mutate = useMutation(
-    ['guestbook', 'create'],
+    ['guestbookCreate'],
     async data => {
       const res = await fetch('/api/guestbook', {
         method: 'POST',
@@ -22,10 +31,12 @@ export default function GuestbookPage() {
 
       return res.json();
     },
-
     {
-      onSuccess: () => {
+      onSuccess: async () => {
         reset();
+        queryClient.invalidateQueries({
+          queryKey: ['guestbookReturn'],
+        });
       },
     }
   );
@@ -90,6 +101,34 @@ export default function GuestbookPage() {
         Your information is only used to display your name and reply by email{' '}
         <span className="opacity-60">(expect twitter)</span>.
       </p>
+      <GuestbookComp fallbackData={fallbackData} />
     </Container>
   );
 }
+
+export const getStaticProps: GetStaticProps<{
+  fallbackData: Guestbook[];
+}> = async ctx => {
+  const fallbackData = await prisma.guestbook.findMany({
+    orderBy: {
+      created_at: 'desc',
+    },
+  });
+  return {
+    props: {
+      fallbackData: JSON.parse(JSON.stringify(fallbackData)).map(
+        (message: Guestbook) => {
+          return {
+            id: message.id.toString(),
+            created_by: message.created_by,
+            body: message.body,
+            created_at: format(
+              new Date(message.updated_at),
+              "d MMM yyyy 'at' h:mm bb"
+            ),
+          };
+        }
+      ),
+    },
+  };
+};
