@@ -130,5 +130,6 @@ export const getStaticProps: GetStaticProps<{
         }
       ),
     },
+    revalidate: 60,
   };
 };

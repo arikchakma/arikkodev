@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { memo } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import cn from 'clsx';
 
 function GuestbookComp({ fallbackData }: { fallbackData: Guestbook[] }) {
   const queryClient = useQueryClient();
@@ -13,7 +14,7 @@ function GuestbookComp({ fallbackData }: { fallbackData: Guestbook[] }) {
       return res.json();
     },
     {
-      placeholderData: fallbackData,
+      initialData: fallbackData,
     }
   );
   const deleteGuestbook = useMutation(
@@ -37,12 +38,14 @@ function GuestbookComp({ fallbackData }: { fallbackData: Guestbook[] }) {
   };
 
   return (
-    <div className="mt-8 space-y-8">
+    <div className={cn('space-y-8', data.length <= 0 ? '' : 'mt-8')}>
       {(data as Guestbook[]).map(guestbook => (
         <div key={guestbook.id}>
-          <p>{guestbook.body}</p>
-          <div className="mt-1 flex items-center gap-3 text-sm text-gray-500">
-            <p>{guestbook.created_by}</p>
+          <p className="[font-variation-settings:'wght'_500]">
+            {guestbook.body}
+          </p>
+          <div className="mt-1 flex items-center gap-3 text-sm text-gray-400">
+            <p className="">{guestbook.created_by}</p>
             <span>/</span>
             <p>{`${guestbook.created_at}`}</p>
             {guestbook.created_by === session?.user?.name ? (
