@@ -1,8 +1,7 @@
 import * as Popover from '@radix-ui/react-popover';
 import FeedbackComp from './FeedbackComp';
 import { useState } from 'react';
-import SuccessToast from '../shared/SuccessToast';
-import ErrorToast from '../shared/ErrorToast';
+import { SuccessToast, ErrorToast } from './FeedbackToast';
 
 export default function FeedbackPopover() {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
