@@ -17,7 +17,7 @@ function GuestbookComp({ fallbackData }: { fallbackData: Guestbook[] }) {
       return res.json();
     },
     {
-      initialData: fallbackData,
+      placeholderData: fallbackData,
     }
   );
   const { data: session } = useSession();
