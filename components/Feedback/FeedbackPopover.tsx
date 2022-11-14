@@ -3,10 +3,6 @@ import FeedbackComp from './FeedbackComp';
 import { useState } from 'react';
 import Toast from '../shared/Toast';
 
-function Compo() {
-  return <div>Component</div>;
-}
-
 export default function FeedbackPopover() {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
@@ -22,13 +18,6 @@ export default function FeedbackPopover() {
             status="success"
             open={isSuccessOpen}
             setOpen={setIsSuccessOpen}
-          />
-          <Toast
-            title="Feedback error!"
-            description="Having problems sending your feedback. Please try again later."
-            status="error"
-            open={isErrorOpen}
-            setOpen={setIsErrorOpen}
           />
           <Toast
             title="Feedback error!"
