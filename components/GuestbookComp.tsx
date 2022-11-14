@@ -52,8 +52,9 @@ function GuestbookComp({ fallbackData }: { fallbackData: Guestbook[] }) {
               <>
                 <span>/</span>
                 <button
-                  className="text-red-500"
+                  className="text-red-500 disabled:opacity-60"
                   onClick={() => deleteBook(guestbook.id)}
+                  disabled={deleteGuestbook.isLoading ? true : false}
                 >
                   Delete
                 </button>
