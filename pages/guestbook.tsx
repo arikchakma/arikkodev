@@ -10,7 +10,10 @@ export default function GuestbookPage({
   fallbackData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Container>
+    <Container
+      title="Guestbook | Arik Chakma"
+      description="Arik Chakma's guestbook."
+    >
       <h1 className="mb-0 mt-10 text-4xl tracking-[-0.02em] [font-variation-settings:'wght'_700] -sm:text-3xl -sm:leading-[1.1111]">
         Guestbook
       </h1>

@@ -12,7 +12,10 @@ export default function AllWritings({
   const isMounted = useIsMounted()();
 
   return (
-    <Container>
+    <Container
+      title="Writing | Arik Chakma"
+      description="Arik Chakma's thoughts and writings."
+    >
       <ul className="mt-10">
         {writings.map(writing => (
           <li key={writing.slug} className="">
