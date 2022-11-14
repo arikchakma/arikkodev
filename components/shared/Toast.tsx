@@ -1,51 +1,16 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import cn from 'clsx';
 
-interface DescriptionProps
-  extends React.ComponentProps<typeof ToastPrimitive.Description> {
-  children: React.ReactNode;
-  className?: string;
-}
-
-function ToastDescription({ children, className }: DescriptionProps) {
-  return (
-    <ToastPrimitive.Description className={cn('p-2', className)}>
-      {children}
-    </ToastPrimitive.Description>
-  );
-}
-
-interface ToastTitle extends React.ComponentProps<typeof ToastPrimitive.Title> {
-  children: React.ReactNode;
-  className?: string;
-  status: 'success' | 'error' | 'warning' | 'info';
-}
-
-function ToastTitle({ children, className, status }: ToastTitle) {
-  return (
-    <ToastPrimitive.Title
-      className={cn(
-        'p-2 font-semibold',
-        status === 'success' && 'border-b border-green-400/40',
-        status === 'error' && 'border-b border-red-400/40',
-        status === 'warning' && 'border-b border-yellow-400/40',
-        status === 'info' && 'border-b border-blue-400/40',
-        className
-      )}
-    >
-      {children}
-    </ToastPrimitive.Title>
-  );
-}
-
 interface ToastProps extends React.ComponentProps<typeof ToastPrimitive.Root> {
   status: 'success' | 'error' | 'warning' | 'info';
   open: boolean;
   setOpen: (open: boolean) => void;
+  title?: string;
+  description: string;
 }
 
 export default function Toast(props: ToastProps) {
-  const { status, ...restProps } = props;
+  const { status, open, setOpen, className, ...restProps } = props;
   return (
     <ToastPrimitive.Provider>
       <ToastPrimitive.Root
@@ -60,15 +25,30 @@ export default function Toast(props: ToastProps) {
             'bg-[#FEF3C7] text-yellow-800 ring-1 ring-yellow-400/40',
           status === 'info' &&
             'bg-[#BFDBFE] text-blue-800 ring-1 ring-blue-400/40',
-          props.className
+          className
         )}
-        open={props.open}
-        onOpenChange={props.setOpen}
+        open={open}
+        onOpenChange={setOpen}
       >
-        {props.children}
+        {props.title && (
+          <ToastPrimitive.Title
+            className={cn(
+              'p-2 font-semibold',
+              status === 'success' && 'border-b border-green-400/40',
+              status === 'error' && 'border-b border-red-400/40',
+              status === 'warning' && 'border-b border-yellow-400/40',
+              status === 'info' && 'border-b border-blue-400/40'
+            )}
+          >
+            {props.title}
+          </ToastPrimitive.Title>
+        )}
+        <ToastPrimitive.Description className="p-2">
+          {props.description}
+        </ToastPrimitive.Description>
       </ToastPrimitive.Root>
+
+      <ToastPrimitive.Viewport />
     </ToastPrimitive.Provider>
   );
 }
-
-export { ToastDescription as Description, ToastTitle as Title };

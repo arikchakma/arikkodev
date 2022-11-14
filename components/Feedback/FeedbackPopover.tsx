@@ -1,7 +1,11 @@
 import * as Popover from '@radix-ui/react-popover';
 import FeedbackComp from './FeedbackComp';
 import { useState } from 'react';
-import { SuccessToast, ErrorToast } from './FeedbackToast';
+import Toast from '../shared/Toast';
+
+function Compo() {
+  return <div>Component</div>;
+}
 
 export default function FeedbackPopover() {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -12,8 +16,27 @@ export default function FeedbackPopover() {
       <Popover.Trigger asChild>
         <div>
           <button className="text-[#5d676a]">Feedback</button>
-          <SuccessToast open={isSuccessOpen} setOpen={setIsSuccessOpen} />
-          <ErrorToast open={isErrorOpen} setOpen={setIsErrorOpen} />
+          <Toast
+            title="Feedback sent!"
+            description="Thank you for your feedback!"
+            status="success"
+            open={isSuccessOpen}
+            setOpen={setIsSuccessOpen}
+          />
+          <Toast
+            title="Feedback error!"
+            description="Having problems sending your feedback. Please try again later."
+            status="error"
+            open={isErrorOpen}
+            setOpen={setIsErrorOpen}
+          />
+          <Toast
+            title="Feedback error!"
+            description="Having problems sending your feedback. Please try again later."
+            status="error"
+            open={isErrorOpen}
+            setOpen={setIsErrorOpen}
+          />
         </div>
       </Popover.Trigger>
       <Popover.Portal>
