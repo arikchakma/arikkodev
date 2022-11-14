@@ -8,6 +8,27 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (req.method === 'GET') {
+    const messages = await prisma.guestbook.findMany({
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
+    return res.status(200).json(
+      messages.map(message => {
+        return {
+          id: message.id.toString(),
+          created_by: message.created_by,
+          body: message.body,
+          created_at: format(
+            new Date(message.updated_at),
+            "d MMM yyyy 'at' h:mm bb"
+          ),
+        };
+      })
+    );
+  }
+
   const session = await getSession({ req });
   const { body } = req.body;
 
@@ -29,27 +50,6 @@ export default async function handler(
       created_by: newMessage.created_by,
       updated_at: newMessage.updated_at,
     });
-  }
-
-  if (req.method === 'GET') {
-    const messages = await prisma.guestbook.findMany({
-      orderBy: {
-        created_at: 'desc',
-      },
-    });
-    return res.status(200).json(
-      messages.map(message => {
-        return {
-          id: message.id.toString(),
-          created_by: message.created_by,
-          body: message.body,
-          created_at: format(
-            new Date(message.updated_at),
-            "d MMM yyyy 'at' h:mm bb"
-          ),
-        };
-      })
-    );
   }
 
   return res.status(405).json({ message: 'Method not allowed' });

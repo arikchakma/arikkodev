@@ -10,17 +10,12 @@ function GuestbookComp({ fallbackData }: { fallbackData: Guestbook[] }) {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
 
-  const { data } = useQuery(
-    ['guestbookReturn'],
-    async () => {
-      const res = await fetch('/api/guestbook');
-      return res.json();
-    },
-    {
-      placeholderData: fallbackData,
-    }
-  );
+  const { data: queryData } = useQuery(['guestbookReturn'], async () => {
+    const res = await fetch('/api/guestbook');
+    return res.json();
+  });
   const { data: session } = useSession();
+  const data = queryData || fallbackData;
 
   return (
     <>
