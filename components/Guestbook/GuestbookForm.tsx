@@ -86,7 +86,7 @@ export default function GuestbookForm() {
         ) : (
           <>
             <button
-              className="grid place-content-center rounded-md bg-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-100"
+              className="grid place-content-center rounded-md bg-gray-200 font-medium transition-colors duration-150 ease-in-out hover:bg-gray-300/30 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-100"
               onClick={e => {
                 e.preventDefault();
                 signIn('github');
