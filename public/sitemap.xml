@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://arikko.dev/writing/toggle-theme</loc>
+    <loc>https://arikko.dev/writing/learning-threejs</loc>
+  </url>
+
+  <url>
+    <loc>https://arikko.dev/writing/mdx-external-link-previewer</loc>
   </url>
 </urlset>

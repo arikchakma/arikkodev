@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "post:build": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs && pnpm post:preview",
+    "post:build": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs",
     "post:preview": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/preview-images.mjs",
     "prepare": "husky install",
     "migrate": "prisma migrate dev"
