@@ -32,7 +32,7 @@ export default function Container(props: {
         aria-hidden
         className="top-blur pointer-events-none sticky top-0 left-0 z-10 h-20 w-full cursor-none select-none opacity-95 backdrop-blur-[5px] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom,rgba(252,252,252,1),rgba(252,252,252,0))] -sm:h-10"
       />
-      <main className="mx-auto max-w-[640px] pb-20">
+      <div className="mx-auto max-w-[640px] pb-20">
         <Head>
           <title>{meta.title}</title>
           <meta name="robots" content="follow, index" />
@@ -65,7 +65,7 @@ export default function Container(props: {
         <Header />
         {children}
         <Footer />
-      </main>
+      </div>
     </>
   );
 }

@@ -32,7 +32,7 @@ module.exports = {
       },
       // TYPOGRAPHY
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
+        sans: ['var(--font-inter)', ...fontFamily.sans],
       },
       // Breakpoints
       screens: {
