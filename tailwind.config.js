@@ -1,6 +1,24 @@
 const { fontFamily, spacing } = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 
+/** 
+Radix Colors
+| Step | Use Case                                |
+| ---- | --------------------------------------- |
+| 100   | App background                          |
+| 200  | Subtle background                       |
+| 300  | UI element background                   |
+| 400  | Hovered UI element background           |
+| 500  | Active / Selected UI element background |
+| 600  | Subtle borders and separators           |
+| 700  | UI element border and focus rings       |
+| 800  | Hovered UI element border               |
+| 900  | Solid backgrounds                       |
+| 1000  | Hovered solid backgrounds               |
+| 1100 | Low-contrast text                       |
+| 1200 | High-contrast text                      |
+*/
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
