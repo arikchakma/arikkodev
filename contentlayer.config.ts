@@ -10,7 +10,6 @@ import rehypeCodeTitles from 'rehype-code-titles'; // Code Title
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax highlighting
 import GithubSlugger from 'github-slugger';
-import { formatDate } from './lib/formatDate';
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: doc => readingTime(doc.body.raw) },
