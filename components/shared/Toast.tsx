@@ -1,5 +1,11 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import cn from 'clsx';
+import { Inter } from '@next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
 
 interface ToastProps extends React.ComponentProps<typeof ToastPrimitive.Root> {
   status: 'success' | 'error' | 'warning' | 'info';
@@ -16,6 +22,7 @@ export default function Toast(props: ToastProps) {
       <ToastPrimitive.Root
         {...restProps}
         className={cn(
+          inter.variable,
           'fixed right-4 bottom-4 z-50 w-[280px] animate-toast-slide-in rounded-lg',
           status === 'success' &&
             'bg-[#DDFBE8] text-green-800 ring-1 ring-green-400/40',

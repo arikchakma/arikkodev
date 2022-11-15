@@ -4,6 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import LoadingSpinIcon from '../icons/LoadingSpinIcon';
+import { Inter } from '@next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
 
 type FeedbackData = {
   feedback: string;
@@ -78,7 +84,7 @@ export default function FeedbackComp({
 
   return (
     <form
-      className="w-[min(300px,100%)] rounded-lg bg-link-color/[0.02] bg-bgWhite ring-1 ring-link-color/10"
+      className={`${inter.variable} w-[min(300px,100%)] rounded-lg bg-link-color/[0.02] bg-bgWhite font-sans ring-1 ring-link-color/10`}
       onSubmit={onSubmit}
     >
       <div className="px-5 pb-4 pt-5">

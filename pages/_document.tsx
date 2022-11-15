@@ -5,13 +5,6 @@ export default function Document(props: DocumentProps) {
     <Html lang="en">
       <Head>
         <link
-          rel="preload"
-          href="/fonts/Inter.var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
           rel="apple-touch-icon"
           sizes="180x180"
           href="/static/favicons/apple-touch-icon.png"
