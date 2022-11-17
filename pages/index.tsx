@@ -41,7 +41,10 @@ const Home: NextPage = () => {
                   Tokens.Army
                 </LinkPreview>
                 , which helps you explore your fantastic nfts on Ethreum and
-                manage your ens domains.
+                manage your ens domains.{' '}
+                <span className="px-2 font-medium leading-none tracking-tight text-[#313233]/70">
+                  ( cooking )
+                </span>
               </li>
               <li className="pl-1.5">
                 Created <Link href="https://og.arikko.dev/">OG</Link>, which
