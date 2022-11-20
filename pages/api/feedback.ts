@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { postmark } from '@/lib/postmark';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
@@ -16,7 +15,7 @@ export default async function handler(
       feedback: z
         .string()
         .trim()
-        .min(0, 'Must be at least 1 character')
+        .min(1, 'Must be at least 1 character')
         .max(500),
       emoji: z.string().min(0).max(500),
       route: z.string().min(0).max(500),

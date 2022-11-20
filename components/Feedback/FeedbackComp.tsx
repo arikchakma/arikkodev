@@ -100,6 +100,7 @@ export default function FeedbackComp({
           spellCheck="false"
           className="mt-2"
           rows={4}
+          minLength={1}
           error={errors}
         />
       </div>
