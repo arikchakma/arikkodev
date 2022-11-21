@@ -8,7 +8,7 @@ export default function Profile({ session }: { session: Session }) {
   if (!session) {
     return (
       <main className="flex h-screen items-center justify-center">
-        <button
+        {/* <button
           className="rounded-lg bg-green-300/40 p-2 px-3 font-medium text-green-700 ring-1 ring-green-500"
           onClick={() =>
             signIn('twitter', {
@@ -17,7 +17,7 @@ export default function Profile({ session }: { session: Session }) {
           }
         >
           Sign In with Twitter
-        </button>
+        </button> */}
         <button
           className="rounded-lg bg-green-300/40 p-2 px-3 font-medium text-green-700 ring-1 ring-green-500"
           onClick={() =>
