@@ -16,11 +16,11 @@ export default function Header() {
               Writing
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/guestbook" className="text-[#4b5563]">
               Guestbook
             </Link>
-          </li>
+          </li> */}
           {/*
           <li>
             <Link to="/inspiration" className="text-[#4b5563]">
