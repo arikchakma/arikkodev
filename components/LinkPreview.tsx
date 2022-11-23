@@ -1,6 +1,7 @@
 import * as HoverCard from '@radix-ui/react-hover-card';
 import cn from 'clsx';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function LinkPreview({
   href,
@@ -10,6 +11,7 @@ export default function LinkPreview({
   children: React.ReactNode;
 }) {
   const name = href.replace(/[\/#]/g, '@');
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <HoverCard.Root openDelay={50} closeDelay={100}>
       <HoverCard.Trigger asChild>
@@ -34,10 +36,14 @@ export default function LinkPreview({
           <figure className="relative aspect-[1.3333] w-full overflow-hidden rounded-md">
             <Image
               src={`/previews/${name}.png`}
-              className="absolute h-full w-full object-top"
+              className={cn(
+                'absolute h-full w-full object-top',
+                isLoading ? 'opacity-0' : 'animate-image-reveal'
+              )}
               fill={true}
               alt={name}
               sizes="100%"
+              onLoadingComplete={() => setIsLoading(false)}
             />
           </figure>
         </HoverCard.Content>

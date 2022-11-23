@@ -62,6 +62,7 @@ module.exports = {
         'ticker-loop': '20s infinite linear ticker-loop',
         'preview-popup': '150ms cubic-bezier(0,.79,.19,.99) preview-popup',
         'toast-slide-in': '150ms cubic-bezier(0,.79,.19,.99) toast-slide-in',
+        'image-reveal': '1s ease image-reveal',
       },
       keyframes: {
         'ticker-loop': {
@@ -89,6 +90,16 @@ module.exports = {
           },
           '100%': {
             transform: 'scale(1) translateX(0)',
+            opacity: 1,
+          },
+        },
+        'image-reveal': {
+          '0%': {
+            mask: 'linear-gradient(90deg, #000 25%, #000000e6 50%, #00000000) 150% 0 / 400% no-repeat',
+            opacity: 0.2,
+          },
+          '100%': {
+            mask: 'linear-gradient(90deg, #000 25%, #000000e6 50%, #00000000) 0 / 400% no-repeat',
             opacity: 1,
           },
         },
