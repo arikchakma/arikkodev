@@ -13,7 +13,7 @@ export default function LinkPreview({
   const name = href.replace(/[\/#]/g, '@');
   const [isLoading, setIsLoading] = useState(true);
   return (
-    <HoverCard.Root openDelay={500} closeDelay={100}>
+    <HoverCard.Root openDelay={500} closeDelay={100} open={true}>
       <HoverCard.Trigger asChild>
         <a
           href={href}
@@ -38,7 +38,7 @@ export default function LinkPreview({
               src={`/previews/${name}.png`}
               className={cn(
                 'absolute h-full w-full object-top',
-                isLoading ? '' : 'animate-image-reveal'
+                isLoading ? 'opacity-0' : 'animate-image-reveal'
               )}
               fill={true}
               alt={name}
