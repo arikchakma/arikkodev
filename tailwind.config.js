@@ -62,7 +62,7 @@ module.exports = {
         'ticker-loop': '20s infinite linear ticker-loop',
         'preview-popup': '150ms cubic-bezier(0,.79,.19,.99) preview-popup',
         'toast-slide-in': '150ms cubic-bezier(0,.79,.19,.99) toast-slide-in',
-        'image-reveal': '1s ease image-reveal',
+        'image-reveal': '1s ease image-reveal, 1s ease scale-down',
       },
       keyframes: {
         'ticker-loop': {
@@ -101,6 +101,14 @@ module.exports = {
           '100%': {
             mask: 'linear-gradient(90deg, #000 25%, #000000e6 50%, #00000000) 0 / 400% no-repeat',
             opacity: 1,
+          },
+        },
+        'scale-down': {
+          '0%': {
+            transform: 'scale(1.05)',
+          },
+          '100%': {
+            transform: 'scale(1)',
           },
         },
       },
