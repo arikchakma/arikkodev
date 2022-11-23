@@ -13,7 +13,7 @@ export default function LinkPreview({
   const name = href.replace(/[\/#]/g, '@');
   const [isLoading, setIsLoading] = useState(true);
   return (
-    <HoverCard.Root openDelay={500} closeDelay={100} open={true}>
+    <HoverCard.Root openDelay={500} closeDelay={100}>
       <HoverCard.Trigger asChild>
         <a
           href={href}
