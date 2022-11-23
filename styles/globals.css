@@ -128,7 +128,7 @@ pre {
   @apply rounded-t-lg border border-b-0 border-gray-200 bg-[#f7f7f7] px-5 py-3 font-mono text-sm font-bold text-gray-800;
 }
 
-.rehype-code-title + pre {
+.rehype-code-title + .group > pre {
   @apply mt-0 rounded-t-none;
 }
 
