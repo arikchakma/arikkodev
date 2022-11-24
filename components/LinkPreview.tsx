@@ -33,7 +33,7 @@ export default function LinkPreview({
           side="top"
           className="relative z-50 m-2 w-64 origin-bottom animate-preview-popup rounded-lg bg-white p-2 shadow-xl data-[side=bottom]:origin-top"
         >
-          <figure className="relative aspect-[1.3333] w-full overflow-hidden rounded-md">
+          <figure className="relative aspect-[1.3333] w-full overflow-hidden rounded-md bg-gray-100">
             <Image
               src={`/previews/${name}.png`}
               className={cn(
