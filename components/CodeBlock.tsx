@@ -34,7 +34,7 @@ export default function CodeBlock({
             setHasCopied(true);
             setTimeout(() => setHasCopied(false), 2000);
           }}
-          className="absolute top-2 right-2 inline-flex h-6 w-6 items-center justify-center rounded-md bg-gray-100 text-gray-300 opacity-0 ring-1  ring-gray-200 transition-all duration-200 hover:bg-gray-200 hover:text-gray-400 hover:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100 group-hover:opacity-100"
+          className="absolute top-2 right-2 inline-flex h-6 w-6 items-center justify-center rounded-md bg-gray-100 text-gray-300 opacity-0 ring-1  ring-gray-200 transition-all duration-200 hover:text-gray-400 hover:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100 group-hover:opacity-100"
         >
           {hasCopied ? <CheckIcon /> : <ClipboardIcon className="" />}
         </button>

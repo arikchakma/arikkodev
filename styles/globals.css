@@ -41,7 +41,7 @@ body {
 }
 
 .prose pre code {
-  @apply bg-bgWhite tracking-normal text-[#313233];
+  @apply bg-bgWhite tracking-normal text-[#313233] p-0;
 }
 
 .prose img {
