@@ -6,7 +6,6 @@ import LinkPreview from '@/components/LinkPreview';
 const Home: NextPage = () => {
   return (
     <Container>
-      <h1>Testing</h1>
       <article>
         <div className="mt-10 text-base leading-[26`px] text-[#313233]">
           <p>
