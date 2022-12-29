@@ -21,7 +21,7 @@ export default function GuestbookPage({
       <GuestbookForm />
       <p className="mt-3 text-sm">
         Your information is only used to display your name and reply by email{' '}
-        <span className="opacity-60">(expect twitter)</span>.
+        <span className="opacity-60">(except twitter)</span>.
       </p>
       <GuestbookComp fallbackData={fallbackData} />
     </Container>
