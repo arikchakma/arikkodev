@@ -20,7 +20,7 @@ export default function Container(props: {
   } = {
     title: 'Arik Chakma - Developer, creator.',
     description: `Web3 Front-end developer, content creator, and an explorer.`,
-    image: 'https://beta.arikko.dev/static/images/banner.png',
+    image: 'https://arikko.dev/static/images/banner.png',
     keywords:
       'Arik Chakma, Arikko, Arik, Chakma, Developer, Frontend Master, Frontend Developer, Web3, Crypto Dev, Blockchain Developer, Web3 Frontend Developer',
     type: 'website',
