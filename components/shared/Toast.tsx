@@ -1,6 +1,6 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import cn from 'clsx';
-import { Inter } from '@next/font/google';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
