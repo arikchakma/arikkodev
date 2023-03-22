@@ -8,7 +8,7 @@ const allWritings = readFileSync(
 
 const altLinks = [
   'https://arikko.dev',
-  'https://1x3.studio',
+  'https://shoutly.club',
   'https://precog.finance/',
   'https://tokens-army.vercel.app/',
 ];

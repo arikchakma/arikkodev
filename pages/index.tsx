@@ -20,11 +20,18 @@ const Home: NextPage = () => {
             and am pursuing a BSc degree in Computer Science. Building projects
             and experimenting in a{' '}
             <LinkPreview href="https://1x3.studio">little lab</LinkPreview>
-            —and now I&apos;m applying my knowledge to help build the future of
-            money with{' '}
+            —and now focusing on my side project,{' '}
+            <LinkPreview href="https://shoutly.club">Shoutly</LinkPreview>. I am
+            currently taking the waitlist and am excited to see where this
+            project takes me.
+          </p>
+
+          <p className="mt-5">
+            I have had an incredible journey working at{' '}
             <LinkPreview href="https://precog.finance/">
               Precog Finance.
             </LinkPreview>
+            , where I applied my knowledge to help develop the future of money.
           </p>
 
           <p className="mt-5">
@@ -35,6 +42,11 @@ const Home: NextPage = () => {
 
           <div className="mt-5">
             <ul className="list-disc space-y-1 pl-6 marker:text-[#5d676a]">
+              <li className="pl-1.5">
+                Created <Link href="https://chat.arikko.dev/">Chat</Link>, where
+                you can create project specific chat rooms and invite your team
+                members.
+              </li>
               <li className="pl-1.5">
                 Building{' '}
                 <LinkPreview href="https://tokens-army.vercel.app/">
