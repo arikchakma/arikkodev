@@ -43,6 +43,11 @@ const Home: NextPage = () => {
           <div className="mt-5">
             <ul className="list-disc space-y-1 pl-6 marker:text-[#5d676a]">
               <li className="pl-1.5">
+                Created <Link href="https://chat.arikko.dev/">Chat</Link>, where
+                you can create project specific chat rooms and invite your team
+                members.
+              </li>
+              <li className="pl-1.5">
                 Building{' '}
                 <LinkPreview href="https://tokens-army.vercel.app/">
                   Tokens.Army
