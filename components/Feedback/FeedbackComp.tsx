@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import LoadingSpinIcon from '../icons/LoadingSpinIcon';
-import { Inter } from 'next/font/google';
+import { Inter } from '@next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
