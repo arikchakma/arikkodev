@@ -20,18 +20,11 @@ const Home: NextPage = () => {
             and am pursuing a BSc degree in Computer Science. Building projects
             and experimenting in a{' '}
             <LinkPreview href="https://1x3.studio">little lab</LinkPreview>
-            —and now focusing on my side project,{' '}
-            <LinkPreview href="https://shoutly.club">Shoutly</LinkPreview>. I am
-            currently taking the waitlist and am excited to see where this
-            project takes me.
-          </p>
-
-          <p className="mt-5">
-            I have had an incredible journey working at{' '}
-            <LinkPreview href="https://precog.finance/">
-              Precog Finance.
-            </LinkPreview>
-            , where I applied my knowledge to help develop the future of money.
+            —and now writing html at{' '}
+            <LinkPreview href="https://roadmap.sh">roadmap.sh</LinkPreview>.
+            Building my side project,{' '}
+            <LinkPreview href="https://shoutly.club">Shoutly(beta)</LinkPreview>
+            .
           </p>
 
           <p className="mt-5">
