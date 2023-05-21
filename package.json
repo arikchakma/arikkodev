@@ -2,8 +2,8 @@
   "name": "arikko.dev",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "contentlayer dev && next dev",
+    "build": "contentlayer build && next build",
     "start": "next start",
     "lint": "next lint",
     "post:build": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs",
