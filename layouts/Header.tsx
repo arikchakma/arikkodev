@@ -1,4 +1,3 @@
-import FeedbackPopover from '@/components/Feedback/FeedbackPopover';
 import Link from '@/components/Link';
 
 export default function Header() {
@@ -21,15 +20,7 @@ export default function Header() {
               Guestbook
             </Link>
           </li>
-          {/*
-          <li>
-            <Link to="/inspiration" className="text-[#4b5563]">
-              Inspiration
-            </Link>
-          </li> */}
         </ul>
-
-        <FeedbackPopover />
       </nav>
     </header>
   );

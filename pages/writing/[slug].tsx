@@ -26,7 +26,7 @@ export default function Post({
           <h1 className="mb-0 tracking-[-0.02em] [font-variation-settings:'wght'_700] -sm:text-3xl -sm:leading-[1.1111]">
             {writing.title}
           </h1>
-          <div className="mt-3 mb-10 flex items-center gap-1.5 text-sm opacity-70">
+          <div className="mb-10 mt-3 flex items-center gap-1.5 text-sm opacity-70">
             {writing.author}
 
             <span aria-hidden className="whitespace-nowrap">
