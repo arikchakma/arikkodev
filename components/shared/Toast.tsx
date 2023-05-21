@@ -23,7 +23,7 @@ export default function Toast(props: ToastProps) {
         {...restProps}
         className={cn(
           inter.variable,
-          'fixed bottom-4 right-4 z-50 w-[280px] animate-toast-slide-in rounded-lg',
+          'fixed right-4 bottom-4 z-50 w-[280px] animate-toast-slide-in rounded-lg',
           status === 'success' &&
             'bg-[#DDFBE8] text-green-800 ring-1 ring-green-400/40',
           status === 'error' &&

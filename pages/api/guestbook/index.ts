@@ -1,9 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/lib/prisma';
+import { getSession } from 'next-auth/react';
 import { format } from 'date-fns';
-import { unstable_getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,7 +29,7 @@ export default async function handler(
     );
   }
 
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getSession({ req });
   const { body } = req.body;
 
   if (!session) {
