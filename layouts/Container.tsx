@@ -30,7 +30,7 @@ export default function Container(props: {
     <>
       <div
         aria-hidden
-        className="top-blur pointer-events-none sticky top-0 left-0 z-[9999] h-20 w-full cursor-none select-none opacity-95 backdrop-blur-[5px] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom,rgba(252,252,252,1),rgba(252,252,252,0))] -sm:h-10"
+        className="top-blur pointer-events-none sticky left-0 top-0 z-[9999] h-20 w-full cursor-none select-none opacity-95 backdrop-blur-[5px] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom,rgba(252,252,252,1),rgba(252,252,252,0))] -sm:h-10"
       />
       <div className="mx-auto max-w-[640px] pb-20">
         <Head>
