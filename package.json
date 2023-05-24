@@ -2,7 +2,7 @@
   "name": "arikko.dev",
   "private": true,
   "scripts": {
-    "dev": "contentlayer dev && next dev",
+    "dev": "next dev",
     "build": "contentlayer build && next build",
     "start": "next start",
     "lint": "next lint",

@@ -1,6 +1,17 @@
 import { Writing } from 'contentlayer/generated';
 import { formatDate } from './formatDate';
 
+export type HeadingType = {
+  heading: number;
+  text: string;
+  slug: string;
+  child: {
+    heading: number;
+    text: string;
+    slug: string;
+  }[];
+};
+
 // don't send fields we don't use to the client
 // the biggest culprit is post.body.raw (the raw MDX source)
 export const getFormattedWriting = ({
@@ -30,6 +41,5 @@ export const getFormattedWriting = ({
     body: {
       code: body.code,
     },
-    headings:
-      (headings as { heading: number; text: string; slug: string }[]) ?? null,
+    headings: (headings as HeadingType[]) ?? null,
   });

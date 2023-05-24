@@ -10,6 +10,7 @@ import rehypeCodeTitles from 'rehype-code-titles'; // Code Title
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax highlighting
 import GithubSlugger from 'github-slugger';
+import { HeadingType } from './lib/getFormattedWriting';
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: doc => readingTime(doc.body.raw) },
@@ -24,29 +25,44 @@ const computedFields: ComputedFields = {
   headings: {
     type: 'json',
     resolve: async doc => {
-      // use same package as rehypeSlug so toc and sluggified headings match
-      // https://github.com/rehypejs/rehype-slug/blob/main/package.json#L36
       const slugger = new GithubSlugger();
-
-      // https://stackoverflow.com/a/70802303
       const regXHeader = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+      const headings = Array.from(doc.body.raw.matchAll(regXHeader)) as {
+        groups: {
+          flag: string;
+          content: string;
+        };
+      }[];
 
-      const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
-        value => {
-          const groups = (
-            value as { groups: { flag: string; content: string } }
-          ).groups;
-          const flag = groups?.flag;
-          const content = groups?.content;
-          return {
+      const enrichedHeadings: HeadingType[] = [];
+      let parentHeading: HeadingType | null = null;
+
+      headings.forEach((value, counter) => {
+        const groups = value.groups;
+        const flag = groups?.flag;
+        const content = groups?.content;
+
+        if (flag && flag.length === 2) {
+          // If the heading is h2 (##), treat it as a parent
+          parentHeading = {
+            heading: flag.length,
+            text: content,
+            slug: content ? slugger.slug(content) : '',
+            child: [],
+          };
+          enrichedHeadings.push(parentHeading);
+        } else if (parentHeading) {
+          // If the heading is not h2 (##) and there is a parent heading, treat it as a child
+          parentHeading.child.push({
             heading: flag?.length,
             text: content,
-            slug: content ? slugger.slug(content) : undefined,
-          };
+            slug: content ? slugger.slug(content) : '',
+          });
         }
-      );
+      });
 
-      return headings;
+      parentHeading = null;
+      return enrichedHeadings;
     },
   },
   externalLinks: {

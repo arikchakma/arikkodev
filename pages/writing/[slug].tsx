@@ -1,17 +1,20 @@
 import Container from '@/layouts/Container';
 import { allWritings } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import { formatDate, formatDateFull } from '@/lib/formatDate';
+import { formatDate } from '@/lib/formatDate';
 import LinkPreview from '@/components/LinkPreview';
 import { getFormattedWriting } from '@/lib/getFormattedWriting';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '@/components/CodeBlock';
 import LinkPreviewDemo from '@/components/demos/LinkPreviewDemo';
+import { CSSProperties } from 'react';
 
 export default function Post({
   writing,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const MDXComponent = useMDXComponent(writing.body.code);
+
+  console.log(writing.headings);
 
   return (
     <Container
@@ -40,11 +43,38 @@ export default function Post({
           <div className="mb-10">
             <h4 className="mt-0">Table of Contents</h4>
             <ol className="list-inside pl-0">
-              {writing.headings.map(heading => (
+              {writing.headings.map((heading, counter) => (
                 <li key={heading.slug}>
                   <a href={`#${heading.slug}`} className="no-underline">
                     {heading.text}
                   </a>
+
+                  {heading.child.length > 0 && (
+                    <ol className="my-0 ml-6">
+                      {heading.child.map((children, childCounter) => {
+                        return (
+                          <li
+                            key={children.slug}
+                            style={
+                              {
+                                '--counter': `'${counter + 1}.${
+                                  childCounter + 1
+                                }.'`,
+                              } as CSSProperties
+                            }
+                            className={`marker:content-[var(--counter)]`}
+                          >
+                            <a
+                              href={`#${children.slug}`}
+                              className="no-underline"
+                            >
+                              {children.text}
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  )}
                 </li>
               ))}
             </ol>
