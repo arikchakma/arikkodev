@@ -11,6 +11,9 @@ const altLinks = [
   'https://shoutly.club',
   'https://roadmap.sh',
   'https://tokens-army.vercel.app/',
+  'https://preactjs.com/',
+  'https://astro.build/',
+  'https://github.com/kamranahmedse/developer-roadmap/blob/master/src/components/CommandMenu/CommandMenu.tsx',
 ];
 
 function previewImages() {
