@@ -17,10 +17,12 @@
   </url>
 
   <url>
-    <loc>https://arikko.dev/writing/learning-threejs</loc>
+    <loc>https://arikko.dev/writing/mdx-external-link-previewer</loc>
   </url>
 
   <url>
-    <loc>https://arikko.dev/writing/mdx-external-link-previewer</loc>
+    <loc
+      >https://arikko.dev/writing/the-command-menu-enhancing-navigation-on-roadmap-sh</loc
+    >
   </url>
 </urlset>

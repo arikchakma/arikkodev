@@ -40,12 +40,9 @@ export default function Container(props: {
           <meta name="keywords" content={meta.keywords} />
           <meta
             property="og:url"
-            content={`https://beta.arikko.dev${router.asPath}`}
+            content={`https://arikko.dev${router.asPath}`}
           />
-          <link
-            rel="canonical"
-            href={`https://beta.arikko.dev${router.asPath}`}
-          />
+          <link rel="canonical" href={`https://arikko.dev${router.asPath}`} />
           <meta property="og:type" content={meta.type} />
           <meta property="og:site_name" content="Arik Chakma" />
           <meta property="og:description" content={meta.description} />

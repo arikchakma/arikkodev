@@ -14,7 +14,11 @@ export default function Post({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const MDXComponent = useMDXComponent(writing.body.code);
 
-  console.log(writing.headings);
+  const imageUrl = `https://arikko.dev/api/og?${new URLSearchParams({
+    title: writing.title ?? '',
+    summary: writing.summary ?? '',
+    date: writing.formatedDate ?? '',
+  })}`;
 
   return (
     <Container
@@ -22,7 +26,7 @@ export default function Post({
       description={writing.summary}
       keywords={writing.keywords}
       date={formatDate(writing.date)}
-      image={`https://arikko.dev/api/og?title=${writing.title}&summary=${writing.summary}&date=${writing.formatedDate}`}
+      image={imageUrl}
     >
       <article className="font-main prose mt-10 text-[#313233]">
         <div>
