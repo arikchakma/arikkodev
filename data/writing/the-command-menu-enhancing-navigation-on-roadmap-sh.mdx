@@ -1,6 +1,6 @@
 ---
 title: 'The Command Menu: Enhancing Navigation on roadmap.sh'
-date: 2023-05-24
+date: 2023-05-25
 status: published
 keywords: 'Command Menu, roadmap.sh, navigation tool, browsing experience, roadmaps, guides, resources'
 summary: Learn about the Command Menu in roadmap.sh, a powerful and user-friendly navigation tool that enhances browsing experience and provides quick access to roadmaps, guides, and other resources.
@@ -31,9 +31,9 @@ To understand how the Command Menu is implemented, let's explore some of the key
 
 ### Dependencies and Hooks
 
-The Command Menu leverages the preact/hooks library, which provides essential hooks for managing component state and lifecycle events. The `useState`, `useEffect`, `useRef`, and `useOutsideClick` hooks are utilized to handle various functionalities, such as menu activation, search input handling, and click events outside the menu.
+The Command Menu leverages the preact/hooks library, which provides essential hooks for managing component state and lifecycle events. The `useState`, `useEffect`, `useRef`, and `useOutsideClick` hooks are utilized to handle various functionalities, such as menu activation, search input handling, and click events outside the menu. Also focus the search input when the menu is activated.
 
-```tsx:CommandMenu.tsx {9-11, 14-17}
+```tsx:CommandMenu.tsx {9-13, 15-22}
 import { useEffect, useRef, useState } from 'preact/hooks';
 
 export function CommandMenu() {
