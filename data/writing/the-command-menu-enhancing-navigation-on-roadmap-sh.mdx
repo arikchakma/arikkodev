@@ -9,7 +9,7 @@ author: 'Arik Chakma'
 
 ## Introducing the Command Menu in roadmap.sh: A Comprehensive Guide
 
-In our ongoing efforts to enhance user experience and provide seamless navigation, we are excited to introduce the Command Menu feature in roadmap.sh. This powerful tool, built with preact and astro, offers a convenient way for users to access various pages, search for specific content, and explore different sections of the website. In this blog post, we will dive into the Command Menu's functionalities and discuss how it improves user interaction. Whether you are a beginner or an experienced user, this guide will help you understand and make the most of the Command Menu in roadmap.sh.
+In our ongoing efforts to enhance user experience and provide seamless navigation, we are excited to introduce the Command Menu feature in roadmap.sh. This tool, built with preact and astro, offers a convenient way for users to access various pages, search for specific content, and explore different sections of the website. In this blog post, we will dive into the Command Menu's functionalities and discuss how it improves user interaction. Whether you are a beginner or an experienced user, this guide will help you understand and make the most of the Command Menu in roadmap.sh.
 
 ## Key Features and Benefits
 
@@ -56,6 +56,31 @@ export function CommandMenu() {
 
     inputRef.current.focus();
   }, [isActive]);
+}
+```
+
+The `useOutsideClick` hook is used to detect clicks outside the menu and close it.
+
+```tsx:use-outside-click.ts
+import { useEffect } from 'preact/hooks';
+
+export function useOutsideClick(ref: any, callback: any) {
+  useEffect(() => {
+    const listener = (event: any) => {
+      const isClickedOutside = !ref?.current?.contains(event.target);
+      if (isClickedOutside) {
+        callback();
+      }
+    };
+
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
+
+    return () => {
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
+    };
+  }, [ref]);
 }
 ```
 

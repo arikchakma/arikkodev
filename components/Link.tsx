@@ -15,7 +15,7 @@ function Link({
   className?: string;
 }) {
   const router = useRouter();
-  const isActive = router.pathname === href || router.pathname === to;
+  const isActive = router.asPath === to || router.asPath === href;
 
   if (href && !to) {
     return (

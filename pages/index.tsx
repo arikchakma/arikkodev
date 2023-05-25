@@ -9,7 +9,7 @@ const Home: NextPage = () => {
       <article>
         <div className="mt-10 text-base leading-[26`px] text-[#313233]">
           <p>
-            I&apos;m a web3 frontend developer interested in filmmaking, content
+            I&apos;m a frontend developer interested in filmmaking, content
             creation, vlogging, and backend based in Bangladesh. I enjoy
             visualizing problems and writing code to solve them.
           </p>
