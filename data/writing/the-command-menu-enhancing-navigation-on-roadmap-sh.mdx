@@ -25,6 +25,76 @@ We wanted to keep it lightweight and simple. The Command Menu is built with [pre
 
 We are just getting started! We are continuously working on improving the Command Menu and adding new features to enhance user experience. Stay tuned for more updates!
 
+## Content Management
+
+There are a lot of pages on roadmap.sh, and we wanted to make sure it is easy to manage and maintain.
+
+### Content Structure
+
+All of our roadmaps are stored in `/src/data/roadmaps/roadmap-name/roadmap-name.md`, and `/src/data/best-practices/best-practices-name/best-practices-name.md` for best practices. For example, the frontend roadmap is stored in `/src/data/roadmaps/frontend/frontend.md`.
+
+```md
+├── src
+│ ├── data
+│ │ ├── roadmaps
+│ │ │ ├── frontend
+│ │ │ | ├── frontend.md
+```
+
+### Retrieving Roadmap Details
+
+We're using [Astro glob](https://docs.astro.build/en/guides/imports/#astroglob) to import all of the roadmaps using their `tags` metadata. This allows us to easily retrieve the roadmaps and their details.
+
+```ts:roadmap.ts
+export async function getRoadmapsByTag(
+  tag: string
+): Promise<RoadmapFileType[]> {
+  // imports all files that end with `.md` in `./src/data/roadmaps/*/*.md`
+  const roadmapFilesMap = await import.meta.glob<RoadmapFileType>(
+    '/src/data/roadmaps/*/*.md',
+    {
+      eager: true,
+    }
+  );
+
+  const roadmapFiles = Object.values(roadmapFilesMap);
+  const filteredRoadmaps = roadmapFiles
+    .filter((roadmapFile) => roadmapFile.frontmatter.tags.includes(tag))
+    .map((roadmapFile) => ({
+      ...roadmapFile,
+      id: roadmapPathToId(roadmapFile.file),
+    }));
+
+  return filteredRoadmaps.sort(
+    (a, b) => a.frontmatter.order - b.frontmatter.order
+  );
+}
+```
+
+### Serving as a Static File
+
+We decided to use a [Astro static file endpoints](https://docs.astro.build/en/core-concepts/endpoints/#static-file-endpoints) for storing the page date in `/pages.json.ts/`, then in the build it will be converted to `/pages.json` and served as a static json file.
+
+```ts:pages.json.ts
+import { getRoadmapsByTag } from '../lib/roadmap';
+
+export async function get() {
+  const roadmaps = await getRoadmapsByTag('roadmap');
+  return {
+    body: JSON.stringify([
+      ...roadmaps.map((roadmap) => ({
+        url: `/${roadmap.id}`,
+        title: roadmap.frontmatter.briefTitle,
+        group: 'Roadmaps',
+      })),
+      ........
+    ]),
+  };
+}
+```
+
+Now, we can easily fetch pages data from the client-side.
+
 ## Implementation Details
 
 To understand how the Command Menu is implemented, let's explore some of the key aspects of its code structure.
@@ -214,7 +284,7 @@ The Command Menu contributes significantly to improving user experience on roadm
 
 To further enhance accessibility and user interaction, the Command Menu can be triggered not only through the search input but also via a dedicated button and keyboard shortcut.
 
-### Triggering the Command Menu Programmatically:
+### Triggering the Command Menu Programmatically
 
 The Command Menu can be triggered programmatically using the `window.dispatchEvent` function along with a custom event. In the roadmap.sh implementation, the Command Menu is activated when the user clicks on an element with the `data-command-menu` attribute. The click event listener then dispatches a custom event, `'command.k'`, which triggers the Command Menu to become active.
 
@@ -237,7 +307,7 @@ Please note that the keyboard shortcut implementation may vary depending on the 
 
 This in roadmap.sh brings a powerful and user-friendly navigation tool to enhance the overall browsing experience. Its intuitive search, quick access to pages, and protection of sensitive content make it a valuable addition to the website. Whether you are a beginner exploring roadmap.sh for the first time or a frequent user looking for specific information, the Command Menu offers a convenient and efficient way to navigate through the website. Start exploring [roadmap.sh](https://roadmap.sh) today and experience the benefits of the Command Menu firsthand!
 
-You can check out the full source code in the [GitHub](https://github.com/kamranahmedse/developer-roadmap/blob/master/src/components/CommandMenu/CommandMenu.tsx).
+You can check out the full source code in the [GitHub](https://github.com/kamranahmedse/developer-roadmap/blob/master/src/components/CommandMenu/CommandMenu.tsx). Huge thanks to [Kamran Ahmed](https://twitter.com/kamrify).
 
 We hope this comprehensive guide has provided you with a detailed understanding of the Command Menu in roadmap.sh. If you have any further questions or need assistance, feel free to reach out. Happy navigating!
 
