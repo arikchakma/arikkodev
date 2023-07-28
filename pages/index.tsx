@@ -23,8 +23,7 @@ const Home: NextPage = () => {
             —and now writing html at{' '}
             <LinkPreview href="https://roadmap.sh">roadmap.sh</LinkPreview>.
             Building my side project,{' '}
-            <LinkPreview href="https://shoutly.club">Shoutly(beta)</LinkPreview>
-            .
+            <LinkPreview href="https://maily.to">maily.to</LinkPreview>.
           </p>
 
           <p className="mt-5">
@@ -47,14 +46,6 @@ const Home: NextPage = () => {
                 </LinkPreview>
                 , which helps you explore your fantastic nfts on Ethreum and
                 manage your ens domains.{' '}
-                <span className="whitespace-nowrap font-medium leading-none tracking-tight text-[#313233]/70">
-                  (cooking)
-                </span>
-              </li>
-              <li className="pl-1.5">
-                Created <Link href="https://og.arikko.dev/">OG</Link>, which
-                gerates open graph data from a url and helps you create dynamic
-                og images for Tokens.Army.{' '}
                 <span className="whitespace-nowrap font-medium leading-none tracking-tight text-[#313233]/70">
                   (cooking)
                 </span>

@@ -11,7 +11,7 @@ const images = JSON.parse(readFileSync('public/previews/index.json', 'utf8'));
 
 const altLinks = [
   'https://arikko.dev',
-  'https://shoutly.club',
+  'https://maily.to',
   'https://roadmap.sh',
   'https://tokens-army.vercel.app/',
   'https://preactjs.com/',
