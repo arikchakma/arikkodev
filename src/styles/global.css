@@ -15,7 +15,7 @@ body {
     'cv04' 1, 'liga', 'clig', 'calt', 'cv11', 'cv09', 'cv10';
   font-variation-settings: 'wght' 450;
   font-variant: common-ligatures contextual;
-  letter-spacing: 0.008em;
+  letter-spacing: 0.009em;
 }
 
 @layer utilities {
