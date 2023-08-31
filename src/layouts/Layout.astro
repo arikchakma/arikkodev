@@ -1,0 +1,67 @@
+---
+import Navigation from '../components/Navigation.astro';
+import { siteConfig } from '../lib/config';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  keywords?: string[];
+  noIndex?: boolean;
+  canonical?: string;
+  permalink?: string;
+}
+
+const {
+  title,
+  description = siteConfig.description,
+  keywords = siteConfig.keywords,
+  noIndex = false,
+  canonical = '',
+  permalink = '',
+} = Astro.props;
+
+// Remove trailing slash from canonical URL
+const currentPageAbsoluteUrl = `https://arikko.dev${permalink}`;
+const canonicalUrl = canonical || currentPageAbsoluteUrl;
+---
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+    <meta name='description' content={description} />
+    <meta name='author' content='Arik Chakma' />
+    <meta name='keywords' content={keywords.join(', ')} />
+    <meta
+      name='viewport'
+      content='width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0'
+    />
+    <meta http-equiv='Content-Language' content='en' />
+
+    {noIndex && <meta name='robots' content='noindex' />}
+    <link rel='canonical' href={canonicalUrl} />
+
+    <!-- Twitter -->
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:creator' content='@imarikchakma' />
+
+    <link
+      rel='preload'
+      href='/fonts/Inter.var.woff2'
+      as='font'
+      type='font/woff2'
+      crossorigin='anonymous'
+    />
+  </head>
+  <body class='antialiased'>
+    <slot name='header'>
+      <Navigation />
+    </slot>
+    <slot />
+  </body>
+</html>

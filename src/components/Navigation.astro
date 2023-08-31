@@ -1,0 +1,37 @@
+---
+const links = [
+  {
+    name: 'About',
+    url: '/',
+  },
+  {
+    name: 'Writing',
+    url: '/writing',
+  },
+  {
+    name: 'Projects',
+    url: '/projects',
+  },
+];
+---
+
+<header class='container mx-auto'>
+  <nav>
+    <ul class='flex items-center gap-2'>
+      {
+        links.map((link) => {
+          return (
+            <li>
+              <a
+                href={link.url}
+                class='whitespace-nowrap text-[#4b5563] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out hover:opacity-70'
+              >
+                {link.name}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+</header>

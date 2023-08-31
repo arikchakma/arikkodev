@@ -1,6 +1,7 @@
-coverage
-.next
+app-dist
 dist
-CHANGELOG.md
-.contentlayer
-build
+.idea
+.github
+public
+node_modules
+pnpm-lock.yaml
