@@ -1,30 +1,45 @@
 ---
-const links = [
+export type AllowedNavLinks = 'about' | 'writing' | 'projects';
+export const navLinks = [
   {
+    id: 'about',
     name: 'About',
     url: '/',
   },
   {
+    id: 'writing',
     name: 'Writing',
     url: '/writing',
   },
   {
+    id: 'projects',
     name: 'Projects',
     url: '/projects',
   },
 ];
+
+type Props = {
+  activePage: AllowedNavLinks;
+};
+
+const { activePage } = Astro.props;
 ---
 
-<header class='container mx-auto'>
+<header class='container mt-5'>
   <nav>
     <ul class='flex items-center gap-2'>
       {
-        links.map((link) => {
+        navLinks.map((link) => {
           return (
             <li>
               <a
                 href={link.url}
-                class='whitespace-nowrap text-[#4b5563] underline decoration-[#5d676a]/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out hover:opacity-70'
+                class:list={[
+                  'whitespace-nowrap text-[#4b5563] decoration-[#5d676a]/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out hover:opacity-70',
+                  activePage === link.id
+                    ? 'no-underline opacity-90'
+                    : 'underline',
+                ]}
               >
                 {link.name}
               </a>

@@ -1,5 +1,9 @@
 ---
-import Navigation from '../components/Navigation.astro';
+import { act } from 'react-dom/test-utils';
+import Navigation, {
+  type AllowedNavLinks,
+} from '../components/Navigation.astro';
+import TopBlur from '../components/TopBlur.astro';
 import { siteConfig } from '../lib/config';
 import '../styles/global.css';
 
@@ -10,6 +14,7 @@ interface Props {
   noIndex?: boolean;
   canonical?: string;
   permalink?: string;
+  activePage?: AllowedNavLinks;
 }
 
 const {
@@ -19,6 +24,7 @@ const {
   noIndex = false,
   canonical = '',
   permalink = '',
+  activePage = 'about',
 } = Astro.props;
 
 // Remove trailing slash from canonical URL
@@ -58,9 +64,12 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
       crossorigin='anonymous'
     />
   </head>
-  <body class='antialiased'>
+  <body class='px-5 font-sans text-primary antialiased selection:bg-selection'>
+    <slot name='top-blur'>
+      <TopBlur />
+    </slot>
     <slot name='header'>
-      <Navigation />
+      <Navigation activePage={activePage} />
     </slot>
     <slot />
   </body>

@@ -26,3 +26,25 @@ body {
   font-variant: common-ligatures contextual;
   letter-spacing: 0.005em;
 }
+
+@layer utilities {
+  .top-blur {
+    -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent);
+    mask-image: linear-gradient(to bottom, #000 25%, transparent);
+  }
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto !max-w-[640px];
+  }
+}
