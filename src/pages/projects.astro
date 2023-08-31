@@ -5,12 +5,12 @@ import Layout from '../layouts/Layout.astro';
 const activeProjects = [
   {
     title: 'Maily',
-    description: 'A simple email forwarding service.',
+    description: 'A simple email forwarding service',
     url: 'https://maily.to',
   },
   {
     title: 'Roadmap Editor',
-    description: 'A tool for creating and editing roadmaps.',
+    description: 'A tool for creating and editing roadmaps',
     url: 'https://draw.roadmap.sh',
   },
 ];
@@ -18,12 +18,12 @@ const activeProjects = [
 const archievedProjects = [
   {
     title: 'Chat',
-    description: 'A simple chat application.',
+    description: 'Create project specific chat rooms',
     url: 'https://chat.arikko.dev',
   },
   {
     title: 'Tokens Army',
-    description: 'Helps you explore your fantastic nfts.',
+    description: 'Helps you explore your fantastic nfts',
     url: 'https://tokens-army.vercel.app',
   },
 ];
@@ -47,12 +47,14 @@ const archievedProjects = [
                 target='_blank'
                 rel='noreferrer'
                 class:list={[
-                  'flex items-center justify-between gap-2 py-2 hover:opacity-70',
+                  'flex sm:flex-row flex-col sm:items-center sm:justify-between sm:gap-2 py-2 hover:opacity-70',
                   index === 0 ? '' : 'border-t border-gray-200',
                 ]}
               >
                 <span>{project.title}</span>
-                <span class='text-right'>{project.description}</span>
+                <span class='text-gray-500 sm:text-right'>
+                  {project.description}
+                </span>
               </a>
             </li>
           );
@@ -61,14 +63,18 @@ const archievedProjects = [
     </ul>
 
     <div class='mt-16'>
-      <h3 class='font-bold'>Archieved</h3>
+      <h3
+        class="text-lg font-bold tracking-tight [font-variation-settings:'wght'_600]"
+      >
+        Archieved
+      </h3>
       <p class='mt-1'>
-        These are the projects that I have worked on in the past, but are no
-        longer maintained.
+        The following projects are ones I've been involved with previously, but
+        they are no longer being actively <em>maintained</em>.
       </p>
     </div>
 
-    <ul class='mt-6'>
+    <ul class='mb-28 mt-5'>
       {
         archievedProjects.map((project, index) => {
           return (
@@ -78,12 +84,14 @@ const archievedProjects = [
                 target='_blank'
                 rel='noreferrer'
                 class:list={[
-                  'flex items-center justify-between gap-2 py-2 hover:opacity-70',
+                  'flex sm:flex-row flex-col sm:items-center sm:justify-between sm:gap-2 py-2 hover:opacity-70',
                   index === 0 ? '' : 'border-t border-gray-200',
                 ]}
               >
                 <span>{project.title}</span>
-                <span class='text-right'>{project.description}</span>
+                <span class='text-gray-500 sm:text-right'>
+                  {project.description}
+                </span>
               </a>
             </li>
           );
