@@ -1,0 +1,94 @@
+---
+import Link from '../components/Link.astro';
+import Layout from '../layouts/Layout.astro';
+
+const activeProjects = [
+  {
+    title: 'Maily',
+    description: 'A simple email forwarding service.',
+    url: 'https://maily.to',
+  },
+  {
+    title: 'Roadmap Editor',
+    description: 'A tool for creating and editing roadmaps.',
+    url: 'https://draw.roadmap.sh',
+  },
+];
+
+const archievedProjects = [
+  {
+    title: 'Chat',
+    description: 'A simple chat application.',
+    url: 'https://chat.arikko.dev',
+  },
+  {
+    title: 'Tokens Army',
+    description: 'Helps you explore your fantastic nfts.',
+    url: 'https://tokens-army.vercel.app',
+  },
+];
+---
+
+<Layout activePage='projects'>
+  <main class='container mt-10 text-sm sm:text-base'>
+    <p>
+      Listed below are the projects in which I have participated, dedicating
+      significant time and effort towards their creation, maintenance, and
+      enhancement.
+    </p>
+
+    <ul class='mt-5'>
+      {
+        activeProjects.map((project, index) => {
+          return (
+            <li>
+              <a
+                href={project.url}
+                target='_blank'
+                rel='noreferrer'
+                class:list={[
+                  'flex items-center justify-between gap-2 py-2 hover:opacity-70',
+                  index === 0 ? '' : 'border-t border-gray-200',
+                ]}
+              >
+                <span>{project.title}</span>
+                <span class='text-right'>{project.description}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class='mt-16'>
+      <h3 class='font-bold'>Archieved</h3>
+      <p class='mt-1'>
+        These are the projects that I have worked on in the past, but are no
+        longer maintained.
+      </p>
+    </div>
+
+    <ul class='mt-6'>
+      {
+        archievedProjects.map((project, index) => {
+          return (
+            <li>
+              <a
+                href={project.url}
+                target='_blank'
+                rel='noreferrer'
+                class:list={[
+                  'flex items-center justify-between gap-2 py-2 hover:opacity-70',
+                  index === 0 ? '' : 'border-t border-gray-200',
+                ]}
+              >
+                <span>{project.title}</span>
+                <span class='text-right'>{project.description}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </main>
+</Layout>

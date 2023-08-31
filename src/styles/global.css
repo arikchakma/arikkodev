@@ -18,6 +18,15 @@ body {
   letter-spacing: 0.005em;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio: 1.5),
+  screen and (min-device-pixel-ratio: 1.5),
+  screen and (min-resolution: 1.5dppx) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
 @layer utilities {
   .top-blur {
     -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent);
