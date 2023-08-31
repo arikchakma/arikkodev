@@ -12,19 +12,10 @@
 
 body {
   font-feature-settings: 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02', 'cv03' 1,
-    'cv04' 1, 'liga', 'clig', 'calt';
+    'cv04' 1, 'liga', 'clig', 'calt', 'cv11', 'cv09', 'cv10';
   font-variation-settings: 'wght' 450;
   font-variant: common-ligatures contextual;
-  letter-spacing: 0.005em;
-  background-color: #fcfcfc;
-}
-
-.font-main {
-  font-feature-settings: 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02', 'cv03' 1,
-    'cv04' 1, 'liga', 'clig', 'calt';
-  font-variation-settings: 'wght' 450;
-  font-variant: common-ligatures contextual;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.008em;
 }
 
 @layer utilities {

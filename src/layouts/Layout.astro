@@ -1,5 +1,4 @@
 ---
-import { act } from 'react-dom/test-utils';
 import Navigation, {
   type AllowedNavLinks,
 } from '../components/Navigation.astro';
@@ -8,7 +7,7 @@ import { siteConfig } from '../lib/config';
 import '../styles/global.css';
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   keywords?: string[];
   noIndex?: boolean;
@@ -18,7 +17,7 @@ interface Props {
 }
 
 const {
-  title,
+  title = siteConfig.title,
   description = siteConfig.description,
   keywords = siteConfig.keywords,
   noIndex = false,
@@ -64,7 +63,9 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
       crossorigin='anonymous'
     />
   </head>
-  <body class='px-5 font-sans text-primary antialiased selection:bg-selection'>
+  <body
+    class='bg-background px-5 font-sans text-primary antialiased selection:bg-selection'
+  >
     <slot name='top-blur'>
       <TopBlur />
     </slot>
