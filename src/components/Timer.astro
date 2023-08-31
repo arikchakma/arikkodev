@@ -1,0 +1,12 @@
+---
+type Props = {
+  class?: string;
+};
+const { class: className } = Astro.props;
+---
+
+<span
+  data-time
+  class:list={["whitespace-nowrap [font-feature-settings:'tnum']", className]}
+  >00:00:00</span
+>

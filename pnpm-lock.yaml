@@ -8,6 +8,9 @@ dependencies:
   '@astrojs/react':
     specifier: ^3.0.0
     version: 3.0.0(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)(vite@4.4.9)
+  '@astrojs/rss':
+    specifier: ^3.0.0
+    version: 3.0.0
   '@astrojs/tailwind':
     specifier: ^5.0.0
     version: 5.0.0(astro@3.0.3)(tailwindcss@3.3.3)
@@ -117,6 +120,13 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - vite
+    dev: false
+
+  /@astrojs/rss@3.0.0:
+    resolution: {integrity: sha512-PMX8iqByk9gtOrusikten/oF5uHjOCZigL6RuXFBUu+xtdKQxXzfIohJ99V2haA4FJjVDyibDTGzXR81POBMxQ==}
+    dependencies:
+      fast-xml-parser: 4.2.7
+      kleur: 4.1.5
     dev: false
 
   /@astrojs/tailwind@5.0.0(astro@3.0.3)(tailwindcss@3.3.3):
@@ -1605,6 +1615,13 @@ packages:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.5
+    dev: false
+
+  /fast-xml-parser@4.2.7:
+    resolution: {integrity: sha512-J8r6BriSLO1uj2miOk1NW0YVm8AGOOu3Si2HQp/cSmo6EA4m3fcwu2WKjJ4RK9wMLBtg69y1kS8baDiQBR41Ig==}
+    hasBin: true
+    dependencies:
+      strnum: 1.0.5
     dev: false
 
   /fastq@1.15.0:
@@ -3352,6 +3369,10 @@ packages:
   /strip-json-comments@2.0.1:
     resolution: {integrity: sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /strnum@1.0.5:
+    resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
     dev: false
 
   /sucrase@3.34.0:

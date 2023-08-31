@@ -3,6 +3,7 @@ import Navigation, {
   type AllowedNavLinks,
 } from '../components/Navigation.astro';
 import TopBlur from '../components/TopBlur.astro';
+import Footer from '../components/Footer.astro';
 import { siteConfig } from '../lib/config';
 import '../styles/global.css';
 
@@ -73,5 +74,8 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
       <Navigation activePage={activePage} />
     </slot>
     <slot />
+    <slot name='footer'>
+      <Footer />
+    </slot>
   </body>
 </html>
