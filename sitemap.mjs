@@ -27,7 +27,6 @@ export async function serializeSitemap(item) {
   ];
 
   for (let pageUrl of highPriorityPages) {
-    console.log(item, pageUrl)
     if (item.url === pageUrl) {
       return {
         ...item,
