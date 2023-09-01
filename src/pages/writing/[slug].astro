@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import '../../styles/article.css';
+import { formatDate } from '../../lib/time';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('writing');
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+type Props = {
+  entry: CollectionEntry<'writing'>;
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, publishedAt, description, author } = entry.data;
+const date = formatDate(publishedAt!);
+
+
+
+---
+
+<Layout
+  activePage='writing'
+  title={`${title} | Arik Chakma`}
+  description={description}
+>
+  <article class='container prose mt-10'>
+    <div>
+      <h1
+        class="mb-0 text-4xl tracking-[-0.02em] [font-variation-settings:'wght'_700]"
+      >
+        {title}
+      </h1>
+      <p class='mb-10 mt-3 flex items-center gap-1.5 text-sm opacity-70'>
+        {author} &middot; {date}
+      </p>
+    </div>
+    <Content class:list={['mt-5']} />
+  </article>
+</Layout>

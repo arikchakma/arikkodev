@@ -1,0 +1,311 @@
+---
+title: 'The Command Menu: Enhancing Navigation on roadmap.sh'
+publishedAt: 2023-05-25
+status: published
+keywords: 'Command Menu, roadmap.sh, navigation tool, browsing experience, roadmaps, command menu astro, astrojs, preact, cmd+k, cmd+k astro and preact'
+description: Learn about the Command Menu in roadmap.sh, a powerful and user-friendly navigation tool that enhances browsing experience and provides quick access to roadmaps, guides, and other resources.
+author: 'Arik Chakma'
+---
+
+## Introducing the Command Menu in roadmap.sh: A Comprehensive Guide
+
+In our ongoing efforts to enhance user experience and provide seamless navigation, we are excited to introduce the Command Menu feature in roadmap.sh. This tool, built with preact and astro, offers a convenient way for users to access various pages, search for specific content, and explore different sections of the website. In this blog post, we will dive into the Command Menu's functionalities and discuss how it improves user interaction. Whether you are a beginner or an experienced user, this guide will help you understand and make the most of the Command Menu in roadmap.sh.
+
+## Key Features and Benefits
+
+We wanted to keep it lightweight and simple. The Command Menu is built with [preact](https://preactjs.com/) and [astro](https://astro.build/), which are lightweight libraries that provide a fast and efficient way to build web applications.
+
+- **Instant Search:** The Command Menu enables users to search for specific pages, roadmaps, guides, or other content directly from the menu. As users type their search queries, this dynamically updates the search results, making it easier to find the desired information.
+
+- **Quick Access to Pages:** Users can quickly access important pages, such as the Home, Account, Roadmaps, Best Practices, Guides, and Videos pages, directly from it. Each page is associated with a title, group, and an optional icon, providing a visually appealing and organized menu structure.
+
+- **Keyboard Navigation:** The Command Menu allows users to navigate through the search results using the arrow keys. The currently selected page is highlighted, and pressing the Enter key triggers navigation to the corresponding URL.
+
+- **Protection of Sensitive Pages:** This takes into account user authentication and access control. Protected pages, such as the Account page, are only displayed if the user is logged in. This ensures that sensitive information remains secure and inaccessible to unauthorized users.
+
+We are just getting started! We are continuously working on improving the Command Menu and adding new features to enhance user experience. Stay tuned for more updates!
+
+## Content Management
+
+There are a lot of pages on roadmap.sh, and we wanted to make sure it is easy to manage and maintain.
+
+### Content Structure
+
+All of our roadmap details are stored in `/src/data/roadmaps/roadmap-name/roadmap-name.md`, and `/src/data/best-practices/best-practices-name/best-practices-name.md` for best practices. For example, the frontend roadmap details is stored in `/src/data/roadmaps/frontend/frontend.md`.
+
+```md
+├── src
+│ ├── data
+│ │ ├── roadmaps
+│ │ │ ├── frontend
+│ │ │ | ├── frontend.md
+```
+
+### Retrieving Roadmap Details
+
+We're using [Astro glob](https://docs.astro.build/en/guides/imports/#astroglob) to import all of the roadmaps using their `tags` metadata. This allows us to easily retrieve the roadmaps and their details.
+
+```ts:roadmap.ts
+export async function getRoadmapsByTag(
+  tag: string
+): Promise<RoadmapFileType[]> {
+  // imports all files that end with `.md` in `./src/data/roadmaps/*/*.md`
+  const roadmapFilesMap = await import.meta.glob<RoadmapFileType>(
+    '/src/data/roadmaps/*/*.md',
+    {
+      eager: true,
+    }
+  );
+
+  const roadmapFiles = Object.values(roadmapFilesMap);
+  const filteredRoadmaps = roadmapFiles
+    .filter((roadmapFile) => roadmapFile.frontmatter.tags.includes(tag))
+    .map((roadmapFile) => ({
+      ...roadmapFile,
+      id: roadmapPathToId(roadmapFile.file),
+    }));
+
+  return filteredRoadmaps.sort(
+    (a, b) => a.frontmatter.order - b.frontmatter.order
+  );
+}
+```
+
+### Serving as a Static File
+
+We decided to use a [Astro static file endpoints](https://docs.astro.build/en/core-concepts/endpoints/#static-file-endpoints) for storing the page date in `/pages.json.ts/`, then in the build it will be converted to `/pages.json` and served as a static json file.
+
+```ts:pages.json.ts
+import { getRoadmapsByTag } from '../lib/roadmap';
+
+export async function get() {
+  const roadmaps = await getRoadmapsByTag('roadmap');
+  return {
+    body: JSON.stringify([
+      ...roadmaps.map((roadmap) => ({
+        url: `/${roadmap.id}`,
+        title: roadmap.frontmatter.briefTitle,
+        group: 'Roadmaps',
+      })),
+      ........
+    ]),
+  };
+}
+```
+
+Now, we can easily fetch pages data from the client-side.
+
+## Implementation Details
+
+To understand how the Command Menu is implemented, let's explore some of the key aspects of its code structure.
+
+### Dependencies and Hooks
+
+The Command Menu leverages the preact/hooks library, which provides essential hooks for managing component state and lifecycle events. The `useState`, `useEffect`, `useRef`, and `useOutsideClick` hooks are utilized to handle various functionalities, such as menu activation, search input handling, and click events outside the menu. Also focus the search input when the menu is activated.
+
+```tsx:CommandMenu.tsx {9-13, 15-22}
+import { useEffect, useRef, useState } from 'preact/hooks';
+
+export function CommandMenu() {
+  const inputRef = useRef < HTMLInputElement > null;
+  const modalRef = useRef < HTMLInputElement > null;
+  const [isActive, setIsActive] = useState(false);
+
+
+  // If user clicks outside the Command Menu, close it and reset the search input
+  useOutsideClick(modalRef, () => {
+    setSearchedText('');
+    setIsActive(false);
+  });
+
+  // Focus the search input when the Command Menu is activated
+  useEffect(() => {
+    if (!isActive || !inputRef.current) {
+      return;
+    }
+
+    inputRef.current.focus();
+  }, [isActive]);
+}
+```
+
+The `useOutsideClick` hook is used to detect clicks outside the menu and close it.
+
+```tsx:use-outside-click.ts
+import { useEffect } from 'preact/hooks';
+
+export function useOutsideClick(ref: any, callback: any) {
+  useEffect(() => {
+    const listener = (event: any) => {
+      const isClickedOutside = !ref?.current?.contains(event.target);
+      if (isClickedOutside) {
+        callback();
+      }
+    };
+
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
+
+    return () => {
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
+    };
+  }, [ref]);
+}
+```
+
+### Menu Activation
+
+The Command Menu is activated when the user presses the `mod_k(⌘+k)` key combination. The `useKeydown` hook is used to listen for the `mod_k(⌘+k)` key combination and trigger the `handleToggleTopic` function. This function sets the `isActive` state variable to `true`, which activates the Command Menu and displays the search input.
+
+_Keep the highlighted code in mind as we will revisit it later in this guide._
+
+```tsx:CommandMenu.tsx {12}
+// Keydown event handler for activating the Command Menu
+useKeydown('mod_k', () => {
+  setIsActive(true);
+});
+
+useEffect(() => {
+  function handleToggleTopic(e: any) {
+    setIsActive(true);
+  }
+
+  getAllPages();
+  window.addEventListener(`command.k`, handleToggleTopic);
+  return () => {
+    window.removeEventListener(`command.k`, handleToggleTopic);
+  };
+}, []);
+```
+
+### Data Structure
+
+The `PageType` interface defines the structure of each page displayed in the Command Menu. It includes properties like URL, title, group, icon, and isProtected. The icon property allows for visual representation using SVG icons, enhancing the user experience with recognizable symbols.
+
+```typescript
+type PageType = {
+  url: string;
+  title: string;
+  group: string;
+  icon?: string;
+  isProtected?: boolean;
+};
+```
+
+### Retrieving Page Data
+
+The `getAllPages` function retrieves the necessary page data asynchronously. It fetches the page data from the server using the `httpGet` function from the provided `lib/http` module. If the response is successful, the retrieved pages are filtered based on their protection status and merged with the default pages.
+
+```tsx:CommandMenu.tsx
+function shouldShowPage(page: PageType) {
+  // If the page is protected, only show it if the user is logged in
+  const isUser = isLoggedIn();
+  return !page.isProtected || isUser;
+}
+
+async function getAllPages() {
+  if (allPages.length > 0) {
+    return allPages;
+  }
+
+  const { error, response } = await httpGet<PageType[]>(`/pages.json`);
+  if (!response) {
+    return defaultPages.filter(shouldShowPage);
+  }
+
+  setAllPages([...defaultPages, ...response].filter(shouldShowPage));
+  return response;
+}
+```
+
+### Filtering and Search
+
+The Command Menu provides a search functionality that filters the pages based on the user's input. The `searchedText` state variable stores the current search query, which triggers a search operation whenever it changes. The search results are displayed in real-time, allowing users to find relevant pages efficiently.
+
+```tsx
+useEffect(() => {
+  if (!searchedText) {
+    setSearchResults(defaultPages.filter(shouldShowPage));
+    return;
+  }
+
+  const normalizedSearchText = searchedText.trim().toLowerCase();
+  getAllPages().then((unfilteredPages = defaultPages) => {
+    const filteredPages = unfilteredPages
+      .filter((currPage: PageType) => {
+        return (
+          currPage.title.toLowerCase().indexOf(normalizedSearchText) !== -1
+        );
+      })
+      .slice(0, 10);
+
+    setActiveCounter(0);
+    setSearchResults(filteredPages);
+  });
+}, [searchedText]);
+```
+
+### User Interaction and Navigation
+
+The Command Menu allows users to interact with the search results using keyboard navigation. Arrow keys navigate through the search results, highlighting the currently selected page. The `Enter` key triggers navigation to the selected page, redirecting the user to the corresponding URL.
+
+```tsx
+<input
+  ...
+  onKeyDown={e => {
+    if (e.key === 'ArrowDown') {
+      const canGoNext = activeCounter < searchResults.length - 1;
+      setActiveCounter(canGoNext ? activeCounter + 1 : 0);
+    } else if (e.key === 'ArrowUp') {
+      const canGoPrev = activeCounter > 0;
+      setActiveCounter(
+        canGoPrev ? activeCounter - 1 : searchResults.length - 1
+      );
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+    } else if (e.key === 'Escape') {
+      setSearchedText('');
+      setIsActive(false);
+    } else if (e.key === 'Enter') {
+      const activePage = searchResults[activeCounter];
+      if (activePage) {
+        window.location.href = activePage.url;
+      }
+    }
+  }}
+/>
+```
+
+## Enhancing User Experience
+
+The Command Menu contributes significantly to improving user experience on roadmap.sh. Its seamless integration with the website's design and functionality allows users to effortlessly discover and access content. By providing quick access to pages and intuitive search capabilities, users can navigate through roadmaps, guides, and other resources efficiently, ultimately enhancing their learning and browsing experience.
+
+To further enhance accessibility and user interaction, the Command Menu can be triggered not only through the search input but also via a dedicated button and keyboard shortcut.
+
+### Triggering the Command Menu Programmatically
+
+The Command Menu can be triggered programmatically using the `window.dispatchEvent` function along with a custom event. In the roadmap.sh implementation, the Command Menu is activated when the user clicks on an element with the `data-command-menu` attribute. The click event listener then dispatches a custom event, `'command.k'`, which triggers the Command Menu to become active.
+
+```javascript
+document.querySelector('[data-command-menu]')?.addEventListener('click', () => {
+  // Check the CommandMenu.tsx file highlighted code for the implementation of this event listener
+  window.dispatchEvent(new CustomEvent('command.k'));
+});
+```
+
+This allows developers to programmatically trigger the Command Menu from other parts of the website if desired.
+
+By pressing ⌘+K (or Ctrl+K on non-Mac systems), users can instantly open the Command Menu, providing a seamless and efficient way to navigate through the website's content.
+
+Please note that the keyboard shortcut implementation may vary depending on the target platform or framework used. Make sure to adapt the code accordingly for your specific project.
+
+## Conclusion
+
+This in roadmap.sh brings a powerful and user-friendly navigation tool to enhance the overall browsing experience. Its intuitive search, quick access to pages, and protection of sensitive content make it a valuable addition to the website. Whether you are a beginner exploring roadmap.sh for the first time or a frequent user looking for specific information, the Command Menu offers a convenient and efficient way to navigate through the website. Start exploring [roadmap.sh](https://roadmap.sh) today and experience the benefits of the Command Menu firsthand!
+
+You can check out the full source code in the [GitHub](https://github.com/kamranahmedse/developer-roadmap/blob/master/src/components/CommandMenu/CommandMenu.tsx). Huge thanks to [Kamran Ahmed](https://twitter.com/kamrify).
+
+We hope this comprehensive guide has provided you with a detailed understanding of the Command Menu in roadmap.sh. If you have any further questions or need assistance, feel free to reach out. Happy navigating!
+
+Btw, if you are looking for a place to start learning, check out the [developer roadmap](https://roadmap.sh) and pick a path that interests you. Start learning today!
