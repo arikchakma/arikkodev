@@ -1,8 +1,10 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { siteConfig } from '../lib/config';
+import { getCollection } from 'astro:content';
 
-export function GET(context: APIContext) {
+export async function GET(context: APIContext) {
+  const writings = await getCollection('writing');
   return rss({
     xmlns: {
       dc: 'http://purl.org/dc/elements/1.1/',
@@ -12,7 +14,16 @@ export function GET(context: APIContext) {
     title: siteConfig.title,
     description: siteConfig.description,
     site: context?.site || 'https://arikko.dev',
-    items: [],
+    trailingSlash: false,
+    items: [
+      ...writings.map((writing) => ({
+        title: writing.data.title,
+        description: writing.data.description,
+        link: `/writing/${writing.slug}`,
+        pubDate: writing.data.publishedAt!,
+        author: writing.data.author,
+      })),
+    ],
     customData: `<language>en-us</language> <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/> <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
   });
 }
