@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import '../../styles/article.css';
 import { formatDate } from '../../lib/time';
+import { getTableOfContents } from '../../lib/article';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('writing');
@@ -11,28 +12,31 @@ export async function getStaticPaths() {
     props: { entry },
   }));
 }
+
 type Props = {
   entry: CollectionEntry<'writing'>;
 };
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
-const { title, publishedAt, description, author } = entry.data;
+const { Content, headings } = await entry.render();
+const { title, publishedAt, description, author, tags } = entry.data;
 const date = formatDate(publishedAt!);
-
-
-
+const toc = getTableOfContents(headings);
 ---
 
 <Layout
   activePage='writing'
   title={`${title} | Arik Chakma`}
   description={description}
+  keywords={tags}
+  permalink={`/writing/${entry.slug}`}
 >
-  <article class='container prose mt-10'>
+  <article
+    class="container prose mt-10 max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm"
+  >
     <div>
       <h1
-        class="mb-0 text-4xl tracking-[-0.02em] [font-variation-settings:'wght'_700]"
+        class="mb-0 text-3xl tracking-[-0.02em] [font-variation-settings:'wght'_700] sm:text-4xl"
       >
         {title}
       </h1>
@@ -40,6 +44,41 @@ const date = formatDate(publishedAt!);
         {author} &middot; {date}
       </p>
     </div>
+
+    <div class='mb-10'>
+      <h4 class='mt-0'>Table of Contents</h4>
+      <ol class='list-inside pl-0'>
+        {
+          toc.map((heading, counter) => (
+            <li>
+              <a href={`#${heading.slug}`} class='no-underline'>
+                {heading.text}
+              </a>
+
+              {heading.child.length > 0 && (
+                <ol class='my-0 ml-6'>
+                  {heading.child.map((children, childCounter) => {
+                    return (
+                      <li
+                        style={{
+                          '--counter': `'${counter + 1}.${childCounter + 1}.'`,
+                        }}
+                        class='marker:content-[var(--counter)]'
+                      >
+                        <a href={`#${children.slug}`} class='no-underline'>
+                          {children.text}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ol>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
     <Content class:list={['mt-5']} />
   </article>
 </Layout>

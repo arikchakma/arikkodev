@@ -13,7 +13,6 @@ export function GET(context: APIContext) {
     description: siteConfig.description,
     site: context?.site || 'https://arikko.dev',
     items: [],
-    // (optional) inject custom xml
     customData: `<language>en-us</language> <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/> <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
   });
 }

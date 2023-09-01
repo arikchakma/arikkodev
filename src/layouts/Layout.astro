@@ -15,6 +15,7 @@ interface Props {
   canonical?: string;
   permalink?: string;
   activePage?: AllowedNavLinks;
+  ogImageUrl?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   canonical = '',
   permalink = '',
   activePage = 'about',
+  ogImageUrl = '',
 } = Astro.props;
 
 // Remove trailing slash from canonical URL
@@ -37,7 +39,6 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
     <meta name='description' content={description} />
@@ -51,10 +52,71 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
 
     {noIndex && <meta name='robots' content='noindex' />}
     <link rel='canonical' href={canonicalUrl} />
+    <link rel='sitemap' href='/sitemap-index.xml' />
 
     <!-- Twitter -->
     <meta name='twitter:card' content='summary_large_image' />
     <meta name='twitter:creator' content='@imarikchakma' />
+
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='630' />
+    <meta
+      property='og:image'
+      content={ogImageUrl || 'https://arikko.dev/images/og-image.png'}
+    />
+    <meta property='og:image:alt' content='arikko.dev' />
+    <meta property='og:site_name' content='arikko.dev' />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={currentPageAbsoluteUrl} />
+
+    <meta name='mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta
+      name='apple-mobile-web-app-status-bar-style'
+      content='black-translucent'
+    />
+    <meta name='apple-mobile-web-app-title' content='arikko.dev' />
+    <meta name='application-name' content='arikko.dev' />
+
+    <link
+      rel='apple-touch-icon'
+      sizes='180x180'
+      href='/manifest/apple-touch-icon.png'
+    />
+    <meta name='msapplication-TileColor' content='#fcfcfc' />
+    <meta
+      name='theme-color'
+      media='(prefers-color-scheme: light)'
+      content='#fcfcfc'
+    />
+    <meta
+      name='theme-color'
+      media='(prefers-color-scheme: dark)'
+      content='#1f1f1f'
+    />
+
+    <link rel='manifest' href='/manifest/manifest.json' />
+    <link
+      rel='icon'
+      type='image/png'
+      sizes='32x32'
+      href='/manifest/icon32.png'
+    />
+    <link
+      rel='icon'
+      type='image/png'
+      sizes='16x16'
+      href='/manifest/icon16.png'
+    />
+    <link
+      rel='shortcut icon'
+      href='/manifest/favicon.ico'
+      type='image/x-icon'
+    />
+
+    <link rel='icon' href='/manifest/favicon.ico' type='image/x-icon' />
 
     <link
       rel='preload'

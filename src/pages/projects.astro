@@ -1,22 +1,16 @@
 ---
-import Link from '../components/Link.astro';
 import Layout from '../layouts/Layout.astro';
 
 const activeProjects = [
   {
     title: 'Maily',
-    description: 'A simple email forwarding service',
+    description: 'Craft beautiful emails effortlessly',
     url: 'https://maily.to',
   },
   {
     title: 'Developer Roadmap',
     description: 'Roadmaps, articles and guides for developers',
     url: 'https://roadmap.sh',
-  },
-  {
-    title: 'Roadmap Editor',
-    description: 'A tool for creating and editing roadmaps',
-    url: 'https://draw.roadmap.sh',
   },
 ];
 
@@ -34,7 +28,11 @@ const archievedProjects = [
 ];
 ---
 
-<Layout activePage='projects'>
+<Layout
+  activePage='projects'
+  title='Projects | Arik Chakma'
+  description="Arik's projects and experiments."
+>
   <main class='container mt-10 text-sm sm:text-base'>
     <p>
       Listed below are the projects in which I have participated, dedicating

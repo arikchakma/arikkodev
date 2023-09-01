@@ -8,7 +8,11 @@ const allWritings = await getCollection('writing', ({ data }) => {
 });
 ---
 
-<Layout activePage='writing'>
+<Layout
+  activePage='writing'
+  title='Writing | Arik Chakma'
+  description="Arik Chakma's thoughts and writings."
+>
   <main class='container mt-10 text-sm sm:text-base'>
     <ul class='mt-5'>
       {
@@ -23,7 +27,7 @@ const allWritings = await getCollection('writing', ({ data }) => {
                   index === 0 ? '' : 'border-t border-gray-200',
                 ]}
               >
-                <span class="text-lg tracking-tight [font-variation-settings:'wght'_500]">
+                <span class="text-base tracking-tight [font-variation-settings:'wght'_500] sm:text-lg">
                   {writing.data.title}
                 </span>
                 <time class="text-right text-sm text-gray-500 [font-feature-settings:'tnum']">
