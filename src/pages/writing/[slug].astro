@@ -19,7 +19,7 @@ type Props = {
 
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
-const { title, publishedAt, description, author, tags } = entry.data;
+const { title, publishedAt, description, author, tags, image } = entry.data;
 const date = formatDate(publishedAt!);
 const toc = getTableOfContents(headings);
 ---
@@ -30,6 +30,7 @@ const toc = getTableOfContents(headings);
   description={description}
   keywords={tags}
   permalink={`/writing/${entry.slug}`}
+  ogImageUrl={image?.src}
 >
   <article
     class="container prose mt-10 max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm"

@@ -4,23 +4,24 @@
   "name": "Arik Chakma",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["fullscreen", "minimal-ui"],
   "start_url": "https://arikko.dev/",
   "short_name": "Arikko",
-  "theme_color": "#EDD07E",
+  "theme_color": "#313233",
   "description": "Developer, content creator, and an explorer - arikko.dev",
   "orientation": "any",
-  "background_color": "#101010",
+  "background_color": "#fcfcfc",
   "related_applications": [],
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/manifest/icon152.png",
-      "sizes": "152x152",
+      "src": "/manifest/mstile-144x144.png",
+      "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/manifest/icon196.png",
-      "sizes": "196x196",
+      "src": "/manifest/mstile-270x270.png",
+      "sizes": "270x270",
       "type": "image/png"
     }
   ]
