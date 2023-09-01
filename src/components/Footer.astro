@@ -1,0 +1,85 @@
+---
+import Location from './Location.astro';
+import MarqueeLocation from './MarqueeLocation.astro';
+const socialLinks = [
+  {
+    name: 'Twitter',
+    url: 'https://twitter.com/imarikchakma',
+  },
+  {
+    name: 'Instagram',
+    url: 'https://instagram.com/imarikchakma',
+  },
+  {
+    name: 'GitHub',
+    url: 'https://github.com/arikchakma',
+  },
+  {
+    name: 'hello@arikko.dev',
+    url: 'mailto:hello@arikko.dev',
+  },
+];
+---
+
+<footer class='container pb-20'>
+  <hr class='mt-12 text-divider' />
+
+  <ul class='mt-12'>
+    {
+      socialLinks.map((link, index) => (
+        <li class='inline-flex text-sm sm:text-base'>
+          <a
+            href={link.url}
+            target='_blank'
+            class='text-divider underline decoration-divider/60 decoration-1 underline-offset-2 hover:no-underline hover:opacity-70'
+          >
+            {link.name}
+          </a>
+          {index !== socialLinks.length - 1 && (
+            <span aria-hidden class='select-none px-1'>
+              &middot;
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class='mt-28 flex items-center justify-between text-xs text-divider'>
+    <MarqueeLocation />
+    <span class='hidden md:block'>
+      <Location />
+    </span>
+    <a
+      href='/feed.xml'
+      class='hidden uppercase text-divider underline decoration-divider/60 decoration-1 underline-offset-2 hover:no-underline hover:opacity-70 md:block'
+      >RSS</a
+    >
+  </div>
+</footer>
+
+<script>
+  const timers = document.querySelectorAll(
+    '[data-time]'
+  ) as NodeListOf<HTMLElement>;
+  const startTime = new Date().toLocaleTimeString('en-US', {
+    timeZone: 'Asia/Dhaka',
+    hourCycle: 'h24',
+  });
+  timers.forEach((el) => {
+    el.textContent = startTime;
+  });
+
+  setInterval(() => {
+    const currentTime = new Date().toLocaleTimeString('en-US', {
+      timeZone: 'Asia/Dhaka',
+      hourCycle: 'h24',
+    });
+
+    if (startTime !== currentTime) {
+      timers.forEach((el) => {
+        el.textContent = currentTime;
+      });
+    }
+  }, 1000);
+</script>

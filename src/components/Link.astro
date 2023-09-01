@@ -1,0 +1,27 @@
+---
+type Props = {
+  href: string;
+  target?: '_blank';
+  rel?: 'noopener noreferrer';
+  class?: string;
+};
+
+const {
+  href,
+  target = '_blank',
+  rel = 'noopener noreferrer',
+  class: className,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class:list={[
+    'text-divider underline decoration-divider/60 decoration-1 underline-offset-2 hover:no-underline hover:opacity-70',
+    className,
+  ]}
+>
+  <slot />
+</a>

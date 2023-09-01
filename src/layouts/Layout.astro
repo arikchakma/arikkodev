@@ -1,0 +1,145 @@
+---
+import Navigation, {
+  type AllowedNavLinks,
+} from '../components/Navigation.astro';
+import TopBlur from '../components/TopBlur.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../lib/config';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  noIndex?: boolean;
+  canonical?: string;
+  permalink?: string;
+  activePage?: AllowedNavLinks;
+  ogImageUrl?: string;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  keywords = siteConfig.keywords,
+  noIndex = false,
+  canonical = '',
+  permalink = '',
+  activePage = 'about',
+  ogImageUrl = '',
+} = Astro.props;
+
+// Remove trailing slash from canonical URL
+const currentPageAbsoluteUrl = `https://arikko.dev${permalink}`;
+const canonicalUrl = canonical || currentPageAbsoluteUrl;
+---
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+    <meta name='description' content={description} />
+    <meta name='author' content='Arik Chakma' />
+    <meta name='keywords' content={keywords.join(', ')} />
+    <meta
+      name='viewport'
+      content='width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0'
+    />
+    <meta http-equiv='Content-Language' content='en' />
+
+    {noIndex && <meta name='robots' content='noindex' />}
+    <link rel='canonical' href={canonicalUrl} />
+    <link rel='sitemap' href='/sitemap-index.xml' />
+
+    <!-- Twitter -->
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:creator' content='@imarikchakma' />
+
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='630' />
+    <meta
+      property='og:image'
+      content={ogImageUrl || 'https://arikko.dev/images/og-image.png'}
+    />
+    <meta property='og:image:alt' content='arikko.dev' />
+    <meta property='og:site_name' content='arikko.dev' />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={currentPageAbsoluteUrl} />
+
+    <meta name='mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta
+      name='apple-mobile-web-app-status-bar-style'
+      content='black-translucent'
+    />
+    <meta name='apple-mobile-web-app-title' content='arikko.dev' />
+    <meta name='application-name' content='arikko.dev' />
+
+    <link
+      rel='apple-touch-icon'
+      sizes='180x180'
+      href='/manifest/apple-touch-icon.png'
+    />
+    <meta name='msapplication-TileColor' content='#fcfcfc' />
+    <meta
+      name='theme-color'
+      media='(prefers-color-scheme: light)'
+      content='#fcfcfc'
+    />
+    <meta
+      name='theme-color'
+      media='(prefers-color-scheme: dark)'
+      content='#313233'
+    />
+
+    <link rel='manifest' href='/manifest/manifest.json' />
+    <meta name='msapplication-config' content='/manifest/browserconfig.xml' />
+
+    <link
+      rel='icon'
+      type='image/png'
+      sizes='32x32'
+      href='/manifest/favicon-32x32.png'
+    />
+    <link
+      rel='icon'
+      type='image/png'
+      sizes='16x16'
+      href='/manifest/favicon-16x16.png'
+    />
+    <link
+      rel='shortcut icon'
+      href='/manifest/favicon.ico'
+      type='image/x-icon'
+    />
+
+    <link rel='icon' href='/manifest/favicon.ico' type='image/x-icon' />
+
+    <link
+      rel='preload'
+      href='/fonts/Inter.var.woff2'
+      as='font'
+      type='font/woff2'
+      crossorigin='anonymous'
+    />
+  </head>
+  <body
+    class='bg-background px-5 font-sans text-primary selection:bg-selection'
+  >
+    <slot name='top-blur'>
+      <TopBlur />
+    </slot>
+    <slot name='header'>
+      <Navigation activePage={activePage} />
+    </slot>
+    <slot />
+    <slot name='footer'>
+      <Footer />
+    </slot>
+  </body>
+</html>

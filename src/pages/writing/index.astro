@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { formatDate } from '../../lib/time';
+
+const allWritings = await getCollection('writing', ({ data }) => {
+  return import.meta.env.PROD ? data.status === 'published' : true;
+});
+---
+
+<Layout
+  activePage='writing'
+  title='Writing | Arik Chakma'
+  description="Arik Chakma's thoughts and writings."
+>
+  <main class='container mt-10 text-sm sm:text-base'>
+    <ul class='mt-5'>
+      {
+        allWritings.map((writing, index) => {
+          const time = formatDate(writing.data.publishedAt!);
+          return (
+            <li>
+              <a
+                href={`/writing/${writing.slug}`}
+                class:list={[
+                  'flex items-baseline justify-between gap-2 py-2 hover:opacity-70',
+                  index === 0 ? '' : 'border-t border-gray-200',
+                ]}
+              >
+                <span class="text-base tracking-tight [font-variation-settings:'wght'_500] sm:text-lg">
+                  {writing.data.title}
+                </span>
+                <time class="text-right text-sm text-gray-500 [font-feature-settings:'tnum']">
+                  {time}
+                </time>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </main>
+</Layout>

@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: optional;
+  src: url(/fonts/Inter.var.woff2) format('woff2');
+}
+
+body {
+  font-feature-settings: 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02', 'cv03' 1,
+    'cv04' 1, 'liga', 'clig', 'calt', 'cv11', 'cv09', 'cv10', 'cv05';
+  font-variation-settings: 'wght' 450;
+  font-variant: common-ligatures contextual;
+  letter-spacing: 0.005em;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.5),
+  screen and (min-device-pixel-ratio: 1.5),
+  screen and (min-resolution: 1.5dppx) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .top-blur {
+    -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent);
+    mask-image: linear-gradient(to bottom, #000 25%, transparent);
+  }
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto !max-w-[640px];
+  }
+}
+
+.gradient-clip::before {
+  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 40px;
+  z-index: 2;
+  left: 0;
+  top: 0;
+}
+.gradient-clip::after {
+  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 40px;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+
