@@ -2,17 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url(/fonts/Inter.var.woff2) format('woff2');
-}
-
 body {
-  font-feature-settings: 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02', 'cv03' 1,
-    'cv04' 1, 'liga', 'clig', 'calt', 'cv11', 'cv09', 'cv10', 'cv05';
   font-variation-settings: 'wght' 450;
   font-variant: common-ligatures contextual;
   letter-spacing: 0.005em;

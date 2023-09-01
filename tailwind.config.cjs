@@ -12,9 +12,6 @@ module.exports = {
         divider: '#5d676a',
         'link-hover': 'rgb(93 103 106 / 0.7)',
       },
-      fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
-      },
       animation: {
         'ticker-loop': '20s infinite linear ticker-loop',
       },
