@@ -6,6 +6,7 @@ import TopBlur from '../components/TopBlur.astro';
 import Footer from '../components/Footer.astro';
 import { siteConfig } from '../lib/config';
 import '../styles/global.css';
+import Analytics from '../components/Analytics/Analytics.astro';
 
 interface Props {
   title?: string;
@@ -132,12 +133,16 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
     <slot name='top-blur'>
       <TopBlur />
     </slot>
+
     <slot name='header'>
       <Navigation activePage={activePage} />
     </slot>
     <slot />
+    
     <slot name='footer'>
       <Footer />
     </slot>
+
+    <Analytics />
   </body>
 </html>

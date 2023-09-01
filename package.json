@@ -27,6 +27,7 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
+    "@astrojs/partytown": "^2.0.0",
     "@tailwindcss/typography": "^0.5.9",
     "prettier": "^2.8.8",
     "prettier-plugin-astro": "^0.10.0",

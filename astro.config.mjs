@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import partytown from '@astrojs/partytown';
 
 import rehypeSlug from 'rehype-slug'; // Add id to headings
 import rehypeCodeTitles from 'rehype-code-titles'; // Code Title
@@ -65,6 +66,12 @@ export default defineConfig({
     sitemap({
       serialize: serializeSitemap,
       filter: shouldIndexPage,
+    }),
+    partytown({
+      // Adds dataLayer.push as a forwarding-event.
+      config: {
+        forward: ["dataLayer.push"],
+      },
     }),
   ],
 });
