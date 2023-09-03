@@ -1,10 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { formatDate } from '../../lib/time';
+import { getYear } from '../../lib/time';
 
-const allWritings = await getCollection('writing', ({ data }) => {
-  return import.meta.env.PROD ? data.status === 'published' : true;
+const allWritings = (
+  await getCollection('writing', ({ data }) => {
+    return import.meta.env.PROD ? data.status === 'published' : true;
+  })
+).sort((a, b) => {
+  return (
+    new Date(b.data.publishedAt!).getTime() -
+    new Date(a.data.publishedAt!).getTime()
+  );
 });
 ---
 
@@ -14,25 +21,36 @@ const allWritings = await getCollection('writing', ({ data }) => {
   description="Arik Chakma's thoughts and writings."
 >
   <main class='container mt-10 text-sm sm:text-base'>
-    <ul class='mt-5'>
+    <header class='flex h-9 items-center border-b text-sm text-gray-500'>
+      <span class='w-12 text-left'>date</span>
+      <span class='grow pl-2'>title</span>
+    </header>
+    <ul>
       {
         allWritings.map((writing, index) => {
-          const time = formatDate(writing.data.publishedAt!);
+          const year = getYear(writing.data.publishedAt!);
+          const isFirstOfTheYear =
+            index === 0 ||
+            year !== getYear(allWritings[index - 1].data.publishedAt!);
+
           return (
             <li>
               <a
                 href={`/writing/${writing.slug}`}
                 class:list={[
-                  'flex items-baseline justify-between gap-2 py-2 hover:opacity-70',
+                  'flex py-2 hover:bg-gray-100 active:bg-gray-200',
                   index === 0 ? '' : 'border-t border-gray-200',
+                  !isFirstOfTheYear && 'pl-14',
                 ]}
               >
+                {isFirstOfTheYear && (
+                  <span class="h-full w-14 shrink-0 self-start text-sm leading-7 text-gray-500 [font-feature-settings:'tnum']">
+                    {year}
+                  </span>
+                )}
                 <span class="text-base tracking-tight [font-variation-settings:'wght'_500] sm:text-lg">
                   {writing.data.title}
                 </span>
-                <time class="text-right text-sm text-gray-500 [font-feature-settings:'tnum']">
-                  {time}
-                </time>
               </a>
             </li>
           );

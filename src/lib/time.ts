@@ -10,3 +10,7 @@ export function getRelativeTime(date: Date) {
 export function formatDate(date: Date) {
   return dayjs(date).format('MM/DD/YYYY');
 }
+
+export function getYear(date: Date) {
+  return dayjs(date).year();
+}
