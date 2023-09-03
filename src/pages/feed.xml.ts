@@ -21,7 +21,7 @@ export async function GET(context: APIContext) {
         description: writing.data.description,
         link: `/writing/${writing.slug}`,
         pubDate: writing.data.publishedAt!,
-        author: writing.data.author,
+        author: writing.data.author.name,
       })),
     ],
     customData: `<language>en-us</language> <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/> <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
