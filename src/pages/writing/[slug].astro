@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import '../../styles/article.css';
-import { formatDate } from '../../lib/time';
+import { formatDate, getRelativeTime } from '../../lib/time';
 import { getTableOfContents } from '../../lib/article';
 
 export async function getStaticPaths() {
@@ -21,6 +21,7 @@ const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 const { title, publishedAt, description, author, tags, image } = entry.data;
 const date = formatDate(publishedAt!);
+const timeAgo = getRelativeTime(publishedAt!);
 const toc = getTableOfContents(headings);
 ---
 
@@ -41,8 +42,18 @@ const toc = getTableOfContents(headings);
       >
         {title}
       </h1>
-      <p class='mb-10 mt-3 flex items-center gap-1.5 text-sm opacity-70'>
-        {author} &middot; {date}
+      <p
+        class='mb-10 mt-2 flex items-center gap-1.5 font-mono text-sm text-gray-500'
+      >
+        <a
+          href={`https://twitter.com/${author?.twitter}`}
+          target='_blank'
+          class='not-prose text-gray-500 no-underline hover:text-black'
+        >
+          {author?.name}
+        </a>
+        &middot; {date}
+        <span class='hidden sm:inline'>({timeAgo})</span>
       </p>
     </div>
 

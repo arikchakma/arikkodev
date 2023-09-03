@@ -13,8 +13,10 @@ const writingCollection = defineCollection({
       .optional(),
     status: z.enum(['draft', 'published']),
     tags: z.array(z.string()).optional(),
-    author: z.string().optional(),
-    authorContact: z.string().email().optional(),
+    author: z.object({
+      name: z.string(),
+      twitter: z.string().optional(),
+    }),
     publishedAt: z.date().optional(),
   }),
 });
