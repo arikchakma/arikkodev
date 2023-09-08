@@ -5,12 +5,18 @@ const writingCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    image: z
-      .object({
-        src: z.string(),
-        alt: z.string(),
-      })
-      .optional(),
+    image: z.object({
+      src: z.string(),
+      alt: z.string(),
+      size: z.object({
+        width: z.number(),
+        height: z.number(),
+      }),
+    }),
+    ogImage: z.object({
+      src: z.string(),
+      alt: z.string(),
+    }),
     status: z.enum(['draft', 'published']),
     tags: z.array(z.string()).optional(),
     author: z.object({

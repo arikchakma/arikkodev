@@ -4,6 +4,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import '../../styles/article.css';
 import { formatDate, getRelativeTime } from '../../lib/time';
 import { getTableOfContents } from '../../lib/article';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('writing');
@@ -19,7 +20,8 @@ type Props = {
 
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
-const { title, publishedAt, description, author, tags, image } = entry.data;
+const { title, publishedAt, description, author, tags, image, ogImage } =
+  entry.data;
 const date = formatDate(publishedAt!);
 const timeAgo = getRelativeTime(publishedAt!);
 const toc = getTableOfContents(headings);
@@ -31,12 +33,12 @@ const toc = getTableOfContents(headings);
   description={description}
   keywords={tags}
   permalink={`/writing/${entry.slug}`}
-  ogImageUrl={image?.src}
+  ogImageUrl={ogImage?.src}
 >
   <article
     class="container prose mt-10 max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm"
   >
-    <div>
+    <header>
       <h1
         class="mb-0 text-3xl tracking-[-0.02em] [font-variation-settings:'wght'_700] sm:text-4xl"
       >
@@ -55,9 +57,19 @@ const toc = getTableOfContents(headings);
         &middot; {date}
         <span class='hidden sm:inline'>({timeAgo})</span>
       </p>
-    </div>
 
-    <div class='mb-10'>
+      <figure class='mb-10'>
+        <Image
+          class='rounded-lg'
+          src={image?.src}
+          alt={image?.alt}
+          width={image?.size?.width}
+          height={image?.size?.height}
+        />
+      </figure>
+    </header>
+
+    <section class='mb-10'>
       <h4 class='mt-0'>Table of Contents</h4>
       <ol class='list-inside pl-0'>
         {
@@ -89,8 +101,10 @@ const toc = getTableOfContents(headings);
           ))
         }
       </ol>
-    </div>
+    </section>
 
-    <Content class:list={['mt-5']} />
+    <section>
+      <Content class:list={['mt-5']} />
+    </section>
   </article>
 </Layout>
