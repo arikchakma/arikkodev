@@ -63,7 +63,7 @@ export default defineConfig({
   },
   integrations: [
     tailwind(),
-    mdx({}),
+    mdx(),
     sitemap({
       serialize: serializeSitemap,
       filter: shouldIndexPage,

@@ -2,7 +2,9 @@ import path from 'path';
 import fs from 'fs';
 
 async function getWritingIds() {
-  const files = fs.readdirSync(path.join(process.cwd(), 'src/content/writing'));
+  const files = fs.readdirSync(
+    path.join(process.cwd(), 'src/content/writings'),
+  );
 
   // Only include mdx files
   const writingIds = files
