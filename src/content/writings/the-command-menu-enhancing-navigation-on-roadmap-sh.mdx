@@ -3,18 +3,16 @@ title: 'The Command Menu: Enhancing Navigation on roadmap.sh'
 publishedAt: 2023-05-25
 status: published
 tags:
-  [
-    'Command Menu',
-    'roadmap.sh',
-    'navigation tool',
-    'browsing experience',
-    'roadmaps',
-    'command menu astro',
-    'astrojs',
-    'preact',
-    'cmd+k',
-    'cmd+k astro and preact',
-  ]
+  - 'Command Menu'
+  - 'roadmap.sh'
+  - 'navigation tool'
+  - 'browsing experience'
+  - 'roadmaps'
+  - 'command menu astro'
+  - 'astrojs'
+  - 'preact'
+  - 'cmd+k'
+  - 'cmd+k astro and react'
 description: Learn about the Command Menu in roadmap.sh, a powerful and user-friendly navigation tool that enhances browsing experience and provides quick access to roadmaps, guides, and other resources.
 author:
   name: '@imarikchakma'
@@ -282,7 +280,7 @@ The Command Menu allows users to interact with the search results using keyboard
     } else if (e.key === 'ArrowUp') {
       const canGoPrev = activeCounter > 0;
       setActiveCounter(
-        canGoPrev ? activeCounter - 1 : searchResults.length - 1
+        canGoPrev ? activeCounter - 1 : searchResults.length - 1,
       );
     } else if (e.key === 'Tab') {
       e.preventDefault();

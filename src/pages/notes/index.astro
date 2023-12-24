@@ -3,8 +3,8 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { getYear } from '../../lib/time';
 
-const allWritings = (
-  await getCollection('writing', ({ data }) => {
+const allNotes = (
+  await getCollection('notes', ({ data }) => {
     return import.meta.env.PROD ? data.status === 'published' : true;
   })
 ).sort((a, b) => {
@@ -16,8 +16,8 @@ const allWritings = (
 ---
 
 <Layout
-  activePage='writing'
-  title='Writing | Arik Chakma'
+  activePage='notes'
+  title='Notes | Arik Chakma'
   description="Arik Chakma's thoughts and writings."
 >
   <main class='container mt-10 text-sm sm:text-base'>
@@ -27,16 +27,16 @@ const allWritings = (
     </header>
     <ul>
       {
-        allWritings.map((writing, index) => {
-          const year = getYear(writing.data.publishedAt!);
+        allNotes.map((note, index) => {
+          const year = getYear(note.data.publishedAt!);
           const isFirstOfTheYear =
             index === 0 ||
-            year !== getYear(allWritings[index - 1].data.publishedAt!);
+            year !== getYear(allNotes[index - 1].data.publishedAt!);
 
           return (
             <li>
               <a
-                href={`/writing/${writing.slug}`}
+                href={`/notes/${note.slug}`}
                 class:list={[
                   'flex py-2 hover:bg-gray-100 active:bg-gray-200',
                   index === 0 ? '' : 'border-t border-gray-200',
@@ -49,7 +49,7 @@ const allWritings = (
                   </span>
                 )}
                 <span class="text-base tracking-tight [font-variation-settings:'wght'_500] sm:text-lg">
-                  {writing.data.title}
+                  {note.data.title}
                 </span>
               </a>
             </li>

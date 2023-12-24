@@ -1,0 +1,50 @@
+---
+title: 'Database Backup Import'
+publishedAt: 2023-12-25
+status: 'published'
+tags:
+  - 'Docker Database Import'
+  - 'MySQL Backup Restore'
+  - 'MongoDB Data Recovery'
+  - 'Database Management'
+  - 'SQL and NoSQL Backup Solutions'
+  - 'Command-Line Database Tools'
+  - 'Docker Containers for Databases'
+  - 'Data Import Techniques'
+  - 'Database Backup Strategies'
+  - 'MySQL and MongoDB Tutorials'
+description: 'Effortlessly import data into MySQL and MongoDB using Docker with single-command guide.'
+author:
+  name: '@imarikchakma'
+  twitter: 'imarikchakma'
+image:
+  src: '/images/og-images/command-menu.png'
+  alt: 'Single Command Database Backup Imports'
+  size:
+    width: 1200
+    height: 630
+---
+
+When you are working with docker, you might need to import data from a backup file. Here is a single command to import data in MySQL and MongoDB from backup.
+
+## MySQL
+
+```bash
+docker cp /path/to/your/backup.sql.gz MYSQL_CONTAINER:/tmp/backup.sql.gz && \
+docker exec -it MYSQL_CONTAINER bash -c "\
+zcat /tmp/backup.sql.gz > /tmp/backup.sql && \
+mysql -u root -pPASSWORD < /tmp/backup.sql && \
+rm /tmp/backup.sql.gz && \
+rm /tmp/backup.sql"
+```
+
+## MongoDB
+
+```bash
+docker cp /path/to/your/backup.tar.gz MONGO_CONTAINER:/tmp/backup.tar.gz && \
+docker exec -it MONGO_CONTAINER bash -c "\
+mongorestore --gzip --archive=/tmp/backup.tar.gz --nsInclude='DATABASE_NAME.*' && \
+rm /tmp/backup.tar.gz"
+```
+
+> **Note:** If you want to import to a specific collection, replace `DATABASE_NAME.*` with `DATABASE_NAME.COLLECTION_NAME`.

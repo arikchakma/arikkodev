@@ -36,7 +36,7 @@ const socialLinks = [
             {link.name}
           </a>
           {index !== socialLinks.length - 1 && (
-            <span aria-hidden class='select-none px-1'>
+            <span aria-hidden='true' class='select-none px-1'>
               &middot;
             </span>
           )}
@@ -60,7 +60,7 @@ const socialLinks = [
 
 <script>
   const timers = document.querySelectorAll(
-    '[data-time]'
+    '[data-time]',
   ) as NodeListOf<HTMLElement>;
   const startTime = new Date().toLocaleTimeString('en-US', {
     timeZone: 'Asia/Dhaka',

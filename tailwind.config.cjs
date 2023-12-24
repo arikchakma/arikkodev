@@ -1,4 +1,4 @@
-import { fontFamily, spacing } from 'tailwindcss/defaultTheme';
+import { spacing } from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

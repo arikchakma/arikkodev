@@ -4,7 +4,9 @@ import { siteConfig } from '../lib/config';
 import { getCollection } from 'astro:content';
 
 export async function GET(context: APIContext) {
-  const writings = await getCollection('writing');
+  const writings = await getCollection('writings');
+  const notes = await getCollection('notes');
+
   return rss({
     xmlns: {
       dc: 'http://purl.org/dc/elements/1.1/',
@@ -19,9 +21,16 @@ export async function GET(context: APIContext) {
       ...writings.map((writing) => ({
         title: writing.data.title,
         description: writing.data.description,
-        link: `/writing/${writing.slug}`,
+        link: `/writings/${writing.slug}`,
         pubDate: writing.data.publishedAt!,
         author: writing.data.author.name,
+      })),
+      ...notes.map((note) => ({
+        title: note.data.title,
+        description: note.data.description,
+        link: `/notes/${note.slug}`,
+        pubDate: note.data.publishedAt!,
+        author: note.data.author.name,
       })),
     ],
     customData: `<language>en-us</language> <atom:link href="https://arikko.dev/feed.xml" rel="self" type="application/rss+xml"/> <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,

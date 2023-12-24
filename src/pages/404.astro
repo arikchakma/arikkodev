@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { navLinks } from '../components/Navigation.astro';
+import FrownIcon from '../components/FrownIcon.astro';
 ---
 
 <Layout title='Page not found' permalink={'/404'} noIndex={true}>
@@ -8,27 +10,32 @@ import Layout from '../layouts/Layout.astro';
     class='container flex flex-col items-center justify-center gap-7 py-10 md:flex-row md:py-32'
   >
     <div class='text-left md:text-left'>
+      <FrownIcon className='h-16 w-16 max-md:h-12 max-md:w-12' />
       <h1
-        class="text-2xl [font-variation-settings:'wght'_700] md:text-5xl md:[font-variation-settings:'wght'_800]"
+        class="mt-5 text-3xl [font-variation-settings:'wght'_700] md:text-5xl md:[font-variation-settings:'wght'_800]"
       >
         Page not found!
       </h1>
-      <p class='mt-2 text-sm md:text-xl'>
+      <p class='mt-2 text-base md:text-xl'>
         Sorry, we couldn't find the page you are looking for.
       </p>
       <p class='mt-6'>
-        <a
-          class="whitespace-nowrap text-sm text-[#4b5563] underline decoration-divider/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out [font-variation-settings:'wght'_500] hover:no-underline hover:opacity-70 md:text-base"
-          href='/'>About</a
-        > &middot; <a
-          href='/writing'
-          class="whitespace-nowrap text-sm text-[#4b5563] underline decoration-divider/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out [font-variation-settings:'wght'_500] hover:no-underline hover:opacity-70 md:text-base"
-          >Writing</a
-        > &middot; <a
-          href='/projects'
-          class="whitespace-nowrap text-sm text-[#4b5563] underline decoration-divider/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out [font-variation-settings:'wght'_500] hover:no-underline hover:opacity-70 md:text-base"
-          >Projects</a
-        >
+        {
+          navLinks.map((link) => {
+            const isLast = navLinks.indexOf(link) === navLinks.length - 1;
+            return (
+              <>
+                <a
+                  class="whitespace-nowrap text-sm text-[#4b5563] underline decoration-divider/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out [font-variation-settings:'wght'_500] hover:no-underline hover:opacity-70 md:text-base"
+                  href={link.url}
+                >
+                  {link.name}
+                </a>
+                {isLast ? null : <>&middot;</>}
+              </>
+            );
+          })
+        }
       </p>
     </div>
   </div>

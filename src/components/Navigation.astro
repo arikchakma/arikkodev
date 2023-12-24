@@ -1,5 +1,5 @@
 ---
-export type AllowedNavLinks = 'about' | 'writing' | 'projects';
+export type AllowedNavLinks = 'about' | 'writings' | 'projects' | 'notes';
 export const navLinks = [
   {
     id: 'about',
@@ -7,9 +7,14 @@ export const navLinks = [
     url: '/',
   },
   {
-    id: 'writing',
-    name: 'Writing',
-    url: '/writing',
+    id: 'writings',
+    name: 'Writings',
+    url: '/writings',
+  },
+  {
+    id: 'notes',
+    name: 'Notes',
+    url: '/notes',
   },
   {
     id: 'projects',
