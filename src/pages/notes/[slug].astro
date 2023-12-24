@@ -17,8 +17,8 @@ type Props = {
 };
 
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
-const { title, publishedAt, description, author, tags, image, ogImage } =
+const { Content } = await entry.render();
+const { title, publishedAt, description, author, tags, ogImage } =
   entry.data;
 const date = formatDate(publishedAt!);
 const timeAgo = getRelativeTime(publishedAt!);
