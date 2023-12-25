@@ -103,16 +103,12 @@ pre {
   scrollbar-width: none; /* Firefox */
 }
 
-.rehype-code-title {
+.remark-code-title {
   @apply rounded-t-lg border border-b-0 border-gray-200 bg-[#f7f7f7] px-5 py-3 font-mono text-sm font-bold text-gray-800;
 }
 
-.rehype-code-title + pre {
+.remark-code-title + pre {
   @apply mt-0 rounded-t-none;
-}
-
-.highlight-line {
-  @apply -mx-4 block border-l-2 border-pink-500 bg-gray-200/40 px-4;
 }
 
 /* Remove Safari input shadow on mobile */
@@ -147,7 +143,7 @@ pre code {
 }
 
 pre code .code-line {
-  @apply block border-l-4 border-transparent px-4;
+  @apply block border-l-2 border-transparent px-4;
 }
 
 pre code .code-line.inserted {
@@ -165,4 +161,8 @@ pre code .line-number::before {
 /* Increase line number width for double digits */
 pre code:has(span.line-number[line='10']) .line-number::before {
   @apply w-[18px];
+}
+
+pre code .highlight-line {
+  @apply block border-l-2 border-pink-500 bg-gray-200/40;
 }

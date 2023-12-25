@@ -4,7 +4,6 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
 import rehypeSlug from 'rehype-slug'; // Add id to headings
-import rehypeCodeTitles from 'rehype-code-titles'; // Code Title
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax
 import rehypeExternalLinks from 'rehype-external-links'; // External links
@@ -12,6 +11,7 @@ import rehypeExternalLinks from 'rehype-external-links'; // External links
 import { serializeSitemap, shouldIndexPage } from './sitemap.mjs';
 
 import vercel from '@astrojs/vercel/static';
+import { remarkCodeTitles } from './src/lib/remark-code-titles';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,8 +20,8 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     gfm: true,
+    remarkPlugins: [remarkCodeTitles],
     rehypePlugins: [
-      rehypeCodeTitles,
       rehypeSlug,
       [
         rehypeAutolinkHeadings,
@@ -56,7 +56,6 @@ export default defineConfig({
         {
           ignoreMissing: true,
           showLineNumbers: true,
-          transformInlineCode: true,
         },
       ],
     ],

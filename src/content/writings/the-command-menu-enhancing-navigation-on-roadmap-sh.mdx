@@ -124,7 +124,7 @@ To understand how the Command Menu is implemented, let's explore some of the key
 
 The Command Menu leverages the preact/hooks library, which provides essential hooks for managing component state and lifecycle events. The `useState`, `useEffect`, `useRef`, and `useOutsideClick` hooks are utilized to handle various functionalities, such as menu activation, search input handling, and click events outside the menu. Also focus the search input when the menu is activated.
 
-```tsx:CommandMenu.tsx {9-13, 15-22}
+```tsx:CommandMenu.tsx
 import { useEffect, useRef, useState } from 'preact/hooks';
 
 export function CommandMenu() {
