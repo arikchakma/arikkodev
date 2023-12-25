@@ -8,7 +8,11 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to h
 import rehypePrism from 'rehype-prism-plus'; // Syntax
 import rehypeExternalLinks from 'rehype-external-links'; // External links
 
-import { serializeSitemap, shouldIndexPage } from './sitemap.mjs';
+import {
+  serializeSitemap,
+  shouldIndexPage,
+  writingRedirects,
+} from './sitemap.mjs';
 
 import vercel from '@astrojs/vercel/static';
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
@@ -17,6 +21,9 @@ import { remarkCodeTitles } from './src/lib/remark-code-titles';
 export default defineConfig({
   site: 'https://arikko.dev',
   trailingSlash: 'never',
+  redirects: {
+    ...(await writingRedirects()),
+  },
   markdown: {
     syntaxHighlight: false,
     gfm: true,

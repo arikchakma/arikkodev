@@ -14,6 +14,18 @@ async function getWritingIds() {
   return writingIds;
 }
 
+export async function writingRedirects() {
+  const writingIds = await getWritingIds();
+  const redirect = {};
+  for (let id of writingIds) {
+    redirect[`/writing/${id}`] = {
+      status: 301,
+      destination: `/writings/${id}`,
+    };
+  }
+  return redirect;
+}
+
 async function getNoteIds() {
   const files = fs.readdirSync(path.join(process.cwd(), 'src/content/notes'));
 
