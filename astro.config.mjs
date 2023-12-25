@@ -18,7 +18,7 @@ export default defineConfig({
   site: 'https://arikko.dev',
   trailingSlash: 'never',
   markdown: {
-    syntaxHighlight: 'prism',
+    syntaxHighlight: false,
     gfm: true,
     rehypePlugins: [
       rehypeCodeTitles,

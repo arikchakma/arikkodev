@@ -7,7 +7,7 @@
 }
 
 .prose pre {
-  @apply overflow-x-auto rounded-lg border border-gray-200 bg-background px-4 py-3;
+  @apply overflow-x-auto rounded-lg border border-gray-200 bg-background px-0 py-3.5;
 }
 
 .prose strong {
@@ -112,7 +112,7 @@ pre {
 }
 
 .highlight-line {
-  @apply -mx-4 block border-l-2 border-blue-500 bg-gray-200/40 px-4;
+  @apply -mx-4 block border-l-2 border-pink-500 bg-gray-200/40 px-4;
 }
 
 /* Remove Safari input shadow on mobile */
@@ -135,4 +135,34 @@ article.prose {
   font-variation-settings: 'wght' 450;
   line-height: 1.6;
   word-spacing: -0.04em;
+}
+
+pre code {
+  @apply inline-block;
+}
+
+.code-highlight {
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
+}
+
+pre code .code-line {
+  @apply block border-l-4 border-transparent px-4;
+}
+
+pre code .code-line.inserted {
+  @apply bg-green-600/20;
+}
+
+pre code .code-line.deleted {
+  @apply bg-red-600/10;
+}
+
+pre code .line-number::before {
+  @apply -ml-2 mr-4 inline-block w-2 text-right text-gray-400 content-[attr(line)];
+}
+
+/* Increase line number width for double digits */
+pre code:has(span.line-number[line='10']) .line-number::before {
+  @apply w-[18px];
 }
