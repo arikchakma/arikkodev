@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-async function getWritingIds() {
+export async function getWritingIds() {
   const files = fs.readdirSync(
     path.join(process.cwd(), 'src/content/writings'),
   );
@@ -12,18 +12,6 @@ async function getWritingIds() {
     // Remove the .mdx extension to get the id of the writing
     .map((file) => file.replace(/\.mdx$/, ''));
   return writingIds;
-}
-
-export async function writingRedirects() {
-  const writingIds = await getWritingIds();
-  const redirect = {};
-  for (let id of writingIds) {
-    redirect[`/writing/${id}`] = {
-      status: 301,
-      destination: `/writings/${id}`,
-    };
-  }
-  return redirect;
 }
 
 async function getNoteIds() {

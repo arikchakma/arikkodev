@@ -3,19 +3,16 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
+import vercel from '@astrojs/vercel/static';
 import rehypeSlug from 'rehype-slug'; // Add id to headings
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax
 import rehypeExternalLinks from 'rehype-external-links'; // External links
 
-import {
-  serializeSitemap,
-  shouldIndexPage,
-  writingRedirects,
-} from './sitemap.mjs';
+import { serializeSitemap, shouldIndexPage } from './sitemap.mjs';
 
-import vercel from '@astrojs/vercel/static';
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
+import { writingRedirects } from './redirect.mjs';
 
 // https://astro.build/config
 export default defineConfig({
