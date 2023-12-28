@@ -58,15 +58,19 @@ const toc = getTableOfContents(headings);
         <span class='hidden sm:inline'>({timeAgo})</span>
       </p>
 
-      <figure class='mb-10'>
-        <Image
-          class='rounded-lg'
-          src={image?.src}
-          alt={image?.alt}
-          width={image?.size?.width}
-          height={image?.size?.height}
-        />
-      </figure>
+      {
+        image?.src ? (
+          <figure class='mb-10'>
+            <Image
+              class='rounded-lg'
+              src={image?.src}
+              alt={image?.alt || title}
+              width={image?.size?.width || 0}
+              height={image?.size?.height || 0}
+            />
+          </figure>
+        ) : null
+      }
     </header>
 
     <section class='mb-10'>
