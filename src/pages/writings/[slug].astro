@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import '../../styles/article.css';
-import { formatDate, getRelativeTime } from '../../lib/time';
+import { formatDate } from '../../lib/time';
 import { getTableOfContents } from '../../lib/article';
 import { Image } from 'astro:assets';
 
@@ -23,7 +23,6 @@ const { Content, headings } = await entry.render();
 const { title, publishedAt, description, author, tags, image, ogImage } =
   entry.data;
 const date = formatDate(publishedAt!);
-const timeAgo = getRelativeTime(publishedAt!);
 const toc = getTableOfContents(headings);
 ---
 
@@ -55,7 +54,6 @@ const toc = getTableOfContents(headings);
           {author?.name}
         </a>
          &middot; {date}
-        <span class='hidden sm:inline' id='writing-time-ago'>({timeAgo})</span>
       </p>
 
       {
@@ -112,13 +110,3 @@ const toc = getTableOfContents(headings);
     </section>
   </article>
 </Layout>
-
-<script type='module'>
-  const timeAgoEl = document.getElementById('writing-time-ago');
-  if (!timeAgoEl) {
-    return;
-  }
-  
-  const timeAgo = getRelativeTime(publishedAt);
-  timeAgoEl.textContent = `(${timeAgo})`;
-</script>

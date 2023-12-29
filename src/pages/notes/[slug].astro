@@ -2,7 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import '../../styles/article.css';
-import { formatDate, getRelativeTime } from '../../lib/time';
+import { formatDate } from '../../lib/time';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('notes');
@@ -20,7 +20,6 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const { title, publishedAt, description, author, tags, ogImage } = entry.data;
 const date = formatDate(publishedAt!);
-const timeAgo = getRelativeTime(publishedAt!);
 ---
 
 <Layout
@@ -51,7 +50,6 @@ const timeAgo = getRelativeTime(publishedAt!);
           {author?.name}
         </a>
          &middot; {date}
-        <span class='hidden sm:inline' id='writing-time-ago'>({timeAgo})</span>
       </p>
     </header>
 
@@ -60,13 +58,3 @@ const timeAgo = getRelativeTime(publishedAt!);
     </section>
   </article>
 </Layout>
-
-<script type='module'>
-  const timeAgoEl = document.getElementById('writing-time-ago');
-  if (!timeAgoEl) {
-    return;
-  }
-
-  const timeAgo = getRelativeTime(publishedAt);
-  timeAgoEl.textContent = `(${timeAgo})`;
-</script>
