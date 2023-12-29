@@ -62,19 +62,21 @@ const socialLinks = [
   const timers = document.querySelectorAll(
     '[data-time]',
   ) as NodeListOf<HTMLElement>;
-  const startTime = new Date().toLocaleTimeString('en-US', {
-    timeZone: 'Asia/Dhaka',
-    hourCycle: 'h24',
-  });
+
+  function getCurrentTime() {
+    return new Date().toLocaleTimeString('en-US', {
+      timeZone: 'Asia/Dhaka',
+      hourCycle: 'h24',
+    });
+  }
+
+  const startTime = getCurrentTime();
   timers.forEach((el) => {
     el.textContent = startTime;
   });
 
   setInterval(() => {
-    const currentTime = new Date().toLocaleTimeString('en-US', {
-      timeZone: 'Asia/Dhaka',
-      hourCycle: 'h24',
-    });
+    const currentTime = getCurrentTime();
 
     if (startTime !== currentTime) {
       timers.forEach((el) => {
