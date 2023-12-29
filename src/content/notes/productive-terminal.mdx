@@ -22,7 +22,7 @@ ogImage:
   alt: 'Productive Terminal'
 ---
 
-I've been using [Z-shell](https://opensource.com/article/19/9/getting-started-zsh) (Zsh) with [Oh My Zsh](https://ohmyz.sh/) for a while now. It's a great combination and I love it. I've been using it for a while now and I've customized it to my liking with a few plugins and themes.
+I've been using [Z-shell](https://opensource.com/article/19/9/getting-started-zsh) (Zsh), [Oh My Zsh](https://ohmyz.sh/), and [Iterm2](https://iterm2.com/) for a while now. It's a great combination and I love it. I've been using it for a while now and I've customized it to my liking with a few plugins and themes.
 
 > Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter.
 
@@ -39,3 +39,17 @@ I use the following plugins:
 - [z - jump around](https://github.com/rupa/z) - Tracks your most used directories and allows you to jump to them quickly. I use this all the time to jump to my projects directory. Let's say I wanna jump to one of my projects, I just type `z <project-name>` and it'll jump to that directory.
 
 You can install these plugins by following the instructions on their respective GitHub repositories.
+
+## Shortcuts
+
+Here are some common shortcuts I use:
+
+- `ctrl + r` - Search through your command history.
+- `ctrl + d` - For spiliting the terminal window horizontally _(Iterm2)_.
+- `ctrl + shift + d` - For spiliting the terminal window vertically _(Iterm2)_.
+- `ctrl + a` - Move cursor to the beginning of the line.
+- `ctrl + e` - Move cursor to the end of the line.
+- `ctrl + -` - Switch back and forth between the current and previous directory.
+- `repeat 5 echo "Hello World"` - Repeat a command 5 times. Useful when testing rate limiting on APIs `repeat 10 curl ...`.
+
+For more shortcuts, you can use `aliases` and `functions`. I have a few of them in my `.zshrc` file. You can check them out `cd ~/.zshrc`.
