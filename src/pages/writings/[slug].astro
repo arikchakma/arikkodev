@@ -55,7 +55,7 @@ const toc = getTableOfContents(headings);
           {author?.name}
         </a>
          &middot; {date}
-        <span class='hidden sm:inline'>({timeAgo})</span>
+        <span class='hidden sm:inline' id='writing-time-ago'>({timeAgo})</span>
       </p>
 
       {
@@ -112,3 +112,13 @@ const toc = getTableOfContents(headings);
     </section>
   </article>
 </Layout>
+
+<script type='module'>
+  const timeAgoEl = document.getElementById('writing-time-ago');
+  if (!timeAgoEl) {
+    return;
+  }
+  
+  const timeAgo = getRelativeTime(publishedAt);
+  timeAgoEl.textContent = `(${timeAgo})`;
+</script>
