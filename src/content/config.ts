@@ -30,6 +30,7 @@ const writingCollection = defineCollection({
       twitter: z.string().optional(),
     }),
     publishedAt: z.date().optional(),
+    showTableOfContents: z.boolean().optional().default(false),
   }),
 });
 
