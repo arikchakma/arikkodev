@@ -35,7 +35,7 @@ const currentPageAbsoluteUrl = `https://arikko.dev${permalink}`;
 const canonicalUrl = canonical || currentPageAbsoluteUrl;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -138,7 +138,7 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
       <Navigation activePage={activePage} />
     </slot>
     <slot />
-    
+
     <slot name='footer'>
       <Footer />
     </slot>
