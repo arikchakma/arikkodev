@@ -30,7 +30,7 @@ When you are working with docker, you might need to import data from a backup fi
 docker cp /path/to/your/backup.sql.gz MYSQL_CONTAINER:/tmp/backup.sql.gz && \
 docker exec -it MYSQL_CONTAINER bash -c "\
 zcat /tmp/backup.sql.gz > /tmp/backup.sql && \
-mysql -u root -pPASSWORD < /tmp/backup.sql && \
+mysql -u root -p DATABASE_NAME < /tmp/backup.sql && \
 rm /tmp/backup.sql.gz && \
 rm /tmp/backup.sql"
 ```
