@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import '../../styles/article.css';
 import { formatDate } from '../../lib/time';
+import { getOpenGraphImage } from '../../lib/og';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('notes');
@@ -18,8 +19,10 @@ type Props = {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const { title, publishedAt, description, author, tags, ogImage } = entry.data;
+const { title, publishedAt, description, author, tags, seo } = entry.data;
 const date = formatDate(publishedAt!);
+
+const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('note', entry.slug);
 ---
 
 <Layout
@@ -28,7 +31,7 @@ const date = formatDate(publishedAt!);
   description={description}
   keywords={tags}
   permalink={`/notes/${entry.slug}`}
-  ogImageUrl={ogImage?.src}
+  ogImageUrl={ogImageUrl}
 >
   <article
     class="container prose mt-10 max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm"
@@ -49,7 +52,7 @@ const date = formatDate(publishedAt!);
         >
           {author?.name}
         </a>
-        &middot; {date}
+         &middot; {date}
       </p>
     </header>
 

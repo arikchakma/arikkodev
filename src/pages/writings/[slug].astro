@@ -5,6 +5,7 @@ import '../../styles/article.css';
 import { formatDate } from '../../lib/time';
 import { getTableOfContents } from '../../lib/article';
 import { Image } from 'astro:assets';
+import { getOpenGraphImage } from '../../lib/og';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('writings');
@@ -27,11 +28,12 @@ const {
   author,
   tags,
   image,
-  ogImage,
+  seo,
   showTableOfContents,
 } = entry.data;
 const date = formatDate(publishedAt!);
 const toc = getTableOfContents(headings);
+const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.slug);
 ---
 
 <Layout
@@ -40,7 +42,7 @@ const toc = getTableOfContents(headings);
   description={description}
   keywords={tags}
   permalink={`/writings/${entry.slug}`}
-  ogImageUrl={ogImage?.src}
+  ogImageUrl={ogImageUrl}
 >
   <article
     class="container prose mt-10 max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm"
@@ -61,7 +63,7 @@ const toc = getTableOfContents(headings);
         >
           {author?.name}
         </a>
-        &middot; {date}
+         &middot; {date}
       </p>
 
       {

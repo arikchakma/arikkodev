@@ -5,6 +5,7 @@ const writingCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    publishedAt: z.date().optional(),
     image: z
       .object({
         src: z.string().optional(),
@@ -17,10 +18,12 @@ const writingCollection = defineCollection({
           .optional(),
       })
       .optional(),
-    ogImage: z
+    seo: z
       .object({
-        src: z.string().optional(),
-        alt: z.string().optional(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        keywords: z.array(z.string()).optional(),
+        ogImageUrl: z.string().optional(),
       })
       .optional(),
     status: z.enum(['draft', 'published']).default('draft'),
@@ -29,7 +32,6 @@ const writingCollection = defineCollection({
       name: z.string(),
       twitter: z.string().optional(),
     }),
-    publishedAt: z.date().optional(),
     showTableOfContents: z.boolean().optional().default(false),
   }),
 });
