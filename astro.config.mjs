@@ -3,7 +3,6 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
-import vercel from '@astrojs/vercel/static';
 import rehypeSlug from 'rehype-slug'; // Add id to headings
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax
@@ -78,6 +77,7 @@ export default defineConfig({
       },
     }),
   ],
-  output: 'static',
-  adapter: vercel(),
+  build: {
+    format: 'file',
+  },
 });
