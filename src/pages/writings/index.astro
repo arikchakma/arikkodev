@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { getYear } from '../../lib/time';
+import { getYearFromDate } from '../../lib/time';
 
 const allWritings = (
   await getCollection('writings', ({ data }) => {
@@ -28,10 +28,10 @@ const allWritings = (
     <ul>
       {
         allWritings.map((writing, index) => {
-          const year = getYear(writing.data.publishedAt!);
+          const year = getYearFromDate(writing.data.publishedAt!);
           const isFirstOfTheYear =
             index === 0 ||
-            year !== getYear(allWritings[index - 1].data.publishedAt!);
+            year !== getYearFromDate(allWritings[index - 1].data.publishedAt!);
 
           return (
             <li>
