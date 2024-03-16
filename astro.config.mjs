@@ -9,10 +9,10 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to h
 import rehypePrism from 'rehype-prism-plus'; // Syntax
 import rehypeExternalLinks from 'rehype-external-links'; // External links
 
-import { serializeSitemap, shouldIndexPage } from './sitemap.mjs';
+import { serializeSitemap, shouldIndexPage } from './scripts/sitemap.mjs';
 
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
-import { writingRedirects } from './redirect.mjs';
+import { writingRedirects } from './scripts/redirect.mjs';
 
 // https://astro.build/config
 export default defineConfig({

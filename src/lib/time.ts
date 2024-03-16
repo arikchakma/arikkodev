@@ -1,16 +1,9 @@
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-
-dayjs.extend(relativeTime);
-
-export function getRelativeTime(date: Date) {
-  return dayjs(date).fromNow();
-}
+import { DateTime } from 'luxon';
 
 export function formatDate(date: Date) {
-  return dayjs(date).format('MMMM DD, YYYY');
+  return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
 }
 
-export function getYear(date: Date) {
-  return dayjs(date).year();
+export function getYearFromDate(date: Date) {
+  return DateTime.fromJSDate(date).year;
 }

@@ -10,6 +10,6 @@ export const GET: APIRoute = async function () {
       headers: {
         'Content-Type': 'application/json',
       },
-    }
+    },
   );
 };
