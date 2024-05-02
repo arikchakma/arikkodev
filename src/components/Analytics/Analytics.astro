@@ -3,12 +3,12 @@ const sankhyaAnalyticsUrl = `${import.meta.env.SANKHYA_ANALYTICS_URL}/stats.js`;
 ---
 
 <script src='./analytics.ts'></script>
-<script type='text/partytown' src={sankhyaAnalyticsUrl}></script>
+<script is:inline src={sankhyaAnalyticsUrl}></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src='https://www.googletagmanager.com/gtag/js?id=G-RRZW0B0M77'
 ></script>
-<script type='text/partytown'>
+<script is:inline>
   // @ts-nocheck
   window.dataLayer = window.dataLayer || [];
   function gtag() {

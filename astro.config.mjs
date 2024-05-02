@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import partytown from '@astrojs/partytown';
 import rehypeSlug from 'rehype-slug'; // Add id to headings
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to headings
 import rehypePrism from 'rehype-prism-plus'; // Syntax
@@ -69,12 +68,6 @@ export default defineConfig({
     sitemap({
       serialize: serializeSitemap,
       filter: shouldIndexPage,
-    }),
-    partytown({
-      // Adds dataLayer.push as a forwarding-event.
-      config: {
-        forward: ['dataLayer.push'],
-      },
     }),
   ],
   build: {
