@@ -1,0 +1,64 @@
+---
+title: 'The tiny Vercel'
+publishedAt: 2024-08-31
+status: published
+description: 'How I built a tiny version of Vercel.'
+author:
+  name: '@imarikchakma'
+  twitter: 'imarikchakma'
+seo:
+  keywords:
+    - 'The tiny Vercel'
+    - 'Arik Chakma'
+    - 'AWS'
+    - 'CloudFront functions'
+    - 'CloudFront'
+    - 'S3'
+    - 'Lambda@Edge'
+    - 'Lambda Functions'
+    - 'tiiny host'
+    - 'building your own vercel'
+    - 'building your own tiiny.host'
+showTableOfContents: false
+---
+
+import { Image } from 'astro:assets';
+import architecture from '../../assets/tiny-vercel-architecture.png';
+
+Today I am going to share my experience of building a tiny version of Vercel. I have been using Vercel for a long time and I love the experience they provide.
+
+One day [Kamran](https://x.com/kamrify) told me about [tiiny.host](https://tiiny.host) and I was amazed by the simplicity of it (Definitely give it a try). I decided to reverse engineer it and build my own version of it.
+
+I was also exploring [Rust](https://www.rust-lang.org/) at that time and I thought it would be a great opportunity to build something with Rust. I started to build the backend with Rust using [Actix Web](https://actix.rs/) as the web framework.
+
+> You can try out a hosted site using this architecture [here](https://arikko.chit.fun). Only the `about` and `writings` pages are deployed.
+
+## The Stack
+
+I tried to keep the stack as simple as possible. Here is the stack I used:
+
+- Rust(Actix Web): For building the REST API.
+- S3: For storing the project build files.
+- CloudFront: Used as CDN to serve the files and as a reverse proxy.
+- DynamoDB: For storing the project metadata.
+- Lambda Functions: To handle the request and response for the CloudFront reverse proxy.
+
+## The Architecture
+
+In the beginning, I thought I will use the Rust backend as the reverse proxy. But it would be tough to scale the backend. So I decided to use CloudFront as the reverse proxy. I was using `CloudFront functions` instead of `Lambda` and CloudFront Key Value Store instead of `DynamoDB` to store the site metadata. But I was also facing some delay while serving the sites even after it was stored in `S3`. So I decided to use `Lambda` and `DynamoDB`.
+
+<Image src={architecture} class="rounded-xl" alt="Tiny Vercel Architecture" />
+
+The architecture is simple, we have a REST API built with Actix Web. The API is responsible for handling the project files and metadata. The files are stored in `S3` and the metadata is stored in `DynamoDB`. When a user uploads a project, the API stores the files in `S3` and the metadata in `DynamoDB`. Either the user can choose a subdomain or the API will generate a subdomain for the project.
+
+When a user requests to that subdomain, the CloudFront `viewer request` triggers a Lambda function. The Lambda function checks the subdomain from the `request` `Host` header and fetches the metadata from `DynamoDB`. If the metadata is found, it updates the `request` `URI` to the `S3` file URL and forwards the request to the `S3` bucket.
+
+I used a trick to invalidate the cache for that File. I attach a `Header` called `X-Nano-Cache-Key`(which is just a mix of `site_id=x=updated_timestamp`) in the request. So, I can able to cache the files in CloudFront and invalidate the cache when the file is updated. I use `Cache Policy` for the cache settings.
+
+So I was able to use CloudFront as the CDN and as a reverse proxy.
+
+## Conclusion
+
+I was able to build a tiny version of Vercel with Rust and AWS. I learned a lot while building this. I am planning to _**open-source**_ the project soon. I will share the link once it's open-sourced.
+
+there are a lot of room for improvement in the project. I will keep working on it and make it better. Please [let me know](https://x.com/imarikchakma) if you have any suggestions or feedback.

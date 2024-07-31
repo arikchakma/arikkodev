@@ -29,7 +29,7 @@ const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('note', entry.slug);
   activePage='notes'
   title={`${title} | Arik Chakma`}
   description={description}
-  keywords={tags}
+  keywords={seo?.keywords || tags}
   permalink={`/notes/${entry.slug}`}
   ogImageUrl={ogImageUrl}
 >
@@ -52,7 +52,7 @@ const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('note', entry.slug);
         >
           {author?.name}
         </a>
-         &middot; {date}
+        &middot; {date}
       </p>
     </header>
 
