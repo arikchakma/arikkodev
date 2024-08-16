@@ -1,0 +1,19 @@
+---
+type Props = {
+  href: string;
+  isActive: boolean;
+  name: string;
+};
+
+const { isActive, href, name } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    'whitespace-nowrap text-[#4b5563] decoration-divider/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out hover:opacity-70',
+    isActive ? 'no-underline opacity-90' : 'underline',
+  ]}
+>
+  {name}
+</a>

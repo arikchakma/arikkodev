@@ -1,0 +1,46 @@
+---
+import Link from '../components/Link.astro';
+import { QuickChatButton } from '../components/QuickChatButton';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout activePage='chat'>
+  <main class='container mt-10 text-sm sm:text-base'>
+    <p class='mb-5'>
+      I have been doing a lot of open-source and community work over the past
+      few years. My open-source work has reached millions of developers via <Link
+        href='https://roadmap.sh'>roadmap.sh</Link
+      >, <Link href='https://maily.to'>maily.to</Link>, and other projects.
+    </p>
+
+    <p class='mb-5'>
+      I owe a lot of my success to the amazing people I have met along the way.
+      With the hope of doing the same for others, I am offering 15-minute chats
+      to anyone who wants to talk about their projects, ideas, or anything else.
+      I am happy to help in any way I can.
+    </p>
+
+    <p class='mb-8'>
+      If you would like to chat, please click the button below to schedule a
+      time that works for you. Let me know if none of the times work, and I can
+      move things around.
+    </p>
+
+    <QuickChatButton client:load />
+
+    <p class='mt-8'>
+      Please book a few days in advance, although I check reservations daily.
+      Keep an eye on the confirmation email—if I miss your reservation, just
+      book again.
+    </p>
+
+    <h4 class="mb-5 mt-8 text-lg [font-variation-settings:'wght'_600]">
+      Credit
+    </h4>
+    <p class='mb-5'>
+      <Link href='https://antfu.me/chat'>Anthony Fu</Link>, and <Link
+        href='https://kamranahmed.info/chat'>Kamran Ahmed</Link
+      > who have done similar things.
+    </p>
+  </main>
+</Layout>

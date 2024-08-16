@@ -1,5 +1,8 @@
 ---
-export type AllowedNavLinks = 'about' | 'writings' | 'projects' | 'notes';
+import NavigationLink from './NavigationLink.astro';
+
+// prettier-ignore
+export type AllowedNavLinks = 'about' | 'writings' | 'projects' | 'notes' | 'chat';
 export const navLinks = [
   {
     id: 'about',
@@ -31,27 +34,23 @@ const { activePage } = Astro.props;
 ---
 
 <header class='container mt-5'>
-  <nav>
-    <ul class='flex items-center gap-3 text-sm sm:text-base'>
+  <nav class='flex items-center justify-between gap-2 text-sm sm:text-base'>
+    <ul class='flex items-center gap-3'>
       {
         navLinks.map((link) => {
           return (
             <li>
-              <a
+              <NavigationLink
                 href={link.url}
-                class:list={[
-                  'whitespace-nowrap text-[#4b5563] decoration-divider/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out hover:opacity-70',
-                  activePage === link.id
-                    ? 'no-underline opacity-90'
-                    : 'underline',
-                ]}
-              >
-                {link.name}
-              </a>
+                isActive={activePage === link.id}
+                name={link.name}
+              />
             </li>
           );
         })
       }
     </ul>
+
+    <NavigationLink href='/chat' isActive={activePage === 'chat'} name='Chat' />
   </nav>
 </header>

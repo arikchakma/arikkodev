@@ -8,9 +8,10 @@ import rehypePrism from 'rehype-prism-plus'; // Syntax
 import rehypeExternalLinks from 'rehype-external-links'; // External links
 
 import { serializeSitemap, shouldIndexPage } from './scripts/sitemap.mjs';
-
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
 import { writingRedirects } from './scripts/redirect.mjs';
+
+import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
@@ -69,6 +70,7 @@ export default defineConfig({
       serialize: serializeSitemap,
       filter: shouldIndexPage,
     }),
+    react(),
   ],
   build: {
     format: 'file',
