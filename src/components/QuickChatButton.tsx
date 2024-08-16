@@ -1,6 +1,5 @@
 import { getCalApi } from '@calcom/embed-react';
 import { useEffect } from 'react';
-import { CalendarIcon } from './icons/CalendarIcon';
 
 export function QuickChatButton() {
   useEffect(() => {
@@ -20,6 +19,9 @@ export function QuickChatButton() {
       data-cal-link="arikchakma/chat"
       data-cal-config='{"layout":"month_view"}'
       className="inline-flex items-center gap-2 underline underline-offset-4 transition-colors [font-variation-settings:'wght'_500] hover:text-zinc-600"
+      onClick={() => {
+        window.seline.track('clicked:quick_chat_button');
+      }}
     >
       Book a 15-minute chat →
     </button>

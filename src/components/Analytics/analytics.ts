@@ -7,6 +7,7 @@ declare global {
       label?: string;
       value?: string;
     }) => void;
+    seline: any;
   }
 }
 
