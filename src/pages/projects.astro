@@ -8,11 +8,6 @@ const activeProjects = [
     url: 'https://maily.to',
   },
   {
-    title: 'Sankhya',
-    description: 'A self-hosted, real-time analytics collector and dashboard',
-    url: 'https://stats.arikko.dev',
-  },
-  {
     title: 'Mly.fyi',
     description: 'Monitor your emails, your way',
     url: 'https://mly.fyi',
@@ -29,7 +24,12 @@ const activeProjects = [
   },
 ];
 
-const archievedProjects = [
+const archivedProjects = [
+  {
+    title: 'Sankhya',
+    description: 'A self-hosted, real-time analytics collector and dashboard',
+    url: 'https://stats.arikko.dev',
+  },
   {
     title: 'Chat',
     description: 'Create project specific chat rooms',
@@ -94,7 +94,7 @@ const archievedProjects = [
 
     <ul class='mb-28 mt-5'>
       {
-        archievedProjects.map((project, index) => {
+        archivedProjects.map((project, index) => {
           return (
             <li>
               <a
