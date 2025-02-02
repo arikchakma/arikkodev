@@ -10,6 +10,7 @@ import { serializeSitemap, shouldIndexPage } from './scripts/sitemap';
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
 import { notesRedirects, writingRedirects } from './scripts/redirect';
 import tailwindcss from '@tailwindcss/vite';
+import vercel from '@astrojs/vercel/static';
 
 import react from '@astrojs/react';
 
@@ -66,6 +67,8 @@ export default defineConfig({
       ],
     ],
   },
+  output: 'static',
+  adapter: vercel({}),
   integrations: [
     mdx(),
     sitemap({
@@ -74,9 +77,6 @@ export default defineConfig({
     }),
     react(),
   ],
-  build: {
-    format: 'file',
-  },
   vite: {
     plugins: [tailwindcss()],
   },
