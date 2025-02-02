@@ -9,7 +9,7 @@ import rehypeExternalLinks from 'rehype-external-links'; // External links
 
 import { serializeSitemap, shouldIndexPage } from './scripts/sitemap.mjs';
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
-import { writingRedirects } from './scripts/redirect.mjs';
+import { notesRedirects, writingRedirects } from './scripts/redirect.mjs';
 
 import react from '@astrojs/react';
 
@@ -19,6 +19,7 @@ export default defineConfig({
   trailingSlash: 'never',
   redirects: {
     ...(await writingRedirects()),
+    ...(await notesRedirects()),
   },
   markdown: {
     syntaxHighlight: false,
