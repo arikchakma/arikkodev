@@ -1,6 +1,25 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 @config '../../tailwind.config.cjs';
+
+@theme {
+  --color-primary: #313233;
+  --color-selection: #95a5ac40;
+  --color-background: #fcfcfc;
+  --color-divider: #5d676a;
+  --color-link-hover: rgb(93 103 106 / 0.7);
+
+  --animate-ticker-loop: 20s infinite linear ticker-loop;
+  @keyframes ticker-loop {
+    0% {
+      transform: translatex(0);
+    }
+    100% {
+      transform: translatex(-100%);
+    }
+  }
+}
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -78,7 +97,7 @@
 }
 
 .prose .anchor {
-  @apply cursor-pointer text-[#313233] no-underline after:invisible after:pl-2 after:text-[#5d676a] after:content-['#'] hover:opacity-80 hover:after:visible hover:after:opacity-100;
+  @apply text-primary after:text-divider cursor-pointer no-underline after:invisible after:pl-2 after:content-['#'] hover:opacity-80 hover:after:visible hover:after:opacity-100;
 }
 
 .prose a {
@@ -95,11 +114,11 @@
 }
 
 .prose code {
-  @apply rounded-lg border-0 bg-[#EFEFEF] px-1 py-0.5 font-medium tracking-normal text-[#313233] [font-variation-settings:"wght"_500];
+  @apply text-primary rounded-lg border-0 bg-[#EFEFEF] px-1 py-0.5 font-medium tracking-normal [font-variation-settings:"wght"_500];
 }
 
 .prose pre code {
-  @apply bg-background p-0 tracking-normal text-[#313233];
+  @apply bg-background text-primary p-0 tracking-normal;
 }
 
 .prose img {
@@ -117,11 +136,11 @@
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply text-[#313233]/70;
+  @apply text-primary/70;
 }
 
 .token.punctuation {
-  @apply text-[#313233];
+  @apply text-primary;
 }
 
 .token.property,

@@ -56,11 +56,11 @@ const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.slug);
         class='mt-2 mb-10 flex items-center gap-1.5 font-mono text-sm text-gray-500'
       >
         <a
-          href={`https://twitter.com/${author?.twitter}`}
+          href={`https://x.com/${author?.twitter}`}
           target='_blank'
           class='not-prose text-gray-500 no-underline hover:text-black'
         >
-          {author?.name}
+          @{author?.twitter}
         </a>
         &middot; {date}
       </p>
