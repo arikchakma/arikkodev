@@ -1,8 +1,9 @@
-import { getWritingIds, getNoteIds } from './sitemap.mjs';
+import type { RedirectConfig } from 'astro';
+import { getWritingIds } from './sitemap.js';
 
 export async function writingRedirects() {
   const writingIds = await getWritingIds();
-  const redirect = {};
+  const redirect: Record<string, RedirectConfig> = {};
   for (let id of writingIds) {
     redirect[`/writing/${id}`] = {
       status: 301,
@@ -18,7 +19,7 @@ export async function writingRedirects() {
 
 export async function notesRedirects() {
   const notesIds = ['database-backup-import', 'productive-terminal'];
-  const redirect = {};
+  const redirect: Record<string, RedirectConfig> = {};
   for (let id of notesIds) {
     redirect[`/notes/${id}`] = {
       status: 301,

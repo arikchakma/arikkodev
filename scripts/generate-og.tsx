@@ -40,34 +40,6 @@ async function getAllWritings() {
   return writings;
 }
 
-async function getAllNotes() {
-  const rawNotes = await fs.readdir(
-    path.join(process.cwd(), '/src/content/notes'),
-  );
-
-  const notes: OpenGraphFileData[] = [];
-  for (const note of rawNotes) {
-    const raw = await fs.readFile(
-      path.join(process.cwd(), `/src/content/notes/${note}`),
-    );
-
-    const { data } = matter(raw);
-    if (data?.seo?.ogImageUrl) {
-      continue;
-    }
-
-    notes.push({
-      type: 'note',
-      id: note.replace('.mdx', ''),
-      title: data.title,
-      description: data.description,
-      tags: data?.tags,
-    });
-  }
-
-  return notes;
-}
-
 async function openGraphTemplate({
   type,
   id,
@@ -214,12 +186,7 @@ async function openGraphTemplate({
   console.log('✅ Completed: ', fileName);
 }
 
-(async () => {
-  const writings = await getAllWritings();
-  const notes = await getAllNotes();
-
-  const all = [...writings, ...notes];
-  for (const file of all) {
-    await openGraphTemplate(file);
-  }
-})();
+const writings = await getAllWritings();
+for (const file of writings) {
+  await openGraphTemplate(file);
+}

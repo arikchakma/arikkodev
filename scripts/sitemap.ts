@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import type { SitemapItem } from '@astrojs/sitemap';
 
 export async function getWritingIds() {
   const files = fs.readdirSync(
@@ -14,11 +15,13 @@ export async function getWritingIds() {
   return writingIds;
 }
 
-export function shouldIndexPage(pageUrl) {
+export function shouldIndexPage(pageUrl: string) {
   return !['https://arikko.dev/404'].includes(pageUrl);
 }
 
-export async function serializeSitemap(item) {
+export async function serializeSitemap(
+  item: SitemapItem,
+): Promise<SitemapItem | undefined> {
   const highPriorityPages = [
     'https://arikko.dev',
     'https://arikko.dev/projects',
