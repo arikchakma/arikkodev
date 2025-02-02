@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import type { SitemapItem } from '@astrojs/sitemap';
 
 export async function getWritingIds() {
   const files = fs.readdirSync(
@@ -14,22 +15,13 @@ export async function getWritingIds() {
   return writingIds;
 }
 
-async function getNoteIds() {
-  const files = fs.readdirSync(path.join(process.cwd(), 'src/content/notes'));
-
-  // Only include mdx files
-  const noteIds = files
-    .filter((file) => path.extname(file) === '.mdx')
-    // Remove the .mdx extension to get the id of the note
-    .map((file) => file.replace(/\.mdx$/, ''));
-  return noteIds;
-}
-
-export function shouldIndexPage(pageUrl) {
+export function shouldIndexPage(pageUrl: string) {
   return !['https://arikko.dev/404'].includes(pageUrl);
 }
 
-export async function serializeSitemap(item) {
+export async function serializeSitemap(
+  item: SitemapItem,
+): Promise<SitemapItem | undefined> {
   const highPriorityPages = [
     'https://arikko.dev',
     'https://arikko.dev/projects',
@@ -38,7 +30,6 @@ export async function serializeSitemap(item) {
     ...(await getWritingIds()).flatMap((id) => [
       `https://arikko.dev/writings/${id}`,
     ]),
-    ...(await getNoteIds()).flatMap((id) => [`https://arikko.dev/notes/${id}`]),
   ];
 
   for (let pageUrl of highPriorityPages) {

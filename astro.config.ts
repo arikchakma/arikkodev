@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import rehypeSlug from 'rehype-slug'; // Add id to headings
@@ -7,9 +6,10 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // Add links to h
 import rehypePrism from 'rehype-prism-plus'; // Syntax
 import rehypeExternalLinks from 'rehype-external-links'; // External links
 
-import { serializeSitemap, shouldIndexPage } from './scripts/sitemap.mjs';
+import { serializeSitemap, shouldIndexPage } from './scripts/sitemap';
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
-import { writingRedirects } from './scripts/redirect.mjs';
+import { notesRedirects, writingRedirects } from './scripts/redirect';
+import tailwindcss from '@tailwindcss/vite';
 
 import react from '@astrojs/react';
 
@@ -19,6 +19,7 @@ export default defineConfig({
   trailingSlash: 'never',
   redirects: {
     ...(await writingRedirects()),
+    ...(await notesRedirects()),
   },
   markdown: {
     syntaxHighlight: false,
@@ -39,6 +40,7 @@ export default defineConfig({
         rehypeExternalLinks,
         {
           target: '_blank',
+          // @ts-ignore
           rel: function (element) {
             const href = element.properties.href;
             const whiteListedStarts = [
@@ -54,6 +56,7 @@ export default defineConfig({
           },
         },
       ],
+      // @ts-ignore
       [
         rehypePrism,
         {
@@ -64,7 +67,6 @@ export default defineConfig({
     ],
   },
   integrations: [
-    tailwind(),
     mdx(),
     sitemap({
       serialize: serializeSitemap,
@@ -74,5 +76,8 @@ export default defineConfig({
   ],
   build: {
     format: 'file',
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

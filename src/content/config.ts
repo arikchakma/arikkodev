@@ -38,5 +38,4 @@ const writingCollection = defineCollection({
 
 export const collections = {
   writings: writingCollection,
-  notes: writingCollection,
 };

@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import '../../styles/article.css';
 import { formatDate } from '../../lib/time';
 import { getTableOfContents } from '../../lib/article';
 import { Image } from 'astro:assets';
@@ -45,7 +44,7 @@ const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.slug);
   ogImageUrl={ogImageUrl}
 >
   <article
-    class="container prose mt-10 max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm"
+    class="prose max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm container mt-10"
   >
     <header>
       <h1
@@ -54,7 +53,7 @@ const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.slug);
         {title}
       </h1>
       <p
-        class='mb-10 mt-2 flex items-center gap-1.5 font-mono text-sm text-gray-500'
+        class='mt-2 mb-10 flex items-center gap-1.5 font-mono text-sm text-gray-500'
       >
         <a
           href={`https://twitter.com/${author?.twitter}`}
