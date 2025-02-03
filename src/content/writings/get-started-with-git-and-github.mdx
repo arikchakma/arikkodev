@@ -1,0 +1,159 @@
+---
+title: 'Get Started with Git'
+description: 'Everything you need to know to get started with Git and GitHub.'
+publishedAt: 2025-02-03
+status: published
+tags:
+  - 'git'
+  - 'version-control'
+  - 'github'
+author:
+  name: 'Arik Chakma'
+  twitter: 'imarikchakma'
+seo:
+  keywords:
+    - Git
+    - Git guide
+    - Git commands
+    - Git reference
+    - Version control
+    - GitHub
+    - Install Git
+    - Configure Git
+    - Create GitHub repository
+    - SSH authentication GitHub
+    - Git for beginners
+    - Version control system
+---
+
+In this guide, you'll learn how to get started with Git and GitHub. We'll cover everything from installing Git to creating your first repository on GitHub.
+
+## What is Version Control?
+
+Version Control is a system that records changes to files over time, allowing you to recall specific versions later. It enables tracking changes, collaborating with other developers, and reverting to previous versions when necessary.
+
+## What is Git?
+
+Git is a distributed Version Control System (VCS) that helps you track changes in your codebase. It’s a powerful tool for collaboration and efficient code management.
+
+Git has become the de facto standard for version control in the software development industry. It is widely used by developers to manage their codebase and collaborate with others. Git is open-source and free to use, making it accessible to everyone.
+
+## What is GitHub?
+
+GitHub is a web-based platform that hosts Git repositories. It provides a centralized location for storing, sharing, and collaborating on projects. GitHub offers features like issue tracking, pull requests, and project management tools.
+
+### Install Git
+
+To install Git, follow the instructions for your operating system:
+
+```bash
+# macOS
+brew install git
+
+# Linux
+sudo apt-get install git
+# or
+sudo yum install git
+```
+
+For Windows, download and install from [gitforwindows.org](https://gitforwindows.org/). This will set up Git on your machine for version control.
+
+### Configure Git
+
+Set up your Git identity with the following commands:
+
+```bash
+git config --global user.name "Arik Chakma"
+git config --global user.email "arikchangma@gmail.com"
+```
+
+Using `--global` applies these settings to all repositories. To check your configuration, run:
+
+```bash
+git config --list
+```
+
+### Create a GitHub Account
+
+1. Visit [github.com](https://github.com/signup) and create an account.
+2. Verify your email address to activate your account.
+
+This step is essential for accessing GitHub's features and collaborating on projects.
+
+### Authenticate with GitHub
+
+1. **Generate SSH Key:**
+
+   ```bash
+   ssh-keygen -t ed25519 -C "arikchangma@gmail.com"
+   ```
+
+   This command generates a new SSH key pair. Press `Enter` to save the key in the default location. For macOS users, you will need to add the key to the keychain, follow this [guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=mac) from GitHub.
+
+2. **Copy the Public Key:**
+
+   ```bash
+   pbcopy < ~/.ssh/id_ed25519.pub
+   ```
+
+   If `pbcopy` isn't available, manually copy the key from the `.ssh` folder.
+
+   ```bash
+   cat ~/.ssh/id_ed25519.pub
+   ```
+
+3. **Add the Key to GitHub:**
+   Paste the copied key [here](https://github.com/settings/keys) and save it. This allows GitHub to recognize your machine.
+
+4. **Test Authentication:**
+   ```bash
+   ssh -T git@github.com
+   ```
+   This command checks if your SSH key is set up correctly.
+
+### Create a Repository
+
+1. Go to [github.com/new](https://github.com/new) to create a new repository.
+2. Fill in the repository name and description (e.g., `my-first-repo`).
+3. Choose between public or private visibility.
+4. Click the "Create Repository" button to finalize.
+
+This repository will serve as the central location for your project files.
+
+### Connect Local Repository to GitHub
+
+1. Navigate to your newly created repository on GitHub.
+2. Copy the SSH URL provided for your repository.
+3. Open your terminal and navigate to your project directory.
+
+Run the following commands to connect your local repository to GitHub:
+
+```bash
+# Initialize Git
+git init
+
+# Add the remote repository
+git remote add origin git@github.com:arikchakma/my-first-repo.git
+
+# Create a README file
+echo "# My First Repo" >> README.md
+
+# Add the file to staging
+git add .
+
+# Commit the changes
+git commit -m "Initial commit"
+
+# Push the changes to the remote repository
+git branch -M main
+git push -u origin main
+```
+
+These commands set up your local repository and push your initial changes to GitHub. You can now view your project on GitHub!
+
+## Resources
+
+- [Learn Git and GitHub](https://roadmap.sh/git-github?r=git-github-beginner) - A step by step roadmap to mastering Git and GitHub.
+- [Pro Git Book](https://git-scm.com/book/en/v2) - The official Git documentation for in-depth learning.
+- [Git Cheatsheet](/writings/git-cheatsheet) - A quick reference guide for common Git commands.
+- [Generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=windows) - GitHub's official documentation on SSH key generation.
