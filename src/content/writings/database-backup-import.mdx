@@ -49,3 +49,14 @@ rm /tmp/backup.tar.gz"
 ```
 
 > **Note:** If you want to import to a specific collection, replace `DATABASE_NAME.*` with `DATABASE_NAME.COLLECTION_NAME`.
+
+If you want to import to a remote database, you can use the following command:
+
+```bash
+mongorestore \
+  --uri="mongodb+srv://<username>:<password>@<cluster-url>/" \
+  --gzip --archive=/path/to/your/backup.tar.gz \
+  --nsInclude='DATABASE_NAME.*'
+```
+
+> **Note:** Remember to replace `<username>`, `<password>`, and `<cluster-url>` with your actual username, password, and cluster URL.
