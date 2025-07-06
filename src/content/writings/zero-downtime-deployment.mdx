@@ -33,7 +33,7 @@ Today, I want to share how I tackled a common challenge: deploying updates to th
 + pm2 reload api-maily
 ```
 
-A little bit of background, I was already using `pm2` for the API but in a wrong way. I was using it to start the API as a single process. I was not using it to restart the API when I need to deploy a new version. I was using `pm2 restart` to restart the API but it was not working as expected.
+A little bit of background, I was already using `pm2` for the API but incorrectly. I was using it to start the API as a single process. I was not using it to restart the API when I need to deploy a new version. I was using `pm2 restart` to restart the API but it was not working as expected.
 
 ## The Challenge
 
