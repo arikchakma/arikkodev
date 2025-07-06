@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-@config '../../tailwind.config.cjs';
+@config '../../tailwind.config.mjs';
 
 @theme {
   --color-primary: #313233;
@@ -152,18 +152,24 @@
 .token.boolean,
 .token.number,
 .token.constant,
-.token.symbol,
-.token.deleted {
+.token.symbol {
   @apply text-green-500;
+}
+
+.token.deleted {
+  @apply text-red-400;
 }
 
 .token.selector,
 .token.attr-name,
 .token.string,
 .token.char,
-.token.builtin,
-.token.inserted {
+.token.builtin {
   @apply text-purple-500;
+}
+
+.token.inserted {
+  @apply text-green-800;
 }
 
 .token.operator,

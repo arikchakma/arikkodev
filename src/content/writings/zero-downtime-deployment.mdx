@@ -1,0 +1,169 @@
+---
+title: 'Zero Downtime Deployments'
+publishedAt: 2025-07-06
+status: published
+description: 'How I achieved seamless updates for the Maily API using PM2, ensuring no service interruptions.'
+author:
+  name: 'Arik Chakma'
+  twitter: 'imarikchakma'
+seo:
+  keywords:
+    - 'Zero Downtime Deployment'
+    - 'PM2'
+    - 'Hono'
+    - 'Node.js'
+    - 'Maily'
+    - 'Ansible'
+    - 'DevOps'
+    - 'Continuous Deployment'
+    - 'API deployment'
+showTableOfContents: false
+---
+
+Today, I want to share how I tackled a common challenge: deploying updates to the [Maily](https://maily.to) API without any downtime. Imagine updating your app and users suddenly see errors or a "site under maintenance" page. That's what I wanted to avoid! I aimed for seamless updates, where users wouldn't even notice a new version was being rolled out.
+
+[Maily](https://maily.to) helps you craft stunning, responsive emails effortlessly and now it’s more powerful than ever. Beyond just beautiful templates, Maily is now a complete platform for managing your email design workflow, collaboration, and brand consistency in one seamless experience.
+
+> tl;dr: I switched from `pm2 restart` to `pm2 reload` and implemented graceful shutdown in my API.
+
+```diff
+- pm2 start ./apps/api/dist/server.js --name api-maily
+- pm2 restart api-maily
++ pm2 start ./apps/api/dist/server.js --name api-maily -i 2
++ pm2 reload api-maily
+```
+
+A little bit of background, I was already using `pm2` for the API but in a wrong way. I was using it to start the API as a single process. I was not using it to restart the API when I need to deploy a new version. I was using `pm2 restart` to restart the API but it was not working as expected.
+
+## The Challenge
+
+The API is built with Hono and Node.js and relies on various services. When I push a new feature or fix a bug, I need to deploy the new code to my server. The tricky part is making sure this deployment doesn't interrupt anyone using the API.
+
+My initial deployment process involved stopping the old version, putting the new version in place, and then starting it up again. This brief "stop-start" period, even if just a few seconds, meant downtime for users.
+
+## PM2 Magic
+
+To achieve zero downtime, I made two key changes to how I use PM2:
+
+1. **Multiple Instances (Cluster Mode)** <br />
+   Instead of running a single instance, I configured PM2 to run multiple copies of the API using cluster mode (`-i 2`). This means I have 2 instances of the API running simultaneously.
+
+2. **Graceful Reload** <br />
+   Instead of using `pm2 restart` (which stops all instances at once), I switched to `pm2 reload`. This command performs a "rolling restart" - it starts new instances with the updated code, waits for them to be ready, then gracefully shuts down the old instances.
+
+## The Graceful Reload Process
+
+Here's how `pm2 reload` works its magic:
+
+1. Start New Instances: PM2 starts new instances of the API with the updated code.
+2. Health Check: It waits for these new instances to fully start up and become healthy (ready to handle requests).
+3. Graceful Shutdown: Only once the new instances are ready, PM2 tells the old instances to shut down gracefully. The old instances stop accepting new requests but finish any requests they're currently handling.
+4. Seamless Transition: During this entire process, there are always healthy instances running to serve requests - first the old ones, then both old and new, then only the new ones.
+
+This is like having multiple checkout counters in a supermarket - you open new ones, wait for them to be ready, then close the old ones. Customers keep flowing without interruption!
+
+## Graceful Shutdown
+
+For `pm2 reload` to work perfectly, my Node.js API must know how to shut down "gracefully." This means handling `SIGTERM` and `SIGINT` signals (which PM2 sends when it wants to stop an instance).
+
+I added specific handlers in my API code for these signals to:
+
+- Stop accepting _new_ HTTP requests immediately.
+- Allow _in-progress_ requests to finish.
+- Close connections to external services like my database and Redis cleanly. This prevents database connection leaks or corrupted data.
+
+```ts
+// (omitted imports)
+import type { ServerType } from '@hono/node-server';
+
+export async function shutdown(server: ServerType | null, signal: string) {
+  if (!server) {
+    logError('[server]: Server not initialized');
+    process.exit(1);
+  }
+
+  try {
+    logInfo(`[server]: ${signal} received. Initiating graceful shutdown...`);
+
+    // it will wait for all the requests to be processed
+    // and then close the server
+    await new Promise<void>((resolve) => {
+      server.close((err) => {
+        if (err) {
+          logError(`[server]: Error closing server: ${err.message}`);
+        } else {
+          logInfo('[server]: HTTP server closed.');
+        }
+        resolve();
+      });
+    });
+
+    // clean up resources like database connections, redis connections, etc.
+    // this is important to prevent database connection leaks or corrupted data
+
+    logInfo('[server]: All resources cleaned up. Exiting process.');
+    process.exit(0);
+  } catch (error) {
+    logError('[server]: Error during shutdown', error);
+    process.exit(1);
+  }
+}
+```
+
+Without these handlers, PM2 would "hard kill" the processes, leading to broken requests and potentially messy resource states.
+
+## Ansible Playbook
+
+I automate this whole process using Ansible. Here's a simplified look at the key steps in my Ansible playbook:
+
+```yaml
+- name: clone api-maily
+  # Get the latest code to a temporary directory
+  git: ...
+
+- name: build api-maily
+  # Install dependencies and build the application
+  shell: |
+    cd "/tmp/api-maily"
+    pnpm install --frozen-lockfile
+    pnpm run build --force --no-cache --filter=@maily-to/api
+
+- name: copy api-maily
+  # Copy the freshly built code to the actual deployment directory
+  command: 'cp -r /tmp/api-maily/. {{ api_maily_project_dir }}'
+
+- name: check api-maily running
+  # See if PM2 already has our API running
+  command: 'pm2 list'
+  register: pm2_list
+
+- name: run migrations
+  shell: |
+    cd {{ api_maily_project_dir }}
+    pnpm run db:migrate --filter=@maily-to/db
+
+- name: reload api-maily
+  # If the API is running, gracefully reload it
+  shell: |
+    pm2 reload api-maily
+  when: "'api-maily' in pm2_list.stdout"
+
+- name: start api-maily
+  # If the API is NOT running (first deployment), start it in cluster mode
+  shell: |
+    cd {{ api_maily_project_dir }}/apps/api
+    pm2 start dist/server.js --name api-maily -i 2
+  when: "'api-maily' not in pm2_list.stdout"
+
+- name: save pm2
+  # Make sure PM2 remembers the current state of processes across reboots
+  command: 'pm2 save'
+```
+
+> This is a simplified version of my Ansible playbook. I have more steps and more complex logic in my actual playbook.
+
+## Conclusion
+
+The key to achieving zero downtime for the API was changing how I used PM2. By switching from `pm2 restart` to `pm2 reload` and running multiple instances in cluster mode, combined with implementing graceful shutdown in my API code, I eliminated deployment downtime entirely. Users now experience seamless updates without any service interruptions - a fundamental requirement for robust, production-ready applications.
+
+If you have any questions or feedback, please feel free to reach out to me on [X (formerly Twitter)](https://x.com/imarikchakma).
