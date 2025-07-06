@@ -27,9 +27,9 @@ Today, I want to share how I tackled a common challenge: deploying updates to th
 > tl;dr: I switched from `pm2 restart` to `pm2 reload` and implemented graceful shutdown in my API.
 
 ```diff
-- pm2 start ./apps/api/dist/server.js --name api-maily
+- pm2 start dist/server.js --name api-maily
 - pm2 restart api-maily
-+ pm2 start ./apps/api/dist/server.js --name api-maily -i 2
++ pm2 start dist/server.js --name api-maily -i 2
 + pm2 reload api-maily
 ```
 
