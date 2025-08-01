@@ -20,6 +20,10 @@ const socialLinks = [
     url: 'https://instagram.com/imarikchakma',
   },
   {
+    name: 'Peerlist',
+    url: 'https://peerlist.io/arikchakma',
+  },
+  {
     name: 'hello@arikko.dev',
     url: 'mailto:hello@arikko.dev',
   },
@@ -27,7 +31,7 @@ const socialLinks = [
 ---
 
 <footer class='container pb-20'>
-  <hr class='mt-12 text-divider' />
+  <hr class='text-divider mt-12' />
 
   <ul class='mt-12'>
     {
@@ -36,12 +40,12 @@ const socialLinks = [
           <a
             href={link.url}
             target='_blank'
-            class='text-divider underline decoration-divider/60 decoration-1 underline-offset-2 hover:no-underline hover:opacity-70'
+            class='text-divider decoration-divider/60 underline decoration-1 underline-offset-2 hover:no-underline hover:opacity-70'
           >
             {link.name}
           </a>
           {index !== socialLinks.length - 1 && (
-            <span aria-hidden='true' class='select-none px-1'>
+            <span aria-hidden='true' class='px-1 select-none'>
               &middot;
             </span>
           )}
@@ -50,14 +54,14 @@ const socialLinks = [
     }
   </ul>
 
-  <div class='mt-28 flex items-center justify-between text-xs text-divider'>
+  <div class='text-divider mt-28 flex items-center justify-between text-xs'>
     <MarqueeLocation />
     <span class='hidden md:block'>
       <Location />
     </span>
     <a
       href='/feed.xml'
-      class='hidden uppercase text-divider underline decoration-divider/60 decoration-1 underline-offset-2 hover:no-underline hover:opacity-70 md:block'
+      class='text-divider decoration-divider/60 hidden uppercase underline decoration-1 underline-offset-2 hover:no-underline hover:opacity-70 md:block'
       >RSS</a
     >
   </div>
