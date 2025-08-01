@@ -1,0 +1,159 @@
+---
+title: 'The Better Migration'
+description: 'How we migrated roadmap.sh incrementally'
+publishedAt: 2025-08-01
+status: published
+tags:
+  - 'migration'
+  - 'roadmap.sh'
+  - 'incremental migration'
+author:
+  name: 'Arik Chakma'
+  twitter: 'imarikchakma'
+seo:
+  keywords:
+    - roadmapsh migration
+    - roadmapsh react router migration
+    - Migration
+    - roadmap.sh
+    - incremental migration
+    - react router
+    - tanstack query
+    - astro
+    - nginx
+    - react query
+---
+
+import { Image } from 'astro:assets';
+import roadmapUserGrownStats from '../../assets/roadmap-user-growth-stats.jpeg';
+import astroToReactRouter from '../../assets/astro-to-react-router-migration.jpeg';
+import nginxSingleApp from '../../assets/nginx-single-app-setup.jpeg';
+import nginxDualApps from '../../assets/nginx-dual-app-setup.jpeg';
+
+When I joined roadmap.sh, it was a content-heavy application with little bit of interactivity. We were using Astro for the static content and React for the interactive parts.
+
+Fast forward to today: it’s now a feature-rich application with lots of interactive parts and complex features like [AI Tutor](https://roadmap.sh/ai), [Courses](https://roadmap.sh/courses/sql), [Roadmap Editor](https://draw.roadmap.sh), and more.
+
+> **tl;dr:** We migrated the **account** and **teams** pages to React Router for now — **more to come**.
+
+<Image
+  src={roadmapUserGrownStats}
+  class="rounded-xl"
+  alt="roadmap.sh user growth stats"
+/>
+
+For some context on the size of the application:
+
+- **2.2M+ users**
+- **18k+ teams**
+- **7M visits per month**
+
+Astro was the best choice for the static, content-heavy parts of the application. But for the interactive parts, it started showing limitations. That’s when we began looking for a better alternative — and that’s where **React Router** came into the picture.
+
+<Image
+  src={astroToReactRouter}
+  class="rounded-xl"
+  alt="Astro to React Router migration"
+/>
+
+## Why React Router?
+
+The main issue was full page reloads in Astro as it was a multi-page application. Which is expected as it's a static site generator. We could have used React Router inside the Astro app with wildcard routes, but we wanted to keep the Astro app as simple as possible.
+
+After some research, we found that React Router is the best option for our use case. We were already using it in some of our internal tools and it was a great fit for our use case. We can pre-render some part of the app on the build time and then use React Router to handle the rest of the routing.
+
+If you ask me, I would still use Astro for the static content. But for a feature rich application and complex features, React Router is the best option.
+
+## Why Incremental Migration?
+
+We didn’t want to go for a full-blown migration right away. Instead, we decided on an **incremental migration strategy**:
+
+1. Start with the **account** and **teams** pages.
+2. Gradually move features like **AI Tutor** and others.
+
+This approach allows us to ship improvements without breaking the whole platform.
+
+## Tech Stack Upgrades
+
+We were already using **React Query** for async state management, fetching, and mutations (and I’m a huge fan of it, btw). But we weren’t using it to its full potential.
+
+So, we decided to migrate all async states to TanStack Query. Paired with **React Router**, this combo now gives us:
+
+- Strong **type safety**
+- Smart **caching**
+- Optimistic updates
+- Seamless **data loading with routing**
+
+```tsx
+// (imports omitted for brevity)
+export async function clientLoader(args: Route.ClientLoaderArgs) {
+  redirectIfNotLoggedIn();
+  // async work runs here before rendering
+  // combined with the HydrateFallback component
+}
+
+export default function AccountSettingsPage(props: Route.ComponentProps) {
+  const [currentUser, billingDetails] = useSuspenseQueries({
+    queries: [currentUserOptions(), billingDetailsOptions()],
+  });
+
+  // rest is just UI code
+}
+```
+
+> Keep it simple, stupid.
+
+## Running Two Apps on the Same Domain
+
+The interesting part is how we run two apps on the same domain. The magic happens in our nginx config.
+
+We had a single app running, so the config was simple. Every request is proxied to the upstream server.
+
+```nginx
+upstream roadmapsh_upstream {
+    server 127.0.0.1:3000;
+}
+
+server {
+    listen 80;
+    server_name roadmap.sh;
+
+    location / {
+        proxy_pass http://roadmapsh_upstream;
+    }
+}
+```
+
+Now, we’ve added another upstream for the new React Router app:
+
+```nginx {4-6,9-11}
+upstream roadmapsh_upstream {
+  server 127.0.0.1:3000;
+}
+upstream app_roadmapsh_upstream {
+  server 127.0.0.1:4000;
+}
+
+server {
+    location ~ ^/(account|teams)(/.*)?$ {
+        proxy_pass http://app_roadmapsh_upstream;
+    }
+    location / {
+        proxy_pass http://roadmapsh_upstream;
+    }
+}
+```
+
+<Image src={nginxDualApps} class="rounded-xl" alt="nginx dual app setup" />
+
+Astro app → still runs on port `3000`, the new React Router app → runs on port `4000` and any requests starting with `/account` or `/teams` get routed to the new app.
+
+## Wrapping Up
+
+This was just an overview of the setup. In reality, we’re running a more complex system with multiple domains and subdomains, but the main idea stays the same. These images are drawn by [@kamrify](https://x.com/kamrify).
+
+We are happy with the result and we are looking forward to migrate more features to React Router.
+
+I am also keeping an eye on **[Tanstack Start](https://tanstack.com/start)** though :D
+
+If you have any questions, feel free to reach out to me on [X](https://x.com/imarikchakma).
