@@ -1,0 +1,195 @@
+---
+title: 'Fast & Minimal Inline Style Parser'
+publishedAt: 2025-11-16
+status: published
+description: 'Building StyleCast: A lightweight CSS parser for inline styles that is fast and minimal.'
+author:
+  name: 'Arik Chakma'
+  twitter: 'imarikchakma'
+seo:
+  keywords:
+    - 'StyleCast'
+    - 'CSS Parser'
+    - 'Inline Style Parser'
+    - 'JavaScript'
+    - 'TypeScript'
+    - 'Lexer'
+    - 'Parser'
+    - 'AST'
+    - 'CSS Tokenization'
+showTableOfContents: false
+---
+
+I recently built [StyleCast](https://github.com/arikchakma/stylecast), a fast and lightweight inline CSS style parser for JavaScript and TypeScript. In this post, I'll walk you through why I built it, and how it works.
+
+> **tl;dr:** StyleCast parses inline CSS strings into AST or JavaScript objects with optional React style camelCase conversion. It's designed to be fast, lightweight, and works in both browser and Node.js.
+
+## Why Build Another CSS Parser?
+
+While working on various projects, I found myself needing to parse inline CSS styles for one of my projects. I wanted something that:
+
+- Parses inline CSS styles
+- Outputs AST and JavaScript objects
+- Supports React style camelCase conversion
+- Is fast and lightweight
+- Works in browser and Node.js
+
+So I decided to build StyleCast.
+
+## How It Works
+
+Instead of using Regex to tokenize the CSS string, I chose to use a lexer. A lexer is a state machine that reads the CSS string character by character and produces tokens. Each token has a type, value, and position information. And then a parser builds a minimal with only the declarations and comments AST.
+
+### The Lexer
+
+The lexer reads the CSS string character by character and produces tokens. Each token has a type, value, and position information.
+
+```ts
+import { lex } from 'stylecast';
+
+const tokens = lex('color: red; font-size: 16px;');
+console.log(tokens);
+// [
+//   { kind: 'ident-token', value: 'color', start: {...}, end: {...} },
+//   { kind: 'colon-token', value: ':', start: {...}, end: {...} },
+//   { kind: 'whitespace-token', value: ' ', start: {...}, end: {...} },
+//   { kind: 'ident-token', value: 'red', start: {...}, end: {...} },
+//   { kind: 'semicolon-token', value: ';', start: {...}, end: {...} },
+//   ...
+// ]
+```
+
+The lexer handles:
+
+- **Whitespace**: Spaces, tabs, newlines, etc.
+- **Comments**: `/* ... */`
+- **Strings**: `"Open Sans"`, `'Roboto'`
+- **Identifiers**: Property names and values
+- **Delimiters**: Colon, semicolon, comma, etc.
+
+One interesting optimization I made was merging consecutive whitespace characters into a single token. This reduces the number of tokens and improves performance.
+
+```ts
+// Instead of creating multiple whitespace tokens
+// [space, tab, space] → merged into → [whitespace]
+private whitespace(): Token {
+  const start = this.position;
+  const startLine = this.line;
+  const startColumn = this.column;
+
+  while (true) {
+    const char = this.peek();
+    if (char === null || !this.isWhitespace(char)) {
+      break;
+    }
+    this.consume();
+  }
+
+  return {
+    kind: TOKEN_KINDS.WHITESPACE,
+    value: this.source.slice(start, this.position),
+    start: { line: startLine, column: startColumn },
+    end: { line: this.line, column: this.column },
+  };
+}
+```
+
+### The Parser
+
+The parser takes the tokens from the lexer and builds a minimal AST. The AST is a tree structure that represents the CSS declarations and comments.
+
+I kept it simple and minimal by not including the parent-child relationships between the declarations and comments. This makes the AST smaller and faster to parse.
+
+```ts
+import { parse } from 'stylecast';
+
+const ast = parse('color: red; font-size: 16px;');
+console.log(ast);
+// [
+//   {
+//     type: 'declaration',
+//     property: 'color',
+//     value: 'red',
+//     start: { line: 1, column: 1 },
+//     end: { line: 1, column: 10 }
+//   },
+//   {
+//     type: 'declaration',
+//     property: 'font-size',
+//     value: '16px',
+//     start: { line: 1, column: 13 },
+//     end: { line: 1, column: 28 }
+//   }
+// ]
+```
+
+### Converting to JavaScript Objects
+
+StyleCast provides a helper function to convert the AST into a JavaScript object. This is useful when you want to use the styles in your application.
+
+```ts
+import { objectify } from 'stylecast';
+
+const styles = objectify('color: red; font-size: 16px;');
+console.log(styles);
+// { color: 'red', fontSize: '16px' }
+```
+
+By default, `objectify` doesn't convert property names to camelCase. But you can enable it with the `camelCase` option:
+
+```ts
+const styles = objectify('color: red; font-size: 16px;', { camelCase: true });
+console.log(styles);
+// { color: 'red', fontSize: '16px' }
+```
+
+For React applications, you can use the `reactify` option to handle vendor prefixes correctly:
+
+```ts
+const styles = objectify(
+  '-webkit-transform: scale(1); -ms-transform: scale(1);',
+  {
+    reactify: true,
+  },
+);
+console.log(styles);
+// { WebkitTransform: 'scale(1)', msTransform: 'scale(1)' }
+```
+
+Notice how `-webkit-` becomes `Webkit` but `-ms-` becomes `ms` (lowercase). This matches React's style object conventions.
+
+## Error Handling
+
+StyleCast provides helpful error messages when parsing invalid CSS. For example:
+
+```ts
+try {
+  parse('color red;');
+} catch (error) {
+  console.error(error.message);
+  // SyntaxError: Invalid CSS declaration. Expected a colon (':') after the property name 'color'.
+  // Instead, found '' (EOF-token) at line 1, column 11.
+}
+```
+
+The error messages include the position information (line and column) to help you locate the issue quickly.
+
+## What's Next?
+
+StyleCast is already published on npm and ready to use. But there's always room for improvement:
+
+- **Better error recovery**: Currently, StyleCast throws an error when it encounters invalid CSS. I want to add support for error recovery so it can continue parsing.
+- **silent mode**: Currently, StyleCast throws an error when it encounters invalid CSS. I want to add a silent mode so it can continue parsing silently.
+- **More optimizations**: There are always more optimizations to explore.
+
+## Wrapping Up
+
+Building StyleCast was a fun project that taught me a lot about lexers, parsers, and performance optimization. If you're working with inline CSS styles, give it a try!
+
+You can check out the source code on [GitHub](https://github.com/arikchakma/stylecast) or install it from [npm](https://npmjs.com/package/stylecast):
+
+```bash
+npm install stylecast
+```
+
+If you have any questions or feedback, feel free to reach out to me on [X](https://x.com/imarikchakma).
