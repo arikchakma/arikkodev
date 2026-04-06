@@ -17,6 +17,8 @@ interface Props {
   permalink?: string;
   activePage?: AllowedNavLinks;
   ogImageUrl?: string;
+  isHomePage?: boolean;
+  articleData?: { publishedAt: Date; title: string };
 }
 
 const {
@@ -28,6 +30,8 @@ const {
   permalink = '',
   activePage = 'about',
   ogImageUrl = '',
+  isHomePage = false,
+  articleData,
 } = Astro.props;
 
 // Remove trailing slash from canonical URL
@@ -126,6 +130,60 @@ const canonicalUrl = canonical || currentPageAbsoluteUrl;
     />
 
     <link rel='icon' href='/manifest/favicon.ico' type='image/x-icon' />
+
+    <script
+      type='application/ld+json'
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Arik Chakma',
+        url: 'https://arikko.dev',
+        author: {
+          '@type': 'Person',
+          name: 'Arik Chakma',
+          url: 'https://arikko.dev',
+        },
+      })}
+    />
+
+    {
+      isHomePage && (
+        <script
+          type='application/ld+json'
+          set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Arik Chakma',
+            url: 'https://arikko.dev',
+            sameAs: [
+              'https://x.com/imarikchakma',
+              'https://github.com/arikchakma',
+              'https://instagram.com/imarikchakma/',
+            ],
+          })}
+        />
+      )
+    }
+
+    {
+      articleData && (
+        <script
+          type='application/ld+json'
+          set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: articleData.title,
+            datePublished: articleData.publishedAt.toISOString(),
+            author: {
+              '@type': 'Person',
+              name: 'Arik Chakma',
+              url: 'https://arikko.dev',
+            },
+            url: canonicalUrl,
+          })}
+        />
+      )
+    }
   </head>
   <body
     class='bg-background px-5 font-sans text-primary selection:bg-selection'
