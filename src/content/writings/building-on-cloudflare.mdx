@@ -1,0 +1,81 @@
+---
+title: 'Building on Cloudflare'
+publishedAt: 2026-04-06
+status: draft
+description: 'How a Cloudflare email beta turned into building a framework I still cannot fully explain.'
+author:
+  name: 'Arik Chakma'
+  twitter: 'imarikchakma'
+seo:
+  keywords:
+    - 'Cloudflare Workers'
+    - 'Durable Objects'
+    - 'Vite virtual modules'
+    - 'TypeScript configDir'
+    - 'kumoh'
+showTableOfContents: false
+---
+
+I've been using Cloudflare for years. DNS, domains, reverse proxies. That's it. I knew Workers existed. I knew they had a whole platform: D1, KV, R2, Durable Objects. I just never touched any of it. It felt like someone else's thing.
+
+Then I got beta access to [Workers Send Email](https://developers.cloudflare.com/email-routing/email-workers/send-email-workers/) and I thought, okay, let me just write a quick Worker to send some emails.
+
+That was a mistake. A good one.
+
+## The Rabbit Hole
+
+Once you write one Worker, you start looking around. And Cloudflare's platform is massive. There's a SQLite database at the edge (D1), key-value storage (KV), object storage (R2), queues, AI bindings, rate limiting. Each one is its own thing. You configure it in `wrangler.toml`, bind it in your Worker, import it in your code.
+
+It gets repetitive fast.
+
+So I started building [kumoh](https://github.com/arikchakma/kumoh), a framework on top of Cloudflare Workers. Heavily inspired by [void.cloud](https://void.cloud). The idea is simple: you create files in the right folders and everything just works. Routes, cron jobs, queues, email handlers, Durable Objects. The framework discovers them, wires them up, generates the types, and spits out a `wrangler.json`. You just write code.
+
+## Virtual Modules
+
+The first problem I ran into: Cloudflare bindings only exist at runtime, on the `env` object passed to your Worker. But I wanted users to just write `import { db } from 'kumoh/db'` and have it work, with full types, no setup.
+
+Vite's virtual module system turned out to be the right fit. Virtual modules don't exist on disk — a plugin intercepts the import and returns generated code on the fly. So `kumoh/db` resolves to code that wraps `env.DB` in Drizzle and re-exports all the query helpers. `kumoh/kv`, `kumoh/objects`, `kumoh/email` — none of these files exist anywhere. They're generated at build time.
+
+What I didn't expect was how well this extended to types. The plugin also generates a `.kumoh/kumoh.d.ts` that augments the virtual modules with your actual schema, your queue types, your Durable Object bindings. Full autocomplete, no extra step. That part felt like it just fell into place.
+
+## Durable Objects
+
+I had read the Durable Objects docs before starting this and thought I understood them. Building the integration is what actually made them click.
+
+What surprised me was how naturally they fit into the file-based model. You drop a class in `app/objects/`, the framework scans the filename, registers the binding, exports the class from the worker entry. Done. The boilerplate that normally comes with Durable Objects just disappears.
+
+```ts
+// app/objects/chat-room.ts
+export class ChatRoom extends DurableObject<KumohBindings> {
+  async webSocketMessage(ws: WebSocket, message: string | ArrayBuffer) {
+    for (const conn of this.ctx.getWebSockets()) {
+      conn.send(message);
+    }
+  }
+}
+```
+
+The alarm API also caught me off guard. A Durable Object can schedule itself to wake up at a specific time and run logic. No cron job, no external scheduler. I hadn't thought about that use case until I was elbow-deep in the implementation and realized it was just there.
+
+## TypeScript's `configDir`
+
+kumoh ships a base `tsconfig.json` meant to be extended by any project using the framework. The problem: `include` paths in a shared config are relative to the package, not the consuming project.
+
+TypeScript 5.5 added `${configDir}`, a variable that resolves to the directory of the tsconfig where it's written. So in the base config:
+
+```json
+"include": [
+  "${configDir}/app",
+  "${configDir}/.kumoh/kumoh.d.ts"
+]
+```
+
+When a project extends `kumoh/tsconfig`, `${configDir}` becomes that project's root. The generated types get picked up automatically. Before this the only real option was skipping `include` entirely and making each project manage their own paths. Small addition, but it made the shared config actually work.
+
+## Still Figuring It Out
+
+I went from "let me just send some emails" to building a framework with a CLI, a Vite plugin, file-based routing, type generation, and a client library. I am not sure how that happened.
+
+Cloudflare's platform is a lot. But Durable Objects specifically. I keep showing people and they have the same reaction I did. You read the docs, you kind of get it, you build something with it, and then you really get it. And then someone asks you to explain it and you open your mouth and nothing comes out.
+
+If you want to take a look, the source is at [github.com/arikchakma/kumoh](https://github.com/arikchakma/kumoh). And if you can explain Durable Objects in one sentence, please [let me know](https://x.com/imarikchakma).
