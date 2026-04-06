@@ -1,8 +1,10 @@
 import type { RedirectConfig } from 'astro';
-import { getWritingIds } from './sitemap.js';
+import { getPublishedWritings } from './sitemap.js';
 
 export async function writingRedirects() {
-  const writingIds = await getWritingIds();
+  const writings = await getPublishedWritings();
+  const writingIds = writings.map((w) => w.id);
+
   const redirect: Record<string, RedirectConfig> = {};
   for (let id of writingIds) {
     redirect[`/writing/${id}`] = {

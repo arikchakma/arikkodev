@@ -10,7 +10,7 @@ import { serializeSitemap, shouldIndexPage } from './scripts/sitemap';
 import { remarkCodeTitles } from './src/lib/remark-code-titles';
 import { notesRedirects, writingRedirects } from './scripts/redirect';
 import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel';
 
 import react from '@astrojs/react';
 
