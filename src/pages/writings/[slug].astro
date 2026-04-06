@@ -42,7 +42,7 @@ const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.slug);
   keywords={seo?.keywords || tags}
   permalink={`/writings/${entry.slug}`}
   ogImageUrl={ogImageUrl}
-  articleData={{ publishedAt: publishedAt!, title }}
+  articleData={{ publishedAt: publishedAt!, title, image: ogImageUrl }}
 >
   <article
     class="prose max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm container mt-10"
