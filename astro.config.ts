@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import rehypeSlug from 'rehype-slug'; // Add id to headings
@@ -24,48 +25,50 @@ export default defineConfig({
   },
   markdown: {
     syntaxHighlight: false,
-    gfm: true,
-    remarkPlugins: [remarkCodeTitles],
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'wrap',
-          properties: {
-            className: ['anchor'],
+    processor: unified({
+      gfm: true,
+      remarkPlugins: [remarkCodeTitles],
+      rehypePlugins: [
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: 'wrap',
+            properties: {
+              className: ['anchor'],
+            },
           },
-        },
-      ],
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          // @ts-ignore
-          rel: function (element) {
-            const href = element.properties.href;
-            const whiteListedStarts = [
-              '/',
-              '#',
-              'mailto:',
-              'https://arikko.dev',
-            ];
-            if (whiteListedStarts.some((start) => href.startsWith(start))) {
-              return [];
-            }
-            return 'noopener noreferrer nofollow';
+        ],
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            // @ts-ignore
+            rel: function (element) {
+              const href = element.properties.href;
+              const whiteListedStarts = [
+                '/',
+                '#',
+                'mailto:',
+                'https://arikko.dev',
+              ];
+              if (whiteListedStarts.some((start) => href.startsWith(start))) {
+                return [];
+              }
+              return 'noopener noreferrer nofollow';
+            },
           },
-        },
+        ],
+        // @ts-ignore
+        [
+          rehypePrism,
+          {
+            ignoreMissing: true,
+            showLineNumbers: true,
+          },
+        ],
       ],
-      // @ts-ignore
-      [
-        rehypePrism,
-        {
-          ignoreMissing: true,
-          showLineNumbers: true,
-        },
-      ],
-    ],
+    }),
   },
   output: 'static',
   adapter: vercel({}),

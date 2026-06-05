@@ -26,7 +26,7 @@ export async function GET(context: APIContext) {
         .map((writing) => ({
           title: writing.data.title,
           description: writing.data.description,
-          link: `/writings/${writing.slug}`,
+          link: `/writings/${writing.id}`,
           pubDate: writing.data.publishedAt!,
           author: 'hello@arikko.dev (Arik Chakma)',
         })),

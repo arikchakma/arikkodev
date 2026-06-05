@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { formatDate } from '../../lib/time';
 import { getTableOfContents } from '../../lib/article';
 import { Image } from 'astro:assets';
@@ -9,7 +9,7 @@ import { getOpenGraphImage } from '../../lib/og';
 export async function getStaticPaths() {
   const blogEntries = await getCollection('writings');
   return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
@@ -19,7 +19,7 @@ type Props = {
 };
 
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
+const { Content, headings } = await render(entry);
 const {
   title,
   publishedAt,
@@ -32,7 +32,7 @@ const {
 } = entry.data;
 const date = formatDate(publishedAt!);
 const toc = getTableOfContents(headings);
-const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.slug);
+const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.id);
 ---
 
 <Layout
@@ -40,7 +40,7 @@ const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.slug);
   title={`${title} | Arik Chakma`}
   description={description}
   keywords={seo?.keywords || tags}
-  permalink={`/writings/${entry.slug}`}
+  permalink={`/writings/${entry.id}`}
   ogImageUrl={ogImageUrl}
   articleData={{ publishedAt: publishedAt!, title, image: ogImageUrl }}
 >
