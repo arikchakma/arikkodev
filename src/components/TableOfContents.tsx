@@ -65,7 +65,7 @@ export function TableOfContents(props: TableOfContentsProps) {
                     aria-current={isActive ? "true" : undefined}
                     className={cn(
                       "block leading-snug transition-colors hover:text-black",
-                      isActive ? "text-black" : "text-zinc-400",
+                      isActive ? "text-black" : "text-zinc-500",
                     )}
                   >
                     {heading.text}

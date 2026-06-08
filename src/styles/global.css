@@ -81,6 +81,13 @@
     font-weight: 430;
   }
 
+  a,
+  button,
+  [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   em,
   i,
   cite {

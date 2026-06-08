@@ -48,12 +48,12 @@ export function CompanyRow(props: CompanyRowProps) {
           <span className="font-medium transition-colors">
             {company.company}
           </span>
-          <span className="text-sm text-zinc-400 tabular-nums">
+          <span className="text-sm text-zinc-500 tabular-nums">
             {company.startDate} – {company.endDate ?? "Present"}
           </span>
         </span>
 
-        <span className="flex shrink-0 items-center gap-1.5 text-sm text-zinc-400">
+        <span className="flex shrink-0 items-center gap-1.5 text-sm text-zinc-500">
           <span className="hidden opacity-0 transition-opacity group-hover:opacity-100 md:inline">
             Expand to see more
           </span>

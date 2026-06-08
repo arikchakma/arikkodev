@@ -39,10 +39,7 @@ const ogImage = ogImageUrl || `${siteConfig.url}/images/og-image.png`;
   <head>
     <meta charset="utf-8" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Language" content="en" />
 
     <title>{title}</title>
@@ -120,16 +117,7 @@ const ogImage = ogImageUrl || `${siteConfig.url}/images/og-image.png`;
       href="/manifest/apple-touch-icon.png"
     />
     <link rel="manifest" href="/manifest/manifest.json" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#fcfcfc"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#313233"
-    />
+    <meta name="theme-color" content="#fcfcfc" />
 
     <script
       type="application/ld+json"
@@ -185,9 +173,16 @@ const ogImage = ogImageUrl || `${siteConfig.url}/images/og-image.png`;
     <Analytics />
   </head>
   <body class="font-sans antialiased">
+    <a
+      href="#main"
+      class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-3 focus-visible:left-3 focus-visible:z-50 focus-visible:rounded-md focus-visible:bg-white focus-visible:px-3 focus-visible:py-1.5 focus-visible:text-sm focus-visible:text-black focus-visible:ring focus-visible:ring-zinc-300"
+    >
+      Skip to content
+    </a>
+
     <TopBlur />
 
-    <main class="mx-auto mb-10 max-w-xl px-4">
+    <main id="main" class="mx-auto mb-10 max-w-xl px-4">
       <slot />
     </main>
 

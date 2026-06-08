@@ -26,7 +26,7 @@ export function WorkLabel(props: WorkLabelProps) {
       />
 
       {/* Mobile: wraps in full under the name. sm+: truncates as a teaser. */}
-      <span className="ml-[30px] text-zinc-400 sm:ml-0 sm:min-w-0 sm:shrink sm:truncate sm:text-right">
+      <span className="ml-[30px] text-zinc-500 sm:ml-0 sm:min-w-0 sm:shrink sm:truncate sm:text-right">
         {work.tagline}
       </span>
     </>
