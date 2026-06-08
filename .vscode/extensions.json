@@ -1,7 +1,4 @@
 {
   "recommendations": ["astro-build.astro-vscode"],
-  "unwantedRecommendations": [],
-  "files.associations": {
-    "*.mdx": "markdown"
-  }
+  "unwantedRecommendations": []
 }

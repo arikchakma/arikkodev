@@ -44,8 +44,7 @@ I had read the Durable Objects docs before starting this and thought I understoo
 
 What surprised me was how naturally they fit into the file-based model. You drop a class in `app/objects/`, the framework scans the filename, registers the binding, exports the class from the worker entry. Done. The boilerplate that normally comes with Durable Objects just disappears.
 
-```ts
-// app/objects/chat-room.ts
+```ts title="app/objects/chat-room.ts"
 export class ChatRoom extends DurableObject<KumohBindings> {
   async webSocketMessage(ws: WebSocket, message: string | ArrayBuffer) {
     for (const conn of this.ctx.getWebSockets()) {

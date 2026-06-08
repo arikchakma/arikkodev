@@ -1,0 +1,129 @@
+---
+title: 'Precise CloudFront Invalidation'
+shortTitle: 'CloudFront Invalidation'
+publishedAt: 2026-06-07
+status: draft
+description: "CloudFront can finally clear cached content by what it belongs to, not where it lives."
+author:
+  name: 'Arik Chakma'
+  twitter: 'imarikchakma'
+seo:
+  keywords:
+    - 'CloudFront'
+    - 'CloudFront cache tags'
+    - 'invalidation by cache tag'
+    - 'CacheTagConfig'
+    - 'multi-tenant cache invalidation'
+    - 'CDN cache invalidation'
+    - 'Arik Chakma'
+showTableOfContents: false
+---
+
+import { WildcardVsTag } from "../../components/cloudfront/WildcardVsTag.tsx";
+import { EdgeInvalidation } from "../../components/cloudfront/EdgeInvalidation.tsx";
+
+We're building a platform internally (shipping soon). It's a multi-tenant app, and every tenant's site is served from the edge and cached hard so it loads fast anywhere in the world.
+
+The caching is the easy part. Clearing it is where I got stuck. When a tenant ships a new version, I want to invalidate their pages and nothing else. But CloudFront only invalidates by path, and a single tenant's content is spread across many paths and several versions during a rollout.
+
+The workaround was to serve each tenant under its own slug, like `/sites/arikko/...`. Grouping everything under one prefix at least gave me a handle to target. But because path is the only thing you can invalidate on, the URL structure had to carry all the grouping, and clearing one sub-part of a tenant meant rewriting things in place just to get a path I could actually invalidate.
+
+> tl;dr: Tag each tenant's objects at the origin, then clear everything that tenant owns with a single `#tenant:arikko` request. No URL tracking, no wildcards hitting other tenants.
+
+Then I came across a [blog post from CloudFront](https://aws.amazon.com/blogs/networking-and-content-delivery/manage-caches-with-precision-using-amazon-cloudfront-invalidation-by-cache-tag/). They just announced a new feature: you can invalidate by a tag instead of by path. You tag each response, then clear everything carrying that tag in one request. That was exactly the handle I'd been missing.
+
+## The Old Way
+
+The usual way to invalidate is by matching the path. You name a URL and CloudFront clears it, either an exact match or a wildcard (`*`).
+
+```bash
+aws cloudfront create-invalidation \
+  --distribution-id YOUR_DISTRIBUTION_ID \
+  --paths "/index.html"
+```
+
+This is fine when a tenant's content is served from a clean shared prefix like `/sites/arikko/*`. Obviously you can make that work with rewrites and a few other tricks. But it gets messy fast, and you're left with two bad choices: track every one of that tenant's URLs by hand, or reach for a wildcard broad enough to catch them all and risk clearing other tenants too. Versioned filenames and `Cache-Control` TTLs help for static assets, but neither lets you say "clear everything for this one tenant."
+
+<WildcardVsTag client:visible />
+
+## The Workaround
+
+Before the tag feature, I leaned on the prefix trick. Each tenant was served under `/sites/<slug>`, so all of one tenant's objects sat under a single prefix I could wildcard-invalidate. The catch: I still wanted clean URLs and fast client-side navigation, so that prefix couldn't show up in the address bar.
+
+So I rewrote the path at the edge. A CloudFront Function on the viewer request reads the subdomain, turns it into the slug, and prepends `/sites/<slug>` before the request reaches the origin:
+
+```js
+function handler(event) {
+  var request = event.request;
+  var slug = request.headers.host.value.split(".")[0];
+  request.uri = "/sites/" + slug + request.uri;
+  return request;
+}
+```
+
+A visitor landing on `/hello` actually fetches `/sites/arikko/hello`. Then NGINX strips the prefix back off, so the app only ever sees the clean path:
+
+```nginx
+location ~ ^/sites/[^/]+/(?<path>.*)$ {
+  rewrite ^ /$path break;
+  proxy_pass http://app;
+}
+```
+
+It worked, but the whole URL structure had to be built around invalidation, and a wildcard still cleared the entire tenant even when one page changed. This is where cache tags help a lot. They get rid of all this boilerplate, the rewrites and the CloudFront functions.
+
+## Cache Tags
+
+The idea is simple: tag your objects at the origin, then invalidate by tag instead of by URL. CloudFront clears every object carrying that tag, wherever it lives.
+
+First, opt in per distribution with a `CacheTagConfig` and name the response header that holds your tags. The default is `x-amz-meta-cache-tag`. Add this to your distribution config:
+
+```json
+{
+  "CacheTagConfig": {
+    "HeaderName": "x-amz-meta-cache-tag"
+  }
+}
+```
+
+Then tag your objects. With an S3 origin, add a `cache-tag` metadata key and S3 surfaces it as the `x-amz-meta-cache-tag` response header automatically. Tag every object a tenant owns with its subdomain slug:
+
+```
+x-amz-meta-cache-tag: tenant:arikko, type:html
+```
+
+With another origin, return the configured header directly, or set it from an origin-response Lambda@Edge function. CloudFront forwards the tag header to viewers by default, so if your tags expose internal details, strip them with a response headers policy.
+
+Now the part I wanted. When a tenant redeploys, I clear just them:
+
+```bash
+aws cloudfront create-invalidation \
+  --distribution-id YOUR_DISTRIBUTION_ID \
+  --paths "#tenant:arikko"
+```
+
+That one request clears every object tagged `tenant:arikko`, across every edge, no matter what URL it sits at. As long as the tags are assigned right, no other tenant is touched.
+
+<EdgeInvalidation client:visible />
+
+The `#` prefix tells CloudFront to treat the value as a tag, not a path. You can pass several tags to clear anything matching any of them, and mix tags and paths in the same request:
+
+```bash
+aws cloudfront create-invalidation \
+  --distribution-id YOUR_DISTRIBUTION_ID \
+  --paths "/index.html" "#tenant:arikko" "/assets/*"
+```
+
+A few things worth knowing before you rely on it:
+
+- Each tag counts as 1 invalidation path, and the first 1,000&nbsp;paths each month are free.
+- Tags are case-insensitive exact matches. Wildcards don't work.
+- CloudFront stores the first 50&nbsp;tags on each object.
+- Objects already in cache only pick up tags after CloudFront fetches them again.
+- Invalidations take effect in under 5&nbsp;seconds at P95.
+
+## Wrapping Up
+
+For us it's a small change that took away a real headache. No more prefix, no more edge rewrites just to make invalidation work. Each tenant's objects carry a tag, and when a tenant ships we clear that tag. That's the whole thing now.
+
+Questions or feedback? [Let me know](https://x.com/imarikchakma).

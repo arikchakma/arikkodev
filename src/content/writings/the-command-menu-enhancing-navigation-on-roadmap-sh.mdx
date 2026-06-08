@@ -1,5 +1,5 @@
 ---
-title: 'The Command Menu: Enhancing Navigation on roadmap.sh'
+title: 'The Command Menu on roadmap.sh'
 publishedAt: 2023-05-25
 status: published
 description: Learn about the Command Menu in roadmap.sh, a powerful and user-friendly navigation tool that enhances browsing experience and provides quick access to roadmaps, guides, and other resources.
@@ -27,8 +27,6 @@ image:
     height: 630
 showTableOfContents: true
 ---
-
-## Introducing the Command Menu in roadmap.sh: A Comprehensive Guide
 
 In our ongoing efforts to enhance user experience and provide seamless navigation, we are excited to introduce the Command Menu feature in roadmap.sh. This tool, built with preact and astro, offers a convenient way for users to access various pages, search for specific content, and explore different sections of the website. In this blog post, we will dive into the Command Menu's functionalities and discuss how it improves user interaction. Whether you are a beginner or an experienced user, this guide will help you understand and make the most of the Command Menu in roadmap.sh.
 
@@ -66,7 +64,7 @@ All of our roadmap details are stored in `/src/data/roadmaps/roadmap-name/roadma
 
 We're using [Astro glob](https://docs.astro.build/en/guides/imports/#astroglob) to import all of the roadmaps using their `tags` metadata. This allows us to easily retrieve the roadmaps and their details.
 
-```ts:roadmap.ts
+```ts title="roadmap.ts"
 export async function getRoadmapsByTag(
   tag: string
 ): Promise<RoadmapFileType[]> {
@@ -96,7 +94,7 @@ export async function getRoadmapsByTag(
 
 We decided to use a [Astro static file endpoints](https://docs.astro.build/en/core-concepts/endpoints/#static-file-endpoints) for storing the page date in `/pages.json.ts/`, then in the build it will be converted to `/pages.json` and served as a static json file.
 
-```ts:pages.json.ts
+```ts title="pages.json.ts"
 import { getRoadmapsByTag } from '../lib/roadmap';
 
 export async function get() {
@@ -124,7 +122,7 @@ To understand how the Command Menu is implemented, let's explore some of the key
 
 The Command Menu leverages the preact/hooks library, which provides essential hooks for managing component state and lifecycle events. The `useState`, `useEffect`, `useRef`, and `useOutsideClick` hooks are utilized to handle various functionalities, such as menu activation, search input handling, and click events outside the menu. Also focus the search input when the menu is activated.
 
-```tsx:CommandMenu.tsx
+```tsx title="CommandMenu.tsx"
 import { useEffect, useRef, useState } from 'preact/hooks';
 
 export function CommandMenu() {
@@ -152,7 +150,7 @@ export function CommandMenu() {
 
 The `useOutsideClick` hook is used to detect clicks outside the menu and close it.
 
-```tsx:use-outside-click.ts
+```tsx title="use-outside-click.ts"
 import { useEffect } from 'preact/hooks';
 
 export function useOutsideClick(ref: any, callback: any) {
@@ -181,7 +179,7 @@ The Command Menu is activated when the user presses the `mod_k(⌘+k)` key combi
 
 _Keep the highlighted code in mind as we will revisit it later in this guide._
 
-```tsx:CommandMenu.tsx {12}
+```tsx title="CommandMenu.tsx" {12}
 // Keydown event handler for activating the Command Menu
 useKeydown('mod_k', () => {
   setIsActive(true);
@@ -218,7 +216,7 @@ type PageType = {
 
 The `getAllPages` function retrieves the necessary page data asynchronously. It fetches the page data from the server using the `httpGet` function from the provided `lib/http` module. If the response is successful, the retrieved pages are filtered based on their protection status and merged with the default pages.
 
-```tsx:CommandMenu.tsx
+```tsx title="CommandMenu.tsx"
 function shouldShowPage(page: PageType) {
   // If the page is protected, only show it if the user is logged in
   const isUser = isLoggedIn();
