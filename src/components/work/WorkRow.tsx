@@ -83,7 +83,7 @@ export function WorkRow(props: WorkRowProps) {
                       target={
                         work.href.startsWith("http") ? "_blank" : undefined
                       }
-                      className="rounded-md bg-zinc-100 px-1.5 py-0.5 text-sm text-zinc-500 transition-colors hover:bg-zinc-200 hover:text-black"
+                      className="rounded-md bg-zinc-100 px-1.5 py-0.5 text-sm text-zinc-500 transition-colors outline-none hover:bg-zinc-200 hover:text-black focus:ring focus:ring-zinc-300"
                     >
                       {work.linkLabel ?? hostLabel(work.href)} ↗
                     </a>
