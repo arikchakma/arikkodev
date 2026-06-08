@@ -1,43 +1,30 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { navLinks } from '../components/Navigation.astro';
-import FrownIcon from '../components/FrownIcon.astro';
+import Layout from "../layouts/Layout.astro";
+import { VictoryHand } from "../components/VictoryHand";
 ---
 
-<Layout title='Page not found' permalink={'/404'} noIndex={true}>
-  <div slot='header'></div>
-  <div
-    class='container flex flex-col items-center justify-center gap-7 py-10 md:flex-row md:py-32'
-  >
-    <div class='text-left md:text-left'>
-      <FrownIcon className='h-16 w-16 max-md:h-12 max-md:w-12' />
-      <h1
-        class="mt-5 text-3xl [font-variation-settings:'wght'_700] md:text-5xl md:[font-variation-settings:'wght'_800]"
-      >
-        Page not found!
-      </h1>
-      <p class='mt-2 text-base md:text-xl'>
-        Sorry, we couldn't find the page you are looking for.
-      </p>
-      <p class='mt-6'>
-        {
-          navLinks.map((link) => {
-            const isLast = navLinks.indexOf(link) === navLinks.length - 1;
-            return (
-              <>
-                <a
-                  class="whitespace-nowrap text-sm text-[#4b5563] underline decoration-divider/60 decoration-1 underline-offset-2 opacity-100 transition-colors duration-100 ease-in-out [font-variation-settings:'wght'_500] hover:no-underline hover:opacity-70 md:text-base"
-                  href={link.url}
-                >
-                  {link.name}
-                </a>
-                {isLast ? null : <>&middot;</>}
-              </>
-            );
-          })
-        }
-      </p>
-    </div>
-  </div>
-  <div slot='footer'></div>
+<Layout title="Page not found | Arik Chakma" noIndex={true}>
+  <header class="mb-5">
+    <VictoryHand client:load />
+    <h1 class="mt-3 mb-0.5">Page not found</h1>
+    <p class="text-zinc-500">
+      The page you're looking for doesn't exist or moved.
+    </p>
+  </header>
+
+  <p class="text-zinc-600">
+    Head back to the <a
+      href="/"
+      class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+      >Index</a
+    >, read my <a
+      href="/writings"
+      class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+      >Writings</a
+    >, or browse the <a
+      href="/projects"
+      class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+      >Projects</a
+    > I've built.
+  </p>
 </Layout>

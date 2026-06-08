@@ -1,140 +1,75 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { BackButton } from "../components/BackButton";
+import ProjectList from "../components/ProjectList.astro";
 
-const activeProjects = [
+const projects = [
   {
-    title: 'Maily',
-    description: 'Craft beautiful emails effortlessly',
-    url: 'https://maily.to',
+    name: "Maily",
+    tagline: "Craft beautiful emails effortlessly",
+    href: "https://maily.to",
   },
   {
-    title: 'Sticky',
-    description: 'Capture notes, tasks, thoughts',
-    url: 'https://github.com/arikchakma/sticky',
+    name: "Sticky",
+    tagline: "Capture notes, tasks, thoughts",
+    href: "https://github.com/arikchakma/sticky",
   },
   {
-    title: 'StyleCast',
-    description: 'Fast and Minimal Inline Style Parser',
-    url: 'https://github.com/arikchakma/stylecast',
+    name: "StyleCast",
+    tagline: "Fast and Minimal Inline Style Parser",
+    href: "https://github.com/arikchakma/stylecast",
   },
   {
-    title: 'Flowy',
-    description: 'Automate API workflows with ease',
-    url: 'https://flowy.run',
+    name: "Developer Roadmap",
+    tagline: "Roadmaps, articles and guides for developers",
+    href: "https://roadmap.sh",
   },
   {
-    title: 'Inboxing',
-    description: 'Monitor your emails, your way',
-    url: 'https://github.com/arikchakma/mly.fyi',
+    name: "Roadmap Editor",
+    tagline: "Create and share your own developer roadmap",
+    href: "https://draw.roadmap.sh",
   },
   {
-    title: 'Developer Roadmap',
-    description: 'Roadmaps, articles and guides for developers',
-    url: 'https://roadmap.sh',
-  },
-  {
-    title: 'Roadmap Editor',
-    description: 'Create and share your own developer roadmap',
-    url: 'https://draw.roadmap.sh',
-  },
-  {
-    title: 'Roadmap Courses',
-    description: 'Learn to code with interactive courses',
-    url: 'https://course.roadmap.sh',
+    name: "Roadmap Courses",
+    tagline: "Learn to code with interactive courses",
+    href: "https://course.roadmap.sh",
   },
 ];
 
-const archivedProjects = [
+const archived = [
   {
-    title: 'Sankhya',
-    description: 'A self-hosted, real-time analytics collector and dashboard',
-    url: 'https://stats.arikko.dev',
+    name: "Inboxing",
+    tagline: "Monitor your emails, your way",
+    href: "https://github.com/arikchakma/mly.fyi",
   },
   {
-    title: 'Chat',
-    description: 'Create project specific chat rooms',
-    url: 'https://chat.arikko.dev',
-  },
-  {
-    title: 'Tokens Army',
-    description: 'Helps you explore your fantastic nfts',
-    url: 'https://tokens-army.vercel.app',
+    name: "Flowy",
+    tagline: "Automate API workflows with ease",
+    href: "https://flowy.run",
   },
 ];
 ---
 
 <Layout
-  activePage='projects'
-  title='Projects | Arik Chakma'
+  title="Projects | Arik Chakma"
   description="Arik's projects and experiments."
 >
-  <main class='container mt-10 text-sm sm:text-base'>
-    <p>
-      Listed below are the projects in which I have participated, dedicating
-      significant time and effort towards their creation, maintenance, and
-      enhancement.
+  <header class="mb-8">
+    <BackButton href="/" label="Index" />
+    <h1 class="mt-8">Projects</h1>
+    <p class="mt-1 text-zinc-500">
+      Listed below are the projects I've participated in, dedicating significant
+      time and effort towards their creation, maintenance, and enhancement.
     </p>
+  </header>
 
-    <ul class='mt-5'>
-      {
-        activeProjects.map((project, index) => {
-          return (
-            <li>
-              <a
-                href={project.url}
-                target='_blank'
-                rel='noreferrer'
-                class:list={[
-                  'flex flex-col py-2 hover:opacity-70 sm:flex-row sm:items-center sm:justify-between sm:gap-2',
-                  index === 0 ? '' : 'border-t border-gray-200',
-                ]}
-              >
-                <span>{project.title}</span>
-                <span class='text-gray-500 sm:text-right'>
-                  {project.description}
-                </span>
-              </a>
-            </li>
-          );
-        })
-      }
-    </ul>
+  <ProjectList projects={projects} />
 
-    <div class='mt-16'>
-      <h3
-        class="text-lg font-bold tracking-tight [font-variation-settings:'wght'_600]"
-      >
-        Archieved
-      </h3>
-      <p class='mt-1'>
-        The following projects are ones I've been involved with previously, but
-        they are no longer being actively <em>maintained</em>.
-      </p>
-    </div>
+  <h2 class="mt-12">Archived</h2>
+  <p class="mt-1 text-zinc-500">
+    The following are projects I've been involved with previously, but are no
+    longer actively <em>maintained</em>.
+  </p>
 
-    <ul class='mt-5 mb-28'>
-      {
-        archivedProjects.map((project, index) => {
-          return (
-            <li>
-              <a
-                href={project.url}
-                target='_blank'
-                rel='noreferrer'
-                class:list={[
-                  'flex flex-col py-2 hover:opacity-70 sm:flex-row sm:items-center sm:justify-between sm:gap-2',
-                  index === 0 ? '' : 'border-t border-gray-200',
-                ]}
-              >
-                <span>{project.title}</span>
-                <span class='text-gray-500 sm:text-right'>
-                  {project.description}
-                </span>
-              </a>
-            </li>
-          );
-        })
-      }
-    </ul>
-  </main>
+  <ProjectList projects={archived} class="mt-5" />
 </Layout>

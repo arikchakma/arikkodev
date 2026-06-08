@@ -1,42 +1,98 @@
 ---
-import Link from '../components/Link.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { VictoryHand } from "../components/VictoryHand";
+import { WorkSection } from "../components/work/WorkSection";
+import { MoreInline } from "../components/MoreInline";
+import { SoundToggle } from "../components/SoundToggle";
 ---
 
 <Layout isHomePage={true}>
-  <main class='container mt-10 text-sm sm:text-base'>
+  <header class="mb-5">
+    <VictoryHand client:load />
+    <h1 class="mt-3 mb-0.5">Howdy, I’m Arik.</h1>
+    <p class="text-zinc-500">You can call me “Arikko”</p>
+  </header>
+
+  <div class="mb-8 space-y-3">
     <p>
-      I'm a full-stack developer interested in filmmaking, content creation, and
+      I'm a Software Engineer interested in filmmaking, content creation, and
       vlogging based in Bangladesh. I enjoy visualizing problems and writing
       code to solve them.
     </p>
-    <p class='mt-5'>
-      I came across computer kinds of stuff in school and have spent five years
-      as a cinematographer and editor. Taken programming more seriously after
-      joining college, worked as a freelance developer, and am pursuing a BSc
-      degree in Computer Science. Building and experimenting in a little lab—and
-      now writing html at <Link href='https://roadmap.sh'>roadmap.sh</Link>.
+
+    <p>
+      Currently engineering at <a
+        target="_blank"
+        href="https://roadmap.sh"
+        class="underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >roadmap.sh ↗</a
+      >
+      <MoreInline client:load
+        >(6th most starred project on GitHub, has 2.5m+ registered users, and
+        gets 5m+ pageviews every month)</MoreInline
+      >. Built <a
+        target="_blank"
+        href="https://maily.to"
+        class="underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >Maily ↗</a
+      > that helps craft beautiful emails effortlessly, the powerful email editor
+      that works across all major clients <MoreInline client:load
+        >(used by Novu, AhaSend, roadmap.sh, and more)</MoreInline
+      >.
     </p>
-    <p class='mt-5'>
-      My goal is to build cool things that make people&apos;s lives easier or
-      more interesting—whether that&apos;s through building an app or writing
-      code for other people.
+  </div>
+
+  <WorkSection client:load />
+
+  <div class="mt-8 space-y-3">
+    <p class="text-zinc-600">
+      Read my <a
+        href="/writings"
+        data-sound-nav
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >writings</a
+      >, or browse the <a
+        href="/projects"
+        data-sound-nav
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >projects</a
+      > I've built. Wanna discuss a project or just say hi? <a
+        target="_blank"
+        href="https://cal.com/arikchakma"
+        data-sound-hover
+        class="underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >Let’s grab a coffee</a
+      >
     </p>
 
-    <div class='mt-5'>
-      <ul class='marker:text-divider list-disc space-y-1 pl-6'>
-        <li class='pl-1.5'>
-          Building <Link href='https://maily.to'>maily.to</Link>, craft
-          beautiful emails effortlessly with Maily, the powerful email editor
-          that ensures impeccable communication across all major clients.
-        </li>
-        <li class='pl-1.5'>
-          Crafting <Link href='https://github.com/arikchakma/mly.fyi'
-            >inboxing.at</Link
-          > to send, and monitor your emails, your way. A self-hosted email tracking
-          solution for Amazon SES.
-        </li>
-      </ul>
-    </div>
-  </main>
+    <p class="text-zinc-600">
+      You can find me on <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >X</a
+      >, <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >GitHub</a
+      >, <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >Instagram</a
+      >, or reach me via <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >email</a
+      >.
+    </p>
+
+    <SoundToggle client:load />
+  </div>
 </Layout>

@@ -1,276 +1,102 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/typography';
+@import "tailwindcss";
 
-@config '../../tailwind.config.mjs';
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Fallback";
+  src: local("Arial");
+  size-adjust: 103.26%;
+  ascent-override: 97.33%;
+  descent-override: 28.57%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono Fallback";
+  src: local("Courier New"), local("CourierNewPSMT");
+  size-adjust: 99.98%;
+  ascent-override: 100.52%;
+  descent-override: 29.5%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/newsreader.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/newsreader-italic.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader Fallback";
+  src: local("Georgia");
+  size-adjust: 91.75%;
+  ascent-override: 80.11%;
+  descent-override: 28.88%;
+  line-gap-override: 0%;
+}
 
 @theme {
-  --color-primary: #313233;
-  --color-selection: #95a5ac40;
-  --color-background: #fcfcfc;
-  --color-divider: #5d676a;
-  --color-link-hover: rgb(93 103 106 / 0.7);
-
-  --animate-ticker-loop: 20s infinite linear ticker-loop;
-  @keyframes ticker-loop {
-    0% {
-      transform: translatex(0);
-    }
-    100% {
-      transform: translatex(-100%);
-    }
-  }
+  --color-selection: #a9a9a940;
+  --font-sans:
+    "Geist", "Geist Fallback", ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-serif:
+    "Newsreader", "Newsreader Fallback", ui-serif, Georgia, "Times New Roman",
+    serif;
+  --font-mono:
+    "Geist Mono", "Geist Mono Fallback", ui-monospace, SFMono-Regular,
+    "SF Mono", Menlo, Consolas, monospace;
 }
 
-@utility prose {
-  --tw-prose-kbd-shadows: 0 0 0;
-}
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply selection:bg-selection;
+    font-weight: 430;
+  }
+
+  em,
+  i,
+  cite {
+    @apply font-serif font-medium text-black;
+    font-style: italic;
+    font-optical-sizing: auto;
+    letter-spacing: -0.01rem;
+    font-variation-settings: "opsz" 10;
+  }
+
+  strong {
+    @apply font-medium text-black;
   }
 }
 
 @utility top-blur {
   -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent);
   mask-image: linear-gradient(to bottom, #000 25%, transparent);
-}
-
-@utility no-scrollbar {
-  /* Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-@utility container {
-  @apply mx-auto max-w-[640px]!;
-}
-
-@layer utilities {
-  body {
-    font-variation-settings: 'wght' 450;
-    font-variant: common-ligatures contextual;
-    letter-spacing: 0.005em;
-  }
-
-  @media screen and (-webkit-min-device-pixel-ratio: 1.5),
-    screen and (min-device-pixel-ratio: 1.5),
-    screen and (min-resolution: 1.5dppx) {
-    body {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-  }
-}
-
-.gradient-clip::before {
-  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
-  content: '';
-  height: 100%;
-  position: absolute;
-  width: 40px;
-  z-index: 2;
-  left: 0;
-  top: 0;
-}
-.gradient-clip::after {
-  @apply [background:linear-gradient(to_right,_rgba(252,252,252,1),_rgba(252,252,252,0))];
-  content: '';
-  height: 100%;
-  position: absolute;
-  width: 40px;
-  z-index: 2;
-  right: 0;
-  top: 0;
-  transform: rotateZ(180deg);
-}
-
-.prose .anchor {
-  @apply text-primary after:text-divider cursor-pointer no-underline after:invisible after:pl-2 after:content-['#'] hover:opacity-80 hover:after:visible hover:after:opacity-100;
-}
-
-.prose a {
-  @apply transition-all;
-}
-
-.prose pre {
-  @apply bg-background overflow-x-auto rounded-lg border border-gray-200 px-0 py-3.5;
-}
-
-.prose strong {
-  @apply font-semibold;
-  font-variation-settings: 'wght' 600 !important;
-}
-
-.prose code {
-  @apply text-primary rounded-lg border-0 bg-[#EFEFEF] px-1 py-0.5 font-medium tracking-normal [font-variation-settings:"wght"_500];
-}
-
-.prose pre code {
-  @apply bg-background text-primary p-0 tracking-normal;
-}
-
-.prose img {
-  /* Don't apply styles to next/image */
-  @apply m-0;
-}
-
-.prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  @apply text-primary/70;
-}
-
-.token.punctuation {
-  @apply text-primary;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol {
-  @apply text-green-500;
-}
-
-.token.deleted {
-  @apply text-red-400;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin {
-  @apply text-purple-500;
-}
-
-.token.inserted {
-  @apply text-green-800;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  @apply text-yellow-500;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  @apply text-blue-500;
-}
-
-.token.function,
-.token.class-name {
-  @apply text-pink-500;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  @apply text-yellow-500;
-}
-
-code[class*='language-'],
-pre[class*='language-'] {
-  @apply text-gray-800 dark:text-gray-50;
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.remark-code-title {
-  @apply rounded-t-lg border border-b-0 border-gray-200 bg-[#f7f7f7] px-5 py-3 font-mono text-sm font-bold text-gray-800;
-}
-
-.remark-code-title + pre {
-  @apply mt-0 rounded-t-none;
-}
-
-/* Remove Safari input shadow on mobile */
-input[type='text'],
-input[type='email'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-article.prose {
-  color: #313233;
-  font-variation-settings: 'wght' 450;
-  line-height: 1.6;
-  word-spacing: -0.04em;
-}
-
-pre code {
-  @apply inline-block;
-}
-
-.code-highlight {
-  float: left; /* 1 */
-  min-width: 100%; /* 2 */
-}
-
-pre code .code-line {
-  @apply block border-l-2 border-transparent px-4;
-}
-
-pre code .code-line.inserted {
-  @apply bg-green-600/20;
-}
-
-pre code .code-line.deleted {
-  @apply bg-red-600/10;
-}
-
-pre code .line-number::before {
-  @apply mr-4 -ml-2 inline-block w-2 text-right text-gray-400 content-[attr(line)];
-}
-
-/* Increase line number width for double digits */
-pre code:has(span.line-number[line='10']) .line-number::before {
-  @apply w-[18px];
-}
-
-pre code .highlight-line {
-  @apply block border-l-2 border-pink-500 bg-gray-200/40;
 }

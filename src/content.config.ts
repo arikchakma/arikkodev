@@ -1,10 +1,12 @@
-import { z, defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
+import { glob } from "astro/loaders";
 
 const writingCollection = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/writings' }),
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/writings" }),
   schema: z.object({
     title: z.string(),
+    shortTitle: z.string().optional(),
     description: z.string().optional(),
     publishedAt: z.date().optional(),
     image: z
@@ -27,7 +29,7 @@ const writingCollection = defineCollection({
         ogImageUrl: z.string().optional(),
       })
       .optional(),
-    status: z.enum(['draft', 'published']).default('draft'),
+    status: z.enum(["draft", "published"]).default("draft"),
     tags: z.array(z.string()).optional(),
     author: z.object({
       name: z.string(),

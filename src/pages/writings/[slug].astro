@@ -1,125 +1,73 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getCollection, render, type CollectionEntry } from 'astro:content';
-import { formatDate } from '../../lib/time';
-import { getTableOfContents } from '../../lib/article';
-import { Image } from 'astro:assets';
-import { getOpenGraphImage } from '../../lib/og';
+import "../../styles/_article.css";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+import { TableOfContents } from "../../components/TableOfContents.tsx";
+import { getOpenGraphImage } from "../../lib/og";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('writings');
-  return blogEntries.map((entry) => ({
+  const entries = await getCollection("writings");
+  return entries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
   }));
 }
 
 type Props = {
-  entry: CollectionEntry<'writings'>;
+  entry: CollectionEntry<"writings">;
 };
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
-const {
-  title,
-  publishedAt,
-  description,
-  author,
-  tags,
-  image,
-  seo,
-  showTableOfContents,
-} = entry.data;
-const date = formatDate(publishedAt!);
-const toc = getTableOfContents(headings);
-const ogImageUrl = seo?.ogImageUrl || getOpenGraphImage('writing', entry.id);
+
+const tocHeadings = headings
+  .filter((heading) => heading.depth === 2)
+  .map((heading) => ({ slug: heading.slug, text: heading.text }));
+
+const { data } = entry;
+const description = data.seo?.description ?? data.description;
+const ogImageUrl =
+  data.seo?.ogImageUrl ?? data.image?.src ?? getOpenGraphImage(entry.id);
+const articleData = data.publishedAt
+  ? {
+      publishedAt: data.publishedAt,
+      title: data.title,
+      image: data.image?.src,
+    }
+  : undefined;
 ---
 
 <Layout
-  activePage='writings'
-  title={`${title} | Arik Chakma`}
+  title={`${data.title} | Arik Chakma`}
   description={description}
-  keywords={seo?.keywords || tags}
-  permalink={`/writings/${entry.id}`}
+  keywords={data.seo?.keywords}
   ogImageUrl={ogImageUrl}
-  articleData={{ publishedAt: publishedAt!, title, image: ogImageUrl }}
+  articleData={articleData}
 >
-  <article
-    class="prose max-sm:prose-h2:text-xl max-sm:prose-h2:[font-variation-settings:'wght'_600] max-sm:prose-h3:text-lg max-sm:prose-h3:[font-variation-settings:'wght'_600] max-sm:prose-h4:text-lg max-sm:prose-h4:[font-variation-settings:'wght'_600] max-sm:prose-p:text-sm max-sm:prose-ol:text-sm container mt-10"
-  >
-    <header>
-      <h1
-        class="mb-0 text-3xl tracking-[-0.02em] [font-variation-settings:'wght'_700] sm:text-4xl"
-      >
-        {title}
-      </h1>
-      <p
-        class='mt-2 mb-10 flex items-center gap-1.5 font-mono text-sm text-gray-500'
-      >
-        <a
-          href={`https://x.com/${author?.twitter}`}
-          target='_blank'
-          class='not-prose text-gray-500 no-underline hover:text-black'
-        >
-          @{author?.twitter}
-        </a>
-        &middot; {date}
-      </p>
+  <TableOfContents
+    client:load
+    headings={tocHeadings}
+    title={data.shortTitle ?? data.title}
+  />
 
-      {
-        image?.src ? (
-          <figure class='mb-10'>
-            <Image
-              class='rounded-lg'
-              src={image?.src}
-              alt={image?.alt || title}
-              width={image?.size?.width || 0}
-              height={image?.size?.height || 0}
-            />
-          </figure>
-        ) : null
-      }
-    </header>
+  <header class="mt-8 mb-8 lg:mt-0">
+    <h1 id="article-title" class="mb-0.5">
+      {data.title}
+    </h1>
     {
-      showTableOfContents ? (
-        <section class='mb-10'>
-          <h4 class='mt-0'>Table of Content</h4>
-          <ol class='list-inside pl-0'>
-            {toc.map((heading, counter) => (
-              <li>
-                <a href={`#${heading.slug}`} class='no-underline'>
-                  {heading.text}
-                </a>
-
-                {heading.child.length > 0 && (
-                  <ol class='my-0 ml-6'>
-                    {heading.child.map((children, childCounter) => {
-                      return (
-                        <li
-                          style={{
-                            '--counter': `'${counter + 1}.${
-                              childCounter + 1
-                            }.'`,
-                          }}
-                          class='marker:content-(--counter)'
-                        >
-                          <a href={`#${children.slug}`} class='no-underline'>
-                            {children.text}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
-      ) : null
+      data.publishedAt && (
+        <p class="text-zinc-500">
+          {data.publishedAt.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+      )
     }
-
-    <section>
-      <Content class:list={['mt-5']} />
-    </section>
+  </header>
+  <article>
+    <Content components={{ pre: CodeBlock }} />
   </article>
 </Layout>

@@ -1,7 +1,7 @@
-app-dist
 dist
-.idea
-.github
-public
+.astro
+.vercel
 node_modules
+public
+bun.lock
 pnpm-lock.yaml

@@ -1,22 +1,22 @@
 ---
-title: 'Zero Downtime Deployments'
+title: "Zero Downtime Deployments"
 publishedAt: 2025-07-06
 status: published
-description: 'How I achieved seamless updates for the Maily API using PM2, ensuring no service interruptions.'
+description: "How I achieved seamless updates for the Maily API using PM2, ensuring no service interruptions."
 author:
-  name: 'Arik Chakma'
-  twitter: 'imarikchakma'
+  name: "Arik Chakma"
+  twitter: "imarikchakma"
 seo:
   keywords:
-    - 'Zero Downtime Deployment'
-    - 'PM2'
-    - 'Hono'
-    - 'Node.js'
-    - 'Maily'
-    - 'Ansible'
-    - 'DevOps'
-    - 'Continuous Deployment'
-    - 'API deployment'
+    - "Zero Downtime Deployment"
+    - "PM2"
+    - "Hono"
+    - "Node.js"
+    - "Maily"
+    - "Ansible"
+    - "DevOps"
+    - "Continuous Deployment"
+    - "API deployment"
 showTableOfContents: false
 ---
 
@@ -74,11 +74,11 @@ I added specific handlers in my API code for these signals to:
 
 ```ts
 // (omitted imports)
-import type { ServerType } from '@hono/node-server';
+import type { ServerType } from "@hono/node-server";
 
 export async function shutdown(server: ServerType | null, signal: string) {
   if (!server) {
-    logError('[server]: Server not initialized');
+    logError("[server]: Server not initialized");
     process.exit(1);
   }
 
@@ -92,7 +92,7 @@ export async function shutdown(server: ServerType | null, signal: string) {
         if (err) {
           logError(`[server]: Error closing server: ${err.message}`);
         } else {
-          logInfo('[server]: HTTP server closed.');
+          logInfo("[server]: HTTP server closed.");
         }
         resolve();
       });
@@ -101,10 +101,10 @@ export async function shutdown(server: ServerType | null, signal: string) {
     // clean up resources like database connections, redis connections, etc.
     // this is important to prevent database connection leaks or corrupted data
 
-    logInfo('[server]: All resources cleaned up. Exiting process.');
+    logInfo("[server]: All resources cleaned up. Exiting process.");
     process.exit(0);
   } catch (error) {
-    logError('[server]: Error during shutdown', error);
+    logError("[server]: Error during shutdown", error);
     process.exit(1);
   }
 }
@@ -130,11 +130,11 @@ I automate this whole process using Ansible. Here's a simplified look at the key
 
 - name: copy api-maily
   # Copy the freshly built code to the actual deployment directory
-  command: 'cp -r /tmp/api-maily/. {{ api_maily_project_dir }}'
+  command: "cp -r /tmp/api-maily/. {{ api_maily_project_dir }}"
 
 - name: check api-maily running
   # See if PM2 already has our API running
-  command: 'pm2 list'
+  command: "pm2 list"
   register: pm2_list
 
 - name: run migrations
@@ -157,7 +157,7 @@ I automate this whole process using Ansible. Here's a simplified look at the key
 
 - name: save pm2
   # Make sure PM2 remembers the current state of processes across reboots
-  command: 'pm2 save'
+  command: "pm2 save"
 ```
 
 > This is a simplified version of my Ansible playbook. I have more steps and more complex logic in my actual playbook.

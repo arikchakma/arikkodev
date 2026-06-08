@@ -1,22 +1,22 @@
 ---
-title: 'Fast & Minimal Inline Style Parser'
+title: "Inline Style Parser"
 publishedAt: 2025-11-16
 status: published
-description: 'Building StyleCast: A lightweight CSS parser for inline styles that is fast and minimal.'
+description: "Building StyleCast: A lightweight CSS parser for inline styles that is fast and minimal."
 author:
-  name: 'Arik Chakma'
-  twitter: 'imarikchakma'
+  name: "Arik Chakma"
+  twitter: "imarikchakma"
 seo:
   keywords:
-    - 'StyleCast'
-    - 'CSS Parser'
-    - 'Inline Style Parser'
-    - 'JavaScript'
-    - 'TypeScript'
-    - 'Lexer'
-    - 'Parser'
-    - 'AST'
-    - 'CSS Tokenization'
+    - "StyleCast"
+    - "CSS Parser"
+    - "Inline Style Parser"
+    - "JavaScript"
+    - "TypeScript"
+    - "Lexer"
+    - "Parser"
+    - "AST"
+    - "CSS Tokenization"
 showTableOfContents: false
 ---
 
@@ -24,7 +24,7 @@ I recently built [StyleCast](https://github.com/arikchakma/stylecast), a fast an
 
 > **tl;dr:** StyleCast parses inline CSS strings into AST or JavaScript objects with optional React style camelCase conversion. It's designed to be fast, lightweight, and works in both browser and Node.js.
 
-## Why Build Another CSS Parser?
+## Why?
 
 While working on various projects, I found myself needing to parse inline CSS styles for one of my projects. I wanted something that:
 
@@ -45,9 +45,9 @@ Instead of using Regex to tokenize the CSS string, I chose to use a lexer. A lex
 The lexer reads the CSS string character by character and produces tokens. Each token has a type, value, and position information.
 
 ```ts
-import { lex } from 'stylecast';
+import { lex } from "stylecast";
 
-const tokens = lex('color: red; font-size: 16px;');
+const tokens = lex("color: red; font-size: 16px;");
 console.log(tokens);
 // [
 //   { kind: 'ident-token', value: 'color', start: {...}, end: {...} },
@@ -101,9 +101,9 @@ The parser takes the tokens from the lexer and builds a minimal AST. The AST is 
 I kept it simple and minimal by not including the parent-child relationships between the declarations and comments. This makes the AST smaller and faster to parse.
 
 ```ts
-import { parse } from 'stylecast';
+import { parse } from "stylecast";
 
-const ast = parse('color: red; font-size: 16px;');
+const ast = parse("color: red; font-size: 16px;");
 console.log(ast);
 // [
 //   {
@@ -128,9 +128,9 @@ console.log(ast);
 StyleCast provides a helper function to convert the AST into a JavaScript object. This is useful when you want to use the styles in your application.
 
 ```ts
-import { objectify } from 'stylecast';
+import { objectify } from "stylecast";
 
-const styles = objectify('color: red; font-size: 16px;');
+const styles = objectify("color: red; font-size: 16px;");
 console.log(styles);
 // { color: 'red', fontSize: '16px' }
 ```
@@ -138,7 +138,7 @@ console.log(styles);
 By default, `objectify` doesn't convert property names to camelCase. But you can enable it with the `camelCase` option:
 
 ```ts
-const styles = objectify('color: red; font-size: 16px;', { camelCase: true });
+const styles = objectify("color: red; font-size: 16px;", { camelCase: true });
 console.log(styles);
 // { color: 'red', fontSize: '16px' }
 ```
@@ -147,7 +147,7 @@ For React applications, you can use the `reactify` option to handle vendor prefi
 
 ```ts
 const styles = objectify(
-  '-webkit-transform: scale(1); -ms-transform: scale(1);',
+  "-webkit-transform: scale(1); -ms-transform: scale(1);",
   {
     reactify: true,
   },
@@ -164,7 +164,7 @@ StyleCast provides helpful error messages when parsing invalid CSS. For example:
 
 ```ts
 try {
-  parse('color red;');
+  parse("color red;");
 } catch (error) {
   console.error(error.message);
   // SyntaxError: Invalid CSS declaration. Expected a colon (':') after the property name 'color'.

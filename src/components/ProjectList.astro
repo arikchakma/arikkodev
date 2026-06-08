@@ -1,0 +1,29 @@
+---
+type Project = { name: string; tagline: string; href: string };
+
+interface Props {
+  projects: Project[];
+  class?: string;
+}
+
+const { projects, class: className } = Astro.props;
+---
+
+<ul class:list={["flex flex-col divide-y divide-zinc-100", className]}>
+  {
+    projects.map((p) => (
+      <li>
+        <a
+          href={p.href}
+          target={p.href.startsWith("http") ? "_blank" : undefined}
+          class="group flex items-baseline justify-between gap-6 py-2"
+        >
+          <span class="shrink-0 transition-colors group-hover:text-zinc-500">
+            {p.name}
+          </span>
+          <span class="text-right text-zinc-500">{p.tagline}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
