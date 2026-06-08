@@ -53,7 +53,7 @@ export function CompanyRow(props: CompanyRowProps) {
           </span>
         </span>
 
-        <span className="flex shrink-0 items-center gap-1.5 text-sm text-zinc-500">
+        <span className="flex shrink-0 items-center gap-1.5 text-sm text-zinc-400">
           <span className="hidden opacity-0 transition-opacity group-hover:opacity-100 md:inline">
             Expand to see more
           </span>
@@ -69,7 +69,7 @@ export function CompanyRow(props: CompanyRowProps) {
       <AnimatePresence initial={false}>
         {open && (
           <motion.div {...expand}>
-            <div className="mb-2">
+            <div className="pb-2">
               {company.works.map((w, i) => (
                 <WorkRow key={w.name} work={w} index={i} />
               ))}
