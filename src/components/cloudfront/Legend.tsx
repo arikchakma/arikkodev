@@ -13,7 +13,7 @@ export function Legend(props: LegendProps) {
       {tenants.map((tenant) => (
         <span
           key={tenant}
-          className="flex items-center gap-1.5 border bg-white border-zinc-200 rounded-lg p-1.5 py-0.5"
+          className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white p-1.5 py-0.5"
         >
           <BoxIcon className={cn("size-3.5", TENANTS[tenant].icon)} />
           <span>{TENANTS[tenant].label}</span>

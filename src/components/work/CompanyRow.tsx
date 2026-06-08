@@ -41,25 +41,25 @@ export function CompanyRow(props: CompanyRowProps) {
           else sound.close();
         }}
         aria-expanded={open}
-        className="group flex ml-1 w-full items-center justify-between gap-6 py-2.5 text-left"
+        className="group ml-1 flex w-full items-center justify-between gap-6 py-2.5 text-left"
       >
         <span className="flex shrink-0 items-center gap-2.5 group-hover:text-zinc-500">
           <LogoMark name={company.company} logo={company.logo} />
           <span className="font-medium transition-colors">
             {company.company}
           </span>
-          <span className="text-sm tabular-nums text-zinc-400">
+          <span className="text-sm text-zinc-400 tabular-nums">
             {company.startDate} – {company.endDate ?? "Present"}
           </span>
         </span>
 
-        <span className="flex shrink-0 items-center gap-1.5 text-zinc-400 text-sm">
+        <span className="flex shrink-0 items-center gap-1.5 text-sm text-zinc-400">
           <span className="hidden opacity-0 transition-opacity group-hover:opacity-100 md:inline">
             Expand to see more
           </span>
           <ChevronRightIcon
             className={cn(
-              "shrink-0 size-4 transition-transform",
+              "size-4 shrink-0 transition-transform",
               open ? "rotate-90" : "rotate-0",
             )}
           />

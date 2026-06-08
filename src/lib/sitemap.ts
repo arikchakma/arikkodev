@@ -26,7 +26,9 @@ export function getPublishedWritings(): Writing[] {
       return [
         {
           id: file.replace(/\.mdx$/, ""),
-          publishedAt: data.publishedAt ? new Date(data.publishedAt) : undefined,
+          publishedAt: data.publishedAt
+            ? new Date(data.publishedAt)
+            : undefined,
         },
       ];
     });

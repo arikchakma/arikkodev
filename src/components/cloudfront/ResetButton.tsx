@@ -10,7 +10,7 @@ export function ResetButton(props: ResetButtonProps) {
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="group flex shrink-0 items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 pl-2 py-1.5 text-sm font-medium text-zinc-600 transition hover:bg-zinc-50 active:translate-y-px disabled:opacity-40 disabled:hover:bg-white"
+      className="group flex shrink-0 items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 pl-2 text-sm font-medium text-zinc-600 transition hover:bg-zinc-50 active:translate-y-px disabled:opacity-40 disabled:hover:bg-white"
     >
       <svg
         viewBox="0 0 12 12"

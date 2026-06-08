@@ -35,7 +35,7 @@ export function TableOfContents(props: TableOfContentsProps) {
   const showTableOfContents = headings.length >= 2;
 
   return (
-    <motion.aside className="lg:fixed z-99 lg:top-16 lg:left-8 lg:max-h-[calc(100vh-5rem)] lg:w-48 overflow-y-auto text-sm">
+    <motion.aside className="z-99 overflow-y-auto text-sm lg:fixed lg:top-16 lg:left-8 lg:max-h-[calc(100vh-5rem)] lg:w-48">
       <BackButton href="/writings" label="Writings" />
 
       {showTableOfContents && (
@@ -49,12 +49,12 @@ export function TableOfContents(props: TableOfContentsProps) {
             initial={false}
             animate={{ opacity: headerPassed ? 1 : 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="text-black text-balance"
+            className="text-balance text-black"
           >
             {title}
           </motion.p>
 
-          <ul className="flex flex-col gap-1.5 mt-2.5">
+          <ul className="mt-2.5 flex flex-col gap-1.5">
             {headings.map((heading) => {
               const isActive = activeId === heading.slug;
               return (

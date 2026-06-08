@@ -3,61 +3,60 @@ const { class: className, "data-title": title, ...rest } = Astro.props;
 ---
 
 <div class="code-block">
-    {title && <div class="code-title">{title}</div>}
-    <div class="code-body">
-        <span class="code-fader code-fader-left" aria-hidden="true"></span>
-        <span class="code-fader code-fader-right" aria-hidden="true"></span>
-        <pre class={className} {...rest} data-code-scroll><slot /></pre>
-    </div>
+  {title && <div class="code-title">{title}</div>}
+  <div class="code-body">
+    <span class="code-fader code-fader-left" aria-hidden="true"></span>
+    <span class="code-fader code-fader-right" aria-hidden="true"></span>
+    <pre class={className} {...rest} data-code-scroll><slot /></pre>
+  </div>
 </div>
 
 <script>
-    import { clamp } from "../lib/math";
+  import { clamp } from "../lib/math";
 
-    function setupCodeBlock(block: HTMLElement) {
-        if (block.dataset.faderInit) {
-            return;
-        }
-        block.dataset.faderInit = "true";
+  function setupCodeBlock(block: HTMLElement) {
+    if (block.dataset.faderInit) {
+      return;
+    }
+    block.dataset.faderInit = "true";
 
-        const scroller = block.querySelector<HTMLElement>("[data-code-scroll]");
-        const leftFader = block.querySelector<HTMLElement>(".code-fader-left");
-        const rightFader =
-            block.querySelector<HTMLElement>(".code-fader-right");
-        if (!scroller || !leftFader || !rightFader) {
-            return;
-        }
-
-        const update = () => {
-            const maxScroll = scroller.scrollWidth - scroller.clientWidth;
-            if (maxScroll <= 0) {
-                leftFader.style.opacity = "0";
-                rightFader.style.opacity = "0";
-                return;
-            }
-
-            const { scrollLeft } = scroller;
-            leftFader.style.opacity = String(clamp(scrollLeft / 16, [0, 1]));
-            rightFader.style.opacity = String(
-                clamp((maxScroll - scrollLeft) / 16, [0, 1]),
-            );
-        };
-
-        update();
-        requestAnimationFrame(() => {
-            block.dataset.faderReady = "true";
-        });
-
-        scroller.addEventListener("scroll", update, { passive: true });
-        new ResizeObserver(update).observe(scroller);
+    const scroller = block.querySelector<HTMLElement>("[data-code-scroll]");
+    const leftFader = block.querySelector<HTMLElement>(".code-fader-left");
+    const rightFader = block.querySelector<HTMLElement>(".code-fader-right");
+    if (!scroller || !leftFader || !rightFader) {
+      return;
     }
 
-    function init() {
-        document
-            .querySelectorAll<HTMLElement>(".code-block")
-            .forEach(setupCodeBlock);
-    }
+    const update = () => {
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      if (maxScroll <= 0) {
+        leftFader.style.opacity = "0";
+        rightFader.style.opacity = "0";
+        return;
+      }
 
-    init();
-    document.addEventListener("astro:page-load", init);
+      const { scrollLeft } = scroller;
+      leftFader.style.opacity = String(clamp(scrollLeft / 16, [0, 1]));
+      rightFader.style.opacity = String(
+        clamp((maxScroll - scrollLeft) / 16, [0, 1]),
+      );
+    };
+
+    update();
+    requestAnimationFrame(() => {
+      block.dataset.faderReady = "true";
+    });
+
+    scroller.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(scroller);
+  }
+
+  function init() {
+    document
+      .querySelectorAll<HTMLElement>(".code-block")
+      .forEach(setupCodeBlock);
+  }
+
+  init();
+  document.addEventListener("astro:page-load", init);
 </script>

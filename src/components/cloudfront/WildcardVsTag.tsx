@@ -51,12 +51,7 @@ function Panel(props: PanelProps) {
 
       <div className="relative">
         <GridStage className="rounded-xl border border-zinc-200 bg-white p-2.5">
-          <Scan
-            fireId={fireId}
-            active={fired}
-            reduce={reduce}
-            tone={tone}
-          />
+          <Scan fireId={fireId} active={fired} reduce={reduce} tone={tone} />
           <div className="relative grid grid-cols-4 gap-2.5">
             {LAYOUT.map((tenant, i) => (
               <CacheCell
@@ -124,7 +119,7 @@ export function WildcardVsTag(props: WildcardVsTagProps) {
         </div>
       </div>
 
-      <div className="flex items-center gap-3 border-t border-zinc-100 p-2.5 bg-white">
+      <div className="flex items-center gap-3 border-t border-zinc-100 bg-white p-2.5">
         <InvalidateButton onClick={fire} label="Invalidate" />
         <ResetButton onClick={reset} disabled={!fired} />
         <span className="min-w-0 truncate text-[11px] text-zinc-400">

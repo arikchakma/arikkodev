@@ -18,7 +18,7 @@ export function MoreInline(props: MoreInlineProps) {
         setRevealed(true);
         sound.reveal();
       }}
-      className="align-baseline text-zinc-600 cursor-help underline decoration-dotted underline-offset-2 transition-colors hover:text-black"
+      className="cursor-help align-baseline text-zinc-600 underline decoration-dotted underline-offset-2 transition-colors hover:text-black"
     >
       (more)
     </button>

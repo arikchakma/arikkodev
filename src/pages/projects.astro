@@ -4,73 +4,72 @@ import { BackButton } from "../components/BackButton";
 import ProjectList from "../components/ProjectList.astro";
 
 const projects = [
-    {
-        name: "Maily",
-        tagline: "Craft beautiful emails effortlessly",
-        href: "https://maily.to",
-    },
-    {
-        name: "Sticky",
-        tagline: "Capture notes, tasks, thoughts",
-        href: "https://github.com/arikchakma/sticky",
-    },
-    {
-        name: "StyleCast",
-        tagline: "Fast and Minimal Inline Style Parser",
-        href: "https://github.com/arikchakma/stylecast",
-    },
-    {
-        name: "Developer Roadmap",
-        tagline: "Roadmaps, articles and guides for developers",
-        href: "https://roadmap.sh",
-    },
-    {
-        name: "Roadmap Editor",
-        tagline: "Create and share your own developer roadmap",
-        href: "https://draw.roadmap.sh",
-    },
-    {
-        name: "Roadmap Courses",
-        tagline: "Learn to code with interactive courses",
-        href: "https://course.roadmap.sh",
-    },
+  {
+    name: "Maily",
+    tagline: "Craft beautiful emails effortlessly",
+    href: "https://maily.to",
+  },
+  {
+    name: "Sticky",
+    tagline: "Capture notes, tasks, thoughts",
+    href: "https://github.com/arikchakma/sticky",
+  },
+  {
+    name: "StyleCast",
+    tagline: "Fast and Minimal Inline Style Parser",
+    href: "https://github.com/arikchakma/stylecast",
+  },
+  {
+    name: "Developer Roadmap",
+    tagline: "Roadmaps, articles and guides for developers",
+    href: "https://roadmap.sh",
+  },
+  {
+    name: "Roadmap Editor",
+    tagline: "Create and share your own developer roadmap",
+    href: "https://draw.roadmap.sh",
+  },
+  {
+    name: "Roadmap Courses",
+    tagline: "Learn to code with interactive courses",
+    href: "https://course.roadmap.sh",
+  },
 ];
 
 const archived = [
-    {
-        name: "Inboxing",
-        tagline: "Monitor your emails, your way",
-        href: "https://github.com/arikchakma/mly.fyi",
-    },
-    {
-        name: "Flowy",
-        tagline: "Automate API workflows with ease",
-        href: "https://flowy.run",
-    },
+  {
+    name: "Inboxing",
+    tagline: "Monitor your emails, your way",
+    href: "https://github.com/arikchakma/mly.fyi",
+  },
+  {
+    name: "Flowy",
+    tagline: "Automate API workflows with ease",
+    href: "https://flowy.run",
+  },
 ];
 ---
 
 <Layout
-    title="Projects | Arik Chakma"
-    description="Arik's projects and experiments."
+  title="Projects | Arik Chakma"
+  description="Arik's projects and experiments."
 >
-    <header class="mb-8">
-        <BackButton href="/" label="Index" />
-        <h1 class="mt-8">Projects</h1>
-        <p class="mt-1 text-zinc-500">
-            Listed below are the projects I've participated in, dedicating
-            significant time and effort towards their creation, maintenance, and
-            enhancement.
-        </p>
-    </header>
-
-    <ProjectList projects={projects} />
-
-    <h2 class="mt-12">Archived</h2>
+  <header class="mb-8">
+    <BackButton href="/" label="Index" />
+    <h1 class="mt-8">Projects</h1>
     <p class="mt-1 text-zinc-500">
-        The following are projects I've been involved with previously, but are no
-        longer actively <em>maintained</em>.
+      Listed below are the projects I've participated in, dedicating significant
+      time and effort towards their creation, maintenance, and enhancement.
     </p>
+  </header>
 
-    <ProjectList projects={archived} class="mt-5" />
+  <ProjectList projects={projects} />
+
+  <h2 class="mt-12">Archived</h2>
+  <p class="mt-1 text-zinc-500">
+    The following are projects I've been involved with previously, but are no
+    longer actively <em>maintained</em>.
+  </p>
+
+  <ProjectList projects={archived} class="mt-5" />
 </Layout>

@@ -66,9 +66,9 @@ export function EdgeInvalidation(props: EdgeInvalidationProps) {
       <div className="p-2">
         <Legend tenants={["arikko", "maily", "nano"]} />
 
-        <div className="flex flex-col items-stretch mt-4 gap-4 sm:flex-row sm:items-end">
+        <div className="mt-4 flex flex-col items-stretch gap-4 sm:flex-row sm:items-end">
           <div className="flex flex-col rounded-xl border border-zinc-200/80 bg-white sm:w-36 sm:shrink-0">
-            <div className="flex items-center justify-between border-b p-1 px-2 border-b-zinc-200">
+            <div className="flex items-center justify-between border-b border-b-zinc-200 p-1 px-2">
               <span className="text-xs font-medium text-zinc-500">Origin</span>
               <CloudDatabaseIcon className="size-4 text-zinc-300" />
             </div>
@@ -77,7 +77,7 @@ export function EdgeInvalidation(props: EdgeInvalidationProps) {
               {ORIGIN_TAGS.map((tenant) => (
                 <span
                   key={tenant}
-                  className="flex items-center gap-1.5 text-xs leading-none px-2 py-1.5 text-zinc-600"
+                  className="flex items-center gap-1.5 px-2 py-1.5 text-xs leading-none text-zinc-600"
                 >
                   <span
                     className={cn("size-1.5 rounded-full", TENANTS[tenant].dot)}
@@ -113,7 +113,7 @@ export function EdgeInvalidation(props: EdgeInvalidationProps) {
         </div>
       </div>
 
-      <div className="flex items-center gap-3 border-t border-zinc-100 p-2.5 bg-white">
+      <div className="flex items-center gap-3 border-t border-zinc-100 bg-white p-2.5">
         <InvalidateButton onClick={fire} label="Invalidate" />
         <ResetButton onClick={reset} disabled={!fired} />
         <span

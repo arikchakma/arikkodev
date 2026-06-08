@@ -7,93 +7,92 @@ import { SoundToggle } from "../components/SoundToggle";
 ---
 
 <Layout isHomePage={true}>
-    <header class="mb-5">
-        <VictoryHand client:load />
-        <h1 class="mb-0.5 mt-3">Howdy, I’m Arik.</h1>
-        <p class="text-zinc-500">You can call me “Arikko”</p>
-    </header>
+  <header class="mb-5">
+    <VictoryHand client:load />
+    <h1 class="mt-3 mb-0.5">Howdy, I’m Arik.</h1>
+    <p class="text-zinc-500">You can call me “Arikko”</p>
+  </header>
 
-    <div class="space-y-3 mb-8">
-        <p>
-            I'm a Software Engineer interested in filmmaking, content creation,
-            and vlogging based in Bangladesh. I enjoy visualizing problems and
-            writing code to solve them.
-        </p>
+  <div class="mb-8 space-y-3">
+    <p>
+      I'm a Software Engineer interested in filmmaking, content creation, and
+      vlogging based in Bangladesh. I enjoy visualizing problems and writing
+      code to solve them.
+    </p>
 
-        <p>
-            Currently engineering at <a
-                target="_blank"
-                href="https://roadmap.sh"
-                class="underline underline-offset-2 decoration-zinc-300 hover:no-underline"
-                >roadmap.sh ↗</a
-            >
-            <MoreInline client:load
-                >(6th most starred project on GitHub, has 2.5m+ registered
-                users, and gets 5m+ pageviews every month)</MoreInline
-            >. Built <a
-                target="_blank"
-                href="https://maily.to"
-                class="underline underline-offset-2 decoration-zinc-300 hover:no-underline"
-                >Maily ↗</a
-            > that helps craft beautiful emails effortlessly, the powerful email editor
-            that works across all major clients <MoreInline client:load
-                >(used by Novu, AhaSend, roadmap.sh, and more)</MoreInline
-            >.
-        </p>
+    <p>
+      Currently engineering at <a
+        target="_blank"
+        href="https://roadmap.sh"
+        class="underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >roadmap.sh ↗</a
+      >
+      <MoreInline client:load
+        >(6th most starred project on GitHub, has 2.5m+ registered users, and
+        gets 5m+ pageviews every month)</MoreInline
+      >. Built <a
+        target="_blank"
+        href="https://maily.to"
+        class="underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >Maily ↗</a
+      > that helps craft beautiful emails effortlessly, the powerful email editor
+      that works across all major clients <MoreInline client:load
+        >(used by Novu, AhaSend, roadmap.sh, and more)</MoreInline
+      >.
+    </p>
+  </div>
 
-    </div>
+  <WorkSection client:load />
 
-    <WorkSection client:load />
+  <div class="mt-8 space-y-3">
+    <p class="text-zinc-600">
+      Read my <a
+        href="/writings"
+        data-sound-nav
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >writings</a
+      >, or browse the <a
+        href="/projects"
+        data-sound-nav
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >projects</a
+      > I've built. Wanna discuss a project or just say hi? <a
+        target="_blank"
+        href="https://cal.com/arikchakma"
+        data-sound-hover
+        class="underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >Let’s grab a coffee</a
+      >
+    </p>
 
-    <div class="space-y-3 mt-8">
-        <p class="text-zinc-600">
-            Read my <a
-                href="/writings"
-                data-sound-nav
-                class="text-black underline underline-offset-2 decoration-zinc-300 hover:no-underline"
-                >writings</a
-            >, or browse the <a
-                href="/projects"
-                data-sound-nav
-                class="text-black underline underline-offset-2 decoration-zinc-300 hover:no-underline"
-                >projects</a
-            > I've built. Wanna discuss a project or just say hi? <a
-                target="_blank"
-                href="https://cal.com/arikchakma"
-                data-sound-hover
-                class="underline underline-offset-2 decoration-zinc-300 hover:no-underline"
-                >Let’s grab a coffee</a
-            >
-        </p>
+    <p class="text-zinc-600">
+      You can find me on <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >X</a
+      >, <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >GitHub</a
+      >, <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >Instagram</a
+      >, or reach me via <a
+        target="_blank"
+        href="https://maily.to"
+        data-sound-hover
+        class="text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline"
+        >email</a
+      >.
+    </p>
 
-        <p class="text-zinc-600">
-            You can find me on <a
-                target="_blank"
-                href="https://maily.to"
-                data-sound-hover
-                class="underline underline-offset-2 text-black decoration-zinc-300 hover:no-underline"
-                >X</a
-            >, <a
-                target="_blank"
-                href="https://maily.to"
-                data-sound-hover
-                class="underline underline-offset-2 text-black decoration-zinc-300 hover:no-underline"
-                >GitHub</a
-            >, <a
-                target="_blank"
-                href="https://maily.to"
-                data-sound-hover
-                class="underline underline-offset-2 text-black decoration-zinc-300 hover:no-underline"
-                >Instagram</a
-            >, or reach me via <a
-                target="_blank"
-                href="https://maily.to"
-                data-sound-hover
-                class="underline underline-offset-2 text-black decoration-zinc-300 hover:no-underline"
-                >email</a
-            >.
-        </p>
-
-        <SoundToggle client:load />
-    </div>
+    <SoundToggle client:load />
+  </div>
 </Layout>

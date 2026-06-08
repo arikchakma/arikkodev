@@ -28,7 +28,7 @@ export function Component(props: ComponentProps) {
 
 - Readable code needs few comments. Rewrite confusing code instead of explaining it.
 - A line or two above a function saying what it does is welcome.
-- Comment the *why*, not the *what*. When you wonder why code is the way it is, leave a note — even `// BUG: explain this`.
+- Comment the _why_, not the _what_. When you wonder why code is the way it is, leave a note — even `// BUG: explain this`.
 - Comments go on their own lines, above the code they explain.
 - A comment must justify itself. Delete ones that only restate the code.
 

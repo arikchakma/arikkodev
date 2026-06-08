@@ -1,27 +1,27 @@
 ---
-title: 'The Command Menu on roadmap.sh'
+title: "The Command Menu on roadmap.sh"
 publishedAt: 2023-05-25
 status: published
 description: Learn about the Command Menu in roadmap.sh, a powerful and user-friendly navigation tool that enhances browsing experience and provides quick access to roadmaps, guides, and other resources.
 author:
-  name: 'Arik Chakma'
-  twitter: 'imarikchakma'
+  name: "Arik Chakma"
+  twitter: "imarikchakma"
 seo:
-  ogImageUrl: 'https://arikko.dev/images/og-images/command-menu.png'
+  ogImageUrl: "https://arikko.dev/images/og-images/command-menu.png"
   keywords:
-    - 'Command Menu'
-    - 'roadmap.sh'
-    - 'navigation tool'
-    - 'browsing experience'
-    - 'roadmaps'
-    - 'command menu astro'
-    - 'astrojs'
-    - 'preact'
-    - 'cmd+k'
-    - 'cmd+k astro and react'
+    - "Command Menu"
+    - "roadmap.sh"
+    - "navigation tool"
+    - "browsing experience"
+    - "roadmaps"
+    - "command menu astro"
+    - "astrojs"
+    - "preact"
+    - "cmd+k"
+    - "cmd+k astro and react"
 image:
-  src: '/images/og-images/command-menu.png'
-  alt: 'The Command Menu: Enhancing Navigation on roadmap.sh'
+  src: "/images/og-images/command-menu.png"
+  alt: "The Command Menu: Enhancing Navigation on roadmap.sh"
   size:
     width: 1200
     height: 630
@@ -66,14 +66,14 @@ We're using [Astro glob](https://docs.astro.build/en/guides/imports/#astroglob) 
 
 ```ts title="roadmap.ts"
 export async function getRoadmapsByTag(
-  tag: string
+  tag: string,
 ): Promise<RoadmapFileType[]> {
   // imports all files that end with `.md` in `./src/data/roadmaps/*/*.md`
   const roadmapFilesMap = await import.meta.glob<RoadmapFileType>(
-    '/src/data/roadmaps/*/*.md',
+    "/src/data/roadmaps/*/*.md",
     {
       eager: true,
-    }
+    },
   );
 
   const roadmapFiles = Object.values(roadmapFilesMap);
@@ -85,7 +85,7 @@ export async function getRoadmapsByTag(
     }));
 
   return filteredRoadmaps.sort(
-    (a, b) => a.frontmatter.order - b.frontmatter.order
+    (a, b) => a.frontmatter.order - b.frontmatter.order,
   );
 }
 ```
@@ -123,17 +123,16 @@ To understand how the Command Menu is implemented, let's explore some of the key
 The Command Menu leverages the preact/hooks library, which provides essential hooks for managing component state and lifecycle events. The `useState`, `useEffect`, `useRef`, and `useOutsideClick` hooks are utilized to handle various functionalities, such as menu activation, search input handling, and click events outside the menu. Also focus the search input when the menu is activated.
 
 ```tsx title="CommandMenu.tsx"
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from "preact/hooks";
 
 export function CommandMenu() {
   const inputRef = useRef < HTMLInputElement > null;
   const modalRef = useRef < HTMLInputElement > null;
   const [isActive, setIsActive] = useState(false);
 
-
   // If user clicks outside the Command Menu, close it and reset the search input
   useOutsideClick(modalRef, () => {
-    setSearchedText('');
+    setSearchedText("");
     setIsActive(false);
   });
 
@@ -151,7 +150,7 @@ export function CommandMenu() {
 The `useOutsideClick` hook is used to detect clicks outside the menu and close it.
 
 ```tsx title="use-outside-click.ts"
-import { useEffect } from 'preact/hooks';
+import { useEffect } from "preact/hooks";
 
 export function useOutsideClick(ref: any, callback: any) {
   useEffect(() => {
@@ -162,12 +161,12 @@ export function useOutsideClick(ref: any, callback: any) {
       }
     };
 
-    document.addEventListener('mousedown', listener);
-    document.addEventListener('touchstart', listener);
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
 
     return () => {
-      document.removeEventListener('mousedown', listener);
-      document.removeEventListener('touchstart', listener);
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
     };
   }, [ref]);
 }
@@ -181,7 +180,7 @@ _Keep the highlighted code in mind as we will revisit it later in this guide._
 
 ```tsx title="CommandMenu.tsx" {12}
 // Keydown event handler for activating the Command Menu
-useKeydown('mod_k', () => {
+useKeydown("mod_k", () => {
   setIsActive(true);
 });
 
@@ -272,20 +271,20 @@ The Command Menu allows users to interact with the search results using keyboard
 ```tsx
 <input
   onKeyDown={(e) => {
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       const canGoNext = activeCounter < searchResults.length - 1;
       setActiveCounter(canGoNext ? activeCounter + 1 : 0);
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowUp") {
       const canGoPrev = activeCounter > 0;
       setActiveCounter(
         canGoPrev ? activeCounter - 1 : searchResults.length - 1,
       );
-    } else if (e.key === 'Tab') {
+    } else if (e.key === "Tab") {
       e.preventDefault();
-    } else if (e.key === 'Escape') {
-      setSearchedText('');
+    } else if (e.key === "Escape") {
+      setSearchedText("");
       setIsActive(false);
-    } else if (e.key === 'Enter') {
+    } else if (e.key === "Enter") {
       const activePage = searchResults[activeCounter];
       if (activePage) {
         window.location.href = activePage.url;
@@ -306,9 +305,9 @@ To further enhance accessibility and user interaction, the Command Menu can be t
 The Command Menu can be triggered programmatically using the `window.dispatchEvent` function along with a custom event. In the roadmap.sh implementation, the Command Menu is activated when the user clicks on an element with the `data-command-menu` attribute. The click event listener then dispatches a custom event, `'command.k'`, which triggers the Command Menu to become active.
 
 ```javascript
-document.querySelector('[data-command-menu]')?.addEventListener('click', () => {
+document.querySelector("[data-command-menu]")?.addEventListener("click", () => {
   // Check the CommandMenu.tsx file highlighted code for the implementation of this event listener
-  window.dispatchEvent(new CustomEvent('command.k'));
+  window.dispatchEvent(new CustomEvent("command.k"));
 });
 ```
 

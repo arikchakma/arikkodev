@@ -20,7 +20,9 @@ export function RequestChip(props: RequestChipProps) {
           : { opacity: 0, y: 12, scale: 0.96 }
       }
       transition={
-        reduce ? { duration: 0 } : { type: "spring", bounce: 0.32, duration: 0.5 }
+        reduce
+          ? { duration: 0 }
+          : { type: "spring", bounce: 0.32, duration: 0.5 }
       }
       className={cn(
         "pointer-events-none absolute -top-4.5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-lg border bg-white px-2.5 py-1 text-[11px] font-medium",

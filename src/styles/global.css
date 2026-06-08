@@ -84,7 +84,7 @@
   em,
   i,
   cite {
-    @apply font-medium text-black font-serif;
+    @apply font-serif font-medium text-black;
     font-style: italic;
     font-optical-sizing: auto;
     letter-spacing: -0.01rem;

@@ -1,233 +1,229 @@
 @reference "./global.css";
 
 article {
-    @apply text-zinc-800;
+  @apply text-zinc-800;
 
-    > * + * {
-        @apply mt-3;
-    }
+  > * + * {
+    @apply mt-3;
+  }
 
-    h1,
-    h2,
-    h3,
-    h4 {
-        @apply font-semibold text-black scroll-mt-16 text-balance;
-    }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply scroll-mt-16 font-semibold text-balance text-black;
+  }
 
-    h1 {
-        @apply text-lg mt-0 mb-0.5;
-    }
+  h1 {
+    @apply mt-0 mb-0.5 text-lg;
+  }
 
-    h2 {
-        @apply text-base mt-8;
-    }
+  h2 {
+    @apply mt-8 text-base;
+  }
 
-    h3 {
-        @apply text-base mt-6 text-zinc-700;
-    }
+  h3 {
+    @apply mt-6 text-base text-zinc-700;
+  }
 
-    h4 {
-        @apply text-base mt-6 text-zinc-600;
-    }
+  h4 {
+    @apply mt-6 text-base text-zinc-600;
+  }
+
+  p {
+    @apply leading-relaxed;
+    letter-spacing: -0.005rem;
+  }
+
+  a {
+    @apply text-black underline decoration-zinc-300 underline-offset-2 hover:no-underline;
+  }
+
+  /* heading anchors from rehype-autolink-headings */
+  a.anchor {
+    @apply cursor-pointer text-inherit no-underline hover:opacity-80;
+  }
+
+  strong {
+    @apply font-medium text-black;
+  }
+
+  /* lists */
+  ul,
+  ol {
+    @apply space-y-1 pl-5 leading-7;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li::marker {
+    @apply text-zinc-400;
+  }
+
+  blockquote {
+    @apply border-l-2 border-zinc-200 pl-4 text-zinc-500;
 
     p {
-        @apply leading-relaxed;
-        letter-spacing: -0.005rem;
+      @apply mt-0;
+    }
+  }
+
+  /* inline code */
+  :not(pre) > code {
+    @apply rounded-md bg-zinc-100 px-1 py-0.5 font-mono text-[0.85em] text-zinc-700;
+  }
+
+  /* code blocks — container holds the border/rounding so faders clip cleanly */
+  .code-block {
+    @apply overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50;
+
+    /* widen the line-number gutter once numbers reach two/three digits */
+    --code-gutter: 2.25rem;
+
+    &:has(.line:nth-child(10)) {
+      --code-gutter: 2.85rem;
     }
 
-    a {
-        @apply text-black underline underline-offset-2 decoration-zinc-300 hover:no-underline;
+    &:has(.line:nth-child(100)) {
+      --code-gutter: 3.45rem;
+    }
+  }
+
+  /* title bar from ```lang title="..." */
+  .code-title {
+    @apply border-b border-zinc-200 bg-zinc-100 px-4 py-2 font-mono text-xs font-medium text-zinc-700;
+  }
+
+  /* scroll region + fader positioning context */
+  .code-body {
+    @apply relative;
+  }
+
+  /* edge faders, revealed on horizontal scroll by CodeBlock.astro */
+  .code-fader {
+    @apply pointer-events-none absolute top-0 z-20 h-full w-12 opacity-0 select-none;
+  }
+
+  /* transition only after the initial state is set, so load doesn't flicker */
+  .code-block[data-fader-ready] .code-fader {
+    transition: opacity 150ms ease;
+  }
+
+  /* offset past the line-number gutter so pinned numbers stay crisp */
+  .code-fader-left {
+    left: var(--code-gutter, 2.25rem);
+    background: linear-gradient(to right, var(--color-zinc-50), transparent);
+  }
+
+  .code-fader-right {
+    @apply right-0;
+    background: linear-gradient(to left, var(--color-zinc-50), transparent);
+  }
+
+  /* code blocks — Shiki tokens resolve from the --shiki-* variables below */
+  pre {
+    --shiki-background: var(--color-zinc-50);
+    --shiki-foreground: hsla(0, 0%, 9%, 1);
+    --shiki-token-constant: oklch(53.18% 0.2399 256.9900584162342);
+    --shiki-token-string: oklch(51.75% 0.1453 147.65);
+    --shiki-token-comment: hsla(0, 0%, 40%, 1);
+    --shiki-token-keyword: oklch(53.5% 0.2058 2.84);
+    --shiki-token-parameter: oklch(52.79% 0.1496 54.65);
+    --shiki-token-function: oklch(47.18% 0.2579 304);
+    --shiki-token-string-expression: oklch(51.75% 0.1453 147.65);
+    --shiki-token-punctuation: hsla(0, 0%, 9%, 1);
+    --shiki-token-link: oklch(51.75% 0.1453 147.65);
+    --shiki-token-number: #111111;
+    --shiki-token-property: oklch(53.18% 0.2399 256.9900584162342);
+    --shiki-token-object-literal: hsla(0, 0%, 9%, 1);
+    --shiki-token-diff-deleted: oklch(58.01% 0.227 25.12);
+    --shiki-token-diff-inserted: oklch(57.81% 0.1776 147.5);
+
+    @apply overflow-x-auto overscroll-x-none py-3 font-mono text-sm leading-6;
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
 
-    /* heading anchors from rehype-autolink-headings */
-    a.anchor {
-        @apply cursor-pointer text-inherit no-underline hover:opacity-80;
-    }
+    code {
+      @apply grid font-mono;
+      /* size to the longest line so line backgrounds span the full scroll width */
+      width: max-content;
+      min-width: 100%;
+      counter-reset: line;
 
-    strong {
-        @apply font-medium text-black;
-    }
+      /* line-number gutter; stays pinned to the left while code scrolls */
+      .line {
+        @apply pr-4;
+        counter-increment: line;
 
-    /* lists */
-    ul,
-    ol {
-        @apply pl-5 space-y-1 leading-7;
-    }
-
-    ul {
-        @apply list-disc;
-    }
-
-    ol {
-        @apply list-decimal;
-    }
-
-    li::marker {
-        @apply text-zinc-400;
-    }
-
-    blockquote {
-        @apply border-l-2 border-zinc-200 pl-4 text-zinc-500;
-
-        p {
-            @apply mt-0;
+        /* accent border lives on the sticky number so it never shifts */
+        &::before {
+          @apply sticky left-0 z-10 inline-block border-l-2 border-transparent bg-zinc-50 pr-4 text-right text-zinc-400 tabular-nums select-none;
+          width: var(--code-gutter, 2.25rem);
+          content: counter(line);
         }
-    }
 
-    /* inline code */
-    :not(pre) > code {
-        @apply rounded-md bg-zinc-100 px-1 py-0.5 font-mono text-[0.85em] text-zinc-700;
-    }
-
-    /* code blocks — container holds the border/rounding so faders clip cleanly */
-    .code-block {
-        @apply overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50;
-
-        /* widen the line-number gutter once numbers reach two/three digits */
-        --code-gutter: 2.25rem;
-
-        &:has(.line:nth-child(10)) {
-            --code-gutter: 2.85rem;
+        /* drop the trailing empty line Shiki emits */
+        &:last-child:empty {
+          @apply hidden;
         }
 
-        &:has(.line:nth-child(100)) {
-            --code-gutter: 3.45rem;
-        }
-    }
-
-    /* title bar from ```lang title="..." */
-    .code-title {
-        @apply border-b border-zinc-200 bg-zinc-100 px-4 py-2 font-mono text-xs font-medium text-zinc-700;
-    }
-
-    /* scroll region + fader positioning context */
-    .code-body {
-        @apply relative;
-    }
-
-    /* edge faders, revealed on horizontal scroll by CodeBlock.astro */
-    .code-fader {
-        @apply pointer-events-none absolute top-0 z-20 h-full w-12 opacity-0 select-none;
-    }
-
-    /* transition only after the initial state is set, so load doesn't flicker */
-    .code-block[data-fader-ready] .code-fader {
-        transition: opacity 150ms ease;
-    }
-
-    /* offset past the line-number gutter so pinned numbers stay crisp */
-    .code-fader-left {
-        left: var(--code-gutter, 2.25rem);
-        background: linear-gradient(
-            to right,
-            var(--color-zinc-50),
+        /* lines flagged via ```lang {1,3-5} */
+        &.highlighted {
+          --code-highlight: color-mix(
+            in oklab,
+            var(--color-zinc-200) 50%,
             transparent
-        );
-    }
+          );
 
-    .code-fader-right {
-        @apply right-0;
-        background: linear-gradient(to left, var(--color-zinc-50), transparent);
-    }
+          background-color: var(--code-highlight);
 
-    /* code blocks — Shiki tokens resolve from the --shiki-* variables below */
-    pre {
-        --shiki-background: var(--color-zinc-50);
-        --shiki-foreground: hsla(0, 0%, 9%, 1);
-        --shiki-token-constant: oklch(53.18% 0.2399 256.9900584162342);
-        --shiki-token-string: oklch(51.75% 0.1453 147.65);
-        --shiki-token-comment: hsla(0, 0%, 40%, 1);
-        --shiki-token-keyword: oklch(53.5% 0.2058 2.84);
-        --shiki-token-parameter: oklch(52.79% 0.1496 54.65);
-        --shiki-token-function: oklch(47.18% 0.2579 304);
-        --shiki-token-string-expression: oklch(51.75% 0.1453 147.65);
-        --shiki-token-punctuation: hsla(0, 0%, 9%, 1);
-        --shiki-token-link: oklch(51.75% 0.1453 147.65);
-        --shiki-token-number: #111111;
-        --shiki-token-property: oklch(53.18% 0.2399 256.9900584162342);
-        --shiki-token-object-literal: hsla(0, 0%, 9%, 1);
-        --shiki-token-diff-deleted: oklch(58.01% 0.227 25.12);
-        --shiki-token-diff-inserted: oklch(57.81% 0.1776 147.5);
-
-        @apply overflow-x-auto overscroll-x-none py-3 font-mono text-sm leading-6;
-
-        scrollbar-width: none;
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        code {
-            @apply grid font-mono;
-            /* size to the longest line so line backgrounds span the full scroll width */
-            width: max-content;
-            min-width: 100%;
-            counter-reset: line;
-
-            /* line-number gutter; stays pinned to the left while code scrolls */
-            .line {
-                @apply pr-4;
-                counter-increment: line;
-
-                /* accent border lives on the sticky number so it never shifts */
-                &::before {
-                    @apply sticky left-0 z-10 inline-block tabular-nums border-l-2 border-transparent bg-zinc-50 pr-4 text-right text-zinc-400 select-none;
-                    width: var(--code-gutter, 2.25rem);
-                    content: counter(line);
-                }
-
-                /* drop the trailing empty line Shiki emits */
-                &:last-child:empty {
-                    @apply hidden;
-                }
-
-                /* lines flagged via ```lang {1,3-5} */
-                &.highlighted {
-                    --code-highlight: color-mix(
-                        in oklab,
-                        var(--color-zinc-200) 50%,
-                        transparent
-                    );
-
-                    background-color: var(--code-highlight);
-
-                    /* match the line's composite: opaque base + same overlay,
+          /* match the line's composite: opaque base + same overlay,
                        so the gutter stays masked yet tints with the line */
-                    &::before {
-                        @apply border-zinc-400;
-                        background-color: var(--color-zinc-50);
-                        background-image: linear-gradient(
-                            var(--code-highlight),
-                            var(--code-highlight)
-                        );
-                    }
-                }
-            }
+          &::before {
+            @apply border-zinc-400;
+            background-color: var(--color-zinc-50);
+            background-image: linear-gradient(
+              var(--code-highlight),
+              var(--code-highlight)
+            );
+          }
         }
+      }
     }
+  }
 
-    hr {
-        @apply my-8 border-zinc-200;
-    }
+  hr {
+    @apply my-8 border-zinc-200;
+  }
 
-    img {
-        @apply rounded-xl;
-    }
+  img {
+    @apply rounded-xl;
+  }
 
-    figcaption {
-        @apply mt-2 text-center text-sm text-zinc-500;
-    }
+  figcaption {
+    @apply mt-2 text-center text-sm text-zinc-500;
+  }
 
-    /* tables */
-    table {
-        @apply w-full border-collapse text-sm;
-    }
+  /* tables */
+  table {
+    @apply w-full border-collapse text-sm;
+  }
 
-    th,
-    td {
-        @apply border border-zinc-200 px-3 py-1.5 text-left;
-    }
+  th,
+  td {
+    @apply border border-zinc-200 px-3 py-1.5 text-left;
+  }
 
-    th {
-        @apply font-medium;
-    }
+  th {
+    @apply font-medium;
+  }
 }
