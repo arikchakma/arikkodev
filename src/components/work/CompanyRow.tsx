@@ -41,7 +41,7 @@ export function CompanyRow(props: CompanyRowProps) {
           else sound.close();
         }}
         aria-expanded={open}
-        className="group ml-1 flex w-full items-center justify-between gap-6 py-2.5 text-left"
+        className="group ml-1 flex w-full items-center justify-between gap-6 py-2.5 text-left outline-none focus-visible:bg-zinc-100 focus-visible:ring focus-visible:ring-zinc-300"
       >
         <span className="flex shrink-0 items-center gap-2.5 group-hover:text-zinc-500">
           <LogoMark name={company.company} logo={company.logo} />
@@ -68,7 +68,7 @@ export function CompanyRow(props: CompanyRowProps) {
 
       <AnimatePresence initial={false}>
         {open && (
-          <motion.div {...expand} className="overflow-hidden">
+          <motion.div {...expand}>
             <div className="mb-2">
               {company.works.map((w, i) => (
                 <WorkRow key={w.name} work={w} index={i} />

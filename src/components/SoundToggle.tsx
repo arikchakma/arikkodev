@@ -45,7 +45,7 @@ export function SoundToggle(props: SoundToggleProps) {
       aria-pressed={!muted}
       aria-keyshortcuts="m"
       title={`${muted ? "Turn sound on" : "Turn sound off"} (press M)`}
-      className="mt-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition-colors hover:text-black"
+      className="mt-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition-colors outline-none hover:text-black focus-visible:ring focus-visible:ring-zinc-300"
     >
       <SpeakerIcon muted={muted} />
       {muted ? "Sound off" : "Sound on"}

@@ -62,7 +62,7 @@ export function WorkRow(props: WorkRowProps) {
           }}
           onMouseEnter={() => sound.detent(index)}
           aria-expanded={open}
-          className="group flex w-full cursor-help flex-col items-start gap-0.5 rounded-lg px-1 py-1 text-left hover:bg-zinc-100 sm:flex-row sm:items-center sm:gap-3"
+          className="group flex w-full cursor-help flex-col items-start gap-0.5 rounded-lg px-1 py-1 text-left outline-none hover:bg-zinc-100 focus-visible:bg-zinc-100 focus-visible:ring focus-visible:ring-zinc-300 sm:flex-row sm:items-center sm:gap-3"
         >
           <WorkLabel work={work} />
         </button>
@@ -108,7 +108,7 @@ export function WorkRow(props: WorkRowProps) {
         target={work.href.startsWith("http") ? "_blank" : undefined}
         onMouseEnter={() => sound.detent(index)}
         onClick={() => sound.nav()}
-        className="group flex flex-col items-start gap-0.5 rounded-lg px-1 py-1 hover:bg-zinc-100 sm:flex-row sm:items-center sm:gap-3"
+        className="group flex flex-col items-start gap-0.5 rounded-lg px-1 py-1 outline-none hover:bg-zinc-100 focus-visible:bg-zinc-100 focus-visible:ring focus-visible:ring-zinc-300 sm:flex-row sm:items-center sm:gap-3"
       >
         <WorkLabel
           work={work}
@@ -125,7 +125,7 @@ export function WorkRow(props: WorkRowProps) {
   return (
     <div
       onMouseEnter={() => sound.detent(index)}
-      className="flex flex-col items-start gap-0.5 rounded-lg px-1 py-1 hover:bg-zinc-100 sm:flex-row sm:items-center sm:gap-3"
+      className="flex flex-col items-start gap-0.5 rounded-lg px-1 py-1 outline-none hover:bg-zinc-100 focus-visible:bg-zinc-100 focus-visible:ring focus-visible:ring-zinc-300 sm:flex-row sm:items-center sm:gap-3"
     >
       <WorkLabel work={work} />
     </div>
