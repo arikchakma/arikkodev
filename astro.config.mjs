@@ -26,6 +26,11 @@ export default defineConfig({
   trailingSlash: "never",
   output: "static",
   adapter: vercel({}),
+
+  // Crawlers guess /sitemap.xml; the sitemap integration emits an index instead.
+  redirects: {
+    "/sitemap.xml": "/sitemap-index.xml",
+  },
   markdown: {
     syntaxHighlight: "shiki",
     shikiConfig: {
