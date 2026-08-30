@@ -12,6 +12,24 @@ import { SparkleIcon } from "../icons/SparkleIcon";
 
 const work: Company[] = [
   {
+    company: "Towards Data Science",
+    tagline: "Home for Data Science and AI",
+    logo: "/logos/tds.png",
+    startDate: "2026",
+    works: [
+      {
+        name: "Editorial CMS",
+        tagline: "Rich-text publishing with collaboration",
+        icon: DocIcon,
+      },
+      {
+        name: "WordPress Migration",
+        tagline: "Moved the publication off WordPress",
+        icon: DatabaseIcon,
+      },
+    ],
+  },
+  {
     company: "roadmap.sh",
     tagline: "Developer Roadmaps",
     logo: "/logos/roadmap.svg",
@@ -83,24 +101,6 @@ const work: Company[] = [
         date: "Oct 2023",
         description:
           "An email platform built from the ground up, with audience segmentation, automations, and throttled high-volume sends. Since retired for a managed provider, but it ran our newsletters at scale for years.",
-      },
-    ],
-  },
-  {
-    company: "Towards Data Science",
-    tagline: "Home for Data Science and AI",
-    logo: "/logos/tds.png",
-    startDate: "2026",
-    works: [
-      {
-        name: "Editorial CMS",
-        tagline: "Rich-text publishing with collaboration",
-        icon: DocIcon,
-      },
-      {
-        name: "WordPress Migration",
-        tagline: "Moved the publication off WordPress",
-        icon: DatabaseIcon,
       },
     ],
   },
