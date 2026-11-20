@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { GradientGenerator } from "../components/gradient/GradientGenerator";
+---
+
+<Layout
+  title="Gradient Generator | Arik Chakma"
+  description="Create smooth gradients & download them as full-resolution PNG or JPG images."
+>
+  <h1 class="sr-only">Gradient Generator</h1>
+  <GradientGenerator client:only="react" />
+</Layout>
+
+<style is:global>
+  html {
+    overflow: hidden;
+    scrollbar-gutter: auto;
+  }
+</style>
