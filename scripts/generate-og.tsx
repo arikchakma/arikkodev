@@ -7,7 +7,8 @@ import sharp from "sharp";
 const ROOT = process.cwd();
 const WRITINGS_DIR = path.join(ROOT, "src/content/writings");
 const FONTS_DIR = path.join(ROOT, "scripts/fonts");
-const OUT_DIR = path.join(ROOT, "public/images/og-images/writings");
+const OG_DIR = path.join(ROOT, "public/images/og-images");
+const OUT_DIR = path.join(OG_DIR, "writings");
 
 const BLACK = "#000000";
 const RED = "#dc2626";
@@ -19,6 +20,15 @@ type Writing = {
   title: string;
   description?: string;
 };
+
+const pages: Writing[] = [
+  {
+    id: "gradient",
+    title: "Gradient Generator",
+    description:
+      "Create mesh & linear gradients, then download them as 4K or 8K images.",
+  },
+];
 
 // Victory hand, resting (open) pose — paths lifted from src/components/VictoryHand.tsx
 const LEFT_UP =
@@ -85,6 +95,7 @@ async function loadFonts() {
 async function renderCard(
   writing: Writing,
   fonts: Awaited<ReturnType<typeof loadFonts>>,
+  outFile: string,
 ) {
   const svg = await satori(
     <div
@@ -153,9 +164,7 @@ async function renderCard(
     },
   );
 
-  await sharp(Buffer.from(svg))
-    .png()
-    .toFile(path.join(OUT_DIR, `${writing.id}.png`));
+  await sharp(Buffer.from(svg)).png().toFile(outFile);
 }
 
 const writings = await getWritings();
@@ -164,7 +173,11 @@ await fs.mkdir(OUT_DIR, { recursive: true });
 
 console.log(`🎨 Generating ${writings.length} OG image(s)...`);
 for (const writing of writings) {
-  await renderCard(writing, fonts);
+  await renderCard(writing, fonts, path.join(OUT_DIR, `${writing.id}.png`));
   console.log(`✅ ${writing.id}.png`);
+}
+for (const page of pages) {
+  await renderCard(page, fonts, path.join(OG_DIR, `${page.id}.png`));
+  console.log(`✅ ${page.id}.png`);
 }
 console.log("✨ Done");

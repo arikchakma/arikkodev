@@ -1,14 +1,52 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { GradientGenerator } from "../components/gradient/GradientGenerator";
+import { siteConfig } from "../lib/config";
+
+const title = "Mesh & Linear Gradient Generator | Arik Chakma";
+const description =
+  "Create mesh & linear gradients with a custom easing curve, then download them as 4K or 8K PNG or JPG images for posts, stories & thumbnails.";
 ---
 
 <Layout
-  title="Gradient Generator | Arik Chakma"
-  description="Create smooth gradients & download them as full-resolution PNG or JPG images."
+  title={title}
+  description={description}
+  keywords={[
+    "gradient generator",
+    "mesh gradient generator",
+    "linear gradient",
+    "css gradient",
+    "gradient background",
+    "4k gradient",
+    "gradient wallpaper",
+    "oklch gradient",
+    "easing gradient",
+  ]}
+  ogImageUrl={`${siteConfig.url}/images/og-images/gradient.png`}
 >
   <h1 class="sr-only">Gradient Generator</h1>
+  <p class="sr-only">{description}</p>
   <GradientGenerator client:only="react" />
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: "Gradient Generator",
+      url: `${siteConfig.url}/gradient`,
+      description,
+      applicationCategory: "DesignApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      author: {
+        "@type": "Person",
+        name: siteConfig.author,
+        url: siteConfig.url,
+      },
+    })}
+  />
 </Layout>
 
 <style is:global>
